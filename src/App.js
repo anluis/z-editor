@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.less'
+import './assets/style/App.less'
+import 'normalize.css'
 import Main from './pages/main'
 class App extends Component {
   render() {

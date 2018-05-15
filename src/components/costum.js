@@ -21,6 +21,7 @@ class Costum extends React.Component {
   render() {
     return (
       <Rnd
+        bounds={'.main-left'}
         style={style}
         size={{ width: this.state.width, height: this.state.height }}
         position={{ x: this.state.x, y: this.state.y }}

@@ -5,7 +5,8 @@ class Main extends React.Component {
   constructor() {
     super()
     this.state = {
-      count: 1
+      count: 0,
+      coms: []
     }
   }
 
@@ -34,6 +35,7 @@ class Main extends React.Component {
           <Button onClick={() => this.handleComAdd()} type="primary">
             新增
           </Button>
+          <div />
         </div>
       </div>
     )

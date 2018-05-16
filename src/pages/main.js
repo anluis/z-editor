@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'antd'
+import Button from '@material-ui/core/Button'
 import Costum from '../components/costum'
 class Main extends React.Component {
   constructor() {
@@ -32,7 +32,11 @@ class Main extends React.Component {
       <div className="main-wrap">
         <div className="main-left">{allComponents}</div>
         <div className="main-right">
-          <Button onClick={() => this.handleComAdd()} type="primary">
+          <Button
+            onClick={() => this.handleComAdd()}
+            variant="raised"
+            color="primary"
+          >
             新增
           </Button>
           <div />

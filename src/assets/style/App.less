@@ -5,9 +5,20 @@
   height: 100vh;
   .main-left {
     min-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .main-right {
     @diff : 800px;
     width: calc(~'100% - @{diff}');
+    margin: 2%;
+    .func {
+      height: 100px;
+      margin: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 }

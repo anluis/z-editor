@@ -6,19 +6,35 @@ class Main extends React.Component {
     super()
     this.state = {
       count: 0,
-      coms: []
+      coms: [],
+      currentChildState: {}
     }
   }
 
   renderCoustum = (context, index) => {
-    return <Costum key={index} />
+    return (
+      <Costum transferState={state => this.transferState(state)} key={index} />
+    )
   }
+
   handleComAdd = () => {
     this.setState({
       count: this.state.count + 1
     })
   }
+
+  transferState = childComState => {
+    this.setState({
+      currentChildState: childComState
+    })
+  }
+
   render() {
+    const designArea = {
+      width: '90%',
+      height: '90%',
+      border: '1px solid gray'
+    }
     let Coms = []
     for (let i = 0; i < this.state.count; i++) {
       Coms.push({})
@@ -30,15 +46,30 @@ class Main extends React.Component {
 
     return (
       <div className="main-wrap">
-        <div className="main-left">{allComponents}</div>
+        <div className="main-left">
+          <div className="design-area" style={designArea}>
+            {allComponents}
+          </div>
+        </div>
         <div className="main-right">
-          <Button
-            onClick={() => this.handleComAdd()}
-            variant="raised"
-            color="primary"
-          >
-            新增
-          </Button>
+          <div className="func">
+            <Button
+              onClick={() => this.handleComAdd()}
+              variant="raised"
+              color="primary"
+            >
+              新增
+            </Button>
+            <Button variant="raised" color="primary">
+              删除
+            </Button>
+          </div>
+
+          <div>高度 : {this.state.currentChildState.height}</div>
+          <div>宽度 : {this.state.currentChildState.width}</div>
+          <div>左边距 : {this.state.currentChildState.x}</div>
+          <div>右边距 : {this.state.currentChildState.y}</div>
+
           <div />
         </div>
       </div>

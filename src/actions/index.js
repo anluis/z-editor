@@ -3,3 +3,13 @@ export const addCom = () => ({
   type: 'ADD_COM',
   id: nextComId++
 })
+
+export const resizeCom = style => ({
+  type: 'RESIZE_COM',
+  style
+})
+
+export const dragCom = style => ({
+  type: 'DRAG_COM',
+  style
+})

@@ -1,7 +1,8 @@
 let nextComId = 0
-export const addCom = () => ({
+export const addCom = style => ({
   type: 'ADD_COM',
-  id: nextComId++
+  id: nextComId++,
+  style
 })
 
 export const resizeCom = style => ({

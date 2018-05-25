@@ -3,9 +3,19 @@ import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux'
 import { addCom } from '../actions'
 
+const defaultStyle = {
+  height: 100,
+  width: 100,
+  x: 0,
+  y: 0
+}
 const AddCom = ({ dispatch }) => {
   return (
-    <Button onClick={() => dispatch(addCom())} variant="raised" color="primary">
+    <Button
+      onClick={() => dispatch(addCom(defaultStyle))}
+      variant="raised"
+      color="primary"
+    >
       新增
     </Button>
   )

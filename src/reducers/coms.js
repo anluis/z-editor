@@ -1,11 +1,11 @@
 const updateObjectInArray = (array, action) => {
   return array.map((item, index) => {
-    if (index !== action.index) {
+    if (index !== action.id) {
       return item
     }
     return {
       ...item,
-      ...action.item
+      ...action
     }
   })
 }
@@ -22,7 +22,9 @@ const coms = (state = [], action) => {
       ]
     case 'DELETE_COM':
       return state.filter(com => com.id !== action.comIdToDelete)
-    case 'UPDATE_COM_STYLE':
+    case 'RESIZE_COM':
+      return updateObjectInArray(state, action)
+    case 'DRAG_COM':
       return updateObjectInArray(state, action)
     default:
       return state

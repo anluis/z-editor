@@ -18,6 +18,8 @@ export const dragCom = (style, id) => ({
   id
 })
 
-export const setCurrentCom = id => ({
+export const setCurrentCom = (style, id) => ({
+  type: 'SET_CURRENT_ID',
+  style,
   id
 })

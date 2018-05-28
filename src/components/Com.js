@@ -35,8 +35,14 @@ const Com = ({ dispatch, text, style, id }) => {
         }
         dispatch(resizeCom(updatedStyle, id))
       }}
-      onClick={id => {
-        dispatch(setCurrentCom(id))
+      onDragStart={(d, id) => {
+        const updatedStyle = {
+          x: d.x,
+          y: d.y,
+          width: style.width,
+          height: style.height
+        }
+        dispatch(setCurrentCom(updatedStyle, id))
       }}
     >
       {text}

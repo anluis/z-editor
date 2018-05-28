@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
-import { setCurrentCom } from '../actions'
-import { ComList } from '../components/ComList'
+import comstatus from '../components/ComStatus'
 
-const getCurrentCom = (coms, filter) => {
+const getCurrentCom = coms => {
   return coms
 }
 
 const mapStateToProps = state => ({
-  coms: state.com
+  coms: getCurrentCom(state.comstatus)
 })
 
 const mapDispatchToProps = dispatch => ({})
+
+export default connect(mapStateToProps, mapDispatchToProps)(comstatus)

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import comstatus from '../components/ComStatus'
 
-const getCurrentCom = coms => {
-  return coms
+const getCurrentCom = com => {
+  return com
 }
 
 const mapStateToProps = state => ({
-  coms: getCurrentCom(state.comstatus)
+  com: getCurrentCom(state.comstatus)
 })
 
 const mapDispatchToProps = dispatch => ({})

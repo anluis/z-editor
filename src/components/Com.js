@@ -35,7 +35,7 @@ const Com = ({ dispatch, text, style, id }) => {
         }
         dispatch(resizeCom(updatedStyle, id))
       }}
-      onDragStart={(d, id) => {
+      onDragStart={(e, d) => {
         const updatedStyle = {
           x: d.x,
           y: d.y,

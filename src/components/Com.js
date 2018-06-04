@@ -26,6 +26,7 @@ const Com = ({ dispatch, text, style, id }) => {
           height: style.height
         }
         dispatch(dragCom(updatedStyle, id))
+        dispatch(setCurrentCom(updatedStyle, id))
       }}
       onResize={(e, direction, ref, delta, position) => {
         const updatedStyle = {
@@ -34,6 +35,7 @@ const Com = ({ dispatch, text, style, id }) => {
           ...position
         }
         dispatch(resizeCom(updatedStyle, id))
+        dispatch(setCurrentCom(updatedStyle, id))
       }}
       onDragStart={(e, d) => {
         const updatedStyle = {
@@ -48,12 +50,6 @@ const Com = ({ dispatch, text, style, id }) => {
       {text}
     </Rnd>
   )
-}
-
-Com.propTypes = {
-  text: PropTypes.string.isRequired,
-  style: PropTypes.object.isRequired,
-  id: PropTypes.number.isRequired
 }
 
 export default connect()(Com)

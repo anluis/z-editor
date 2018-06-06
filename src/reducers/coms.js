@@ -18,7 +18,8 @@ const coms = (state = [], action) => {
         {
           id: action.id,
           text: action.text,
-          style: action.style
+          style: action.style,
+          beSelected: true
         }
       ]
     case 'DELETE_COM':
@@ -29,15 +30,6 @@ const coms = (state = [], action) => {
       return updateObjectInArray(state, action)
     case 'CHANGE_CURRENT_NAME':
       return updateObjectInArray(state, action)
-    // return state.map((item, index) => {
-    //   if (index !== action.id) {
-    //     return item
-    //   }
-    //   return {
-    //     ...item,
-    //     ...action
-    //   }
-    // })
     default:
       return state
   }

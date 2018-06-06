@@ -3,7 +3,8 @@ export const addCom = style => ({
   type: 'ADD_COM',
   id: nextComId++,
   text: 'Com-Id:' + nextComId,
-  style
+  style,
+  beSelected: true
 })
 
 export const resizeCom = (style, id) => ({

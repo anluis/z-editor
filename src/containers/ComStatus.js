@@ -1,13 +1,13 @@
 // 组件状态
 import { connect } from 'react-redux'
-import comstatus from '../components/ComStatus'
+import ComStatus from '../components/ComStatus'
 
-const getCurrentCom = com => {
-  return com
+const getCurrentCom = coms => {
+  return coms.filter(com => com.beSelected === true)
 }
 
 const mapStateToProps = state => ({
-  com: getCurrentCom(state.comstatus)
+  coms: getCurrentCom(state.coms)
 })
 
 const mapDispatchToProps = dispatch => ({})
@@ -15,4 +15,4 @@ const mapDispatchToProps = dispatch => ({})
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(comstatus)
+)(ComStatus)

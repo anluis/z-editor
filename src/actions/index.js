@@ -18,8 +18,15 @@ export const dragCom = (style, id) => ({
   id
 })
 
-export const setCurrentCom = (style, id) => ({
+export const setCurrentCom = (style, id, text) => ({
   type: 'SET_CURRENT_ID',
   style,
+  id,
+  text
+})
+
+export const changeCurrentName = (id, text) => ({
+  type: 'CHANGE_CURRENT_NAME',
+  text,
   id
 })

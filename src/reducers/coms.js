@@ -1,3 +1,4 @@
+//所有组件状态
 const updateObjectInArray = (array, action) => {
   return array.map((item, index) => {
     if (index !== action.id) {
@@ -26,6 +27,17 @@ const coms = (state = [], action) => {
       return updateObjectInArray(state, action)
     case 'DRAG_COM':
       return updateObjectInArray(state, action)
+    case 'CHANGE_CURRENT_NAME':
+      return updateObjectInArray(state, action)
+    // return state.map((item, index) => {
+    //   if (index !== action.id) {
+    //     return item
+    //   }
+    //   return {
+    //     ...item,
+    //     ...action
+    //   }
+    // })
     default:
       return state
   }

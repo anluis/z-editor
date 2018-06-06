@@ -1,13 +1,11 @@
-// 组件状态
+// 左侧模版列表
 import { connect } from 'react-redux'
-import comstatus from '../components/ComStatus'
+import TemplateList from '../components/TemplateList'
 
-const getCurrentCom = com => {
-  return com
-}
+const TemplateArea = () => {}
 
 const mapStateToProps = state => ({
-  com: getCurrentCom(state.comstatus)
+  temps: TemplateArea
 })
 
 const mapDispatchToProps = dispatch => ({})
@@ -15,4 +13,4 @@ const mapDispatchToProps = dispatch => ({})
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(comstatus)
+)(TemplateList)

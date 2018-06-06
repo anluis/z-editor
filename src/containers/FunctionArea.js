@@ -1,13 +1,11 @@
-// 组件状态
+// 顶部功能区域
 import { connect } from 'react-redux'
-import comstatus from '../components/ComStatus'
+import FuctionBar from '../components/FunctionBar'
 
-const getCurrentCom = com => {
-  return com
-}
+const FunctionArea = () => {}
 
 const mapStateToProps = state => ({
-  com: getCurrentCom(state.comstatus)
+  functions: FunctionArea
 })
 
 const mapDispatchToProps = dispatch => ({})
@@ -15,4 +13,4 @@ const mapDispatchToProps = dispatch => ({})
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(comstatus)
+)(FuctionBar)

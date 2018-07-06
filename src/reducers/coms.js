@@ -1,4 +1,13 @@
+import {
+  ADD_COM,
+  DELETE_COM,
+  RESIZE_COM,
+  DRAG_COM,
+  CHANGE_CURRENT_NAME
+} from '../actions'
+
 //所有组件状态
+
 const updateObjectInArray = (array, action) => {
   return array.map((item, index) => {
     if (index !== action.id) {
@@ -12,7 +21,7 @@ const updateObjectInArray = (array, action) => {
 }
 const coms = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_COM':
+    case ADD_COM:
       return [
         ...state,
         {
@@ -22,13 +31,13 @@ const coms = (state = [], action) => {
           beSelected: true
         }
       ]
-    case 'DELETE_COM':
+    case DELETE_COM:
       return state.filter(com => com.id !== action.comIdToDelete)
-    case 'RESIZE_COM':
+    case RESIZE_COM:
       return updateObjectInArray(state, action)
-    case 'DRAG_COM':
+    case DRAG_COM:
       return updateObjectInArray(state, action)
-    case 'CHANGE_CURRENT_NAME':
+    case CHANGE_CURRENT_NAME:
       return updateObjectInArray(state, action)
     default:
       return state

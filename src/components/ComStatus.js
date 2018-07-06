@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Input from '@material-ui/core/Input'
-import { changeCurrentName } from '../actions'
+// import Input from '@material-ui/core/Input'
+// import { changeCurrentName } from '../actions'
 
 // 组件状态 可以去掉 reducers/comstatus 之前想错了
 const ComStatus = ({ dispatch, coms }) => {

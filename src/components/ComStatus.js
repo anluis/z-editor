@@ -1,22 +1,38 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-// import Input from '@material-ui/core/Input'
-// import { changeCurrentName } from '../actions'
+import Input from '@material-ui/core/Input'
+import { updateStyles } from '../actions'
 
-// 组件状态 可以去掉 reducers/comstatus 之前想错了
-const ComStatus = ({ dispatch, coms }) => {
-  if (coms.length === 0) {
+const ComStatus = ({ dispatch, comstatus }) => {
+  if (comstatus === null) {
     return null
   } else
     return (
       <div>
-        <div>组件id: {coms[0].id}</div>
+        <div>
+          组件id:
+          {comstatus.id}
+        </div>
+        <div>
+          组件X:
+          <Input
+            onChange={event => {
+              const updatedStyle = {
+                x: Number(event.target.value),
+                y: Number(comstatus.style.y),
+                width: Number(comstatus.style.width),
+                height: Number(comstatus.style.height)
+              }
+              dispatch(updateStyles(updatedStyle, comstatus.id))
+            }}
+            value={comstatus.style.x}
+          />
+        </div>
+        <div>组件Y: {comstatus.style.y}</div>
+        <div>组件width: {comstatus.style.width}</div>
+        <div>组件height: {comstatus.style.height}</div>
       </div>
     )
-}
-ComStatus.PropTypes = {
-  id: PropTypes.number.isRequired
 }
 
 export default connect()(ComStatus)

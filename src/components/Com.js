@@ -37,22 +37,14 @@ const Com = ({ dispatch, text, style, id }) => {
         dispatch(resizeCom(updatedStyle, id))
         dispatch(setCurrentCom(updatedStyle, id, text))
       }}
-      onDragStart={(e, d) => {
-        const updatedStyle = {
-          x: d.x,
-          y: d.y,
-          width: style.width,
-          height: style.height
-        }
-        dispatch(setCurrentCom(updatedStyle, id, text))
-      }}
+      onDragStart={(e, d) => {}}
     >
       {text}
     </Rnd>
   )
 }
 
-Com.PropTypes = {
+Com.propTypes = {
   dispatch: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   style: PropTypes.object.isRequired,

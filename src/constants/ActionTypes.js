@@ -1,0 +1,7 @@
+export const ADD_COM = 'ADD_COM'
+export const RESIZE_COM = 'RESIZE_COM'
+export const DRAG_COM = 'DRAG_COM'
+export const SET_CURRENT_ID = 'SET_CURRENT_ID'
+export const CHANGE_CURRENT_NAME = 'CHANGE_CURRENT_NAME'
+export const DELETE_COM = 'DELETE_COM'
+export const UPDATE_STYLES = 'UPDATE_STYLES'

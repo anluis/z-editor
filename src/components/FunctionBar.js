@@ -18,8 +18,8 @@ const FunctionBar = ({ com }) => {
   )
 }
 
-FunctionBar.propTypes = {
-  id: PropTypes.number.isRequired
-}
+// FunctionBar.propTypes = {
+//   id: PropTypes.number.isRequired
+// }
 
 export default connect()(FunctionBar)

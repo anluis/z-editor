@@ -44,9 +44,6 @@ const Com = ({ dispatch, context, style, id }) => {
         dispatch(focusCom(id))
       }}
     >
-      {/* {style.hasOwnProperty('imgUrl') ? (
-        <img className="innerImg" src={style.imgUrl} alt="组件图片" />
-      ) : null} */}
       {context.name}
     </Rnd>
   )

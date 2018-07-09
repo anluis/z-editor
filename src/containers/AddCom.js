@@ -17,13 +17,15 @@ const defaultContext = {
 }
 const AddCom = ({ dispatch }) => {
   return (
-    <Button
-      onClick={() => dispatch(addCom(defaultStyle, defaultContext))}
-      variant="raised"
-      color="primary"
-    >
-      新增
-    </Button>
+    <div>
+      <Button
+        onClick={() => dispatch(addCom(defaultStyle, defaultContext))}
+        variant="raised"
+        color="primary"
+      >
+        新增
+      </Button>
+    </div>
   )
 }
 

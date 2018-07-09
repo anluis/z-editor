@@ -1,6 +1,6 @@
 import React from 'react'
 import AddCom from '../containers/AddCom'
-import VisibleComList from '../containers/VisibleComList'
+import ComList from '../containers/ComList'
 import ComStatus from '../containers/ComStatus'
 // import TemplateArea from '../containers/TemplateArea'
 // import FunctionArea from '../containers/FunctionArea'
@@ -13,7 +13,7 @@ const App = () => {
       <div className="main-remain">
         <div className="main-left">{/* <TemplateArea /> */}</div>
         <div className="main-middle">
-          <VisibleComList />
+          <ComList />
         </div>
         <div className="main-right">
           <ComStatus />

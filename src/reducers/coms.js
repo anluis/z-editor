@@ -1,11 +1,4 @@
-import {
-  ADD_COM,
-  DELETE_COM,
-  RESIZE_COM,
-  DRAG_COM,
-  CHANGE_CURRENT_NAME,
-  UPDATE_STYLES
-} from '../constants/ActionTypes'
+import { ADD_COM, DELETE_COM, UPDATE_COM } from '../constants/ActionTypes'
 
 //所有组件状态
 
@@ -28,23 +21,17 @@ const coms = (state = [], action) => {
         ...state,
         {
           id: action.id,
-          text: action.text,
-          style: action.style,
-          beSelected: true
+          context: action.context,
+          style: action.style
         }
       ]
     case DELETE_COM:
       return state.filter(com => com.id !== action.comIdToDelete)
-    case RESIZE_COM:
-      return updateObjectInArray(state, action)
-    case DRAG_COM:
-      return updateObjectInArray(state, action)
-    case CHANGE_CURRENT_NAME:
-      return updateObjectInArray(state, action)
-    case UPDATE_STYLES:
+    case UPDATE_COM:
       return updateObjectInArray(state, action)
     default:
       return state
   }
 }
+
 export default coms

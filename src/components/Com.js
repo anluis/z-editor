@@ -2,16 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
 import { connect } from 'react-redux'
-import { resizeCom, dragCom, setCurrentCom } from '../actions'
+import { updateCom, focusCom } from '../actions'
 
-const Com = ({ dispatch, text, style, id }) => {
+const Com = ({ dispatch, context, style, id }) => {
   const deafultStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     border: 'solid 1px #ddd',
-    background: '#f0f0f0'
+    background: 'white'
   }
+
   return (
     <Rnd
       bounds={'.design-area'}
@@ -25,8 +26,7 @@ const Com = ({ dispatch, text, style, id }) => {
           width: style.width,
           height: style.height
         }
-        dispatch(dragCom(updatedStyle, id))
-        dispatch(setCurrentCom(updatedStyle, id, text))
+        dispatch(updateCom(id, updatedStyle, context))
       }}
       onResize={(e, direction, ref, delta, position) => {
         const updatedStyle = {
@@ -34,20 +34,24 @@ const Com = ({ dispatch, text, style, id }) => {
           height: ref.offsetHeight,
           ...position
         }
-        dispatch(resizeCom(updatedStyle, id))
-        dispatch(setCurrentCom(updatedStyle, id, text))
+        dispatch(updateCom(id, updatedStyle, context))
       }}
-      onDragStart={(e, d) => {}}
+      onDragStart={(e, d) => {
+        dispatch(focusCom(id))
+      }}
     >
-      {text}
+      {style.hasOwnProperty('imgUrl') ? (
+        <img class="innerImg" src="style.imgUrl" alt="组件图片" />
+      ) : null}
+      {context.name}
     </Rnd>
   )
 }
 
 Com.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   style: PropTypes.object.isRequired,
-  id: PropTypes.number.isRequired
+  context: PropTypes.object.isRequired
 }
 export default connect()(Com)

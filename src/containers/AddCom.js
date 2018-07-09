@@ -9,10 +9,14 @@ const defaultStyle = {
   x: 0,
   y: 0
 }
+
+const defaultContext = {
+  name: '新组件'
+}
 const AddCom = ({ dispatch }) => {
   return (
     <Button
-      onClick={() => dispatch(addCom(defaultStyle))}
+      onClick={() => dispatch(addCom(defaultStyle, defaultContext))}
       variant="raised"
       color="primary"
     >

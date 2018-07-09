@@ -10,7 +10,9 @@ const Com = ({ dispatch, context, style, id }) => {
     alignItems: 'center',
     justifyContent: 'center',
     border: 'solid 1px #ddd',
-    background: 'white'
+    background: 'white',
+    backgroundSize: 'contain',
+    backgroundImage: `url(` + style.imgUrl + `)`
   }
 
   return (
@@ -21,6 +23,7 @@ const Com = ({ dispatch, context, style, id }) => {
       position={{ x: style.x, y: style.y }}
       onDragStop={(e, d) => {
         const updatedStyle = {
+          ...style,
           x: d.x,
           y: d.y,
           width: style.width,
@@ -30,6 +33,7 @@ const Com = ({ dispatch, context, style, id }) => {
       }}
       onResize={(e, direction, ref, delta, position) => {
         const updatedStyle = {
+          ...style,
           width: ref.offsetWidth,
           height: ref.offsetHeight,
           ...position
@@ -40,9 +44,9 @@ const Com = ({ dispatch, context, style, id }) => {
         dispatch(focusCom(id))
       }}
     >
-      {style.hasOwnProperty('imgUrl') ? (
-        <img class="innerImg" src="style.imgUrl" alt="组件图片" />
-      ) : null}
+      {/* {style.hasOwnProperty('imgUrl') ? (
+        <img className="innerImg" src={style.imgUrl} alt="组件图片" />
+      ) : null} */}
       {context.name}
     </Rnd>
   )

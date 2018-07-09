@@ -80,6 +80,19 @@ const ComStatus = ({ dispatch, currentCom }) => {
             value={currentCom.style.height}
           />
         </div>
+        <div>
+          图片:
+          <Input
+            onChange={event => {
+              let updatedCom = currentCom.style
+              updatedCom.imgUrl = event.target.value
+              dispatch(
+                updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
+              )
+            }}
+            value={currentCom.style.imgUrl}
+          />
+        </div>
       </div>
     )
 }

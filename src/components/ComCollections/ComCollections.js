@@ -1,7 +1,7 @@
 import React from 'react'
 import Com from './Com'
 
-const ComList = ({ coms }) => {
+const ComCollections = ({ coms }) => {
   const designArea = {
     width: '90%',
     height: '90%',
@@ -16,4 +16,4 @@ const ComList = ({ coms }) => {
   )
 }
 
-export default ComList
+export default ComCollections

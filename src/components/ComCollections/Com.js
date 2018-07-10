@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
 import { connect } from 'react-redux'
-import { updateCom, focusCom } from '../actions'
+import { updateCom, focusCom } from '../../actions'
 
 const Com = ({ dispatch, context, style, id }) => {
   const deafultStyle = {

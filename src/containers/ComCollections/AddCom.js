@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux'
-import { addCom } from '../actions'
+import { addCom } from '../../actions'
 
 const defaultStyle = {
   height: 100,

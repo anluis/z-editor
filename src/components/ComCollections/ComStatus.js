@@ -1,9 +1,8 @@
 import React from 'react'
 import Input from '@material-ui/core/Input'
 import { connect } from 'react-redux'
-import { updateCom } from '../actions'
 
-const ComStatus = ({ dispatch, currentCom }) => {
+const ComStatus = ({ currentCom, updateCom }) => {
   if (currentCom === null || currentCom === undefined) {
     return null
   } else
@@ -19,11 +18,9 @@ const ComStatus = ({ dispatch, currentCom }) => {
             onChange={event => {
               let updatedComStatus = currentCom.context
               updatedComStatus.name = event.target.value
-              dispatch(
-                updateCom(currentCom.id, currentCom.style, {
-                  ...updatedComStatus
-                })
-              )
+              updateCom(currentCom.id, currentCom.style, {
+                ...updatedComStatus
+              })
             }}
             value={currentCom.context.name}
           />
@@ -34,9 +31,7 @@ const ComStatus = ({ dispatch, currentCom }) => {
             onChange={event => {
               let updatedCom = currentCom.style
               updatedCom.x = Number(event.target.value)
-              dispatch(
-                updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
-              )
+              updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
             }}
             value={currentCom.style.x}
           />
@@ -47,9 +42,7 @@ const ComStatus = ({ dispatch, currentCom }) => {
             onChange={event => {
               let updatedCom = currentCom.style
               updatedCom.y = Number(event.target.value)
-              dispatch(
-                updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
-              )
+              updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
             }}
             value={currentCom.style.y}
           />
@@ -60,9 +53,7 @@ const ComStatus = ({ dispatch, currentCom }) => {
             onChange={event => {
               let updatedCom = currentCom.style
               updatedCom.width = Number(event.target.value)
-              dispatch(
-                updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
-              )
+              updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
             }}
             value={currentCom.style.width}
           />
@@ -73,9 +64,7 @@ const ComStatus = ({ dispatch, currentCom }) => {
             onChange={event => {
               let updatedCom = currentCom.style
               updatedCom.height = Number(event.target.value)
-              dispatch(
-                updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
-              )
+              updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
             }}
             value={currentCom.style.height}
           />
@@ -86,9 +75,7 @@ const ComStatus = ({ dispatch, currentCom }) => {
             onChange={event => {
               let updatedCom = currentCom.style
               updatedCom.imgUrl = event.target.value
-              dispatch(
-                updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
-              )
+              updateCom(currentCom.id, { ...updatedCom }, currentCom.context)
             }}
             value={currentCom.style.imgUrl}
           />

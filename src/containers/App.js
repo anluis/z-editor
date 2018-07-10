@@ -1,7 +1,7 @@
 import React from 'react'
-import AddCom from '../containers/AddCom'
-import ComList from '../containers/ComList'
-import ComStatus from '../containers/ComStatus'
+import AddCom from '../containers/ComCollections/AddCom'
+import ComCollections from '../containers/ComCollections/ComCollections'
+import ComStatus from '../containers/ComStatus/ComStatus'
 // import TemplateArea from '../containers/TemplateArea'
 // import FunctionArea from '../containers/FunctionArea'
 import '../assets/style/App.less'
@@ -13,7 +13,7 @@ const App = () => {
       <div className="main-remain">
         <div className="main-left">{/* <TemplateArea /> */}</div>
         <div className="main-middle">
-          <ComList />
+          <ComCollections />
         </div>
         <div className="main-right">
           <ComStatus />

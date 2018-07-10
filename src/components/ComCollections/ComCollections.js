@@ -1,7 +1,7 @@
 import React from 'react'
 import Com from './Com'
 
-const ComCollections = ({ coms }) => {
+const ComCollections = ({ coms, updateCom, focusCom }) => {
   const designArea = {
     width: '90%',
     height: '90%',
@@ -10,7 +10,14 @@ const ComCollections = ({ coms }) => {
   return (
     <div className="main-left">
       <div className="design-area" style={designArea}>
-        {coms.map(com => <Com key={com.id} {...com} />)}
+        {coms.map(com => (
+          <Com
+            key={com.id}
+            {...com}
+            updateCom={updateCom}
+            focusCom={focusCom}
+          />
+        ))}
       </div>
     </div>
   )

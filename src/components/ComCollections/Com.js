@@ -2,9 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
 import { connect } from 'react-redux'
-import { updateCom, focusCom } from '../../actions'
 
-const Com = ({ dispatch, context, style, id }) => {
+const Com = ({ updateCom, focusCom, context, style, id }) => {
   const deafultStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -29,7 +28,7 @@ const Com = ({ dispatch, context, style, id }) => {
           width: style.width,
           height: style.height
         }
-        dispatch(updateCom(id, updatedStyle, context))
+        updateCom(id, updatedStyle, context)
       }}
       onResize={(e, direction, ref, delta, position) => {
         const updatedStyle = {
@@ -38,10 +37,10 @@ const Com = ({ dispatch, context, style, id }) => {
           height: ref.offsetHeight,
           ...position
         }
-        dispatch(updateCom(id, updatedStyle, context))
+        updateCom(id, updatedStyle, context)
       }}
       onDragStart={(e, d) => {
-        dispatch(focusCom(id))
+        focusCom(id)
       }}
     >
       {context.name}

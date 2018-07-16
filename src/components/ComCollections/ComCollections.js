@@ -5,7 +5,8 @@ const ComCollections = ({ coms, updateCom, focusCom }) => {
   const designArea = {
     width: '90%',
     height: '90%',
-    border: '1px solid gray'
+    border: '1px solid gray',
+    backgroundColor: 'white'
   }
   return (
     <div className="main-left">

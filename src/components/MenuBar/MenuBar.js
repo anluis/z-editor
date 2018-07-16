@@ -4,7 +4,7 @@ import React from 'react'
 
 const MenuBar = () => {
   return (
-    <div>
+    <div className="menubar">
       <div className="user-avatar" />
       <div className="user-name" />
       <div className="user-edit" />

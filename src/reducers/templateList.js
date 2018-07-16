@@ -2,7 +2,7 @@ import {
   FETCH_TEMPLATELIST_BEGIN,
   FETCH_TEMPLATELIST_SUCCESS,
   FETCH_TEMPLATELIST_FAILURE
-} from '../constants'
+} from '../constants/ActionTypes'
 
 const initialState = {
   items: [],

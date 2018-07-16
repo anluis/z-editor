@@ -1,61 +1,68 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Tab from '@material-ui/core/Tab'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import Typography from '@material-ui/core/Typography'
-import AppBar from '@material-ui/core/AppBar'
-import { withStyles } from '@material-ui/core/styles'
-import { Tabs } from '@material-ui/core'
+import ComStatus from '../../containers/ComStatus/ComStatus'
 
-function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
-    </Typography>
-  )
-}
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper
+class FunctionTabs extends React.PureComponent {
+  constructor() {
+    super()
+    this.state = {
+      selectedItem: 0
+    }
   }
-})
-class FunctionTabs extends React.Component {
-  state = {
-    value: 0
+  handleMenuSelect = order => {
+    this.setState({
+      selectedItem: order
+    })
   }
-  handleChange = (event, value) => {
-    this.setState({ value })
+  renderTabsItem(isSelected, name, index) {
+    return isSelected ? (
+      <div
+        key={index}
+        className="tabs-item selected"
+        onClick={() => this.handleMenuSelect(index)}
+      >
+        {name}
+      </div>
+    ) : (
+      <div
+        key={index}
+        className="tabs-item"
+        onClick={() => this.handleMenuSelect(index)}
+      >
+        {name}
+      </div>
+    )
   }
-
+  renderTabsDetail(index) {
+    switch (index) {
+      case 0:
+        return <ComStatus />
+      case 1:
+        return null
+      case 2:
+        return null
+      default:
+        return <ComStatus />
+    }
+  }
   render() {
-    const { classes } = this.props
-    const { value } = this.state
+    let tabs = ['属性', '图层', '页面']
+    let renderTabs = tabs.map((item, index) => {
+      let value
+      if (index === this.state.selectedItem) {
+        value = this.renderTabsItem(true, item, index)
+      } else {
+        value = this.renderTabsItem(false, item, index)
+      }
+      return value
+    })
+    let renderDetail = this.renderTabsDetail(this.state.selectedItem)
     return (
-      <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={this.handleChange}
-            scrollable
-            scrollButtons="on"
-            indicatorColor="primary"
-            textColor="primary"
-          >
-            <Tab label="页面属性" icon={<FavoriteIcon />} />
-            <Tab label="组件属性" icon={<FavoriteIcon />} />
-          </Tabs>
-        </AppBar>
-        {value === 0 && <TabContainer> </TabContainer>}
-        {value === 1 && <TabContainer> </TabContainer>}
+      <div className="functiontabs">
+        <div className="inner-tabs">{renderTabs}</div>
+        <div className="item-detail">{renderDetail}</div>
       </div>
     )
   }
 }
 
-FunctionTabs.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-export default withStyles(styles)(FunctionTabs)
+export default FunctionTabs

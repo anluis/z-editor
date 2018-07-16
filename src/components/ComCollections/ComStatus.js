@@ -7,7 +7,7 @@ const ComStatus = ({ currentCom, updateCom }) => {
     return null
   } else
     return (
-      <div>
+      <div className="attributes">
         <div>
           组件id:
           {currentCom.id}

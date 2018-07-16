@@ -1,25 +1,26 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
 // 顶部组件功能区域
-const FunctionBar = ({ com }) => {
+const FunctionBar = ({ addCom, coms }) => {
   return (
     <div className="function-area">
-      <div className="function-area-item">
-        <div className="function-item-name">文本</div>
-        <div className="function-item-icon" />
+      <div className="function-head">此处缺logo</div>
+      <div className="function-funcs">
+        <div className="func-item">文字</div>
+        <div
+          className="func-item"
+          onClick={() => {
+            addCom()
+          }}
+        >
+          图片
+        </div>
       </div>
-      <div className="function-area-item">
-        <div className="function-item-name">文本</div>
-        <div className="function-item-icon" />
+      <div className="function-publish">
+        <div className="pub-item">发布</div>
       </div>
     </div>
   )
 }
 
-// FunctionBar.propTypes = {
-//   id: PropTypes.number.isRequired
-// }
-
-export default connect()(FunctionBar)
+export default FunctionBar

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 // 左侧组件区域
-const TemplateList = ({ com }) => {
+const TemplateList = ({ temps }) => {
   return (
     <div className="template-list">
       <div className="template-top-function">
@@ -20,7 +20,7 @@ const TemplateList = ({ com }) => {
   )
 }
 TemplateList.propTypes = {
-  id: PropTypes.number.isRequired
+  temps: PropTypes.array.isRequired
 }
 
 export default connect()(TemplateList)

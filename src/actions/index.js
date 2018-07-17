@@ -33,3 +33,13 @@ export const fetchTemplateListError = error => ({
   type: types.FETCH_TEMPLATELIST_FAILURE,
   payload: { error }
 })
+
+export const moveLayer = (oldIndex, newIndex) => ({
+  type: types.MOVE_CURRENT_LAYER,
+  oldIndex: oldIndex,
+  newIndex: newIndex
+})
+
+export const addPage = () => ({
+  type: types.ADD_PAGE
+})

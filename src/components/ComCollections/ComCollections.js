@@ -3,8 +3,8 @@ import Com from './Com'
 
 const ComCollections = ({ coms, updateCom, focusCom }) => {
   const designArea = {
-    width: '90%',
-    height: '90%',
+    width: '375px',
+    height: '667px',
     border: '1px solid gray',
     backgroundColor: 'white'
   }

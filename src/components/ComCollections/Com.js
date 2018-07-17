@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
-import { connect } from 'react-redux'
 
 const Com = ({ updateCom, focusCom, context, style, id }) => {
   const deafultStyle = {
@@ -10,7 +9,7 @@ const Com = ({ updateCom, focusCom, context, style, id }) => {
     justifyContent: 'center',
     border: 'solid 1px #ddd',
     background: 'white',
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     backgroundImage: `url(` + style.imgUrl + `)`
   }
 
@@ -49,9 +48,10 @@ const Com = ({ updateCom, focusCom, context, style, id }) => {
 }
 
 Com.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  updateCom: PropTypes.func.isRequired,
+  focusCom: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   style: PropTypes.object.isRequired,
   context: PropTypes.object.isRequired
 }
-export default connect()(Com)
+export default Com

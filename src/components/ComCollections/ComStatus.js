@@ -8,11 +8,11 @@ const ComStatus = ({ currentCom, updateCom }) => {
   } else
     return (
       <div className="attributes">
-        <div>
+        <div className="attr-item">
           组件id:
           {currentCom.id}
         </div>
-        <div>
+        <div className="attr-item">
           组件名称:
           <Input
             onChange={event => {
@@ -25,7 +25,7 @@ const ComStatus = ({ currentCom, updateCom }) => {
             value={currentCom.context.name}
           />
         </div>
-        <div>
+        <div className="attr-item">
           组件X:
           <Input
             onChange={event => {
@@ -36,7 +36,7 @@ const ComStatus = ({ currentCom, updateCom }) => {
             value={currentCom.style.x}
           />
         </div>
-        <div>
+        <div className="attr-item">
           组件Y:
           <Input
             onChange={event => {
@@ -47,7 +47,7 @@ const ComStatus = ({ currentCom, updateCom }) => {
             value={currentCom.style.y}
           />
         </div>
-        <div>
+        <div className="attr-item">
           组件width:
           <Input
             onChange={event => {
@@ -58,7 +58,7 @@ const ComStatus = ({ currentCom, updateCom }) => {
             value={currentCom.style.width}
           />
         </div>
-        <div>
+        <div className="attr-item">
           组件height:
           <Input
             onChange={event => {
@@ -69,7 +69,7 @@ const ComStatus = ({ currentCom, updateCom }) => {
             value={currentCom.style.height}
           />
         </div>
-        <div>
+        <div className="attr-item">
           图片:
           <Input
             onChange={event => {

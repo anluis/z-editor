@@ -1,5 +1,7 @@
 import React from 'react'
 import ComStatus from '../../containers/ComStatus/ComStatus'
+import Layers from '../Layers/Layers'
+import Pages from '../Pages/Pages'
 
 class FunctionTabs extends React.PureComponent {
   constructor() {
@@ -37,9 +39,9 @@ class FunctionTabs extends React.PureComponent {
       case 0:
         return <ComStatus />
       case 1:
-        return null
+        return <Layers />
       case 2:
-        return null
+        return <Pages />
       default:
         return <ComStatus />
     }

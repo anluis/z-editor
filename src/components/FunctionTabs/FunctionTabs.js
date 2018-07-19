@@ -1,7 +1,7 @@
 import React from 'react'
 import ComStatus from '../../containers/ComStatus/ComStatus'
-import Layers from '../Layers/Layers'
-import Pages from '../Pages/Pages'
+import Layers from './Layers/Layers'
+import Pages from './Pages/Pages'
 
 class FunctionTabs extends React.PureComponent {
   constructor() {

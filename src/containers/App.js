@@ -1,7 +1,7 @@
 import React from 'react'
 import ComCollections from '../containers/ComCollections/ComCollections'
 import MenuBar from '../containers/MenuBar/MenuBar'
-import FunctionArea from '../containers/FunctionBar/FunctionBar'
+import TopBar from '../containers/TopBar/TopBar'
 import FunctionTabs from '../containers/FunctionTabs/FunctionTabs'
 import '../assets/style/App.less'
 import 'normalize.css'
@@ -10,7 +10,7 @@ const App = () => {
   return (
     <div className="main-wrap">
       <div className="main-top">
-        <FunctionArea />
+        <TopBar />
       </div>
       <div className="main-remain">
         <div className="main-left">

@@ -1,7 +1,7 @@
 import React from 'react'
 
 // 顶部组件功能区域
-const FunctionBar = ({ addCom, coms }) => {
+const TopBar = ({ addCom, coms }) => {
   return (
     <div className="function-area">
       <div className="function-head">此处缺logo</div>
@@ -23,4 +23,4 @@ const FunctionBar = ({ addCom, coms }) => {
   )
 }
 
-export default FunctionBar
+export default TopBar

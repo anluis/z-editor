@@ -1,7 +1,7 @@
 // 顶部功能区域
 import { connect } from 'react-redux'
 import { addCom } from '../../actions'
-import FuctionBar from '../../components/FunctionBar/FunctionBar'
+import TopBar from '../../components/TopBar/TopBar'
 
 const defaultStyle = {
   height: 100,
@@ -31,4 +31,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FuctionBar)
+)(TopBar)

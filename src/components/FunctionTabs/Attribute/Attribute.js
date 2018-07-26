@@ -1,3 +1,6 @@
 import React from 'react'
-class Attribute extends React.Component {}
+import Input from '@material-ui/core'
+import { connect } from 'react-redux'
+
+const Attribute = ({}) => {}
 export default Attribute

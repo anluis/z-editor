@@ -1,7 +1,7 @@
 import React from 'react'
 import Com from './Com'
 
-const ComCollections = ({ coms, updateCom, focusCom }) => {
+const Canvas = ({ comList, updateCom, focusCom }) => {
   const designArea = {
     width: '375px',
     height: '667px',
@@ -11,7 +11,7 @@ const ComCollections = ({ coms, updateCom, focusCom }) => {
   return (
     <div className="main-left">
       <div className="design-area" style={designArea}>
-        {coms.map(com => (
+        {comList.map(com => (
           <Com
             key={com.id}
             {...com}
@@ -24,4 +24,4 @@ const ComCollections = ({ coms, updateCom, focusCom }) => {
   )
 }
 
-export default ComCollections
+export default Canvas

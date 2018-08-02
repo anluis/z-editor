@@ -1,9 +1,9 @@
 import React from 'react'
-import Input from '@material-ui/core'
-import { connect } from 'react-redux'
+import { Input } from '@material-ui/core'
 
 const Attribute = ({ com }) => {
-  if (com.current === null) {
+  console.dir(com)
+  if (!com) {
     return null
   } else {
     return (
@@ -43,4 +43,4 @@ const Attribute = ({ com }) => {
     )
   }
 }
-export default connect()(Attribute)
+export default Attribute

@@ -1,8 +1,8 @@
 import React from 'react'
-import ComCollections from './containers/ComCollections/ComCollections'
+import Canvas from './containers/Canvas/Canvas'
 import MenuBar from './containers/MenuBar/MenuBar'
 import TopBar from './containers/TopBar/TopBar'
-import FunctionTabs from './containers/FunctionTabs/FunctionTabs'
+import FunctionTabs from './components/FunctionTabs/FunctionTabs'
 import './assets/style/App.less'
 import 'normalize.css'
 
@@ -17,7 +17,7 @@ const App = () => {
           <MenuBar />
         </div>
         <div className="main-middle">
-          <ComCollections />
+          <Canvas />
         </div>
         <div className="main-right">
           <FunctionTabs />

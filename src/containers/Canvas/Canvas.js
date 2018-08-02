@@ -1,16 +1,18 @@
-// 组件状态
 import { connect } from 'react-redux'
-import { updateCom } from '../../actions'
-import ComStatus from '../../components/ComCollections/ComStatus'
+import { updateCom, focusCom } from '../../actions'
+import Canvas from '../../components/Canvas/Canvas'
 
 const mapStateToProps = state => ({
-  currentCom: state.coms[state.comstatus]
+  comList: state.comList
 })
 
 const mapDispatchToProps = dispath => {
   return {
     updateCom: (id, style, context) => {
       dispath(updateCom(id, style, context))
+    },
+    focusCom: id => {
+      dispath(focusCom(id))
     }
   }
 }
@@ -18,4 +20,4 @@ const mapDispatchToProps = dispath => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ComStatus)
+)(Canvas)

@@ -1,11 +1,12 @@
 import React from 'react'
-import ComStatus from '../../containers/ComStatus/ComStatus'
+import Attribute from '../../containers/FunctionTabs/Attribute/Attribute'
 import Layers from './Layers/Layers'
 import Pages from './Pages/Pages'
+import { connect } from 'react-redux'
 
 class FunctionTabs extends React.PureComponent {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       selectedItem: 0
     }
@@ -37,13 +38,13 @@ class FunctionTabs extends React.PureComponent {
   renderTabsDetail(index) {
     switch (index) {
       case 0:
-        return <ComStatus />
+        return <Attribute />
       case 1:
         return <Layers />
       case 2:
         return <Pages />
       default:
-        return <ComStatus />
+        return <Attribute />
     }
   }
   render() {
@@ -67,4 +68,4 @@ class FunctionTabs extends React.PureComponent {
   }
 }
 
-export default FunctionTabs
+export default connect()(FunctionTabs)

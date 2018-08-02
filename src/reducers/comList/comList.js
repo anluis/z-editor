@@ -1,7 +1,9 @@
-import { ADD_COM, DELETE_COM, UPDATE_COM } from '../constants/ActionTypes'
+import { ADD_COM, DELETE_COM, UPDATE_COM } from '../../constants/ActionTypes'
+
+// 初始状态
+const initState = []
 
 //所有组件状态
-
 const updateObjectInArray = (array, action) => {
   return array.map((item, index) => {
     if (index !== action.id) {
@@ -14,15 +16,15 @@ const updateObjectInArray = (array, action) => {
   })
 }
 
-const coms = (state = [], action) => {
+// 组件Reducer
+const comList = (state = initState, action) => {
   switch (action.type) {
     case ADD_COM:
       return [
         ...state,
         {
           id: action.id,
-          context: action.context,
-          style: action.style
+          attribute: action.attribute
         }
       ]
     case DELETE_COM:
@@ -34,4 +36,4 @@ const coms = (state = [], action) => {
   }
 }
 
-export default coms
+export default comList

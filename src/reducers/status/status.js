@@ -1,8 +1,8 @@
-import { FOCUS_COM } from '../constants/ActionTypes'
+import { FOCUS_COM } from '../../constants/ActionTypes'
 
 const initState = {
   page: {
-    order: [0],
+    order: [],
     current: 0
   },
   com: {

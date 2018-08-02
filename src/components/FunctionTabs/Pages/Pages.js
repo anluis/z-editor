@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import {
   SortableContainer,
   SortableElement,
@@ -31,4 +32,4 @@ class Pages extends Component {
   }
 }
 
-export default Pages
+export default connect()(Pages)

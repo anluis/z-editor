@@ -1,5 +1,8 @@
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from '../reducers'
+import { createLogger } from 'redux-logger'
+
+const logger = createLogger()
 
 const initialStore = {
   status: {
@@ -23,15 +26,6 @@ const initialStore = {
       attribute: {}
     }
   ]
-}
-
-const logger = store => next => action => {
-  console.group(action.type)
-  console.info('dispatching', action)
-  let result = next(action)
-  console.log('next state', store.getState())
-  console.groupEnd()
-  return result
 }
 
 const store = createStore(rootReducer, initialStore, applyMiddleware(logger))

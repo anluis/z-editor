@@ -6,4 +6,6 @@ export default combineReducers({
   status,
   comList,
   pageList
+  // templateList,
+  // workList
 })

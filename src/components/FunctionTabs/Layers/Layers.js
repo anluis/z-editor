@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   SortableContainer,
   SortableElement,
@@ -17,7 +17,11 @@ const SortableList = SortableContainer(({ items }) => {
   )
 })
 
-class Layers extends Component {
+class Layers extends React.Component {
+  constructor(props) {
+    super(props)
+    console.dir(props)
+  }
   state = {
     items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']
   }

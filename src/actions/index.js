@@ -32,12 +32,13 @@ export const fetchTemplateListError = error => ({
   payload: { error }
 })
 
-export const moveLayer = (oldIndex, newIndex) => ({
-  type: types.MOVE_CURRENT_LAYER,
-  oldIndex: oldIndex,
-  newIndex: newIndex
-})
-
 export const addPage = () => ({
   type: types.ADD_PAGE
+})
+
+export const updateComZindex = (id, oldIndex, newIndex) => ({
+  type: types.UPDATE_COM_ZINDEX,
+  id,
+  oldIndex,
+  newIndex
 })

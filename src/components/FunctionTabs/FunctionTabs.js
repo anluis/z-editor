@@ -2,7 +2,6 @@ import React from 'react'
 import Attribute from '../../containers/FunctionTabs/Attribute/Attribute'
 import Layers from './Layers/Layers'
 import Pages from './Pages/Pages'
-import { connect } from 'react-redux'
 
 class FunctionTabs extends React.PureComponent {
   constructor(props) {
@@ -68,4 +67,4 @@ class FunctionTabs extends React.PureComponent {
   }
 }
 
-export default connect()(FunctionTabs)
+export default FunctionTabs

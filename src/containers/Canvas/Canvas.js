@@ -6,16 +6,14 @@ const mapStateToProps = state => ({
   comList: state.comList
 })
 
-const mapDispatchToProps = dispath => {
-  return {
-    updateCom: (id, style, context) => {
-      dispath(updateCom(id, style, context))
-    },
-    focusCom: id => {
-      dispath(focusCom(id))
-    }
+const mapDispatchToProps = dispath => ({
+  updateCom: (id, style, context) => {
+    dispath(updateCom(id, style, context))
+  },
+  focusCom: id => {
+    dispath(focusCom(id))
   }
-}
+})
 
 export default connect(
   mapStateToProps,

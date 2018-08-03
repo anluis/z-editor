@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
 
-const Com = ({ updateCom, focusCom, context, style, id }) => {
+const Com = ({ updateCom, focusCom, attribute, id }) => {
+  console.dir(attribute)
   const deafultStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -10,39 +11,39 @@ const Com = ({ updateCom, focusCom, context, style, id }) => {
     border: 'solid 1px #ddd',
     background: 'white',
     backgroundSize: 'cover',
-    backgroundImage: `url(` + style.imgUrl + `)`
+    backgroundImage: `url("` + attribute.imgUrl + `")`
   }
 
   return (
     <Rnd
       bounds={'.design-area'}
       style={deafultStyle}
-      size={{ width: style.width, height: style.height }}
-      position={{ x: style.x, y: style.y }}
+      size={{ width: attribute.width, height: attribute.height }}
+      position={{ x: attribute.x, y: attribute.y }}
       onDragStop={(e, d) => {
-        const updatedStyle = {
-          ...style,
+        const updatedAttr = {
+          ...attribute,
           x: d.x,
           y: d.y,
-          width: style.width,
-          height: style.height
+          width: attribute.width,
+          height: attribute.height
         }
-        updateCom(id, updatedStyle, context)
+        updateCom(id, updatedAttr)
       }}
       onResize={(e, direction, ref, delta, position) => {
-        const updatedStyle = {
-          ...style,
+        const updatedAttr = {
+          ...attribute,
           width: ref.offsetWidth,
           height: ref.offsetHeight,
           ...position
         }
-        updateCom(id, updatedStyle, context)
+        updateCom(id, updatedAttr)
       }}
       onDragStart={(e, d) => {
         focusCom(id)
       }}
     >
-      {context.name}
+      {attribute.name}
     </Rnd>
   )
 }
@@ -51,7 +52,6 @@ Com.propTypes = {
   updateCom: PropTypes.func.isRequired,
   focusCom: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
-  style: PropTypes.object.isRequired,
-  context: PropTypes.object.isRequired
+  attribute: PropTypes.object.isRequired
 }
 export default Com

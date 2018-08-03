@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
 
 const Com = ({ updateCom, focusCom, attribute, id }) => {
-  console.dir(attribute)
   const deafultStyle = {
     display: 'flex',
     alignItems: 'center',

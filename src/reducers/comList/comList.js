@@ -5,8 +5,8 @@ const initState = []
 
 //所有组件状态
 const updateObjectInArray = (array, action) => {
-  return array.map((item, index) => {
-    if (index !== action.id) {
+  return array.map(item => {
+    if (item.id !== action.id) {
       return item
     }
     return {
@@ -28,7 +28,7 @@ const comList = (state = initState, action) => {
         }
       ]
     case DELETE_COM:
-      return state.filter(com => com.id !== action.comIdToDelete)
+      return state.filter(com => com.id !== action.id)
     case UPDATE_COM:
       return updateObjectInArray(state, action)
     default:

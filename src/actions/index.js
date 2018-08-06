@@ -18,6 +18,11 @@ export const focusCom = id => ({
   id
 })
 
+export const deleteCom = id => ({
+  type: types.DELETE_COM,
+  id
+})
+
 export const fetchTemplateListBegin = () => ({
   type: types.FETCH_TEMPLATELIST_BEGIN
 })

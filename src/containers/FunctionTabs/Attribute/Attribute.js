@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateCom } from '../../../actions'
+import { updateCom, deleteCom } from '../../../actions'
 import Attribute from '../../../components/FunctionTabs/Attribute/Attribute'
 
 const mapStateToProps = state => ({
@@ -9,6 +9,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateCom: (id, attribute) => {
     dispatch(updateCom(id, attribute))
+  },
+  deleteCom: id => {
+    dispatch(deleteCom(id))
   }
 })
 

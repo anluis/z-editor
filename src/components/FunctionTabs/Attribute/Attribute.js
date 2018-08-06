@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input } from '@material-ui/core'
 
-const Attribute = ({ focusCom, updateCom }) => {
+const Attribute = ({ focusCom, updateCom, deleteCom }) => {
   if (focusCom === undefined) {
     return null
   } else {
@@ -85,6 +85,9 @@ const Attribute = ({ focusCom, updateCom }) => {
             }}
             value={focusCom.attribute.imgUrl}
           />
+        </div>
+        <div className="attr-item delete">
+          <div onClick={() => deleteCom(focusCom.id)}>删除</div>
         </div>
       </div>
     )

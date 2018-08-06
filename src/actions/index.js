@@ -1,33 +1,49 @@
+import * as types from '../constants/ActionTypes'
 let nextComId = 0
-export const addCom = style => ({
-  type: 'ADD_COM',
+
+export const addCom = attribute => ({
+  type: types.ADD_COM,
   id: nextComId++,
-  text: 'Com-Id:' + nextComId,
-  style,
-  beSelected: true
+  attribute
 })
 
-export const resizeCom = (style, id) => ({
-  type: 'RESIZE_COM',
-  style,
-  id
-})
-
-export const dragCom = (style, id) => ({
-  type: 'DRAG_COM',
-  style,
-  id
-})
-
-export const setCurrentCom = (style, id, text) => ({
-  type: 'SET_CURRENT_ID',
-  style,
+export const updateCom = (id, attribute) => ({
+  type: types.UPDATE_COM,
   id,
-  text
+  attribute
 })
 
-export const changeCurrentName = (id, text) => ({
-  type: 'CHANGE_CURRENT_NAME',
-  text,
+export const focusCom = id => ({
+  type: types.FOCUS_COM,
   id
+})
+
+export const deleteCom = id => ({
+  type: types.DELETE_COM,
+  id
+})
+
+export const fetchTemplateListBegin = () => ({
+  type: types.FETCH_TEMPLATELIST_BEGIN
+})
+
+export const fetchTemplateListSuccess = items => ({
+  type: types.FETCH_TEMPLATELIST_SUCCESS,
+  payload: { items }
+})
+
+export const fetchTemplateListError = error => ({
+  type: types.FETCH_TEMPLATELIST_FAILURE,
+  payload: { error }
+})
+
+export const addPage = () => ({
+  type: types.ADD_PAGE
+})
+
+export const updateComZindex = (id, oldIndex, newIndex) => ({
+  type: types.UPDATE_COM_ZINDEX,
+  id,
+  oldIndex,
+  newIndex
 })

@@ -1,10 +1,11 @@
 {
   "name": "react-h5-template-editor",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^1.0.0-rc.1",
     "autoprefixer": "7.1.6",
+    "axios": "^0.18.0",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -42,7 +43,10 @@
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-rnd": "^7.4.0",
+    "react-router-dom": "^4.3.1",
+    "react-sortable-hoc": "^0.8.3",
     "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
     "resolve": "1.6.0",
     "style-loader": "^0.21.0",
     "sw-precache-webpack-plugin": "0.11.4",

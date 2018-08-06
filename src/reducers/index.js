@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux'
-import coms from './coms'
-import comstatus from './comstatus'
+import status from './status/status'
+import comList from './comList/comList'
+import pageList from './pageList/pageList'
 export default combineReducers({
-  coms,
-  comstatus
+  status,
+  comList,
+  pageList
+  // templateList,
+  // workList
 })

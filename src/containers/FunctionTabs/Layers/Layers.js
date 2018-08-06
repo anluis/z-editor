@@ -7,8 +7,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateComZindex: (id, oldIndex, newIndex) => {
-    dispatch(updateComZindex(id, oldIndex, newIndex))
+  updateComZindex: (layers, oldIndex, newIndex) => {
+    dispatch(updateComZindex(layers, oldIndex, newIndex))
   }
 })
 

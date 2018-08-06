@@ -41,9 +41,9 @@ export const addPage = () => ({
   type: types.ADD_PAGE
 })
 
-export const updateComZindex = (id, oldIndex, newIndex) => ({
+export const updateComZindex = (layers, oldIndex, newIndex) => ({
   type: types.UPDATE_COM_ZINDEX,
-  id,
+  layers,
   oldIndex,
   newIndex
 })

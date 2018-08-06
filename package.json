@@ -1,7 +1,7 @@
 {
   "name": "react-h5-template-editor",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
   "dependencies": {
     "@material-ui/core": "^1.0.0-rc.1",
     "autoprefixer": "7.1.6",

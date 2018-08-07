@@ -1,7 +1,7 @@
 import React from 'react'
 import Attribute from '../../containers/FunctionTabs/Attribute/Attribute'
 import Layers from '../../containers/FunctionTabs/Layers/Layers'
-import Pages from './Pages/Pages'
+import Pages from '../../containers/FunctionTabs/Pages/Pages'
 
 class FunctionTabs extends React.PureComponent {
   constructor(props) {

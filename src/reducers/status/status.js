@@ -1,4 +1,8 @@
-import { FOCUS_COM, UPDATE_COM_ZINDEX } from '../../constants/ActionTypes'
+import {
+  FOCUS_COM,
+  UPDATE_COM_ZINDEX,
+  ADD_COM
+} from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 const initState = {
   page: {
@@ -13,21 +17,21 @@ const initState = {
 
 const status = (state = initState, action) => {
   switch (action.type) {
+    case ADD_COM:
+      state.com.order.push(action.id)
+      return state
     case FOCUS_COM:
       state.com.current = action.id
       return state
     case UPDATE_COM_ZINDEX:
-      let newOrder = arrayMove(action.layers, action.oldIndex, action.newIndex)
-      let newState = {
-        com: {
-          order: newOrder
+      return {
+        ...state,
+        ...{
+          com: {
+            order: arrayMove(action.layers, action.oldIndex, action.newIndex)
+          }
         }
       }
-      let mergedState = {
-        ...state,
-        ...newState
-      }
-      return mergedState
     default:
       return state
   }

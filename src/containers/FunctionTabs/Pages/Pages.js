@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updatePageOrder, focusPage } from '../../../actions'
+import { updatePageOrder, focusPage, addPage } from '../../../actions'
 import Pages from '../../../components/FunctionTabs/Pages/Pages'
 
 const mapStateToProps = state => ({
@@ -7,11 +7,14 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updatePageOrder: (id, oldIndex, newIndex) => {
-    dispatch(updatePageOrder(id, oldIndex, newIndex))
+  updatePageOrder: (pages, oldIndex, newIndex) => {
+    dispatch(updatePageOrder(pages, oldIndex, newIndex))
   },
   focusPage: id => {
     dispatch(focusPage(id))
+  },
+  addPage: () => {
+    dispatch(addPage())
   }
 })
 

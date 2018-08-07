@@ -11,6 +11,7 @@ export const UPDATE_COM_ZINDEX = 'UPDATE_COM_ZINDEX'
 export const ADD_PAGE = 'ADD_PAGE'
 export const DELETE_PAGE = 'DELETE_PAGE'
 export const UPDATE_PAGE_ORDER = 'UPDATE_PAGE_ORDER'
+export const FOCUS_PAGE = 'FOCUS_PAGE'
 
 // template
 export const FETCH_TEMPLATELIST_BEGIN = 'FETCH_TEMPLATELIST_BEGIN'

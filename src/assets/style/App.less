@@ -123,6 +123,26 @@
               line-height: 36px;
             }
           }
+          .layers {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            .layer-item {
+              background: #fff;
+              border-top: 1px solid #ece6e6;
+              padding: 15px 20px;
+              cursor: pointer;
+              &:hover {
+                color: #03a9f4 !important;
+              }
+              &:last-child {
+                border-bottom: 1px solid #ece6e6;
+              }
+              &:first-child {
+                border-top: none !important;
+              }
+            }
+          }
         }
       }
       .func {

@@ -3,7 +3,8 @@ import { updateCom, focusCom } from '../../actions/Coms'
 import Canvas from '../../components/Canvas/Canvas'
 
 const mapStateToProps = state => ({
-  comList: state.comList
+  comList: state.comList,
+  currentCom: state.status.com.order
 })
 
 const mapDispatchToProps = dispath => ({

@@ -11,20 +11,24 @@ const aWork = {
       }
     }
   ],
-  pageList: [
-    { id: 0, name: '页面1', comsOrder: [0, 1, 2] },
-    { id: 1, name: '页面2', comsOrder: [0, 1, 2] },
-    { id: 2, name: '页面2', comsOrder: [0, 1, 2] }
+  layers: [
+    {
+      pageId: 0
+    }
   ],
-  pageOrder: [0, 1, 2],
+  pageList: [
+    { id: 0, name: '页面1', order: [0, 1, 2] },
+    { id: 1, name: '页面2', order: [0, 1, 2] },
+    { id: 2, name: '页面2', order: [0, 1, 2] }
+  ],
   status: {
     page: {
       order: [0, 1, 2],
-      currentId: 0
+      current: 0
     },
     com: {
       order: [],
-      currentId: 0
+      current: 0
     }
   }
 }

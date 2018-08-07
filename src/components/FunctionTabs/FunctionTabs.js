@@ -10,6 +10,7 @@ class FunctionTabs extends React.PureComponent {
       selectedItem: 0
     }
   }
+
   handleMenuSelect = order => {
     this.setState({
       selectedItem: order

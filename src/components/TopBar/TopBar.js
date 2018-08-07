@@ -1,7 +1,7 @@
 import React from 'react'
 
 // 顶部组件功能区域
-const TopBar = ({ addCom, coms }) => {
+const TopBar = ({ addCom, currentPageId }) => {
   return (
     <div className="function-area">
       <div className="function-head">此处缺logo</div>
@@ -10,7 +10,7 @@ const TopBar = ({ addCom, coms }) => {
         <div
           className="func-item"
           onClick={() => {
-            addCom()
+            addCom(currentPageId)
           }}
         >
           图片

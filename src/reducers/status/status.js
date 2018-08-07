@@ -10,7 +10,7 @@ const initState = {
     current: 0
   },
   com: {
-    order: [1, 2, 3],
+    order: [],
     current: null
   }
 }
@@ -18,8 +18,12 @@ const initState = {
 const status = (state = initState, action) => {
   switch (action.type) {
     case ADD_COM:
-      state.com.order.push(action.id)
-      return state
+      return {
+        ...state,
+        com: {
+          order: state.com.order.concat([action.id])
+        }
+      }
     case FOCUS_COM:
       state.com.current = action.id
       return state

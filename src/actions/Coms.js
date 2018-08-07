@@ -1,10 +1,14 @@
 import * as types from '../constants/ActionTypes'
 let nextComId = 0
 
-export const addCom = attribute => ({
+export const addCom = (attribute, targetPageId) => ({
   type: types.ADD_COM,
   id: nextComId++,
-  attribute
+  attribute: {
+    ...attribute,
+    name: attribute.name + nextComId
+  },
+  targetPageId
 })
 
 export const updateCom = (id, attribute) => ({
@@ -23,9 +27,10 @@ export const deleteCom = id => ({
   id
 })
 
-export const updateComZindex = (layers, oldIndex, newIndex) => ({
+export const updateComZindex = (layers, oldIndex, newIndex, targetPageId) => ({
   type: types.UPDATE_COM_ZINDEX,
   layers,
   oldIndex,
-  newIndex
+  newIndex,
+  targetPageId
 })

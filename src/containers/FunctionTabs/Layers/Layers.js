@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
-import { updateComZindex, updateCom } from '../../../actions'
+import { updateComZindex } from '../../../actions'
 import Layers from '../../../components/FunctionTabs/Layers/Layers'
 
 const mapStateToProps = state => ({
-  layers: state.comList
+  layers: state.status.com.order
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateComZindex: (id, oldIndex, newIndex, attribute) => {
-    dispatch(updateComZindex(id, oldIndex, newIndex, attribute))
+  updateComZindex: (id, oldIndex, newIndex) => {
+    dispatch(updateComZindex(id, oldIndex, newIndex))
   }
 })
 

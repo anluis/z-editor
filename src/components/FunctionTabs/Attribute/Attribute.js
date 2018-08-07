@@ -9,7 +9,7 @@ const Attribute = ({ focusCom, updateCom, deleteCom }) => {
       <div className="attributes">
         <div className="attr-item id">组件Id: {focusCom.id}</div>
         <div className="attr-item name">
-          组件名称:
+          组件名称
           <Input
             onChange={e => {
               let updatedAttr = {

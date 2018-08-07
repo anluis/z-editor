@@ -1,6 +1,6 @@
 import React from 'react'
 import Attribute from '../../containers/FunctionTabs/Attribute/Attribute'
-import Layers from '../../containers/FunctionTabs/Layers/Layers'
+import Layers from './Layers/Layers'
 import Pages from './Pages/Pages'
 
 class FunctionTabs extends React.PureComponent {
@@ -10,7 +10,6 @@ class FunctionTabs extends React.PureComponent {
       selectedItem: 0
     }
   }
-
   handleMenuSelect = order => {
     this.setState({
       selectedItem: order

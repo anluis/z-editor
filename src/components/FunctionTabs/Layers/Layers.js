@@ -19,7 +19,7 @@ const SortableList = SortableContainer(({ items, style, store }) => {
         <SortableItem
           key={`item-${index}`}
           index={index}
-          value={value}
+          value={value.attribute.name}
           style={style}
         />
       ))}
@@ -30,10 +30,10 @@ const SortableList = SortableContainer(({ items, style, store }) => {
 class Layers extends React.Component {
   constructor(props) {
     super(props)
-    console.dir(props)
+    console.log(this.props.layers)
   }
   state = {
-    items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']
+    items: this.props.layers
   }
   style = {
     background: '#fff',

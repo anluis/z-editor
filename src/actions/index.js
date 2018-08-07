@@ -4,7 +4,11 @@ let nextComId = 0
 export const addCom = attribute => ({
   type: types.ADD_COM,
   id: nextComId++,
-  attribute
+  attribute: {
+    ...attribute,
+    name: attribute.name + (nextComId - 1),
+    zIndex: nextComId - 1
+  }
 })
 
 export const updateCom = (id, attribute) => ({
@@ -36,9 +40,10 @@ export const addPage = () => ({
   type: types.ADD_PAGE
 })
 
-export const updateComZindex = (id, oldIndex, newIndex) => ({
+export const updateComZindex = (id, oldIndex, newIndex, attribute) => ({
   type: types.UPDATE_COM_ZINDEX,
   id,
+  attribute,
   oldIndex,
   newIndex
 })

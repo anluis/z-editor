@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateComZindex } from '../../../actions'
+import { updateComZindex } from '../../../actions/Coms'
 import Layers from '../../../components/FunctionTabs/Layers/Layers'
 
 const mapStateToProps = state => ({

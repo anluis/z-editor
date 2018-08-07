@@ -1,6 +1,6 @@
 // 顶部功能区域
 import { connect } from 'react-redux'
-import { addCom } from '../../actions'
+import { addCom } from '../../actions/Coms'
 import TopBar from '../../components/TopBar/TopBar'
 
 const defaultAttribute = {

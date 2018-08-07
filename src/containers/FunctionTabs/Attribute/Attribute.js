@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateCom, deleteCom } from '../../../actions'
+import { updateCom, deleteCom } from '../../../actions/Coms'
 import Attribute from '../../../components/FunctionTabs/Attribute/Attribute'
 
 const mapStateToProps = state => ({

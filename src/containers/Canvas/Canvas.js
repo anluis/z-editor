@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateCom, focusCom } from '../../actions'
+import { updateCom, focusCom } from '../../actions/Coms'
 import Canvas from '../../components/Canvas/Canvas'
 
 const mapStateToProps = state => ({

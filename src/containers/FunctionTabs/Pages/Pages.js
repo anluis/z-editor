@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updatePageOrder, focusPage, addPage } from '../../../actions'
+import { updatePageOrder, focusPage, addPage } from '../../../actions/Pages'
 import Pages from '../../../components/FunctionTabs/Pages/Pages'
 
 const mapStateToProps = state => ({

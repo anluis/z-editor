@@ -25,11 +25,11 @@ const SortableList = SortableContainer(({ items }) => {
   )
 })
 
-const Pages = ({ pages, updatePageOrder, addPage }) => {
+const Pages = ({ pages, updatePageOrder, addPage, focusPage }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    updatePageOrder(pages, oldIndex, newIndex)
+    updatePageOrder(oldIndex, newIndex)
+    focusPage(oldIndex)
   }
-
   return (
     <div>
       <SortableList items={pages} onSortEnd={onSortEnd} />

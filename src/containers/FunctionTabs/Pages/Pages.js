@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  updatePageOrder: (pages, oldIndex, newIndex) => {
-    dispatch(updatePageOrder(pages, oldIndex, newIndex))
+  updatePageOrder: (oldIndex, newIndex) => {
+    dispatch(updatePageOrder(oldIndex, newIndex))
   },
   focusPage: id => {
     dispatch(focusPage(id))

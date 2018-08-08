@@ -11,9 +11,8 @@ export const focusPage = id => ({
   id
 })
 
-export const updatePageOrder = (pages, oldIndex, newIndex) => ({
+export const updatePageOrder = (oldIndex, newIndex) => ({
   type: types.UPDATE_PAGE_ORDER,
-  pages,
   oldIndex,
   newIndex
 })

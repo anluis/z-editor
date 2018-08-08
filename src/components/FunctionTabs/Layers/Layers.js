@@ -4,10 +4,14 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 const makeLayersSortByOrder = (layers, order) => {
   let result = []
   order.forEach(e => {
-    result.push(layers.find(item => item.id === e))
+    let r = layers.find(item => item.id === e)
+    if (r !== undefined) {
+      result.push(r)
+    }
   })
   return result
 }
+
 const style = {
   background: '#fff',
   borderTop: '1px solid #ece6e6',
@@ -22,6 +26,7 @@ const SortableItem = SortableElement(({ value }) => (
 ))
 
 const SortableList = SortableContainer(({ items }) => {
+  console.dir(items)
   return (
     <div className="layers">
       {items.map((value, index) => (
@@ -37,8 +42,10 @@ class Layers extends React.Component {
     updateComZindex(order, oldIndex, newIndex, targetPageId)
   }
   render() {
+    console.dir(this.props.layers)
     const { layers, order } = this.props
     let layersSorted = makeLayersSortByOrder(layers, order)
+    console.dir(layersSorted)
     return <SortableList items={layersSorted} onSortEnd={this.onSortEnd} />
   }
 }

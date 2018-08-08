@@ -2,7 +2,8 @@ import {
   UPDATE_COM_ZINDEX,
   ADD_PAGE,
   ADD_COM,
-  DELETE_COM
+  DELETE_COM,
+  UPDATE_PAGE_ORDER
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 const initState = [{ id: 0, name: '页面0', order: [] }]
@@ -60,6 +61,8 @@ const pageList = (state = initState, action) => {
           order: []
         }
       ]
+    case UPDATE_PAGE_ORDER:
+      return arrayMove(state, action.oldIndex, action.newIndex)
     default:
       return state
   }

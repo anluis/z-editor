@@ -22,6 +22,8 @@ const Canvas = ({ comList, updateCom, focusCom, currentCom }) => {
     currentCom
   )
 
+  console.dir(renderComs)
+
   return (
     <div className="main-left">
       <div className="design-area" style={designArea}>

@@ -22,9 +22,10 @@ export const focusCom = id => ({
   id
 })
 
-export const deleteCom = id => ({
+export const deleteCom = (id, targetPageId) => ({
   type: types.DELETE_COM,
-  id
+  id,
+  targetPageId
 })
 
 export const updateComZindex = (layers, oldIndex, newIndex, targetPageId) => ({

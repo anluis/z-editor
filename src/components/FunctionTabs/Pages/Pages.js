@@ -1,7 +1,19 @@
 import React from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { Button } from 'antd'
 
-const SortableItem = SortableElement(({ value }) => <div>{value}</div>)
+const style = {
+  background: '#fff',
+  borderTop: '1px solid #ece6e6',
+  padding: '15px 20px',
+  cursor: 'pointer'
+}
+
+const SortableItem = SortableElement(({ value }) => (
+  <div className="layer-item" style={style}>
+    {value}
+  </div>
+))
 
 const SortableList = SortableContainer(({ items }) => {
   return (
@@ -14,15 +26,14 @@ const SortableList = SortableContainer(({ items }) => {
 })
 
 const Pages = ({ pages, updatePageOrder, addPage }) => {
-  console.dir(pages)
   const onSortEnd = ({ oldIndex, newIndex }) => {
     updatePageOrder(pages, oldIndex, newIndex)
   }
 
   return (
     <div>
-      <div onClick={() => addPage()}>新增</div>
       <SortableList items={pages} onSortEnd={onSortEnd} />
+      <Button onClick={() => addPage()}>新增</Button>
     </div>
   )
 }

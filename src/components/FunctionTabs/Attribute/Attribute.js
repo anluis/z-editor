@@ -1,7 +1,25 @@
 import React from 'react'
-import { Input } from '@material-ui/core'
+import { Input, Button, Modal } from 'antd'
+const confirm = Modal.confirm
 
-const Attribute = ({ focusCom, updateCom, deleteCom }) => {
+const showDeleteConfirm = (deleteCom, id, targetPageId) => {
+  confirm({
+    title: 'Are you sure delete this task?',
+    content: 'Some descriptions',
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      deleteCom(id, targetPageId)
+      console.log('OK')
+    },
+    onCancel() {
+      console.log('Cancel')
+    }
+  })
+}
+
+const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
   if (focusCom === undefined) {
     return null
   } else {
@@ -87,7 +105,16 @@ const Attribute = ({ focusCom, updateCom, deleteCom }) => {
           />
         </div>
         <div className="attr-item delete">
-          <div onClick={() => deleteCom(focusCom.id)}>删除</div>
+          <div>
+            <Button
+              type="danger"
+              onClick={() =>
+                showDeleteConfirm(deleteCom, focusCom.id, status.page.current)
+              }
+            >
+              删除
+            </Button>
+          </div>
         </div>
       </div>
     )

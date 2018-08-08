@@ -6,7 +6,6 @@ const makeLayersSortByOrder = (layers, order) => {
   order.forEach(e => {
     result.push(layers.find(item => item.id === e))
   })
-  console.dir(result)
   return result
 }
 const style = {

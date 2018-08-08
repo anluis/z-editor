@@ -3,15 +3,16 @@ import { updateCom, deleteCom } from '../../../actions/Coms'
 import Attribute from '../../../components/FunctionTabs/Attribute/Attribute'
 
 const mapStateToProps = state => ({
-  focusCom: state.comList.find(com => com.id === state.status.com.current)
+  focusCom: state.comList.find(com => com.id === state.status.com.current),
+  status: state.status
 })
 
 const mapDispatchToProps = dispatch => ({
   updateCom: (id, attribute) => {
     dispatch(updateCom(id, attribute))
   },
-  deleteCom: id => {
-    dispatch(deleteCom(id))
+  deleteCom: (id, targetPageId) => {
+    dispatch(deleteCom(id, targetPageId))
   }
 })
 

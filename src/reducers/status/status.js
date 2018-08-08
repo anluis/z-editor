@@ -1,7 +1,8 @@
 import {
   FOCUS_COM,
   UPDATE_COM_ZINDEX,
-  ADD_COM
+  ADD_COM,
+  DELETE_COM
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 const initState = {
@@ -22,6 +23,13 @@ const status = (state = initState, action) => {
         ...state,
         com: {
           order: state.com.order.concat([action.id])
+        }
+      }
+    case DELETE_COM:
+      return {
+        ...state,
+        com: {
+          order: state.com.order.filter(item => item !== action.id)
         }
       }
     case FOCUS_COM:

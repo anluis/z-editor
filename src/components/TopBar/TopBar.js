@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'antd'
 
 // 顶部组件功能区域
 const TopBar = ({ addCom, currentPageId }) => {
@@ -17,7 +18,9 @@ const TopBar = ({ addCom, currentPageId }) => {
         </div>
       </div>
       <div className="function-publish">
-        <div className="pub-item">发布</div>
+        <div className="pub-item">
+          <Button>发布</Button>
+        </div>
       </div>
     </div>
   )

@@ -11,7 +11,6 @@ const mapDispatchToProps = dispatch => ({
   updatePageOrder: (pages, oldIndex, newIndex) => {
     dispatch(updatePageOrder(pages, oldIndex, newIndex))
   },
-
   focusPage: id => {
     dispatch(focusPage(id))
   },

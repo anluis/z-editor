@@ -17,3 +17,14 @@ export const updatePageOrder = (pages, oldIndex, newIndex) => ({
   oldIndex,
   newIndex
 })
+
+export const deletePage = id => ({
+  type: types.DELETE_PAGE,
+  id
+})
+
+export const updatePageSettings = (id, settings) => ({
+  type: types.UPDATE_PAGE_SETTINGS,
+  id,
+  settings
+})

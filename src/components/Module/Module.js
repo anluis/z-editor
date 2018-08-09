@@ -3,12 +3,13 @@ import * as ModuleTypes from '../../constants/ModuleTypes'
 export const backgroundModule = {
   name: '背景',
   height: 665,
-  width: 375,
+  width: 373,
   x: 0,
   y: 0,
   imgUrl: 'http://cdn.exe666.com/fe/marketing/img/pacific/bg.png',
   zIndex: 0,
   opacity: 1,
+  background:'#fff',
   type: ModuleTypes.BACKGROUND_MODULE
 }
 
@@ -24,7 +25,27 @@ export const imageModule = {
   opacity: 1,
   type: ModuleTypes.IMG_MODULE,
   borderWidth: 0,
+  background:'#fff',
   borderColor: '#000',
   borderStyle: 'solid',
   borderRadius: 0
 }
+
+export const textModule = {
+  name: '输入框',
+  content: '输入框',
+  height: 40,
+  width: 300,
+  x: 0,
+  y: 0,
+  color:'#000',
+  imgUrl:'',
+  opacity: 1,
+  type: ModuleTypes.INPUT_MODULE,
+  borderWidth: 0,
+  background:'#fff',
+  borderColor: '#000',
+  borderStyle: 'solid',
+  borderRadius: 0
+}
+

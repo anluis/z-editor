@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'antd'
+import { Button, Icon } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
 
 // 顶部组件功能区域
@@ -29,7 +29,15 @@ const TopBar = ({ addCom, currentPageId, undo }) => {
         >
           背景
         </div>
-        <div className="func-item">输入框</div>
+        <div
+          className="func-item"
+          onClick={() => {
+            addCom(currentPageId, ModuleTypes.INPUT_MODULE)
+          }}
+        >
+          输入框
+        </div>
+
       </div>
       <div className="function-publish">
         <div className="pub-item">

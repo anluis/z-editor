@@ -19,18 +19,33 @@ const style = {
   cursor: 'pointer'
 }
 
-const SortableItem = SortableElement(({ value }) => (
-  <div className="layer-item" style={style}>
-    {value.attribute.name}
-  </div>
-))
+const selected = {
+  background: '#fff',
+  borderTop: '1px solid #ece6e6',
+  padding: '15px 20px',
+  cursor: 'pointer',
+  color: 'red'
+}
 
-const SortableList = SortableContainer(({ items }) => {
-  console.dir(items)
+const SortableItem = SortableElement(({ value, selectedId }) => {
+  let bindStyle = selectedId === value.id ? selected : style
+  return (
+    <div className="layer-item" style={bindStyle}>
+      {value.attribute.name}
+    </div>
+  )
+})
+
+const SortableList = SortableContainer(({ items, selectedId }) => {
   return (
     <div className="layers">
       {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value} />
+        <SortableItem
+          key={`item-${index}`}
+          index={index}
+          value={value}
+          selectedId={selectedId}
+        />
       ))}
     </div>
   )
@@ -38,15 +53,25 @@ const SortableList = SortableContainer(({ items }) => {
 
 class Layers extends React.Component {
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const { order, updateComZindex, targetPageId } = this.props
-    updateComZindex(order, oldIndex, newIndex, targetPageId)
+    const { order, updateComZindex, targetPageId, layers } = this.props
+    updateComZindex(
+      order,
+      oldIndex,
+      newIndex,
+      targetPageId,
+      makeLayersSortByOrder(layers, order)[oldIndex].id
+    )
   }
   render() {
-    console.dir(this.props.layers)
-    const { layers, order } = this.props
+    const { layers, order, currentComId } = this.props
     let layersSorted = makeLayersSortByOrder(layers, order)
-    console.dir(layersSorted)
-    return <SortableList items={layersSorted} onSortEnd={this.onSortEnd} />
+    return (
+      <SortableList
+        items={layersSorted}
+        onSortEnd={this.onSortEnd}
+        selectedId={currentComId}
+      />
+    )
   }
 }
 

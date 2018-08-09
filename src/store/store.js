@@ -22,12 +22,12 @@ const aWork = {
     { id: 2, name: '页面2', order: [0, 1, 2] }
   ],
   status: {
+    // no need pages order anymore
     page: {
-      order: [0, 1, 2],
       current: 0
     },
+    // no need coms order anymore, find in pageList
     com: {
-      order: [],
       current: 0
     }
   }

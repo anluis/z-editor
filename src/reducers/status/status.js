@@ -1,11 +1,10 @@
 import {
   FOCUS_COM,
-  UPDATE_COM_ZINDEX,
   ADD_COM,
-  DELETE_COM,
   UPDATE_PAGE_ORDER,
   ADD_PAGE,
-  FOCUS_PAGE
+  FOCUS_PAGE,
+  UPDATE_COM_ZINDEX
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 const initState = {
@@ -22,37 +21,25 @@ const initState = {
 const status = (state = initState, action) => {
   switch (action.type) {
     case ADD_COM:
-      return {
-        ...state,
-        com: {
-          order: state.com.order.concat([action.id])
-        }
-      }
-    case DELETE_COM:
-      return {
-        ...state,
-        com: {
-          order: state.com.order.filter(item => item !== action.id)
-        }
-      }
+      state.com.current = action.id
+      return state
     case FOCUS_COM:
       state.com.current = action.id
       return state
     case UPDATE_COM_ZINDEX:
-      return {
-        ...state,
-        ...{
-          com: {
-            order: arrayMove(action.layers, action.oldIndex, action.newIndex)
-          }
-        }
-      }
+      state.com.current = action.chooseComId
+      return state
     case UPDATE_PAGE_ORDER:
       return {
         ...state,
         ...{
           page: {
-            order: arrayMove(state.page.order, action.oldIndex, action.newIndex)
+            order: arrayMove(
+              state.page.order,
+              action.oldIndex,
+              action.newIndex
+            ),
+            current: state.page.current
           }
         }
       }
@@ -65,7 +52,6 @@ const status = (state = initState, action) => {
             current: action.id
           },
           com: {
-            order: [],
             current: null
           }
         }
@@ -75,8 +61,6 @@ const status = (state = initState, action) => {
         ...state,
         ...{
           com: {
-            order: state.pageList.find(e => e.id === action.id).order,
-            // comOrder should not calculate here
             current: null
           },
           page: {

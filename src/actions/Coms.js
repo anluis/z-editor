@@ -28,10 +28,17 @@ export const deleteCom = (id, targetPageId) => ({
   targetPageId
 })
 
-export const updateComZindex = (layers, oldIndex, newIndex, targetPageId) => ({
+export const updateComZindex = (
+  layers,
+  oldIndex,
+  newIndex,
+  targetPageId,
+  chooseComId
+) => ({
   type: types.UPDATE_COM_ZINDEX,
   layers,
   oldIndex,
   newIndex,
-  targetPageId
+  targetPageId,
+  chooseComId
 })

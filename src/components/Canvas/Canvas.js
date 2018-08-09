@@ -1,7 +1,7 @@
 import React from 'react'
 import Com from './Com'
 
-const Canvas = ({ comList, updateCom, focusCom, currentCom }) => {
+const Canvas = ({ comList, updateCom, focusCom, currentPage, currentCom }) => {
   const designArea = {
     width: '375px',
     height: '667px',
@@ -25,22 +25,18 @@ const Canvas = ({ comList, updateCom, focusCom, currentCom }) => {
     currentCom
   )
 
-  console.dir(renderComs)
-
   return (
     <div className="main-left">
       <div className="design-area" style={designArea}>
-        {renderComs !== undefined
-          ? renderComs.map((com, index) => (
-              <Com
-                key={com.id}
-                {...com}
-                updateCom={updateCom}
-                focusCom={focusCom}
-                zIndex={index}
-              />
-            ))
-          : null}
+        {renderComs.map((com, index) => (
+          <Com
+            key={`${currentPage} + ${com.id}`}
+            {...com}
+            updateCom={updateCom}
+            focusCom={focusCom}
+            zIndex={index}
+          />
+        ))}
       </div>
     </div>
   )

@@ -11,7 +11,9 @@ const mapStateToProps = state => ({
             .find(e => e.id === state.status.page.current)
             .order.includes(item.id)
   ),
-  currentCom: state.status.com.order
+  currentCom: state.pageList.find(e => e.id === state.status.page.current)
+    .order,
+  currentPage: state.status.page.current
 })
 
 const mapDispatchToProps = dispath => ({

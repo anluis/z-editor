@@ -1,13 +1,15 @@
 import {
   FOCUS_COM,
-  UPDATE_COM_ZINDEX,
   ADD_COM,
-  DELETE_COM
+  UPDATE_PAGE_ORDER,
+  ADD_PAGE,
+  FOCUS_PAGE,
+  UPDATE_COM_ZINDEX
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 const initState = {
   page: {
-    order: [],
+    order: [0],
     current: 0
   },
   com: {
@@ -19,28 +21,51 @@ const initState = {
 const status = (state = initState, action) => {
   switch (action.type) {
     case ADD_COM:
-      return {
-        ...state,
-        com: {
-          order: state.com.order.concat([action.id])
-        }
-      }
-    case DELETE_COM:
-      return {
-        ...state,
-        com: {
-          order: state.com.order.filter(item => item !== action.id)
-        }
-      }
+      state.com.current = action.id
+      return state
     case FOCUS_COM:
       state.com.current = action.id
       return state
     case UPDATE_COM_ZINDEX:
+      state.com.current = action.chooseComId
+      return state
+    case UPDATE_PAGE_ORDER:
+      return {
+        ...state,
+        ...{
+          page: {
+            order: arrayMove(
+              state.page.order,
+              action.oldIndex,
+              action.newIndex
+            ),
+            current: state.page.current
+          }
+        }
+      }
+    case ADD_PAGE:
+      return {
+        ...state,
+        ...{
+          page: {
+            order: state.page.order.concat([action.id]),
+            current: action.id
+          },
+          com: {
+            current: null
+          }
+        }
+      }
+    case FOCUS_PAGE:
       return {
         ...state,
         ...{
           com: {
-            order: arrayMove(action.layers, action.oldIndex, action.newIndex)
+            current: null
+          },
+          page: {
+            order: state.page.order,
+            current: action.id
           }
         }
       }

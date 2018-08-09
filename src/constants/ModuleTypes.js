@@ -1,0 +1,4 @@
+export const IMG_MODULE = 'IMG_MODULE'
+export const BACKGROUND_MODULE = 'BACKGROUND_MODULE'
+export const TEXT_MODULE = 'TEXT_MODULE'
+export const INPUT_MODULE = 'INPUT_MODULE'

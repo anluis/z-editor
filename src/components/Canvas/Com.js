@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
+
 const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
   const deafultStyle = {
     display: 'flex',
@@ -10,7 +11,12 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
     background: 'white',
     backgroundSize: 'cover',
     backgroundImage: `url("` + attribute.imgUrl + `")`,
-    zIndex: zIndex
+    zIndex: zIndex,
+    opacity: attribute.opacity,
+    borderWidth: attribute.borderWidth + 'px',
+    borderColor: attribute.borderColor,
+    borderStyle: attribute.borderStyle,
+    borderRadius: attribute.borderRadius + 'px'
   }
 
   return (

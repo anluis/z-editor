@@ -112,17 +112,28 @@
           }
         }
         .item-detail {
+          background: #f9f9f9;
           @cap: 40px;
           height: calc(~'100% - @{cap}');
+
           .attributes {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding: 10px 20px;
+            padding: 10px 0;
+            .attributes-base {
+              padding: 0 20px 10px;
+            }
+            .attribute-extend {
+              padding: 0 0 10px;
+            }
             .attr-item {
               min-height: 36px;
               padding: 2px 0;
               line-height: 36px;
+            }
+            .delete {
+              padding: 0 10px;
             }
           }
           .layers {
@@ -160,4 +171,13 @@
 }
 .innerImg {
   width: 100%;
+}
+.ant-collapse-borderless {
+  .ant-collapse-item {
+    .ant-collapse-content {
+      background-color: transparent;
+      border-top: 0;
+      background: #f9f9f9;
+    }
+  }
 }

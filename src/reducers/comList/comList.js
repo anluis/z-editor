@@ -1,5 +1,4 @@
 import { ADD_COM, DELETE_COM, UPDATE_COM } from '../../constants/ActionTypes'
-
 // 初始状态
 const initState = []
 

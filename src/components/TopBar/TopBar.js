@@ -3,10 +3,14 @@ import { Button } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
 
 // 顶部组件功能区域
-const TopBar = ({ addCom, currentPageId }) => {
+const TopBar = ({ addCom, currentPageId, undo }) => {
   return (
     <div className="function-area">
-      <div className="function-head">此处缺logo</div>
+      <div className="function-head">
+        <Button onClick={undo}>Undo</Button>
+        <Button>Redo</Button>
+        此处缺logo
+      </div>
       <div className="function-funcs">
         <div className="func-item">文字</div>
         <div
@@ -25,11 +29,7 @@ const TopBar = ({ addCom, currentPageId }) => {
         >
           背景
         </div>
-        <div
-          className="func-item"
-        >
-          输入框
-        </div>
+        <div className="func-item">输入框</div>
       </div>
       <div className="function-publish">
         <div className="pub-item">

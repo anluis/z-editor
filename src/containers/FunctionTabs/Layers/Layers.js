@@ -4,16 +4,17 @@ import Layers from '../../../components/FunctionTabs/Layers/Layers'
 
 const mapStateToProps = state => {
   let targetPageItem = state.pageList.find(
-    pageItem => pageItem.id === state.status.page.current
+    pageItem => pageItem.id === state.status.present.page.current
   )
   return {
     layers: state.comList.filter(item => {
       return targetPageItem.order.includes(item.id)
     }),
-    order: state.pageList.find(item => item.id === state.status.page.current)
-      .order,
-    targetPageId: state.status.page.current,
-    currentComId: state.status.com.current
+    order: state.pageList.find(
+      item => item.id === state.status.present.page.current
+    ).order,
+    targetPageId: state.status.present.page.current,
+    currentComId: state.status.present.com.current
   }
 }
 

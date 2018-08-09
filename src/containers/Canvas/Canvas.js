@@ -5,15 +5,17 @@ import Canvas from '../../components/Canvas/Canvas'
 const mapStateToProps = state => ({
   comList: state.comList.filter(
     item =>
-      state.pageList.find(e => e.id === state.status.page.current) === undefined
+      state.pageList.find(e => e.id === state.status.present.page.current) ===
+      undefined
         ? []
         : state.pageList
-            .find(e => e.id === state.status.page.current)
+            .find(e => e.id === state.status.present.page.current)
             .order.includes(item.id)
   ),
-  currentCom: state.pageList.find(e => e.id === state.status.page.current)
-    .order,
-  currentPage: state.status.page.current
+  currentCom: state.pageList.find(
+    e => e.id === state.status.present.page.current
+  ).order,
+  currentPage: state.status.present.page.current
 })
 
 const mapDispatchToProps = dispath => ({

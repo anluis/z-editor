@@ -4,7 +4,7 @@ import Pages from '../../../components/FunctionTabs/Pages/Pages'
 
 const mapStateToProps = state => ({
   pages: state.pageList,
-  targetPageId: state.status.page.current
+  targetPageId: state.status.present.page.current
 })
 
 const mapDispatchToProps = dispatch => ({

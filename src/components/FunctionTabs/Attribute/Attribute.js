@@ -67,7 +67,11 @@ const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
             <Button
               type="danger"
               onClick={() =>
-                showDeleteConfirm(deleteCom, focusCom.id, status.page.current)
+                showDeleteConfirm(
+                  deleteCom,
+                  focusCom.id,
+                  status.page.present.current
+                )
               }
             >
               删除

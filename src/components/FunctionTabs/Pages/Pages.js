@@ -25,13 +25,17 @@ const SortableList = SortableContainer(({ items }) => {
   )
 })
 
-const Pages = ({ pages, updatePageOrder, addPage }) => {
+const Pages = ({ pages, updatePageOrder, addPage, focusPage }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    updatePageOrder(pages, oldIndex, newIndex)
+    updatePageOrder(oldIndex, newIndex)
+    focusPage(oldIndex)
   }
-
+  const pStyle = {
+    height: '100%',
+    overflowY: 'scroll'
+  }
   return (
-    <div>
+    <div style={pStyle}>
       <SortableList items={pages} onSortEnd={onSortEnd} />
       <Button onClick={() => addPage()}>新增</Button>
     </div>

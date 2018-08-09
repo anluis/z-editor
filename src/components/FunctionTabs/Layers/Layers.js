@@ -4,10 +4,14 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 const makeLayersSortByOrder = (layers, order) => {
   let result = []
   order.forEach(e => {
-    result.push(layers.find(item => item.id === e))
+    let r = layers.find(item => item.id === e)
+    if (r !== undefined) {
+      result.push(r)
+    }
   })
   return result
 }
+
 const style = {
   background: '#fff',
   borderTop: '1px solid #ece6e6',
@@ -15,17 +19,33 @@ const style = {
   cursor: 'pointer'
 }
 
-const SortableItem = SortableElement(({ value }) => (
-  <div className="layer-item" style={style}>
-    {value.attribute.name}
-  </div>
-))
+const selected = {
+  background: '#fff',
+  borderTop: '1px solid #ece6e6',
+  padding: '15px 20px',
+  cursor: 'pointer',
+  color: 'red'
+}
 
-const SortableList = SortableContainer(({ items }) => {
+const SortableItem = SortableElement(({ value, selectedId }) => {
+  let bindStyle = selectedId === value.id ? selected : style
+  return (
+    <div className="layer-item" style={bindStyle}>
+      {value.attribute.name}
+    </div>
+  )
+})
+
+const SortableList = SortableContainer(({ items, selectedId }) => {
   return (
     <div className="layers">
       {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value} />
+        <SortableItem
+          key={`item-${index}`}
+          index={index}
+          value={value}
+          selectedId={selectedId}
+        />
       ))}
     </div>
   )
@@ -33,13 +53,25 @@ const SortableList = SortableContainer(({ items }) => {
 
 class Layers extends React.Component {
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const { order, updateComZindex, targetPageId } = this.props
-    updateComZindex(order, oldIndex, newIndex, targetPageId)
+    const { order, updateComZindex, targetPageId, layers } = this.props
+    updateComZindex(
+      order,
+      oldIndex,
+      newIndex,
+      targetPageId,
+      makeLayersSortByOrder(layers, order)[oldIndex].id
+    )
   }
   render() {
-    const { layers, order } = this.props
+    const { layers, order, currentComId } = this.props
     let layersSorted = makeLayersSortByOrder(layers, order)
-    return <SortableList items={layersSorted} onSortEnd={this.onSortEnd} />
+    return (
+      <SortableList
+        items={layersSorted}
+        onSortEnd={this.onSortEnd}
+        selectedId={currentComId}
+      />
+    )
   }
 }
 

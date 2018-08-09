@@ -1,10 +1,16 @@
 import React from 'react'
 import { Input, Button, Modal } from 'antd'
+import { SketchPicker } from 'react-color'
 import Image from './Image'
 import Link from './Link'
 import Extend from './Extend'
 import Opacity from './Opacity'
-import { BACKGROUND_MODULE } from '../../../constants/ModuleTypes'
+import Text from './Text'
+import {
+  BACKGROUND_MODULE,
+  IMG_MODULE,
+  INPUT_MODULE
+} from '../../../constants/ModuleTypes'
 
 const confirm = Modal.confirm
 
@@ -28,14 +34,54 @@ const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
   if (focusCom === undefined) {
     return null
   } else {
-    const displayStyle = {
+    const opacityDisplay = {
       display: 'none'
     }
-    if (focusCom.attribute.type === BACKGROUND_MODULE) {
-      displayStyle.display = 'block'
-    } else {
-      displayStyle.display = 'none'
+    const linkDisplay = {
+      display: 'none'
     }
+    const imgDisplay = {
+      display: 'none'
+    }
+    const extendDisplay = {
+      display: 'none'
+    }
+    const inputDisplay = {
+      display: 'none'
+    }
+    if (focusCom.attribute.type !== BACKGROUND_MODULE) {
+      extendDisplay.display = 'block'
+    } else {
+      extendDisplay.display = 'none'
+    }
+
+    if (focusCom.attribute.type === BACKGROUND_MODULE) {
+      opacityDisplay.display = 'block'
+    } else {
+      opacityDisplay.display = 'none'
+    }
+
+    if (focusCom.attribute.type === IMG_MODULE) {
+      linkDisplay.display = 'block'
+    } else {
+      linkDisplay.display = 'none'
+    }
+
+    if (
+      focusCom.attribute.type === IMG_MODULE ||
+      focusCom.attribute.type === BACKGROUND_MODULE
+    ) {
+      imgDisplay.display = 'block'
+    } else {
+      imgDisplay.display = 'none'
+    }
+
+    if (focusCom.attribute.type === INPUT_MODULE) {
+      inputDisplay.display = 'block'
+    } else {
+      inputDisplay.display = 'none'
+    }
+
     return (
       <div className="attributes">
         <div className="attributes-base">
@@ -50,18 +96,42 @@ const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
                 }
                 updateCom(focusCom.id, updatedAttr)
               }}
+              maxLength="12"
               value={focusCom.attribute.name}
             />
           </div>
-          <Image updateCom={updateCom} focusCom={focusCom} />
-          <Link updateCom={updateCom} focusCom={focusCom} />
+          <div className="attr-item background" style={opacityDisplay}>
+            纯色背景:
+            <SketchPicker
+              color={focusCom.attribute.background}
+              onChangeComplete={e => {
+                let updatedAttr = {
+                  ...focusCom.attribute,
+                  background: String(e.hex),
+                  imgUrl: ''
+                }
+                updateCom(focusCom.id, updatedAttr)
+              }}
+            />
+          </div>
+          <Text
+            updateCom={updateCom}
+            focusCom={focusCom}
+            style={inputDisplay}
+          />
+          <Image updateCom={updateCom} focusCom={focusCom} style={imgDisplay} />
+          <Link updateCom={updateCom} focusCom={focusCom} style={linkDisplay} />
           <Opacity
             updateCom={updateCom}
             focusCom={focusCom}
-            style={displayStyle}
+            style={opacityDisplay}
           />
         </div>
-        <Extend updateCom={updateCom} focusCom={focusCom} />
+        <Extend
+          updateCom={updateCom}
+          focusCom={focusCom}
+          style={extendDisplay}
+        />
         <div className="attr-item delete">
           <div>
             <Button

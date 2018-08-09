@@ -1,33 +1,25 @@
 import React from 'react'
 import { Input } from 'antd'
-import { IMG_MODULE, BACKGROUND_MODULE } from '../../../constants/ModuleTypes'
 
-const Image = ({ focusCom, updateCom }) => {
+const Image = ({ focusCom, updateCom, style }) => {
   if (focusCom === undefined) {
     return null
   } else {
-    if (
-      focusCom.attribute.type === IMG_MODULE ||
-      focusCom.attribute.type === BACKGROUND_MODULE
-    ) {
-      return (
-        <div className="attr-item img">
-          图片:
-          <Input
-            onChange={e => {
-              let updatedAttr = {
-                ...focusCom.attribute,
-                imgUrl: e.target.value
-              }
-              updateCom(focusCom.id, updatedAttr)
-            }}
-            value={focusCom.attribute.imgUrl}
-          />
-        </div>
-      )
-    } else {
-      return null
-    }
+    return (
+      <div className="attr-item img" style={style}>
+        图片:
+        <Input
+          onChange={e => {
+            let updatedAttr = {
+              ...focusCom.attribute,
+              imgUrl: e.target.value
+            }
+            updateCom(focusCom.id, updatedAttr)
+          }}
+          value={focusCom.attribute.imgUrl}
+        />
+      </div>
+    )
   }
 }
 export default Image

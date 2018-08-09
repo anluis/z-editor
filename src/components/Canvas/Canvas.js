@@ -5,8 +5,8 @@ const Canvas = ({ comList, updateCom, focusCom, currentCom }) => {
   const designArea = {
     width: '375px',
     height: '667px',
-    border: '1px solid gray',
-    backgroundColor: 'white'
+    border: '1px dashed #a3afb7',
+    backgroundColor: '#eef1f6'
   }
 
   const sortByOrder = (items, order) => {

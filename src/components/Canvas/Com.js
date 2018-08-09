@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
+import { INPUT_MODULE } from '../../constants/ModuleTypes'
 
 const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
   const deafultStyle = {
@@ -8,10 +9,11 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
     alignItems: 'center',
     justifyContent: 'center',
     border: 'solid 1px #ddd',
-    background: 'white',
+    background: attribute.background,
     backgroundSize: 'cover',
     backgroundImage: `url("` + attribute.imgUrl + `")`,
     zIndex: zIndex,
+    color: attribute.color,
     opacity: attribute.opacity,
     borderWidth: attribute.borderWidth + 'px',
     borderColor: attribute.borderColor,
@@ -48,7 +50,7 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
         focusCom(id)
       }}
     >
-      {attribute.name}
+      {attribute.type === INPUT_MODULE ? attribute.content : ''}
     </Rnd>
   )
 }

@@ -30,8 +30,12 @@ const Pages = ({ pages, updatePageOrder, addPage, focusPage }) => {
     updatePageOrder(oldIndex, newIndex)
     focusPage(oldIndex)
   }
+  const pStyle = {
+    height: '100%',
+    overflowY: 'scroll'
+  }
   return (
-    <div>
+    <div style={pStyle}>
       <SortableList items={pages} onSortEnd={onSortEnd} />
       <Button onClick={() => addPage()}>新增</Button>
     </div>

@@ -7,13 +7,13 @@ import {
   UPDATE_COM_ZINDEX
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
+import { undoable } from '../undoable'
 const initState = {
   page: {
     order: [0],
     current: 0
   },
   com: {
-    order: [],
     current: null
   }
 }
@@ -21,8 +21,17 @@ const initState = {
 const status = (state = initState, action) => {
   switch (action.type) {
     case ADD_COM:
-      state.com.current = action.id
-      return state
+      return {
+        ...state,
+        ...{
+          com: {
+            current: action.id
+          },
+          page: {
+            ...state.page
+          }
+        }
+      }
     case FOCUS_COM:
       state.com.current = action.id
       return state
@@ -74,4 +83,4 @@ const status = (state = initState, action) => {
   }
 }
 
-export default status
+export default undoable(status)

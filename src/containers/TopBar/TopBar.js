@@ -6,12 +6,16 @@ import TopBar from '../../components/TopBar/TopBar'
 import {
   imageModule,
   backgroundModule,
+  inputModule,
+  vedioModule,
   textModule
 } from '../../components/Module/Module'
 import {
   IMG_MODULE,
   BACKGROUND_MODULE,
-  INPUT_MODULE
+  INPUT_MODULE,
+  VEDIO_MODULE,
+  TEXT_MODULE
 } from '../../constants/ModuleTypes'
 
 const mapStateToProps = state => {
@@ -32,6 +36,12 @@ const mapDispatchToProps = dispatch => ({
         dispatch(addCom(backgroundModule, targetPageId))
         break
       case INPUT_MODULE:
+        dispatch(addCom(inputModule, targetPageId))
+        break
+      case VEDIO_MODULE:
+        dispatch(addCom(vedioModule, targetPageId))
+        break
+      case TEXT_MODULE:
         dispatch(addCom(textModule, targetPageId))
         break
       default:

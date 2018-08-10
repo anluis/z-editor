@@ -6,10 +6,14 @@ import Link from './Link'
 import Extend from './Extend'
 import Opacity from './Opacity'
 import Text from './Text'
+import Vedio from './Vedio'
+import Textarea from './Textarea'
 import {
   BACKGROUND_MODULE,
   IMG_MODULE,
-  INPUT_MODULE
+  VEDIO_MODULE,
+  INPUT_MODULE,
+  TEXT_MODULE
 } from '../../../constants/ModuleTypes'
 
 const confirm = Modal.confirm
@@ -49,6 +53,12 @@ const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
     const inputDisplay = {
       display: 'none'
     }
+    const vedioDisplay = {
+      display: 'none'
+    }
+    const textDisplay = {
+      display: 'none'
+    }
     if (focusCom.attribute.type !== BACKGROUND_MODULE) {
       extendDisplay.display = 'block'
     } else {
@@ -75,11 +85,21 @@ const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
     } else {
       imgDisplay.display = 'none'
     }
+    if (focusCom.attribute.type === VEDIO_MODULE) {
+      vedioDisplay.display = 'block'
+    } else {
+      vedioDisplay.display = 'none'
+    }
 
     if (focusCom.attribute.type === INPUT_MODULE) {
       inputDisplay.display = 'block'
     } else {
       inputDisplay.display = 'none'
+    }
+    if (focusCom.attribute.type === TEXT_MODULE) {
+      textDisplay.display = 'block'
+    } else {
+      textDisplay.display = 'none'
     }
 
     return (
@@ -119,7 +139,17 @@ const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
             focusCom={focusCom}
             style={inputDisplay}
           />
+          <Textarea
+            updateCom={updateCom}
+            focusCom={focusCom}
+            style={textDisplay}
+          />
           <Image updateCom={updateCom} focusCom={focusCom} style={imgDisplay} />
+          <Vedio
+            updateCom={updateCom}
+            focusCom={focusCom}
+            style={vedioDisplay}
+          />
           <Link updateCom={updateCom} focusCom={focusCom} style={linkDisplay} />
           <Opacity
             updateCom={updateCom}

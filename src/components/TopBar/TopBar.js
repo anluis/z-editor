@@ -16,7 +16,14 @@ const TopBar = ({ addCom, currentPageId, undo, redo, canRedo, canUndo }) => {
         此处缺logo
       </div>
       <div className="function-funcs">
-        <div className="func-item">文字</div>
+        <div
+          className="func-item"
+          onClick={() => {
+            addCom(currentPageId, ModuleTypes.TEXT_MODULE)
+          }}
+        >
+          文字
+        </div>
         <div
           className="func-item"
           onClick={() => {
@@ -40,6 +47,14 @@ const TopBar = ({ addCom, currentPageId, undo, redo, canRedo, canUndo }) => {
           }}
         >
           输入框
+        </div>
+        <div
+          className="func-item"
+          onClick={() => {
+            addCom(currentPageId, ModuleTypes.VEDIO_MODULE)
+          }}
+        >
+          视频
         </div>
       </div>
       <div className="function-publish">

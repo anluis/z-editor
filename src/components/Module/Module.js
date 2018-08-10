@@ -9,7 +9,7 @@ export const backgroundModule = {
   imgUrl: 'http://cdn.exe666.com/fe/marketing/img/pacific/bg.png',
   zIndex: 0,
   opacity: 1,
-  background:'#fff',
+  background: '#fff',
   type: ModuleTypes.BACKGROUND_MODULE
 }
 
@@ -25,27 +25,58 @@ export const imageModule = {
   opacity: 1,
   type: ModuleTypes.IMG_MODULE,
   borderWidth: 0,
-  background:'#fff',
+  background: '#fff',
   borderColor: '#000',
   borderStyle: 'solid',
   borderRadius: 0
 }
 
-export const textModule = {
+export const inputModule = {
   name: '输入框',
   content: '输入框',
   height: 40,
   width: 300,
   x: 0,
   y: 0,
-  color:'#000',
-  imgUrl:'',
+  color: '#000',
+  imgUrl: '',
   opacity: 1,
   type: ModuleTypes.INPUT_MODULE,
   borderWidth: 0,
-  background:'#fff',
+  background: '#fff',
   borderColor: '#000',
   borderStyle: 'solid',
   borderRadius: 0
 }
 
+export const vedioModule = {
+  name: '视频',
+  vedioUrl:
+    'http://h5-images.oss-cn-shanghai.aliyuncs.com/xingshidu_h5/marketing/pages/ad/vedio.mp4',
+  height: 200,
+  width: 300,
+  x: 0,
+  y: 0,
+  type: ModuleTypes.VEDIO_MODULE,
+  borderWidth: 0,
+  background: 'none',
+  borderColor: '#000',
+  borderStyle: 'solid',
+  borderRadius: 0
+}
+
+export const textModule = {
+  name: '文字',
+  content: '',
+  textAlign: 'left',
+  height: 50,
+  width: 300,
+  x: 0,
+  y: 0,
+  type: ModuleTypes.TEXT_MODULE,
+  borderWidth: 1,
+  background: 'none',
+  borderColor: '#08a1ef',
+  borderStyle: 'solid',
+  borderRadius: 0
+}

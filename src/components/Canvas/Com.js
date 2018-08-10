@@ -1,8 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
-import { INPUT_MODULE } from '../../constants/ModuleTypes'
+import {
+  INPUT_MODULE,
+  VEDIO_MODULE,
+  TEXT_MODULE
+} from '../../constants/ModuleTypes'
 
+const Vedio = attribute => {
+  return (
+    <video
+      src={attribute.attribute.vedioUrl}
+      controls="controls"
+      style={{
+        width: attribute.attribute.width + 'px',
+        height: attribute.attribute.height + 'px'
+      }}
+    >
+      your browser does not support the video tag
+    </video>
+  )
+}
 const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
   const deafultStyle = {
     display: 'flex',
@@ -18,7 +36,8 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
     borderWidth: attribute.borderWidth + 'px',
     borderColor: attribute.borderColor,
     borderStyle: attribute.borderStyle,
-    borderRadius: attribute.borderRadius + 'px'
+    borderRadius: attribute.borderRadius + 'px',
+    textAlign: attribute.textAlign
   }
 
   return (
@@ -50,7 +69,11 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
         focusCom(id)
       }}
     >
-      {attribute.type === INPUT_MODULE ? attribute.content : ''}
+      {attribute.type === INPUT_MODULE || attribute.type === TEXT_MODULE ? (
+        attribute.content
+      ) : attribute.type === VEDIO_MODULE ? (
+        <Vedio attribute={attribute} />
+      ) : null}
     </Rnd>
   )
 }

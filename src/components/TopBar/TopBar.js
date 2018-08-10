@@ -43,8 +43,9 @@ const TopBar = ({ addCom, currentPageId, undo, redo, canRedo, canUndo }) => {
         </div>
       </div>
       <div className="function-publish">
-        <div className="pub-item">
-          <Button>发布</Button>
+        <div>
+          <Button className="pub-item">设置</Button>
+          <Button className="pub-item">发布</Button>
         </div>
       </div>
     </div>

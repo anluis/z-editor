@@ -27,8 +27,6 @@ export function undoable(reducer) {
       default:
         // 将其他 action 委托给原始的 reducer 处理
         const newPresent = reducer(present, action)
-        console.dir(present)
-        console.dir(newPresent)
         if (present === newPresent) {
           return state
         }

@@ -3,19 +3,20 @@ import { updateCom, focusCom } from '../../actions/Coms'
 import Canvas from '../../components/Canvas/Canvas'
 
 const mapStateToProps = state => ({
-  comList: state.comList.filter(
+  comList: state.present.comList.filter(
     item =>
-      state.pageList.find(e => e.id === state.status.present.page.current) ===
-      undefined
+      state.present.pageList.find(
+        e => e.id === state.present.status.page.current
+      ) === undefined
         ? []
-        : state.pageList
-            .find(e => e.id === state.status.present.page.current)
+        : state.present.pageList
+            .find(e => e.id === state.present.status.page.current)
             .order.includes(item.id)
   ),
-  currentCom: state.pageList.find(
-    e => e.id === state.status.present.page.current
+  currentCom: state.present.pageList.find(
+    e => e.id === state.present.status.page.current
   ).order,
-  currentPage: state.status.present.page.current
+  currentPage: state.present.status.page.current
 })
 
 const mapDispatchToProps = dispath => ({

@@ -1,14 +1,14 @@
 import React from 'react'
-import { Button, Icon } from 'antd'
+import { Button } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
 
 // 顶部组件功能区域
-const TopBar = ({ addCom, currentPageId, undo }) => {
+const TopBar = ({ addCom, currentPageId, undo, redo }) => {
   return (
     <div className="function-area">
       <div className="function-head">
         <Button onClick={undo}>Undo</Button>
-        <Button>Redo</Button>
+        <Button onClick={redo}>Redo</Button>
         此处缺logo
       </div>
       <div className="function-funcs">
@@ -37,7 +37,6 @@ const TopBar = ({ addCom, currentPageId, undo }) => {
         >
           输入框
         </div>
-
       </div>
       <div className="function-publish">
         <div className="pub-item">

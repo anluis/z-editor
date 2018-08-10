@@ -3,8 +3,8 @@ import { updatePageOrder, focusPage, addPage } from '../../../actions/Pages'
 import Pages from '../../../components/FunctionTabs/Pages/Pages'
 
 const mapStateToProps = state => ({
-  pages: state.pageList,
-  targetPageId: state.status.present.page.current
+  pages: state.present.pageList,
+  targetPageId: state.present.status.page.current
 })
 
 const mapDispatchToProps = dispatch => ({

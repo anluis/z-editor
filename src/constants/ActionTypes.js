@@ -34,3 +34,4 @@ export const APPLY_WORK = 'APPLY_WORK'
 
 // main
 export const UNDO = 'UNDO'
+export const REDO = 'REDO'

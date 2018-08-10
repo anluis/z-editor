@@ -6,6 +6,7 @@ import {
   UPDATE_PAGE_ORDER
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
+
 const initState = [{ id: 0, name: '页面0', order: [] }]
 
 const addIdInPageItem = (array, action) => {

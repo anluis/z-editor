@@ -3,18 +3,18 @@ import { updateComZindex } from '../../../actions/Coms'
 import Layers from '../../../components/FunctionTabs/Layers/Layers'
 
 const mapStateToProps = state => {
-  let targetPageItem = state.pageList.find(
-    pageItem => pageItem.id === state.status.present.page.current
+  let targetPageItem = state.present.pageList.find(
+    pageItem => pageItem.id === state.present.status.page.current
   )
   return {
-    layers: state.comList.filter(item => {
+    layers: state.present.comList.filter(item => {
       return targetPageItem.order.includes(item.id)
     }),
-    order: state.pageList.find(
-      item => item.id === state.status.present.page.current
+    order: state.present.pageList.find(
+      item => item.id === state.present.status.page.current
     ).order,
-    targetPageId: state.status.present.page.current,
-    currentComId: state.status.present.com.current
+    targetPageId: state.present.status.page.current,
+    currentComId: state.present.status.com.current
   }
 }
 

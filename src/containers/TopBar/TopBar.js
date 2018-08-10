@@ -16,7 +16,9 @@ import {
 
 const mapStateToProps = state => {
   return {
-    currentPageId: state.present.status.page.current
+    currentPageId: state.present.status.page.current,
+    canRedo: state.future.length > 0,
+    canUndo: state.past.length > 0
   }
 }
 

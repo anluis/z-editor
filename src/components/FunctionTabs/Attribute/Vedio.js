@@ -1,25 +1,25 @@
 import React from 'react'
 import { Input } from 'antd'
 
-const Link = ({ focusCom, updateCom, style }) => {
+const Vedio = ({ focusCom, updateCom, style }) => {
   if (focusCom === undefined) {
     return null
   } else {
     return (
-      <div className="attr-item link" style={style}>
-        跳转链接:
+      <div className="attr-item img" style={style}>
+        视频:
         <Input
           onChange={e => {
             let updatedAttr = {
               ...focusCom.attribute,
-              link: e.target.value
+              vedioUrl: e.target.value
             }
             updateCom(focusCom.id, updatedAttr)
           }}
-          value={focusCom.attribute.link}
+          value={focusCom.attribute.vedioUrl}
         />
       </div>
     )
   }
 }
-export default Link
+export default Vedio

@@ -45,4 +45,4 @@ const Opacity = ({ focusCom, updateCom, style }) => {
     )
   }
 }
-export default Opacity
+export default Opacity 

@@ -78,5 +78,11 @@ export const textModule = {
   background: 'none',
   borderColor: '#08a1ef',
   borderStyle: 'solid',
-  borderRadius: 0
+  borderRadius: 0,
+  wordWrap: 'break-word',
+  fontSize: '14',
+  lineHeight: 1,
+  letterSpacing: 0
+
+
 }

@@ -37,7 +37,11 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
     borderColor: attribute.borderColor,
     borderStyle: attribute.borderStyle,
     borderRadius: attribute.borderRadius + 'px',
-    textAlign: attribute.textAlign
+    textAlign: attribute.textAlign,
+    wordWrap: attribute.wordWrap,
+    fontSize: attribute.fontSize + 'px',
+    lineHeight: attribute.lineHeight,
+    letterSpacing: attribute.letterSpacing + 'em'
   }
 
   return (

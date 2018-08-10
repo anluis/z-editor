@@ -1,9 +1,9 @@
-## To do
+## Todo
 
-### add flow
+### add flow 静态检查
 
-### use redux-sage or redux-thunk
+### use redux-sage or redux-thunk(maybe)
 
-## config backend
+### unit test
 
-## templateList, workList, 时间旅行
+### config backend

@@ -7,13 +7,13 @@ const TopBar = ({ addCom, currentPageId, undo, redo, canRedo, canUndo }) => {
   return (
     <div className="function-area">
       <div className="function-head">
+        此处缺logo
         <Button disabled={!canUndo} onClick={undo}>
           Undo
         </Button>
         <Button disabled={!canRedo} onClick={redo}>
           Redo
         </Button>
-        此处缺logo
       </div>
       <div className="function-funcs">
         <div

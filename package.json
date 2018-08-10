@@ -98,6 +98,7 @@
   },
   "babel": {
     "presets": [
+      "flow",
       "react-app"
     ],
     "plugins": [
@@ -115,6 +116,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.8.0"
+    "babel-cli": "^6.26.0",
+    "babel-plugin-import": "^1.8.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.78.0"
   }
 }

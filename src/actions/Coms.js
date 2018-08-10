@@ -1,14 +1,15 @@
 import * as types from '../constants/ActionTypes'
 let nextComId = 1
 
-export const addCom = (attribute, targetPageId) => ({
+export const addCom = (attribute, targetPageId, comType) => ({
   type: types.ADD_COM,
   id: nextComId++,
   attribute: {
     ...attribute,
     name: attribute.name + (nextComId - 1)
   },
-  targetPageId
+  targetPageId,
+  comType
 })
 
 export const updateCom = (id, attribute) => ({

@@ -1,7 +1,19 @@
+// @flow
 import React from 'react'
 import Com from './Com'
-
-const Canvas = ({ comList, updateCom, focusCom, currentPage, currentCom }) => {
+const Canvas = ({
+  comList,
+  updateCom,
+  focusCom,
+  currentPage,
+  currentCom
+}: {
+  comList: Array<any>,
+  updateCom: () => void,
+  focusCom: () => void,
+  currentPage: number,
+  currentCom: Array<number>
+}) => {
   const designArea = {
     width: '375px',
     height: '667px',
@@ -9,7 +21,7 @@ const Canvas = ({ comList, updateCom, focusCom, currentPage, currentCom }) => {
     backgroundColor: '#eef1f6'
   }
 
-  const sortByOrder = (items, order) => {
+  const sortByOrder = (items: Array<any>, order: Array<number>) => {
     let result = []
     order.forEach(e => {
       let r = items.find(item => item.id === e)

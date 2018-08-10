@@ -7,7 +7,6 @@ import {
   UPDATE_COM_ZINDEX
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
-import { undoable } from '../undoable'
 const initState = {
   page: {
     order: [0],
@@ -83,4 +82,4 @@ const status = (state = initState, action) => {
   }
 }
 
-export default undoable(status)
+export default status

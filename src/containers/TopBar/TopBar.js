@@ -1,7 +1,7 @@
 // 顶部功能区域
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/Coms'
-import { undo } from '../../actions/index'
+import { undo, redo } from '../../actions/index'
 import TopBar from '../../components/TopBar/TopBar'
 import {
   imageModule,
@@ -19,9 +19,10 @@ import {
 } from '../../constants/ModuleTypes'
 
 const mapStateToProps = state => {
-  console.dir(state)
   return {
-    currentPageId: state.status.present.page.current
+    currentPageId: state.present.status.page.current,
+    canRedo: state.future.length > 0,
+    canUndo: state.past.length > 0
   }
 }
 
@@ -49,6 +50,9 @@ const mapDispatchToProps = dispatch => ({
   },
   undo: () => {
     dispatch(undo())
+  },
+  redo: () => {
+    dispatch(redo())
   }
 })
 

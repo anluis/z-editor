@@ -16,7 +16,7 @@ const Extend = ({ focusCom, updateCom, style }) => {
   } else {
     return (
       <div className="attribute-extend" style={style}>
-        <Collapse bordered={false}>
+        <Collapse bordered={false} accordion>
           <Panel header="边框" key="1" style={customPanelStyle}>
             <div className="attr-item borderStyle">
               边框样式:

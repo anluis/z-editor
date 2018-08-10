@@ -1,6 +1,6 @@
 ## Todo
 
-### add flow 静态检查
+### learn flow
 
 ### use redux-sage or redux-thunk(maybe)
 

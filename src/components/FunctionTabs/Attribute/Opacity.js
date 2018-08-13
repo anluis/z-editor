@@ -1,7 +1,16 @@
+// @flow
 import React from 'react'
 import { Row, Col, Slider, InputNumber } from 'antd'
 
-const Opacity = ({ focusCom, updateCom, style }) => {
+const Opacity = ({
+  focusCom,
+  updateCom,
+  style
+}: {
+  focusCom: (id: string) => void,
+  updateCom: (id: string, attr: Object) => void,
+  style: Object
+}) => {
   if (focusCom === undefined) {
     return null
   } else {
@@ -45,4 +54,4 @@ const Opacity = ({ focusCom, updateCom, style }) => {
     )
   }
 }
-export default Opacity 
+export default Opacity

@@ -1,8 +1,17 @@
+// @flow
 import React from 'react'
 import { Input } from 'antd'
 import { SketchPicker } from 'react-color'
 
-const Text = ({ focusCom, updateCom, style }) => {
+const Text = ({
+  focusCom,
+  updateCom,
+  style
+}: {
+  focusCom: Object,
+  updateCom: (id: string, attr: Object) => void,
+  style: Object
+}) => {
   if (focusCom === undefined) {
     return null
   } else {

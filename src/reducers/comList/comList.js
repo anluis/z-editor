@@ -1,9 +1,16 @@
+// @flow
 import { ADD_COM, DELETE_COM, UPDATE_COM } from '../../constants/ActionTypes'
+
+type Action = ADD_COM | DELETE_COM | UPDATE_COM
+type State = Array<Object>
 // 初始状态
 const initState = []
 
 //所有组件状态
-const updateObjectInArray = (array, action) => {
+const updateObjectInArray = (
+  array: Array<Object>,
+  action: Object
+): Array<Object> => {
   return array.map(item => {
     if (item.id !== action.id) {
       return item
@@ -16,7 +23,7 @@ const updateObjectInArray = (array, action) => {
 }
 
 // 组件Reducer
-const comList = (state = initState, action) => {
+const comList = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case ADD_COM:
       return [

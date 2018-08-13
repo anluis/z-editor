@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 
@@ -51,8 +52,30 @@ const SortableList = SortableContainer(({ items, selectedId }) => {
   )
 })
 
-class Layers extends React.Component {
-  onSortEnd = ({ oldIndex, newIndex }) => {
+type Props = {
+  order: Array<number>,
+  oldIndex: number,
+  newIndex: number,
+  targetPageId: string,
+  currentComId: string,
+  layers: Array<Object>,
+  updateComZindex: (
+    order: Array<number>,
+    oldIndex: number,
+    newIndex: number,
+    targetPageId: string,
+    layers: Array<Object>
+  ) => void
+}
+
+class Layers extends React.Component<Props> {
+  onSortEnd = ({
+    oldIndex,
+    newIndex
+  }: {
+    oldIndex: number,
+    newIndex: number
+  }) => {
     const { order, updateComZindex, targetPageId, layers } = this.props
     updateComZindex(
       order,

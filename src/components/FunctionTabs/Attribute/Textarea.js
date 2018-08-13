@@ -1,10 +1,19 @@
+// @flow
 import React from 'react'
 import { Input, Select, Row, Col, Slider, InputNumber } from 'antd'
 import { SketchPicker } from 'react-color'
 
 const { TextArea } = Input
 const Option = Select.Option
-const Textarea = ({ focusCom, updateCom, style }) => {
+const Textarea = ({
+  focusCom,
+  updateCom,
+  style
+}: {
+  focusCom: (id: string) => void,
+  updateCom: (id: string, attr: Object) => void,
+  style: Object
+}) => {
   if (focusCom === undefined) {
     return null
   } else {

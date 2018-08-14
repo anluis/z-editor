@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { Input, Row, Col, Slider, InputNumber, Collapse, Select } from 'antd'
 import { SketchPicker } from 'react-color'
@@ -10,7 +11,15 @@ const customPanelStyle = {
   border: 0,
   overflow: 'hidden'
 }
-const Extend = ({ focusCom, updateCom, style }) => {
+const Extend = ({
+  focusCom,
+  updateCom,
+  style
+}: {
+  focusCom: (id: string) => void,
+  updateCom: (id: string, attr: Object) => void,
+  style: Object
+}) => {
   if (focusCom === undefined) {
     return null
   } else {

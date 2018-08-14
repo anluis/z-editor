@@ -83,6 +83,28 @@
           width: 280px;
           height: 100%;
           border-right: 1px solid #ccd5db;
+          .menu-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            .work-list {
+              flex: 8;
+              .work-item {
+                width: 200px;
+                height: 60px;
+                border: #03a9f4 1px solid;
+                margin: 20px 0;
+              }
+            }
+            .work-pagination {
+              flex: 1;
+              flex-shrink: 0;
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+          }
         }
       }
     }

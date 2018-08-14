@@ -1,21 +1,21 @@
 import React from 'react'
-import WorkManage from './WorkManage/WorkManage'
-import Template from './Template/Template'
-import Material from './Material/Material'
+import WorkManage from '../../containers/MenuBar/WorkManage/WorkManage'
+import Template from '../../containers/MenuBar/Template/Template'
+import Material from '../../containers/MenuBar/Material/Material'
 
-class MenuBar extends React.Component {
-  constructor() {
-    super()
+class MenuBar extends React.PureComponent {
+  constructor(props) {
+    super(props)
     this.state = {
       isExpand: false,
-      expandMenu: null
+      currentMenu: null
     }
   }
   handlePaneClick(name) {
     if (!this.state.isExpand) {
       this.setState({
         isExpand: true,
-        expandMenu: name
+        currentMenu: name
       })
     } else {
       if (this.state.expandMenu === name) {
@@ -24,7 +24,7 @@ class MenuBar extends React.Component {
         })
       } else {
         this.setState({
-          expandMenu: name
+          currentMenu: name
         })
       }
     }
@@ -54,7 +54,7 @@ class MenuBar extends React.Component {
             素材库
           </div>
         </div>
-        {isExpand ? (
+        {isExpand === true ? (
           <div className="menu-expend">
             {currentMenu === 'WorkManage' ? <WorkManage /> : null}
             {currentMenu === 'Template' ? <Template /> : null}

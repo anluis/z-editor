@@ -1,3 +1,4 @@
+// @flow
 import {
   FOCUS_COM,
   ADD_COM,
@@ -7,6 +8,19 @@ import {
   UPDATE_COM_ZINDEX
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
+
+type State = {
+  +com: { current: number | null },
+  +page: { current: number, order: Array<number> }
+}
+type Action =
+  | FOCUS_COM
+  | ADD_COM
+  | UPDATE_PAGE_ORDER
+  | ADD_PAGE
+  | FOCUS_PAGE
+  | UPDATE_COM_ZINDEX
+
 const initState = {
   page: {
     order: [0],
@@ -17,7 +31,7 @@ const initState = {
   }
 }
 
-const status = (state = initState, action) => {
+const status = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case ADD_COM:
       return {

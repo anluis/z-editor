@@ -1,7 +1,16 @@
+// @flow
 import React from 'react'
 import { Input } from 'antd'
 
-const Image = ({ focusCom, updateCom, style }) => {
+const Image = ({
+  focusCom,
+  updateCom,
+  style
+}: {
+  focusCom: (id: string) => void,
+  updateCom: (id: string, attr: Object) => void,
+  style: Object
+}) => {
   if (focusCom === undefined) {
     return null
   } else {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Canvas from './containers/Canvas/Canvas'
-import MenuBar from './containers/MenuBar/MenuBar'
+import MenuBar from './components/MenuBar/MenuBar'
 import TopBar from './containers/TopBar/TopBar'
 import FunctionTabs from './components/FunctionTabs/FunctionTabs'
 import './assets/style/App.less'

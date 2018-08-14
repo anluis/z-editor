@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import { Input, Button, Modal } from 'antd'
 import { SketchPicker } from 'react-color'
@@ -34,7 +35,17 @@ const showDeleteConfirm = (deleteCom, id, targetPageId) => {
   })
 }
 
-const Attribute = ({ focusCom, updateCom, deleteCom, status }) => {
+const Attribute = ({
+  focusCom,
+  updateCom,
+  deleteCom,
+  status
+}: {
+  focusCom: Object,
+  updateCom: (id: string, attr: Object) => void,
+  deleteCom: (id: string, target: string) => void,
+  status: Object
+}) => {
   if (focusCom === undefined) {
     return null
   } else {

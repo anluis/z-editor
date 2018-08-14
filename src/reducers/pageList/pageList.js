@@ -1,3 +1,4 @@
+// @flow
 import {
   UPDATE_COM_ZINDEX,
   ADD_PAGE,
@@ -7,9 +8,17 @@ import {
 } from '../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
+type State = Array<Object>
+type Action =
+  | UPDATE_COM_ZINDEX
+  | ADD_PAGE
+  | ADD_COM
+  | DELETE_COM
+  | UPDATE_PAGE_ORDER
+
 const initState = [{ id: 0, name: '页面0', order: [] }]
 
-const addIdInPageItem = (array, action) => {
+const addIdInPageItem = (array: Array<Object>, action: Action): State => {
   return array.map(item => {
     if (item.id !== action.targetPageId) {
       return item
@@ -21,7 +30,7 @@ const addIdInPageItem = (array, action) => {
   })
 }
 
-const updateOrderInPageItem = (array, action) => {
+const updateOrderInPageItem = (array: Array<Object>, action: Action): State => {
   return array.map(item => {
     if (item.id !== action.targetPageId) {
       return item
@@ -33,7 +42,7 @@ const updateOrderInPageItem = (array, action) => {
   })
 }
 
-const deleteIdInPageItem = (array, action) => {
+const deleteIdInPageItem = (array: Array<Object>, action: Action): State => {
   return array.map(item => {
     if (item.id !== action.targetPageId) {
       return item
@@ -45,7 +54,7 @@ const deleteIdInPageItem = (array, action) => {
   })
 }
 
-const pageList = (state = initState, action) => {
+const pageList = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case ADD_COM:
       return addIdInPageItem(state, action)

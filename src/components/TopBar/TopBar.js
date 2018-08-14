@@ -1,9 +1,24 @@
+// @flow
 import React from 'react'
 import { Button } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
 
 // 顶部组件功能区域
-const TopBar = ({ addCom, currentPageId, undo, redo, canRedo, canUndo }) => {
+const TopBar = ({
+  addCom,
+  currentPageId,
+  undo,
+  redo,
+  canRedo,
+  canUndo
+}: {
+  addCom: (currentPageId: string, module: string) => void,
+  currentPageId: string,
+  undo: () => void,
+  redo: () => void,
+  canRedo: Boolean,
+  canUndo: Boolean
+}) => {
   return (
     <div className="function-area">
       <div className="function-head">

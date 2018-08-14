@@ -25,7 +25,17 @@ const SortableList = SortableContainer(({ items }) => {
   )
 })
 
-const Pages = ({ pages, updatePageOrder, addPage, focusPage }) => {
+const Pages = ({
+  pages,
+  updatePageOrder,
+  addPage,
+  focusPage
+}: {
+  page: Array<Object>,
+  updatePageOrder: (oldIndex: string, newIndex: string) => void,
+  addPage: () => void,
+  focusPage: (id: string) => void
+}) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     updatePageOrder(oldIndex, newIndex)
     focusPage(oldIndex)

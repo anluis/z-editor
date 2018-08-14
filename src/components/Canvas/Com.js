@@ -1,5 +1,5 @@
+// @flow
 import React from 'react'
-import PropTypes from 'prop-types'
 import Rnd from 'react-rnd'
 import {
   INPUT_MODULE,
@@ -7,9 +7,10 @@ import {
   TEXT_MODULE
 } from '../../constants/ModuleTypes'
 
-const Vedio = attribute => {
+const Vedio = (attribute: Object) => {
   return (
     <video
+      // why attribute.attirbute?
       src={attribute.attribute.vedioUrl}
       controls="controls"
       style={{
@@ -21,7 +22,20 @@ const Vedio = attribute => {
     </video>
   )
 }
-const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
+
+const Com = ({
+  updateCom,
+  focusCom,
+  attribute,
+  id,
+  zIndex
+}: {
+  updateCom: (id: number, attr: Object) => void,
+  focusCom: (id: number) => void,
+  attribute: Object,
+  id: number,
+  zIndex: number
+}) => {
   const deafultStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -83,10 +97,4 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
   )
 }
 
-Com.propTypes = {
-  updateCom: PropTypes.func.isRequired,
-  focusCom: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  attribute: PropTypes.object.isRequired
-}
 export default Com

@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux'
-import status from './status/status'
-import comList from './comList/comList'
-import pageList from './pageList/pageList'
+import { undoable } from './undoable'
+import work from './work/work'
+import workList from './workList/workList'
+const mywork = undoable(work)
 export default combineReducers({
-  status,
-  comList,
-  pageList
-  // templateList,
-  // workList
+  mywork,
+  workList
 })

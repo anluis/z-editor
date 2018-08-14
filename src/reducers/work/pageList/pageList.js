@@ -5,7 +5,7 @@ import {
   ADD_COM,
   DELETE_COM,
   UPDATE_PAGE_ORDER
-} from '../../constants/ActionTypes'
+} from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
 type State = Array<Object>

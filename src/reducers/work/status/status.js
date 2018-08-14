@@ -6,7 +6,7 @@ import {
   ADD_PAGE,
   FOCUS_PAGE,
   UPDATE_COM_ZINDEX
-} from '../../constants/ActionTypes'
+} from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
 type State = {

@@ -11,11 +11,11 @@ const Vedio = (attribute: Object) => {
   return (
     <video
       // why attribute.attirbute?
-      src={attribute.attribute.vedioUrl}
+      src={attribute.vedioUrl}
       controls="controls"
       style={{
-        width: attribute.attribute.width + 'px',
-        height: attribute.attribute.height + 'px'
+        width: attribute.width + 'px',
+        height: attribute.height + 'px'
       }}
     >
       your browser does not support the video tag
@@ -57,7 +57,6 @@ const Com = ({
     lineHeight: attribute.lineHeight,
     letterSpacing: attribute.letterSpacing + 'em'
   }
-
   return (
     <Rnd
       bounds={'.design-area'}
@@ -90,7 +89,7 @@ const Com = ({
       {attribute.type === INPUT_MODULE || attribute.type === TEXT_MODULE ? (
         attribute.content
       ) : attribute.type === VEDIO_MODULE ? (
-        <Vedio attribute={attribute} />
+        <Vedio {...attribute} />
       ) : null}
     </Rnd>
   )

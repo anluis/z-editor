@@ -71,6 +71,14 @@ const TopBar = ({
         >
           视频
         </div>
+        <div
+          className="func-item"
+          onClick={() => {
+            addCom(currentPageId, ModuleTypes.PHOTO_MODULE)
+          }}
+        >
+          照片边框
+        </div>
       </div>
       <div className="function-publish">
         <div>

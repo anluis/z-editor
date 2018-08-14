@@ -4,7 +4,8 @@ import Rnd from 'react-rnd'
 import {
   INPUT_MODULE,
   VEDIO_MODULE,
-  TEXT_MODULE
+  TEXT_MODULE,
+  PHOTO_MODULE
 } from '../../constants/ModuleTypes'
 
 const Vedio = (attribute: Object) => {
@@ -87,7 +88,9 @@ const Com = ({
         focusCom(id)
       }}
     >
-      {attribute.type === INPUT_MODULE || attribute.type === TEXT_MODULE ? (
+      {attribute.type === INPUT_MODULE ||
+      attribute.type === TEXT_MODULE ||
+      attribute.type === PHOTO_MODULE ? (
         attribute.content
       ) : attribute.type === VEDIO_MODULE ? (
         <Vedio {...attribute} />

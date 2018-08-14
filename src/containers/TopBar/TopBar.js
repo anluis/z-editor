@@ -8,14 +8,16 @@ import {
   backgroundModule,
   inputModule,
   vedioModule,
-  textModule
+  textModule,
+  photoModule
 } from '../../components/Module/Module'
 import {
   IMG_MODULE,
   BACKGROUND_MODULE,
   INPUT_MODULE,
   VEDIO_MODULE,
-  TEXT_MODULE
+  TEXT_MODULE,
+  PHOTO_MODULE
 } from '../../constants/ModuleTypes'
 
 const mapStateToProps = state => {
@@ -44,6 +46,9 @@ const mapDispatchToProps = dispatch => ({
         break
       case TEXT_MODULE:
         dispatch(addCom(textModule, targetPageId))
+        break
+      case PHOTO_MODULE:
+        dispatch(addCom(photoModule, targetPageId))
         break
       default:
         break

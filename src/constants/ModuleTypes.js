@@ -3,3 +3,5 @@ export const BACKGROUND_MODULE = 'BACKGROUND_MODULE'
 export const TEXT_MODULE = 'TEXT_MODULE'
 export const INPUT_MODULE = 'INPUT_MODULE'
 export const VEDIO_MODULE = 'VEDIO_MODULE'
+export const PHOTO_MODULE = 'PHOTO_MODULE'
+

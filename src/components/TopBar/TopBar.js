@@ -3,12 +3,37 @@ import React from 'react'
 import { Modal, Button } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
 
-const showModal = (modalFlag, visible) => {
-  console.log(modalFlag)
-  visible(true)
-  // return (
+type ModelProps = {
+  modalFlag: Boolean,
+  visible: (visible: boolean) => void
+}
 
-  // )
+class Model extends React.Component<ModelProps> {
+  render() {
+    const { modalFlag, visible } = this.props
+    return (
+      <Modal
+        visible={modalFlag}
+        title="Title"
+        onOk={() => visible(false)}
+        onCancel={() => visible(false)}
+        footer={[
+          <Button key="back" onClick={() => visible(false)}>
+            Return
+          </Button>,
+          <Button key="submit" type="primary" onClick={() => visible(false)}>
+            Submit
+          </Button>
+        ]}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
+    )
+  }
 }
 
 // 顶部组件功能区域
@@ -28,7 +53,7 @@ const TopBar = ({
   redo: () => void,
   canRedo: Boolean,
   canUndo: Boolean,
-  visible: (visible: Boolean) => void,
+  visible: (visible: boolean) => void,
   modal: Boolean
 }) => {
   return (
@@ -41,28 +66,8 @@ const TopBar = ({
         <Button disabled={!canRedo} onClick={redo}>
           Redo
         </Button>
-        <Modal
-          visible={modal}
-          title="Title"
-          onOk={visible(false)}
-          onCancel={visible(false)}
-          footer={[
-            <Button key="back" onClick={visible(false)}>
-              Return
-            </Button>,
-            <Button key="submit" type="primary" onClick={visible(false)}>
-              Submit
-            </Button>
-          ]}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
       </div>
-
+      <Model visible={visible} modalFlag={modal} />
       <div className="function-funcs">
         <div
           className="func-item"
@@ -118,7 +123,7 @@ const TopBar = ({
           <Button
             className="pub-item"
             onClick={() => {
-              showModal(modal, visible)
+              visible(true)
             }}
           >
             设置

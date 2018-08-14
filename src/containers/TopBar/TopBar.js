@@ -22,7 +22,6 @@ import {
 } from '../../constants/ModuleTypes'
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     currentPageId: state.mywork.present.status.page.current,
     canRedo: state.mywork.future.length > 0,

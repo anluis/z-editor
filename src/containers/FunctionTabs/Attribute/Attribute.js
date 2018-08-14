@@ -3,10 +3,10 @@ import { updateCom, deleteCom } from '../../../actions/Coms'
 import Attribute from '../../../components/FunctionTabs/Attribute/Attribute'
 
 const mapStateToProps = state => ({
-  focusCom: state.present.comList.find(
-    com => com.id === state.present.status.com.current
+  focusCom: state.mywork.present.comList.find(
+    com => com.id === state.mywork.present.status.com.current
   ),
-  status: state.present.status
+  status: state.mywork.present.status
 })
 
 const mapDispatchToProps = dispatch => ({

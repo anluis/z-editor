@@ -1,6 +1,6 @@
 import './Coms'
 import './Pages'
-import './Templates'
+import './TemplateList'
 import * as types from '../constants/ActionTypes'
 export const undo = () => ({
   type: types.UNDO

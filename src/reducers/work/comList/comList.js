@@ -1,5 +1,5 @@
 // @flow
-import { ADD_COM, DELETE_COM, UPDATE_COM } from '../../constants/ActionTypes'
+import { ADD_COM, DELETE_COM, UPDATE_COM } from '../../../constants/ActionTypes'
 
 type Action = ADD_COM | DELETE_COM | UPDATE_COM
 type State = Array<Object>

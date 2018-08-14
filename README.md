@@ -5,5 +5,3 @@
 ### unit test
 
 ### config backend
-
-### How to fetch data but you can still use redo & undo?

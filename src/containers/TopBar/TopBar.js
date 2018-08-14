@@ -19,10 +19,11 @@ import {
 } from '../../constants/ModuleTypes'
 
 const mapStateToProps = state => {
+  console.dir(state)
   return {
-    currentPageId: state.present.status.page.current,
-    canRedo: state.future.length > 0,
-    canUndo: state.past.length > 0
+    currentPageId: state.mywork.present.status.page.current,
+    canRedo: state.mywork.future.length > 0,
+    canUndo: state.mywork.past.length > 0
   }
 }
 

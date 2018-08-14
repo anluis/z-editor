@@ -190,7 +190,7 @@ const Extend = ({
                 value={focusCom.attribute.height}
               />
             </div>
-            <Opacity updateCom={updateCom} focusCom={focusCom} />
+            <Opacity updateCom={updateCom} focusCom={focusCom} style={style} />
           </Panel>
         </Collapse>
       </div>

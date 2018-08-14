@@ -83,6 +83,19 @@ export const textModule = {
   fontSize: '14',
   lineHeight: 1,
   letterSpacing: 0
+}
 
-
+export const photoModule = {
+  name: '照片',
+  content: '我是照片',
+  height: 400,
+  width: 250,
+  x: 0,
+  y: 0,
+  type: ModuleTypes.PHOTO_MODULE,
+  borderWidth: 1,
+  background: 'none',
+  borderColor: '#08a1ef',
+  borderStyle: 'solid',
+  borderRadius: 0
 }

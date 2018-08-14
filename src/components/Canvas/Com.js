@@ -41,7 +41,8 @@ const Com = ({ updateCom, focusCom, attribute, id, zIndex }) => {
     wordWrap: attribute.wordWrap,
     fontSize: attribute.fontSize + 'px',
     lineHeight: attribute.lineHeight,
-    letterSpacing: attribute.letterSpacing + 'em'
+    letterSpacing: attribute.letterSpacing + 'em',
+    wordBreak: 'break-word'
   }
 
   return (

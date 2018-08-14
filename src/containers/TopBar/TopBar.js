@@ -2,6 +2,7 @@
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/Coms'
 import { undo, redo } from '../../actions/index'
+import { visible } from '../../actions/Visible'
 import TopBar from '../../components/TopBar/TopBar'
 import {
   imageModule,
@@ -21,11 +22,12 @@ import {
 } from '../../constants/ModuleTypes'
 
 const mapStateToProps = state => {
-  console.dir(state)
+  console.log(state)
   return {
     currentPageId: state.mywork.present.status.page.current,
     canRedo: state.mywork.future.length > 0,
-    canUndo: state.mywork.past.length > 0
+    canUndo: state.mywork.past.length > 0,
+    modal: state.model.modal.visible
   }
 }
 
@@ -59,6 +61,9 @@ const mapDispatchToProps = dispatch => ({
   },
   redo: () => {
     dispatch(redo())
+  },
+  visible: Modal => {
+    dispatch(visible(Modal))
   }
 })
 

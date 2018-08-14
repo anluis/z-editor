@@ -25,8 +25,8 @@ const Textarea = ({
             placeholder="请输入文字"
             autosize={{ minRows: 2, maxRows: 10 }}
             onChange={e => {
-              focusCom.attribute.height = e.target.scrollHeight
-              console.log(e.target)
+              // focusCom.attribute.height = e.target.scrollHeight
+              // console.log(e.target)
               let updatedAttr = {
                 ...focusCom.attribute,
                 content: e.target.value

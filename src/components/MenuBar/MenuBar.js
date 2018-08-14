@@ -1,24 +1,30 @@
+// @flow
 import React from 'react'
 import WorkManage from '../../containers/MenuBar/WorkManage/WorkManage'
 import Template from '../../containers/MenuBar/Template/Template'
 import Material from '../../containers/MenuBar/Material/Material'
 
-class MenuBar extends React.PureComponent {
-  constructor(props) {
-    super(props)
+type State = {
+  isExpand: boolean,
+  currentMenu: string
+}
+
+class MenuBar extends React.PureComponent<{}, State> {
+  constructor() {
+    super()
     this.state = {
       isExpand: false,
-      currentMenu: null
+      currentMenu: ''
     }
   }
-  handlePaneClick(name) {
+  handlePaneClick(name: string) {
     if (!this.state.isExpand) {
       this.setState({
         isExpand: true,
         currentMenu: name
       })
     } else {
-      if (this.state.expandMenu === name) {
+      if (this.state.currentMenu === name) {
         this.setState({
           isExpand: false
         })
@@ -30,8 +36,7 @@ class MenuBar extends React.PureComponent {
     }
   }
   render() {
-    const { currentMenu } = this.state
-    const { isExpand } = this.state
+    const { currentMenu, isExpand } = this.state
     return (
       <div className="menubar">
         <div className="menu-list">

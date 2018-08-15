@@ -5,18 +5,18 @@ import { Modal, Button } from 'antd'
 type Props = {
   currentSettings: Object,
   shouldSettingsShow: boolean,
-  swichSetting: () => void
+  swichSetting: (b: boolean) => void
 }
 
 type ModelProps = {
   currentSettings: Object,
   shouldSettingsShow: boolean,
-  swichSetting: () => void
+  swichSetting: (b: boolean) => void
 }
 
 class SettingsModel extends React.Component<ModelProps> {
   render() {
-    const { currentSettings, shouldSettingsShow, swichSetting } = this.props
+    const { shouldSettingsShow, swichSetting } = this.props
     return (
       <Modal
         visible={shouldSettingsShow}

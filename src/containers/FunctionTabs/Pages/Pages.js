@@ -10,7 +10,8 @@ import Pages from '../../../components/FunctionTabs/Pages/Pages'
 const mapStateToProps = state => ({
   pages: state.mywork.present.pageList,
   targetPageId: state.mywork.present.status.page.current,
-  shouldSettingsShow: state.mywork.present.status.shouldSettingsShow
+  shouldSettingsShow: state.mywork.present.status.shouldSettingsShow,
+  currentSettings: null
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -5,18 +5,12 @@ import * as ModuleTypes from '../../constants/ModuleTypes'
 const { TextArea } = Input
 
 type ModelProps = {
-  modalFlag: Boolean,
+  modalFlag: boolean,
   visible: (visible: boolean) => void,
   project: Object
 }
 
 class Model extends React.Component<ModelProps> {
-  constructor(props) {
-    super(props)
-//  ???
-    this.state = this.props.project
-  }
-
   render() {
     const { modalFlag, visible, project } = this.props
     return (
@@ -92,7 +86,8 @@ class TopBar extends React.Component<Props> {
       canRedo,
       canUndo,
       visible,
-      modal
+      modal,
+      project
     } = this.props
     return (
       <div className="function-area">
@@ -105,7 +100,7 @@ class TopBar extends React.Component<Props> {
             Redo
           </Button>
         </div>
-        <Model visible={visible} modalFlag={modal} />
+        <Model visible={visible} modalFlag={modal} project={project} />
         <div className="function-funcs">
           <div
             className="func-item"

@@ -7,31 +7,26 @@ const { TextArea } = Input
 type ModelProps = {
   modalFlag: boolean,
   visible: (visible: boolean) => void,
-  project: Object
+  updateProjectSettings: (setting: Object) => void
 }
 
 class Model extends React.Component<ModelProps> {
   constructor(props) {
     super(props)
     this.state = this.props.project
-    console.log(this.props.project)
   }
   render() {
-    const { modalFlag, visible, project } = this.props
+    const { modalFlag, visible, updateProjectSettings } = this.props
     return (
       <Modal
         visible={modalFlag}
         title="项目信息"
         onOk={() => {
           visible(false)
-          this.props.project.name = this.state.name
-          this.props.project.title = this.state.title
-          this.props.project.desc = this.state.desc
-          this.setState(this.props.project)
+          updateProjectSettings(this.state)
         }}
         onCancel={() => {
           visible(false)
-          this.setState(this.props.project)
         }}
         okText="确认"
         cancelText="取消"
@@ -43,7 +38,6 @@ class Model extends React.Component<ModelProps> {
               this.setState({ name: e.target.value })
             }}
             maxLength="12"
-            value={this.state.name}
           />
         </div>
         <div className="attr-item" style={{ marginBottom: 20 }}>
@@ -53,7 +47,7 @@ class Model extends React.Component<ModelProps> {
               this.setState({ title: e.target.value })
             }}
             maxLength="12"
-            value={this.state.title}
+            // value={this.state.title}
           />
         </div>
         <div className="attr-item" style={{ marginBottom: 20 }}>
@@ -63,7 +57,7 @@ class Model extends React.Component<ModelProps> {
             onChange={e => {
               this.setState({ desc: e.target.value })
             }}
-            value={this.state.desc}
+            // value={this.state.desc}
           />
         </div>
       </Modal>
@@ -80,8 +74,8 @@ type Props = {
   canUndo: boolean,
   visible: (visible: boolean) => void,
   modal: boolean,
-  project: Object,
-  modal: boolean
+  modal: boolean,
+  updateProjectSettings: (setting: Object) => void
 }
 
 class TopBar extends React.Component<Props> {
@@ -95,7 +89,7 @@ class TopBar extends React.Component<Props> {
       canUndo,
       visible,
       modal,
-      project
+      updateProjectSettings
     } = this.props
     return (
       <div className="function-area">
@@ -108,7 +102,11 @@ class TopBar extends React.Component<Props> {
             Redo
           </Button>
         </div>
-        <Model visible={visible} modalFlag={modal} project={project} />
+        <Model
+          visible={visible}
+          modalFlag={modal}
+          updateProjectSettings={updateProjectSettings}
+        />
         <div className="function-funcs">
           <div
             className="func-item"

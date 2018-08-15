@@ -5,16 +5,17 @@ import * as ModuleTypes from '../../constants/ModuleTypes'
 const { TextArea } = Input
 
 type ModelProps = {
-  modalFlag: Boolean,
+  modalFlag: boolean,
   visible: (visible: boolean) => void,
   project: Object
 }
 
 class Model extends React.Component<ModelProps> {
-  constructor(props) {
-    super(props)
-  }
-
+//   constructor(props) {
+//  if you need use this.props in constructor then you should super(props)
+//  it does not make any difference in render()
+//     super(props)
+//   }
   render() {
     const { modalFlag, visible, project } = this.props
     return (

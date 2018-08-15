@@ -9,7 +9,9 @@ type Props = {
   updatePageOrder: (oldIndex: string, newIndex: string) => void,
   addPage: () => void,
   focusPage: (id: string) => void,
-  swichSetting: (showOrNotShow: boolean) => void
+  swichSetting: (showOrNotShow: boolean) => void,
+  shouldSettingsShow: boolean,
+  currentSettings: any
 }
 
 const style = {
@@ -30,12 +32,7 @@ const SortableList = SortableContainer(({ items, swichSetting }) => {
   return (
     <div>
       {items.map((value, index) => (
-        <SortableItem
-          key={`item-${index}`}
-          index={index}
-          value={value.name}
-          swichSetting={swichSetting}
-        />
+        <SortableItem key={`item-${index}`} index={index} value={value.name} />
       ))}
     </div>
   )
@@ -48,24 +45,23 @@ class Pages extends React.Component<Props> {
       updatePageOrder,
       addPage,
       focusPage,
+      shouldSettingsShow,
       swichSetting,
-      shouldSettingsShow
+      currentSettings
     } = this.props
+
     const onSortEnd = ({ oldIndex, newIndex }) => {
       updatePageOrder(oldIndex, newIndex)
       focusPage(oldIndex)
     }
     return (
       <div>
-        <SortableList
-          items={pages}
-          onSortEnd={onSortEnd}
-          swichSetting={swichSetting}
-        />
+        <SortableList items={pages} onSortEnd={onSortEnd} />
         <Button onClick={() => addPage()}>新增</Button>
         <Settings
-          swichSetting={swichSetting}
           shouldSettingsShow={shouldSettingsShow}
+          swichSetting={swichSetting}
+          currentSettings={currentSettings}
         />
       </div>
     )

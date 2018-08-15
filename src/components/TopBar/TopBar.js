@@ -13,8 +13,6 @@ type ModelProps = {
 class Model extends React.Component<ModelProps> {
   constructor(props) {
     super(props)
-//  ???
-    this.state = this.props.project
   }
 
   render() {
@@ -25,7 +23,6 @@ class Model extends React.Component<ModelProps> {
         title="项目信息"
         onOk={() => {
           visible(false)
-          console.log(3)
         }}
         onCancel={() => visible(false)}
         okText="确认"
@@ -92,7 +89,8 @@ class TopBar extends React.Component<Props> {
       canRedo,
       canUndo,
       visible,
-      modal
+      modal,
+      project
     } = this.props
     return (
       <div className="function-area">
@@ -105,7 +103,7 @@ class TopBar extends React.Component<Props> {
             Redo
           </Button>
         </div>
-        <Model visible={visible} modalFlag={modal} />
+        <Model visible={visible} modalFlag={modal} project={project} />
         <div className="function-funcs">
           <div
             className="func-item"

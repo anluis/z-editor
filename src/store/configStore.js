@@ -6,6 +6,4 @@ const logger = createLogger()
 
 const store = createStore(rootReducer, applyMiddleware(logger))
 
-console.dir(store)
-
 export default store

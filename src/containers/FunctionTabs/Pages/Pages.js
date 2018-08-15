@@ -1,10 +1,16 @@
 import { connect } from 'react-redux'
-import { updatePageOrder, focusPage, addPage } from '../../../actions/Pages'
+import {
+  updatePageOrder,
+  focusPage,
+  addPage,
+  switchSettings
+} from '../../../actions/Pages'
 import Pages from '../../../components/FunctionTabs/Pages/Pages'
 
 const mapStateToProps = state => ({
   pages: state.mywork.present.pageList,
-  targetPageId: state.mywork.present.status.page.current
+  targetPageId: state.mywork.present.status.page.current,
+  shouldSettingsShow: state.mywork.present.status.shouldSettingsShow
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -16,6 +22,9 @@ const mapDispatchToProps = dispatch => ({
   },
   addPage: () => {
     dispatch(addPage())
+  },
+  swichSetting: shouldSettingsShow => {
+    dispatch(switchSettings(shouldSettingsShow))
   }
 })
 

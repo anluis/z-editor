@@ -37,4 +37,8 @@ export const UNDO = 'UNDO'
 export const REDO = 'REDO'
 
 // setting
+// we should describe actions more accurate
+// like (action)_(action on which thing)_(actions status)
 export const VISIBLE = 'VISIBLE'
+
+export const SWITCH_PAGE_SETTINGS = 'SWITCH_PAGE_SETTINGS'

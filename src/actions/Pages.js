@@ -27,3 +27,8 @@ export const updatePageSettings = (id, settings) => ({
   id,
   settings
 })
+
+export const switchSettings = shouldSettingsShow => ({
+  type: types.SWITCH_PAGE_SETTINGS,
+  shouldSettingsShow
+})

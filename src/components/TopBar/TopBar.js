@@ -11,6 +11,11 @@ type ModelProps = {
 }
 
 class Model extends React.Component<ModelProps> {
+//   constructor(props) {
+//  if you need use this.props in constructor then you should super(props)
+//  it does not make any difference in render()
+//     super(props)
+//   }
   render() {
     const { modalFlag, visible, project } = this.props
     return (
@@ -19,7 +24,6 @@ class Model extends React.Component<ModelProps> {
         title="项目信息"
         onOk={() => {
           visible(false)
-          console.log(3)
         }}
         onCancel={() => visible(false)}
         okText="确认"

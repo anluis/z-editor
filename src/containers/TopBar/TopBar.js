@@ -26,7 +26,8 @@ const mapStateToProps = state => {
     currentPageId: state.mywork.present.status.page.current,
     canRedo: state.mywork.future.length > 0,
     canUndo: state.mywork.past.length > 0,
-    modal: state.model.modal.visible
+    modal: state.model.modal.visible,
+    project: state.mywork.present.status.project
   }
 }
 

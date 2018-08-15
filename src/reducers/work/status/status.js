@@ -32,6 +32,11 @@ const initState = {
   com: {
     current: null
   },
+  project: {
+    desc: '',
+    title: '',
+    name: ''
+  },
   shouldSettingsShow: false
 }
 

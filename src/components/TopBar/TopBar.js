@@ -1,36 +1,69 @@
 // @flow
 import React from 'react'
-import { Modal, Button } from 'antd'
+import { Modal, Button, Input } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
+const { TextArea } = Input
 
 type ModelProps = {
   modalFlag: Boolean,
-  visible: (visible: boolean) => void
+  visible: (visible: boolean) => void,
+  project: Object
 }
 
 class Model extends React.Component<ModelProps> {
+  constructor(props) {
+    super(props)
+//  ???
+    this.state = this.props.project
+  }
+
   render() {
-    const { modalFlag, visible } = this.props
+    const { modalFlag, visible, project } = this.props
     return (
       <Modal
         visible={modalFlag}
-        title="Title"
-        onOk={() => visible(false)}
+        title="项目信息"
+        onOk={() => {
+          visible(false)
+          console.log(3)
+        }}
         onCancel={() => visible(false)}
-        footer={[
-          <Button key="back" onClick={() => visible(false)}>
-            Return
-          </Button>,
-          <Button key="submit" type="primary" onClick={() => visible(false)}>
-            Submit
-          </Button>
-        ]}
+        okText="确认"
+        cancelText="取消"
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <div className="attr-item" style={{ marginBottom: 20 }}>
+          作者:
+          <Input
+            onChange={e => {
+              this.props.project.name = e.target.value
+              this.setState(this.props.project)
+            }}
+            maxLength="12"
+            value={project.name}
+          />
+        </div>
+        <div className="attr-item" style={{ marginBottom: 20 }}>
+          项目名称:
+          <Input
+            onChange={e => {
+              this.props.project.title = e.target.value
+              this.setState(this.props.project)
+            }}
+            maxLength="12"
+            value={project.title}
+          />
+        </div>
+        <div className="attr-item" style={{ marginBottom: 20 }}>
+          项目描述:
+          <TextArea
+            autosize={{ minRows: 2, maxRows: 6 }}
+            onChange={e => {
+              this.props.project.desc = e.target.value
+              this.setState(this.props.project)
+            }}
+            value={project.desc}
+          />
+        </div>
       </Modal>
     )
   }
@@ -41,12 +74,14 @@ type Props = {
   currentPageId: string,
   undo: () => void,
   redo: () => void,
-  canRedo: Boolean,
-  canUndo: Boolean,
+  canRedo: boolean,
+  canUndo: boolean,
   visible: (visible: boolean) => void,
-  modal: Boolean
+  modal: boolean,
+  project: Object,
+  modal: boolean
 }
-// 顶部组件功能区域
+
 class TopBar extends React.Component<Props> {
   render() {
     const {

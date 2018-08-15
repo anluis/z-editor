@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { addCom } from '../../actions/Coms'
 import { undo, redo } from '../../actions/index'
 import { visible } from '../../actions/Visible'
+import { updateProjectSettings } from '../../actions/Project'
 import TopBar from '../../components/TopBar/TopBar'
 import {
   imageModule,
@@ -64,6 +65,10 @@ const mapDispatchToProps = dispatch => ({
   },
   visible: Modal => {
     dispatch(visible(Modal))
+  },
+  updateProjectSettings: settings => {
+    console.log(settings)
+    dispatch(updateProjectSettings(settings))
   }
 })
 

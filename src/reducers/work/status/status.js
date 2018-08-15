@@ -6,7 +6,8 @@ import {
   ADD_PAGE,
   FOCUS_PAGE,
   UPDATE_COM_ZINDEX,
-  SWITCH_PAGE_SETTINGS
+  SWITCH_PAGE_SETTINGS,
+  UPDATE_PROJECT_SETTING
 } from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
@@ -23,6 +24,7 @@ type Action =
   | FOCUS_PAGE
   | UPDATE_COM_ZINDEX
   | SWITCH_PAGE_SETTINGS
+  | UPDATE_PROJECT_SETTING
 
 const initState = {
   page: {
@@ -107,6 +109,19 @@ const status = (state: State = initState, action: Action): State => {
           ...state.com,
           ...state.page,
           shouldSettingsShow: action.shouldSettingsShow
+        }
+      }
+    case UPDATE_PROJECT_SETTING:
+      console.log(state)
+      console.log(action)
+      return {
+        ...state,
+        ...{
+          project: {
+            desc: action.settings.desc,
+            title: action.settings.title,
+            name: action.settings.name
+          }
         }
       }
     default:

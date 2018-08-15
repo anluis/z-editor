@@ -5,13 +5,15 @@ import {
   UPDATE_PAGE_ORDER,
   ADD_PAGE,
   FOCUS_PAGE,
-  UPDATE_COM_ZINDEX
+  UPDATE_COM_ZINDEX,
+  SWITCH_PAGE_SETTINGS
 } from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
 type State = {
   +com: { current: number | null },
-  +page: { current: number, order: Array<number> }
+  +page: { current: number, order: Array<number> },
+  +shouldSettingsShow: boolean
 }
 type Action =
   | FOCUS_COM
@@ -20,6 +22,7 @@ type Action =
   | ADD_PAGE
   | FOCUS_PAGE
   | UPDATE_COM_ZINDEX
+  | SWITCH_PAGE_SETTINGS
 
 const initState = {
   page: {
@@ -33,7 +36,8 @@ const initState = {
     desc: '',
     title: '',
     name: ''
-  }
+  },
+  shouldSettingsShow: false
 }
 
 const status = (state: State = initState, action: Action): State => {
@@ -94,6 +98,15 @@ const status = (state: State = initState, action: Action): State => {
             order: state.page.order,
             current: action.id
           }
+        }
+      }
+    case SWITCH_PAGE_SETTINGS:
+      return {
+        ...state,
+        ...{
+          ...state.com,
+          ...state.page,
+          shouldSettingsShow: action.shouldSettingsShow
         }
       }
     default:

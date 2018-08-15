@@ -1,22 +1,27 @@
+// @flow
 import React from 'react'
 import Attribute from '../../containers/FunctionTabs/Attribute/Attribute'
 import Layers from '../../containers/FunctionTabs/Layers/Layers'
 import Pages from '../../containers/FunctionTabs/Pages/Pages'
 
-class FunctionTabs extends React.PureComponent {
-  constructor(props) {
-    super(props)
+type State = {
+  selectedItem: number
+}
+
+class FunctionTabs extends React.PureComponent<{}, State> {
+  constructor() {
+    super()
     this.state = {
       selectedItem: 0
     }
   }
 
-  handleMenuSelect = order => {
+  handleMenuSelect = (order: number) => {
     this.setState({
       selectedItem: order
     })
   }
-  renderTabsItem(isSelected, name, index) {
+  renderTabsItem(isSelected: boolean, name: string, index: number) {
     return isSelected ? (
       <div
         key={index}
@@ -35,7 +40,7 @@ class FunctionTabs extends React.PureComponent {
       </div>
     )
   }
-  renderTabsDetail(index) {
+  renderTabsDetail(index: number) {
     switch (index) {
       case 0:
         return <Attribute />

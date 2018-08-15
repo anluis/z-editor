@@ -2,8 +2,8 @@
 import React from 'react'
 import { Modal, Button, Input } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
-
 const { TextArea } = Input
+
 type ModelProps = {
   modalFlag: Boolean,
   visible: (visible: boolean) => void,
@@ -13,6 +13,7 @@ type ModelProps = {
 class Model extends React.Component<ModelProps> {
   constructor(props) {
     super(props)
+//  ???
     this.state = this.props.project
   }
 
@@ -68,105 +69,109 @@ class Model extends React.Component<ModelProps> {
   }
 }
 
-// 顶部组件功能区域
-const TopBar = ({
-  addCom,
-  currentPageId,
-  undo,
-  redo,
-  visible,
-  canRedo,
-  canUndo,
-  modal,
-  project
-}: {
+type Props = {
   addCom: (currentPageId: string, module: string) => void,
   currentPageId: string,
   undo: () => void,
   redo: () => void,
-  canRedo: Boolean,
-  canUndo: Boolean,
+  canRedo: boolean,
+  canUndo: boolean,
   visible: (visible: boolean) => void,
-  modal: Boolean,
-  project: Object
-}) => {
-  return (
-    <div className="function-area">
-      <div className="function-head">
-        此处缺logo
-        <Button disabled={!canUndo} onClick={undo}>
-          Undo
-        </Button>
-        <Button disabled={!canRedo} onClick={redo}>
-          Redo
-        </Button>
-      </div>
-      <Model visible={visible} modalFlag={modal} project={project} />
-      <div className="function-funcs">
-        <div
-          className="func-item"
-          onClick={() => {
-            addCom(currentPageId, ModuleTypes.TEXT_MODULE)
-          }}
-        >
-          文字
+  modal: boolean,
+  project: Object,
+  modal: boolean
+}
+
+class TopBar extends React.Component<Props> {
+  render() {
+    const {
+      addCom,
+      currentPageId,
+      undo,
+      redo,
+      canRedo,
+      canUndo,
+      visible,
+      modal
+    } = this.props
+    return (
+      <div className="function-area">
+        <div className="function-head">
+          此处缺logo
+          <Button disabled={!canUndo} onClick={undo}>
+            Undo
+          </Button>
+          <Button disabled={!canRedo} onClick={redo}>
+            Redo
+          </Button>
         </div>
-        <div
-          className="func-item"
-          onClick={() => {
-            addCom(currentPageId, ModuleTypes.IMG_MODULE)
-          }}
-        >
-          图片
-        </div>
-        <div
-          className="func-item"
-          onClick={() => {
-            addCom(currentPageId, ModuleTypes.BACKGROUND_MODULE)
-          }}
-        >
-          背景
-        </div>
-        <div
-          className="func-item"
-          onClick={() => {
-            addCom(currentPageId, ModuleTypes.INPUT_MODULE)
-          }}
-        >
-          输入框
-        </div>
-        <div
-          className="func-item"
-          onClick={() => {
-            addCom(currentPageId, ModuleTypes.VEDIO_MODULE)
-          }}
-        >
-          视频
-        </div>
-        <div
-          className="func-item"
-          onClick={() => {
-            addCom(currentPageId, ModuleTypes.PHOTO_MODULE)
-          }}
-        >
-          照片边框
-        </div>
-      </div>
-      <div className="function-publish">
-        <div>
-          <Button
-            className="pub-item"
+        <Model visible={visible} modalFlag={modal} />
+        <div className="function-funcs">
+          <div
+            className="func-item"
             onClick={() => {
-              visible(true)
+              addCom(currentPageId, ModuleTypes.TEXT_MODULE)
             }}
           >
-            设置
-          </Button>
-          <Button className="pub-item">发布</Button>
+            文字
+          </div>
+          <div
+            className="func-item"
+            onClick={() => {
+              addCom(currentPageId, ModuleTypes.IMG_MODULE)
+            }}
+          >
+            图片
+          </div>
+          <div
+            className="func-item"
+            onClick={() => {
+              addCom(currentPageId, ModuleTypes.BACKGROUND_MODULE)
+            }}
+          >
+            背景
+          </div>
+          <div
+            className="func-item"
+            onClick={() => {
+              addCom(currentPageId, ModuleTypes.INPUT_MODULE)
+            }}
+          >
+            输入框
+          </div>
+          <div
+            className="func-item"
+            onClick={() => {
+              addCom(currentPageId, ModuleTypes.VEDIO_MODULE)
+            }}
+          >
+            视频
+          </div>
+          <div
+            className="func-item"
+            onClick={() => {
+              addCom(currentPageId, ModuleTypes.PHOTO_MODULE)
+            }}
+          >
+            照片边框
+          </div>
+        </div>
+        <div className="function-publish">
+          <div>
+            <Button
+              className="pub-item"
+              onClick={() => {
+                visible(true)
+              }}
+            >
+              设置
+            </Button>
+            <Button className="pub-item">发布</Button>
+          </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default TopBar

@@ -1,6 +1,16 @@
+// @flow
 import React from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { Button } from 'antd'
+import Settings from './Settings'
+
+type Props = {
+  pages: Array<Object>,
+  updatePageOrder: (oldIndex: string, newIndex: string) => void,
+  addPage: () => void,
+  focusPage: (id: string) => void,
+  swichSetting: (showOrNotShow: boolean) => void
+}
 
 const style = {
   background: '#fff',
@@ -9,43 +19,57 @@ const style = {
   cursor: 'pointer'
 }
 
-const SortableItem = SortableElement(({ value }) => (
+const SortableItem = SortableElement(({ value, swichSetting }) => (
   <div className="layer-item" style={style}>
     {value}
+    <Button onClick={() => swichSetting(true)}>设置</Button>
   </div>
 ))
 
-const SortableList = SortableContainer(({ items }) => {
+const SortableList = SortableContainer(({ items, swichSetting }) => {
   return (
     <div>
       {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value.name} />
+        <SortableItem
+          key={`item-${index}`}
+          index={index}
+          value={value.name}
+          swichSetting={swichSetting}
+        />
       ))}
     </div>
   )
 })
 
-const Pages = ({
-  pages,
-  updatePageOrder,
-  addPage,
-  focusPage
-}: {
-  page: Array<Object>,
-  updatePageOrder: (oldIndex: string, newIndex: string) => void,
-  addPage: () => void,
-  focusPage: (id: string) => void
-}) => {
-  const onSortEnd = ({ oldIndex, newIndex }) => {
-    updatePageOrder(oldIndex, newIndex)
-    focusPage(oldIndex)
+class Pages extends React.Component<Props> {
+  render() {
+    const {
+      pages,
+      updatePageOrder,
+      addPage,
+      focusPage,
+      swichSetting,
+      shouldSettingsShow
+    } = this.props
+    const onSortEnd = ({ oldIndex, newIndex }) => {
+      updatePageOrder(oldIndex, newIndex)
+      focusPage(oldIndex)
+    }
+    return (
+      <div>
+        <SortableList
+          items={pages}
+          onSortEnd={onSortEnd}
+          swichSetting={swichSetting}
+        />
+        <Button onClick={() => addPage()}>新增</Button>
+        <Settings
+          swichSetting={swichSetting}
+          shouldSettingsShow={shouldSettingsShow}
+        />
+      </div>
+    )
   }
-  return (
-    <div>
-      <SortableList items={pages} onSortEnd={onSortEnd} />
-      <Button onClick={() => addPage()}>新增</Button>
-    </div>
-  )
 }
 
 export default Pages

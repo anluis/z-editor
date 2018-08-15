@@ -11,11 +11,11 @@ type ModelProps = {
 }
 
 class Model extends React.Component<ModelProps> {
-//   constructor(props) {
-//  if you need use this.props in constructor then you should super(props)
-//  it does not make any difference in render()
-//     super(props)
-//   }
+  constructor(props) {
+    super(props)
+    this.state = this.props.project
+    console.log(this.props.project)
+  }
   render() {
     const { modalFlag, visible, project } = this.props
     return (
@@ -24,8 +24,15 @@ class Model extends React.Component<ModelProps> {
         title="项目信息"
         onOk={() => {
           visible(false)
+          this.props.project.name = this.state.name
+          this.props.project.title = this.state.title
+          this.props.project.desc = this.state.desc
+          this.setState(this.props.project)
         }}
-        onCancel={() => visible(false)}
+        onCancel={() => {
+          visible(false)
+          this.setState(this.props.project)
+        }}
         okText="确认"
         cancelText="取消"
       >
@@ -33,22 +40,20 @@ class Model extends React.Component<ModelProps> {
           作者:
           <Input
             onChange={e => {
-              this.props.project.name = e.target.value
-              this.setState(this.props.project)
+              this.setState({ name: e.target.value })
             }}
             maxLength="12"
-            value={project.name}
+            value={this.state.name}
           />
         </div>
         <div className="attr-item" style={{ marginBottom: 20 }}>
           项目名称:
           <Input
             onChange={e => {
-              this.props.project.title = e.target.value
-              this.setState(this.props.project)
+              this.setState({ title: e.target.value })
             }}
             maxLength="12"
-            value={project.title}
+            value={this.state.title}
           />
         </div>
         <div className="attr-item" style={{ marginBottom: 20 }}>
@@ -56,10 +61,9 @@ class Model extends React.Component<ModelProps> {
           <TextArea
             autosize={{ minRows: 2, maxRows: 6 }}
             onChange={e => {
-              this.props.project.desc = e.target.value
-              this.setState(this.props.project)
+              this.setState({ desc: e.target.value })
             }}
-            value={project.desc}
+            value={this.state.desc}
           />
         </div>
       </Modal>

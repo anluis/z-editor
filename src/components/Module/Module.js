@@ -28,7 +28,11 @@ export const imageModule = {
   background: '#fff',
   borderColor: '#000',
   borderStyle: 'solid',
-  borderRadius: 0
+  borderRadius: 0,
+  animationName: 'none',
+  animationDuration: 1,
+  animationDelay: 0,
+  animationIterationCount: 1
 }
 
 export const inputModule = {
@@ -46,7 +50,11 @@ export const inputModule = {
   background: '#fff',
   borderColor: '#000',
   borderStyle: 'solid',
-  borderRadius: 0
+  borderRadius: 0,
+  animationName: 'none',
+  animationDuration: 1,
+  animationDelay: 0,
+  animationIterationCount: 1
 }
 
 export const vedioModule = {
@@ -62,7 +70,11 @@ export const vedioModule = {
   background: 'none',
   borderColor: '#000',
   borderStyle: 'solid',
-  borderRadius: 0
+  borderRadius: 0,
+  animationName: 'none',
+  animationDuration: 1,
+  animationDelay: 0,
+  animationIterationCount: 1
 }
 
 export const textModule = {
@@ -82,7 +94,11 @@ export const textModule = {
   wordWrap: 'break-word',
   fontSize: '14',
   lineHeight: 1,
-  letterSpacing: 0
+  letterSpacing: 0,
+  animationName: 'none',
+  animationDuration: 1,
+  animationDelay: 0,
+  animationIterationCount: 1
 }
 
 export const photoModule = {
@@ -97,5 +113,9 @@ export const photoModule = {
   background: 'none',
   borderColor: '#08a1ef',
   borderStyle: 'solid',
-  borderRadius: 0
+  borderRadius: 0,
+  animationName: 'none',
+  animationDuration: 1,
+  animationDelay: 0,
+  animationIterationCount: 1
 }

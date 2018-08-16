@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import Rnd from 'react-rnd'
 import {
@@ -54,7 +53,11 @@ class Com extends React.Component<Props> {
       fontSize: attribute.fontSize + 'px',
       lineHeight: attribute.lineHeight,
       letterSpacing: attribute.letterSpacing + 'em',
-      wordBreak: 'break-all'
+      wordBreak: 'break-all',
+      animationName: attribute.animationName,
+      animationDuration: attribute.animationDuration + 's',
+      animationDelay: attribute.animationDelay + 's',
+      animationIterationCount: attribute.animationIterationCount
     }
     return (
       <Rnd
@@ -95,7 +98,9 @@ class Com extends React.Component<Props> {
           focusCom(id)
         }}
       >
-        {attribute.type === INPUT_MODULE || attribute.type === TEXT_MODULE || attribute.type === PHOTO_MODULE ? (
+        {attribute.type === INPUT_MODULE ||
+        attribute.type === TEXT_MODULE ||
+        attribute.type === PHOTO_MODULE ? (
           attribute.content
         ) : attribute.type === VEDIO_MODULE ? (
           <Vedio {...attribute} />

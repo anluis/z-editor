@@ -206,7 +206,7 @@ const Extend = ({
               动画类型:
               <Select
                 defaultValue={focusCom.attribute.animationName}
-                style={{ width: 120, marginLeft: 10 }}
+                style={{ width: 220, marginLeft: 10 }}
                 onChange={value => {
                   let updatedAttr = {
                     ...focusCom.attribute,
@@ -277,6 +277,20 @@ const Extend = ({
                 <Option value="slideOutDown">slideOutDown</Option>
                 <Option value="slideOutLeft">slideOutLeft</Option>
                 <Option value="slideOutRight">slideOutRight</Option>
+                <Option value="zoomIn">zoomIn</Option>
+                <Option value="zoomInDown">zoomInDown</Option>
+                <Option value="zoomInLeft">zoomInLeft</Option>
+                <Option value="zoomInRight">zoomInRight</Option>
+                <Option value="zoomInUp">zoomInUp</Option>
+                <Option value="zoomOut">zoomIn</Option>
+                <Option value="zoomOutDown">zoomInDown</Option>
+                <Option value="zoomOutLeft">zoomInLeft</Option>
+                <Option value="zoomOutRight">zoomInRight</Option>
+                <Option value="zoomOutUp">zoomInUp</Option>
+                <Option value="hinge">hinge</Option>
+                <Option value="jackInTheBox">jackInTheBox</Option>
+                <Option value="rollIn">rollIn</Option>
+                <Option value="rollOut">rollOut</Option>
               </Select>
             </div>
             <div className="attr-item">

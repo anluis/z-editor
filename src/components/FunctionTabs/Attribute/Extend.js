@@ -1,6 +1,15 @@
 // @flow
 import React from 'react'
-import { Input, Row, Col, Slider, InputNumber, Collapse, Select } from 'antd'
+import {
+  Input,
+  Row,
+  Col,
+  Slider,
+  InputNumber,
+  Collapse,
+  Select,
+  Checkbox
+} from 'antd'
 import { SketchPicker } from 'react-color'
 import Opacity from './Opacity'
 
@@ -191,6 +200,163 @@ const Extend = ({
               />
             </div>
             <Opacity updateCom={updateCom} focusCom={focusCom} style={style} />
+          </Panel>
+          <Panel header="动画" key="3" style={customPanelStyle}>
+            <div className="attr-item animationName">
+              动画类型:
+              <Select
+                defaultValue={focusCom.attribute.animationName}
+                style={{ width: 120, marginLeft: 10 }}
+                onChange={value => {
+                  let updatedAttr = {
+                    ...focusCom.attribute,
+                    animationName: `${value}`
+                  }
+                  updateCom(focusCom.id, updatedAttr)
+                }}
+              >
+                <Option value="none">---无---</Option>
+                <Option value="bounce">bounce</Option>
+                <Option value="flash">flash</Option>
+                <Option value="pulse">pulse</Option>
+                <Option value="rubberBand">rubberBand</Option>
+                <Option value="shake">shake</Option>
+                <Option value="swing">swing</Option>
+                <Option value="tada">tada</Option>
+                <Option value="wobble">wobble</Option>
+                <Option value="jello">jello</Option>
+                <Option value="bounceIn">bounceIn</Option>
+                <Option value="bounceDown">bounceDown</Option>
+                <Option value="bounceLeft">bounceLeft</Option>
+                <Option value="bounceRight">bounceRight</Option>
+                <Option value="bounceUp">bounceUp</Option>
+                <Option value="bounceOut">bounceOut</Option>
+                <Option value="bounceOutDown">bounceOutDown</Option>
+                <Option value="bounceOutLeft">bounceOutLeft</Option>
+                <Option value="bounceOutRight">bounceOutRight</Option>
+                <Option value="bounceOutUp">bounceOutUp</Option>
+                <Option value="fadeIn">fadeIn</Option>
+                <Option value="fadeInDown">fadeInDown</Option>
+                <Option value="fadeInDownBig">fadeInDownBig</Option>
+                <Option value="fadeInLeft">fadeInLeft</Option>
+                <Option value="fadeInLeftBig">fadeInLeftBig</Option>
+                <Option value="fadeInRight">fadeInRight</Option>
+                <Option value="fadeInRightBig">fadeInRightBig</Option>
+                <Option value="fadeInUp">fadeInUp</Option>
+                <Option value="fadeOut">fadeOut</Option>
+                <Option value="fadeOutDown">fadeOutDown</Option>
+                <Option value="fadeOutDownBig">fadeOutDownBig</Option>
+                <Option value="fadeOutLeft">fadeOutLeft</Option>
+                <Option value="fadeOutLeftBig">fadeOutLeftBig</Option>
+                <Option value="fadeOutRight">fadeOutRight</Option>
+                <Option value="fadeOutRightBig">fadeOutRightBig</Option>
+                <Option value="fadeOutUp">fadeOutUp</Option>
+                <Option value="fadeOutUpBig">fadeOutUpBig</Option>
+                <Option value="flip">flip</Option>
+                <Option value="flipInX">flipInX</Option>
+                <Option value="flipInY">flipInY</Option>
+                <Option value="flipOutX">flipOutX</Option>
+                <Option value="flipOutY">flipOutY</Option>
+                <Option value="lightSpeedIn">lightSpeedIn</Option>
+                <Option value="lightSpeedOut">lightSpeedOut</Option>
+                <Option value="rotateIn">rotateIn</Option>
+                <Option value="rotateInDownLeft">rotateInDownLeft</Option>
+                <Option value="rotateInDownRight">rotateInDownRight</Option>
+                <Option value="rotateInUpLeft">rotateInUpLeft</Option>
+                <Option value="rotateInUpRight">rotateInUpRight</Option>
+                <Option value="rotateOut">rotateOut</Option>
+                <Option value="rotateOutDownLeft">rotateOutDownLeft</Option>
+                <Option value="rotateOutDownRight">rotateOutDownRight</Option>
+                <Option value="rotateOutUpLeft">rotateOutUpLeft</Option>
+                <Option value="rotateOutUpRight">rotateOutUpRight</Option>
+                <Option value="slideInUp">slideInUp</Option>
+                <Option value="slideInDown">slideInDown</Option>
+                <Option value="slideInLeft">slideInLeft</Option>
+                <Option value="slideInRight">slideInRight</Option>
+                <Option value="slideOutUp">slideOutUp</Option>
+                <Option value="slideOutDown">slideOutDown</Option>
+                <Option value="slideOutLeft">slideOutLeft</Option>
+                <Option value="slideOutRight">slideOutRight</Option>
+              </Select>
+            </div>
+            <div className="attr-item">
+              <Row>
+                <Col span={12}>
+                  时间:
+                  <InputNumber
+                    min={0}
+                    max={20}
+                    style={{ marginLeft: 16 }}
+                    step={0.1}
+                    value={focusCom.attribute.animationDuration}
+                    onChange={value => {
+                      let updatedAttr = {
+                        ...focusCom.attribute,
+                        animationDuration: Number(value)
+                      }
+                      updateCom(focusCom.id, updatedAttr)
+                    }}
+                  />
+                </Col>
+                <Col span={12}>
+                  延迟:
+                  <InputNumber
+                    min={0}
+                    max={20}
+                    style={{ marginLeft: 16 }}
+                    step={0.1}
+                    value={focusCom.attribute.animationDelay}
+                    onChange={value => {
+                      let updatedAttr = {
+                        ...focusCom.attribute,
+                        animationDelay: Number(value)
+                      }
+                      updateCom(focusCom.id, updatedAttr)
+                    }}
+                  />
+                </Col>
+              </Row>
+            </div>
+            <div className="attr-item">
+              <Row>
+                <Col span={12}>
+                  次数:
+                  <InputNumber
+                    min={0}
+                    max={10}
+                    style={{ marginLeft: 16 }}
+                    step={1}
+                    value={focusCom.attribute.animationIterationCount}
+                    onChange={value => {
+                      let updatedAttr = {
+                        ...focusCom.attribute,
+                        animationIterationCount: Number(value)
+                      }
+                      updateCom(focusCom.id, updatedAttr)
+                    }}
+                  />
+                </Col>
+                <Col span={12}>
+                  <Checkbox
+                    onChange={value => {
+                      let updatedAttr = {
+                        ...focusCom.attribute,
+                        animationIterationCount:
+                          `${value.target.checked}` === 'true' ? 'infinite' : 1
+                      }
+                      updateCom(focusCom.id, updatedAttr)
+                    }}
+                    checked={
+                      focusCom.attribute.animationIterationCount === 'infinite'
+                        ? true
+                        : false
+                    }
+                  >
+                    循环播放
+                  </Checkbox>
+                </Col>
+              </Row>
+            </div>
           </Panel>
         </Collapse>
       </div>

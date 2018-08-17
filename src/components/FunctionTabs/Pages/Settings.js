@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { Modal, Button } from 'antd'
+import { Modal, Button, Input } from 'antd'
 
 type Props = {
   currentSettings: Object,
@@ -36,11 +36,15 @@ class SettingsModel extends React.Component<ModelProps> {
           </Button>
         ]}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <div className="attr-item" style={{ marginBottom: 20 }}>
+          页面标题:
+          <Input
+            onChange={e => {
+              this.setState({ name: e.target.value })
+            }}
+            maxLength="12"
+          />
+        </div>
       </Modal>
     )
   }

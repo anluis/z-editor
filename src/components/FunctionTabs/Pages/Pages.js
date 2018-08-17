@@ -32,7 +32,12 @@ const SortableList = SortableContainer(({ items, swichSetting }) => {
   return (
     <div>
       {items.map((value, index) => (
-        <SortableItem key={`item-${index}`} index={index} value={value.name} />
+        <SortableItem
+          key={`item-${index}`}
+          index={index}
+          value={value.name}
+          swichSetting={swichSetting}
+        />
       ))}
     </div>
   )
@@ -56,7 +61,11 @@ class Pages extends React.Component<Props> {
     }
     return (
       <div>
-        <SortableList items={pages} onSortEnd={onSortEnd} />
+        <SortableList
+          items={pages}
+          onSortEnd={onSortEnd}
+          swichSetting={swichSetting}
+        />
         <Button onClick={() => addPage()}>新增</Button>
         <Settings
           shouldSettingsShow={shouldSettingsShow}

@@ -26,10 +26,12 @@ class MenuBar extends React.PureComponent<{}, State> {
     } else {
       if (this.state.currentMenu === name) {
         this.setState({
-          isExpand: false
+          isExpand: false,
+          currentMenu: this.state.currentMenu
         })
       } else {
         this.setState({
+          isExpand: this.state.isExpand,
           currentMenu: name
         })
       }

@@ -1,8 +1,28 @@
 // @flow
 import React from 'react'
+import axios from 'axios'
 import { Modal, Button, Input } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
 const { TextArea } = Input
+
+const testAjax = () => {
+  // axios
+  //   .get('http://127.0.0.1:7001/api/v2/topics', {
+  //     headers: {
+  //       Authorization:
+  //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjViN2JjZjA4NGNmNDA0OTgwNGY2ZjQxNSJ9LCJleHAiOjE1MzU0NDU0MDksImlhdCI6MTUzNDg0MDYwOX0.4OxEsh-redBebMFLhwmAboP2p2wHWBlX5AlbuV9CpnA'
+  //     }
+  //   })
+  //   .then(r => console.dir(r))
+  axios
+    .get('http://127.0.0.1:7001/api/v2/topics')
+    .then(r => {
+      console.dir(r)
+    })
+    .catch(e => {
+      console.dir(e)
+    })
+}
 
 type ModelProps = {
   modalFlag: boolean,
@@ -15,6 +35,7 @@ class Model extends React.Component<ModelProps> {
     super(props)
     this.state = this.props.project
   }
+
   render() {
     const { modalFlag, visible, updateProjectSettings } = this.props
     return (
@@ -167,7 +188,9 @@ class TopBar extends React.Component<Props> {
             >
               设置
             </Button>
-            <Button className="pub-item">发布</Button>
+            <Button className="pub-item" onClick={() => testAjax()}>
+              发布
+            </Button>
           </div>
         </div>
       </div>

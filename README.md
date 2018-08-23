@@ -4,4 +4,6 @@
 
 ### unit test
 
-### config backend
+### config backend(Eggjs)
+
+### pack axios as a module

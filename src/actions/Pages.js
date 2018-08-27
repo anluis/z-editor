@@ -22,13 +22,8 @@ export const deletePage = id => ({
   id
 })
 
-export const updatePageSettings = (id, settings) => ({
-  type: types.UPDATE_PAGE_SETTINGS,
-  id,
-  settings
-})
-
-export const switchSettings = shouldSettingsShow => ({
-  type: types.SWITCH_PAGE_SETTINGS,
-  shouldSettingsShow
+export const editPageSettings = (status, payload) => ({
+  type: types.EDIT_PAGE_SETTINGS,
+  status,
+  payload
 })

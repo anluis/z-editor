@@ -11,11 +11,22 @@ type Props = {
   redo: () => void,
   canRedo: boolean,
   canUndo: boolean,
-  visible: (visible: boolean) => void,
-  modal: boolean,
-  modal: boolean,
-  updateProjectSettings: (setting: Object) => void,
-  project: Object
+  workSettings: {
+    visible: boolean,
+    payload: {
+      author: string,
+      name: string,
+      desc: string
+    }
+  },
+  changeWorkSettingVisible: (
+    visible: boolean,
+    payload: {
+      author: string,
+      name: string,
+      desc: string
+    }
+  ) => void
 }
 
 class TopBar extends React.Component<Props> {

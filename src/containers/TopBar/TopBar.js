@@ -2,8 +2,7 @@
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/Coms'
 import { undo, redo } from '../../actions/index'
-import { changeWorkSettingVisible } from '../../actions/Status'
-import { updateProjectSettings } from '../../actions/Project'
+import { changeWorkSettings } from '../../actions/Status'
 import TopBar from '../../components/TopBar/TopBar'
 import {
   imageModule,
@@ -63,11 +62,8 @@ const mapDispatchToProps = dispatch => ({
   redo: () => {
     dispatch(redo())
   },
-  updateProjectSettings: settings => {
-    dispatch(updateProjectSettings(settings))
-  },
   changeWorkSettingVisible: (status, payload) => {
-    dispatch(changeWorkSettingVisible(status, payload))
+    dispatch(changeWorkSettings(status, payload))
   }
 })
 

@@ -38,18 +38,16 @@ const Canvas = ({
   )
 
   return (
-    <div className="main-left">
-      <div className="design-area" style={designArea}>
-        {renderComs.map((com, index) => (
-          <Com
-            key={`${currentPage} + ${com.id}`}
-            {...com}
-            updateCom={updateCom}
-            focusCom={focusCom}
-            zIndex={index}
-          />
-        ))}
-      </div>
+    <div className="design-area" style={designArea}>
+      {renderComs.map((com, index) => (
+        <Com
+          key={`${currentPage} + ${com.id}`}
+          {...com}
+          updateCom={updateCom}
+          focusCom={focusCom}
+          zIndex={index}
+        />
+      ))}
     </div>
   )
 }

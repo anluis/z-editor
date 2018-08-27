@@ -3,7 +3,7 @@ import {
   updatePageOrder,
   focusPage,
   addPage,
-  switchSettings
+  editPageSettings
 } from '../../../actions/Pages'
 import Pages from '../../../components/FunctionTabs/Pages/Pages'
 
@@ -24,8 +24,8 @@ const mapDispatchToProps = dispatch => ({
   addPage: () => {
     dispatch(addPage())
   },
-  swichSetting: shouldSettingsShow => {
-    dispatch(switchSettings(shouldSettingsShow))
+  editPageSettings: (status, payload) => {
+    dispatch(editPageSettings(status, payload))
   }
 })
 

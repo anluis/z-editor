@@ -3,34 +3,28 @@ import React from 'react'
 import { Modal, Button, Input } from 'antd'
 
 type Props = {
-  currentSettings: Object,
-  shouldSettingsShow: boolean,
-  swichSetting: (b: boolean) => void
+  visible: boolean,
+  payload: object,
+  editPageSettings: () => void
 }
 
-type ModelProps = {
-  currentSettings: Object,
-  shouldSettingsShow: boolean,
-  swichSetting: (b: boolean) => void
-}
-
-class SettingsModel extends React.Component<ModelProps> {
+class Settings extends React.Component<Props> {
   render() {
-    const { shouldSettingsShow, swichSetting } = this.props
+    const { visible, payload, editPageSettings } = this.props
     return (
       <Modal
-        visible={shouldSettingsShow}
+        visible={visible}
         title="页面设置"
-        onOk={() => swichSetting(false)}
-        onCancel={() => swichSetting(false)}
+        onOk={() => editPageSettings(false)}
+        onCancel={() => editPageSettings(false, payload)}
         footer={[
-          <Button key="back" onClick={() => swichSetting(false)}>
+          <Button key="back" onClick={() => editPageSettings(false, payload)}>
             Return
           </Button>,
           <Button
             key="submit"
             type="primary"
-            onClick={() => swichSetting(false)}
+            onClick={() => editPageSettings(false)}
           >
             Submit
           </Button>
@@ -42,12 +36,6 @@ class SettingsModel extends React.Component<ModelProps> {
         </div>
       </Modal>
     )
-  }
-}
-
-class Settings extends React.Component<Props> {
-  render() {
-    return <SettingsModel {...this.props} />
   }
 }
 

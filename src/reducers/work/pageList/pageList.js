@@ -16,7 +16,18 @@ type Action =
   | DELETE_COM
   | UPDATE_PAGE_ORDER
 
-const initState = [{ id: 0, name: '页面0', order: [] }]
+const initState = [
+  {
+    id: 0,
+    order: [],
+    settings: {
+      visible: false,
+      payload: {
+        name: '页面-0'
+      }
+    }
+  }
+]
 
 const addIdInPageItem = (array: Array<Object>, action: Action): State => {
   return array.map(item => {
@@ -67,8 +78,13 @@ const pageList = (state: State = initState, action: Action): State => {
         ...state,
         {
           id: action.id,
-          name: '新页面' + action.id,
-          order: []
+          order: [],
+          settings: {
+            visible: false,
+            payload: {
+              name: '页面-' + action.id
+            }
+          }
         }
       ]
     case UPDATE_PAGE_ORDER:

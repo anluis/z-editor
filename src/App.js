@@ -5,7 +5,6 @@ import TopBar from './containers/TopBar/TopBar'
 import FunctionTabs from './components/FunctionTabs/FunctionTabs'
 import './assets/style/App.less'
 import 'normalize.css'
-import './assets/style/animate.min.css'
 
 const App = () => {
   return (

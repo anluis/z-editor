@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
+    "animate.css": "^3.7.0",
     "antd": "^3.8.0",
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",

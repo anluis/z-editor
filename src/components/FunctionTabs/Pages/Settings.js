@@ -38,12 +38,7 @@ class SettingsModel extends React.Component<ModelProps> {
       >
         <div className="attr-item" style={{ marginBottom: 20 }}>
           页面标题:
-          <Input
-            onChange={e => {
-              this.setState({ name: e.target.value })
-            }}
-            maxLength="12"
-          />
+          <Input maxLength="12" />
         </div>
       </Modal>
     )

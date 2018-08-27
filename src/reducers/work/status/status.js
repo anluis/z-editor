@@ -7,7 +7,8 @@ import {
   FOCUS_PAGE,
   UPDATE_COM_ZINDEX,
   SWITCH_PAGE_SETTINGS,
-  UPDATE_PROJECT_SETTING
+  UPDATE_PROJECT_SETTING,
+  CHANGE_WORKSETTING_VISIBLE
 } from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
@@ -39,7 +40,15 @@ const initState = {
     title: '',
     name: ''
   },
-  shouldSettingsShow: false
+  shouldSettingsShow: false,
+  workSettings: {
+    status: false,
+    payload: {
+      author: '',
+      name: '',
+      desc: ''
+    }
+  }
 }
 
 const status = (state: State = initState, action: Action): State => {
@@ -112,8 +121,6 @@ const status = (state: State = initState, action: Action): State => {
         }
       }
     case UPDATE_PROJECT_SETTING:
-      console.log(state)
-      console.log(action)
       return {
         ...state,
         ...{
@@ -121,6 +128,16 @@ const status = (state: State = initState, action: Action): State => {
             desc: action.settings.desc,
             title: action.settings.title,
             name: action.settings.name
+          }
+        }
+      }
+    case CHANGE_WORKSETTING_VISIBLE:
+      return {
+        ...state,
+        ...{
+          workSettings: {
+            visible: action.visible,
+            payload: action.payload
           }
         }
       }

@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/Coms'
 import { undo, redo } from '../../actions/index'
-import { visible } from '../../actions/Visible'
+import { changeWorkSettingVisible } from '../../actions/Status'
 import { updateProjectSettings } from '../../actions/Project'
 import TopBar from '../../components/TopBar/TopBar'
 import {
@@ -27,8 +27,8 @@ const mapStateToProps = state => {
     currentPageId: state.mywork.present.status.page.current,
     canRedo: state.mywork.future.length > 0,
     canUndo: state.mywork.past.length > 0,
-    modal: state.model.modal.visible,
-    project: state.mywork.present.status.project
+    project: state.mywork.present.status.project,
+    workSettings: state.mywork.present.status.workSettings
   }
 }
 
@@ -63,12 +63,11 @@ const mapDispatchToProps = dispatch => ({
   redo: () => {
     dispatch(redo())
   },
-  visible: Modal => {
-    dispatch(visible(Modal))
-  },
   updateProjectSettings: settings => {
-    console.log(settings)
     dispatch(updateProjectSettings(settings))
+  },
+  changeWorkSettingVisible: (status, payload) => {
+    dispatch(changeWorkSettingVisible(status, payload))
   }
 })
 

@@ -1,90 +1,8 @@
 // @flow
 import React from 'react'
-import axios from 'axios'
-import { Modal, Button, Input } from 'antd'
+import { Button } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
-const { TextArea } = Input
-
-const testAjax = () => {
-  // axios
-  //   .get('http://127.0.0.1:7001/api/v2/topics', {
-  //     headers: {
-  //       Authorization:
-  //         'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjViN2JjZjA4NGNmNDA0OTgwNGY2ZjQxNSJ9LCJleHAiOjE1MzU0NDU0MDksImlhdCI6MTUzNDg0MDYwOX0.4OxEsh-redBebMFLhwmAboP2p2wHWBlX5AlbuV9CpnA'
-  //     }
-  //   })
-  //   .then(r => console.dir(r))
-  axios
-    .get('http://127.0.0.1:7001/api/v2/topics')
-    .then(r => {
-      console.dir(r)
-    })
-    .catch(e => {
-      console.dir(e)
-    })
-}
-
-type ModelProps = {
-  modalFlag: boolean,
-  visible: (visible: boolean) => void,
-  updateProjectSettings: (setting: Object) => void
-}
-
-class Model extends React.Component<ModelProps> {
-  constructor(props) {
-    super(props)
-    this.state = this.props.project
-  }
-
-  render() {
-    const { modalFlag, visible, updateProjectSettings } = this.props
-    return (
-      <Modal
-        visible={modalFlag}
-        title="项目信息"
-        onOk={() => {
-          visible(false)
-          updateProjectSettings(this.state)
-        }}
-        onCancel={() => {
-          visible(false)
-        }}
-        okText="确认"
-        cancelText="取消"
-      >
-        <div className="attr-item" style={{ marginBottom: 20 }}>
-          作者:
-          <Input
-            onChange={e => {
-              this.setState({ name: e.target.value })
-            }}
-            maxLength="12"
-          />
-        </div>
-        <div className="attr-item" style={{ marginBottom: 20 }}>
-          项目名称:
-          <Input
-            onChange={e => {
-              this.setState({ title: e.target.value })
-            }}
-            maxLength="12"
-            // value={this.state.title}
-          />
-        </div>
-        <div className="attr-item" style={{ marginBottom: 20 }}>
-          项目描述:
-          <TextArea
-            autosize={{ minRows: 2, maxRows: 6 }}
-            onChange={e => {
-              this.setState({ desc: e.target.value })
-            }}
-            // value={this.state.desc}
-          />
-        </div>
-      </Modal>
-    )
-  }
-}
+import SettingModal from './SettingModal'
 
 type Props = {
   addCom: (currentPageId: string, module: string) => void,
@@ -96,7 +14,8 @@ type Props = {
   visible: (visible: boolean) => void,
   modal: boolean,
   modal: boolean,
-  updateProjectSettings: (setting: Object) => void
+  updateProjectSettings: (setting: Object) => void,
+  project: Object
 }
 
 class TopBar extends React.Component<Props> {
@@ -108,12 +27,15 @@ class TopBar extends React.Component<Props> {
       redo,
       canRedo,
       canUndo,
-      visible,
-      modal,
-      updateProjectSettings
+      workSettings,
+      changeWorkSettingVisible
     } = this.props
     return (
       <div className="function-area">
+        <SettingModal
+          {...workSettings}
+          changeWorkSettingVisible={changeWorkSettingVisible}
+        />
         <div className="function-head">
           此处缺logo
           <Button disabled={!canUndo} onClick={undo}>
@@ -123,11 +45,6 @@ class TopBar extends React.Component<Props> {
             Redo
           </Button>
         </div>
-        <Model
-          visible={visible}
-          modalFlag={modal}
-          updateProjectSettings={updateProjectSettings}
-        />
         <div className="function-funcs">
           <div
             className="func-item"
@@ -183,14 +100,12 @@ class TopBar extends React.Component<Props> {
             <Button
               className="pub-item"
               onClick={() => {
-                visible(true)
+                changeWorkSettingVisible(true, workSettings.payload)
               }}
             >
               设置
             </Button>
-            <Button className="pub-item" onClick={() => testAjax()}>
-              发布
-            </Button>
+            <Button className="pub-item">发布</Button>
           </div>
         </div>
       </div>

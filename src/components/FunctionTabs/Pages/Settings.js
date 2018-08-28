@@ -3,34 +3,50 @@ import React from 'react'
 import { Modal, Button, Input } from 'antd'
 
 type Props = {
-  currentSettings: Object,
-  shouldSettingsShow: boolean,
-  swichSetting: (b: boolean) => void
+  settings: {
+    visible: boolean,
+    payload: Object
+  },
+  targetPageId: string,
+  editPageSettings: (
+    visible: boolean,
+    payload: Object,
+    targetPageId: string
+  ) => void
 }
 
-type ModelProps = {
-  currentSettings: Object,
-  shouldSettingsShow: boolean,
-  swichSetting: (b: boolean) => void
+type State = {
+  title: string
 }
 
-class SettingsModel extends React.Component<ModelProps> {
+class Settings extends React.Component<Props, State> {
+  constructor() {
+    super()
+    this.state = {
+      name: ''
+    }
+  }
   render() {
-    const { shouldSettingsShow, swichSetting } = this.props
+    const { visible, payload } = this.props.settings
+    const { editPageSettings, targetPageId } = this.props
     return (
       <Modal
-        visible={shouldSettingsShow}
+        destroyOnClose
+        visible={visible}
         title="页面设置"
-        onOk={() => swichSetting(false)}
-        onCancel={() => swichSetting(false)}
+        onOk={() => editPageSettings(false, this.state, targetPageId)}
+        onCancel={() => editPageSettings(false, payload, targetPageId)}
         footer={[
-          <Button key="back" onClick={() => swichSetting(false)}>
+          <Button
+            key="back"
+            onClick={() => editPageSettings(false, payload, targetPageId)}
+          >
             Return
           </Button>,
           <Button
             key="submit"
             type="primary"
-            onClick={() => swichSetting(false)}
+            onClick={() => editPageSettings(false, this.state, targetPageId)}
           >
             Submit
           </Button>
@@ -38,16 +54,18 @@ class SettingsModel extends React.Component<ModelProps> {
       >
         <div className="attr-item" style={{ marginBottom: 20 }}>
           页面标题:
-          <Input maxLength="12" />
+          <Input
+            defaultValue={payload.name}
+            maxLength="12"
+            onChange={e => {
+              this.setState({
+                name: e.target.value
+              })
+            }}
+          />
         </div>
       </Modal>
     )
-  }
-}
-
-class Settings extends React.Component<Props> {
-  render() {
-    return <SettingsModel {...this.props} />
   }
 }
 

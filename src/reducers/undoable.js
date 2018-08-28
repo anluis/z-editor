@@ -5,6 +5,9 @@ export function undoable(reducer) {
     future: []
   }
 
+  // actions which not include in redo & undo
+  const ignoreActions = ['EDIT_PAGE_SETTINGS']
+
   return function(state = initState, action) {
     const { past, present, future } = state
     switch (action.type) {
@@ -25,8 +28,15 @@ export function undoable(reducer) {
           future: newFuture
         }
       default:
-        // 将其他 action 委托给原始的 reducer 处理
         const newPresent = reducer(present, action)
+        if (ignoreActions.includes(action.type)) {
+          return {
+            past: [...past],
+            present: newPresent,
+            future: []
+          }
+        }
+        // 将其他 action 委托给原始的 reducer 处理
         if (present === newPresent) {
           return state
         }

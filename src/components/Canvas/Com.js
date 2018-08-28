@@ -6,6 +6,7 @@ import {
   TEXT_MODULE,
   PHOTO_MODULE
 } from '../../constants/ModuleTypes'
+import 'animate.css'
 
 const Vedio = (attribute: Object) => {
   return (

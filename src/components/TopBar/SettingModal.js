@@ -4,14 +4,29 @@ import { Modal, Input } from 'antd'
 const { TextArea } = Input
 
 type Props = {
+  visible: boolean,
   payload: {
     author: string,
     name: string,
     desc: string
-  }
+  },
+  changeWorkSettingVisible: (
+    visible: boolean,
+    payload: {
+      author: string,
+      name: string,
+      desc: string
+    }
+  ) => void
 }
 
-class SettingModal extends React.Component<Props> {
+type State = {
+  author: string,
+  name: string,
+  desc: string
+}
+
+class SettingModal extends React.Component<Props, State> {
   constructor() {
     super()
     this.state = {

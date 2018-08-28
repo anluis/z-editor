@@ -9,9 +9,8 @@ type Props = {
   updatePageOrder: (oldIndex: string, newIndex: string) => void,
   addPage: () => void,
   focusPage: (id: string) => void,
-  swichSetting: (showOrNotShow: boolean) => void,
-  shouldSettingsShow: boolean,
-  currentSettings: any
+  editPageSettings: (visible: boolean, payload: Object) => void,
+  targetPageId: string
 }
 
 const style = {
@@ -21,27 +20,34 @@ const style = {
   cursor: 'pointer'
 }
 
-const SortableItem = SortableElement(({ value, swichSetting }) => (
-  <div className="layer-item" style={style}>
-    {value}
-    <Button onClick={() => swichSetting(true)}>设置</Button>
-  </div>
-))
-
-const SortableList = SortableContainer(({ items, swichSetting }) => {
-  return (
-    <div>
-      {items.map((value, index) => (
-        <SortableItem
-          key={`item-${index}`}
-          index={index}
-          value={value.name}
-          swichSetting={swichSetting}
-        />
-      ))}
+const SortableItem = SortableElement(
+  ({ payload, editPageSettings, targetPageId }) => (
+    <div className="layer-item" style={style}>
+      {payload.name}
+      <Button onClick={() => editPageSettings(true, payload, targetPageId)}>
+        设置
+      </Button>
     </div>
   )
-})
+)
+
+const SortableList = SortableContainer(
+  ({ items, editPageSettings, targetPageId }) => {
+    return (
+      <div>
+        {items.map((value, index) => (
+          <SortableItem
+            key={`item-${index}`}
+            index={index}
+            {...value.settings}
+            editPageSettings={editPageSettings}
+            targetPageId={targetPageId}
+          />
+        ))}
+      </div>
+    )
+  }
+)
 
 class Pages extends React.Component<Props> {
   render() {
@@ -50,10 +56,17 @@ class Pages extends React.Component<Props> {
       updatePageOrder,
       addPage,
       focusPage,
-      shouldSettingsShow,
-      swichSetting,
-      currentSettings
+      editPageSettings,
+      targetPageId
     } = this.props
+
+    const editPage = {
+      targetPageId,
+      editPageSettings
+    }
+
+    // find page settings by id
+    const settings = pages.find(item => item.id === targetPageId)
 
     const onSortEnd = ({ oldIndex, newIndex }) => {
       updatePageOrder(oldIndex, newIndex)
@@ -61,16 +74,12 @@ class Pages extends React.Component<Props> {
     }
     return (
       <div>
-        <SortableList
-          items={pages}
-          onSortEnd={onSortEnd}
-          swichSetting={swichSetting}
-        />
+        <SortableList items={pages} onSortEnd={onSortEnd} {...editPage} />
         <Button onClick={() => addPage()}>新增</Button>
         <Settings
-          shouldSettingsShow={shouldSettingsShow}
-          swichSetting={swichSetting}
-          currentSettings={currentSettings}
+          {...settings}
+          editPageSettings={editPageSettings}
+          targetPageId={targetPageId}
         />
       </div>
     )

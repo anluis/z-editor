@@ -6,7 +6,12 @@ export function undoable(reducer) {
   }
 
   // actions which not include in redo & undo
-  const ignoreActions = ['EDIT_PAGE_SETTINGS']
+  const ignoreActions = [
+    'EDIT_PAGE_SETTINGS',
+    'CHANGE_WORK_SETTINGS',
+    'FOCUS_PAGE',
+    'FOCUS_COM'
+  ]
 
   return function(state = initState, action) {
     const { past, present, future } = state

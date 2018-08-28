@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { Button } from 'antd'
 
 const makeLayersSortByOrder = (layers, order) => {
   let result = []
@@ -13,26 +14,28 @@ const makeLayersSortByOrder = (layers, order) => {
   return result
 }
 
-const style = {
+const layerItemStyle = {
   background: '#fff',
   borderTop: '1px solid #ece6e6',
   padding: '15px 20px',
-  cursor: 'pointer'
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center'
 }
 
 const selected = {
-  background: '#fff',
-  borderTop: '1px solid #ece6e6',
-  padding: '15px 20px',
-  cursor: 'pointer',
+  ...layerItemStyle,
   color: 'red'
 }
 
 const SortableItem = SortableElement(({ value, selectedId }) => {
-  let bindStyle = selectedId === value.id ? selected : style
+  let bindStyle = selectedId === value.id ? selected : layerItemStyle
   return (
     <div className="layer-item" style={bindStyle}>
       {value.attribute.name}
+      <Button>设置</Button>
+      <Button type="danger">删除</Button>
     </div>
   )
 })

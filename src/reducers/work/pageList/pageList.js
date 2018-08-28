@@ -4,7 +4,8 @@ import {
   ADD_PAGE,
   ADD_COM,
   DELETE_COM,
-  UPDATE_PAGE_ORDER
+  UPDATE_PAGE_ORDER,
+  EDIT_PAGE_SETTINGS
 } from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
@@ -15,6 +16,7 @@ type Action =
   | ADD_COM
   | DELETE_COM
   | UPDATE_PAGE_ORDER
+  | EDIT_PAGE_SETTINGS
 
 const initState = [
   {
@@ -65,6 +67,21 @@ const deleteIdInPageItem = (array: Array<Object>, action: Action): State => {
   })
 }
 
+const editPageSettingsById = (array: Array<Object>, action: Action): State => {
+  return array.map(item => {
+    if (item.id !== action.targetPageId) {
+      return item
+    }
+    return {
+      ...item,
+      settings: {
+        visible: action.visible,
+        payload: action.payload
+      }
+    }
+  })
+}
+
 const pageList = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case ADD_COM:
@@ -82,13 +99,18 @@ const pageList = (state: State = initState, action: Action): State => {
           settings: {
             visible: false,
             payload: {
-              name: '页面-' + action.id
+              name: '页面-' + action.id,
+              isLongPage: false,
+              width: 375,
+              height: 667
             }
           }
         }
       ]
     case UPDATE_PAGE_ORDER:
       return arrayMove(state, action.oldIndex, action.newIndex)
+    case EDIT_PAGE_SETTINGS:
+      return editPageSettingsById(state, action)
     default:
       return state
   }

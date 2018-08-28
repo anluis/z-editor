@@ -22,8 +22,9 @@ export const deletePage = id => ({
   id
 })
 
-export const editPageSettings = (status, payload) => ({
+export const editPageSettings = (visible, payload, targetPageId) => ({
   type: types.EDIT_PAGE_SETTINGS,
-  status,
-  payload
+  visible,
+  payload,
+  targetPageId
 })

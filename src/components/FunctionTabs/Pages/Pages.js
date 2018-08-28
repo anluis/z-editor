@@ -9,7 +9,8 @@ type Props = {
   updatePageOrder: (oldIndex: string, newIndex: string) => void,
   addPage: () => void,
   focusPage: (id: string) => void,
-  editPageSettings: (visible: boolean, payload: object) => void
+  editPageSettings: (visible: boolean, payload: Object) => void,
+  targetPageId: string
 }
 
 const style = {
@@ -23,7 +24,9 @@ const SortableItem = SortableElement(
   ({ payload, editPageSettings, targetPageId }) => (
     <div className="layer-item" style={style}>
       {payload.name}
-      <Button onClick={() => editPageSettings(true, payload)}>设置</Button>
+      <Button onClick={() => editPageSettings(true, payload, targetPageId)}>
+        设置
+      </Button>
     </div>
   )
 )
@@ -38,6 +41,7 @@ const SortableList = SortableContainer(
             index={index}
             {...value.settings}
             editPageSettings={editPageSettings}
+            targetPageId={targetPageId}
           />
         ))}
       </div>
@@ -61,6 +65,9 @@ class Pages extends React.Component<Props> {
       editPageSettings
     }
 
+    // find page settings by id
+    const settings = pages.find(item => item.id === targetPageId)
+
     const onSortEnd = ({ oldIndex, newIndex }) => {
       updatePageOrder(oldIndex, newIndex)
       focusPage(oldIndex)
@@ -69,7 +76,11 @@ class Pages extends React.Component<Props> {
       <div>
         <SortableList items={pages} onSortEnd={onSortEnd} {...editPage} />
         <Button onClick={() => addPage()}>新增</Button>
-        {/* <Settings editPageSettings={editPageSettings} /> */}
+        <Settings
+          {...settings}
+          editPageSettings={editPageSettings}
+          targetPageId={targetPageId}
+        />
       </div>
     )
   }

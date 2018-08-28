@@ -13,32 +13,56 @@ type Props = {
   targetPageId: string
 }
 
-const style = {
+const makePagesSortByOrder = (layers, order) => {
+  let result = []
+  order.forEach(e => {
+    let r = layers.find(item => item.id === e)
+    if (r !== undefined) {
+      result.push(r)
+    }
+  })
+  return result
+}
+
+const layerItemStyle = {
   background: '#fff',
   borderTop: '1px solid #ece6e6',
   padding: '15px 20px',
-  cursor: 'pointer'
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center'
+}
+
+const selected = {
+  ...layerItemStyle,
+  color: 'red'
 }
 
 const SortableItem = SortableElement(
-  ({ payload, editPageSettings, targetPageId }) => (
-    <div className="layer-item" style={style}>
-      {payload.name}
-      <Button onClick={() => editPageSettings(true, payload, targetPageId)}>
-        设置
-      </Button>
-    </div>
-  )
+  ({ payload, editPageSettings, targetPageId, id }) => {
+    let bindStyle = targetPageId === id ? selected : layerItemStyle
+    return (
+      <div className="layer-item" style={bindStyle}>
+        {payload.name}
+        <Button onClick={() => editPageSettings(true, payload, targetPageId)}>
+          设置
+        </Button>
+        <Button type="danger">删除</Button>
+      </div>
+    )
+  }
 )
 
 const SortableList = SortableContainer(
   ({ items, editPageSettings, targetPageId }) => {
     return (
-      <div>
+      <div className="layers">
         {items.map((value, index) => (
           <SortableItem
             key={`item-${index}`}
             index={index}
+            id={value.id}
             {...value.settings}
             editPageSettings={editPageSettings}
             targetPageId={targetPageId}
@@ -57,7 +81,8 @@ class Pages extends React.Component<Props> {
       addPage,
       focusPage,
       editPageSettings,
-      targetPageId
+      targetPageId,
+      order
     } = this.props
 
     const editPage = {
@@ -72,10 +97,15 @@ class Pages extends React.Component<Props> {
       updatePageOrder(oldIndex, newIndex)
       focusPage(oldIndex)
     }
+
+    const pagesSorted = makePagesSortByOrder(pages, order)
+
     return (
       <div>
-        <SortableList items={pages} onSortEnd={onSortEnd} {...editPage} />
-        <Button onClick={() => addPage()}>新增</Button>
+        <div className="layer-function">
+          <Button onClick={() => addPage()}>新增</Button>
+        </div>
+        <SortableList items={pagesSorted} onSortEnd={onSortEnd} {...editPage} />
         <Settings
           {...settings}
           editPageSettings={editPageSettings}

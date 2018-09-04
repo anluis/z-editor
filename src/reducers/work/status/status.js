@@ -7,7 +7,8 @@ import {
   FOCUS_PAGE,
   UPDATE_COM_ZINDEX,
   SWITCH_PAGE_SETTINGS,
-  CHANGE_WORK_SETTINGS
+  CHANGE_WORK_SETTINGS,
+  DELETE_PAGE
 } from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
@@ -117,6 +118,19 @@ const status = (state: State = initState, action: Action): State => {
           workSettings: {
             visible: action.visible,
             payload: action.payload
+          }
+        }
+      }
+    case DELETE_PAGE:
+      return {
+        ...state,
+        ...{
+          page: {
+            order: state.page.order,
+            current: 0
+          },
+          com: {
+            current: null
           }
         }
       }

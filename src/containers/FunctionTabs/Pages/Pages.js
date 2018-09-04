@@ -3,7 +3,8 @@ import {
   updatePageOrder,
   focusPage,
   addPage,
-  editPageSettings
+  editPageSettings,
+  deletePage
 } from '../../../actions/Pages'
 import Pages from '../../../components/FunctionTabs/Pages/Pages'
 
@@ -25,6 +26,9 @@ const mapDispatchToProps = dispatch => ({
   },
   editPageSettings: (visible, payload, targetPageId) => {
     dispatch(editPageSettings(visible, payload, targetPageId))
+  },
+  deletePage: id => {
+    dispatch(deletePage(id))
   }
 })
 

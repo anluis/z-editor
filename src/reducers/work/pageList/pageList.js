@@ -5,7 +5,8 @@ import {
   ADD_COM,
   DELETE_COM,
   UPDATE_PAGE_ORDER,
-  EDIT_PAGE_SETTINGS
+  EDIT_PAGE_SETTINGS,
+  DELETE_PAGE
 } from '../../../constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
@@ -111,6 +112,8 @@ const pageList = (state: State = initState, action: Action): State => {
       return arrayMove(state, action.oldIndex, action.newIndex)
     case EDIT_PAGE_SETTINGS:
       return editPageSettingsById(state, action)
+    case DELETE_PAGE:
+      return state.filter(com => com.id !== action.id)
     default:
       return state
   }

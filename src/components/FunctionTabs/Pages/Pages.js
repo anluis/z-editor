@@ -10,7 +10,8 @@ type Props = {
   addPage: () => void,
   focusPage: (id: string) => void,
   editPageSettings: (visible: boolean, payload: Object) => void,
-  targetPageId: string
+  targetPageId: string,
+  deletePage: (id: string) => void
 }
 
 const makePagesSortByOrder = (layers, order) => {
@@ -40,7 +41,7 @@ const selected = {
 }
 
 const SortableItem = SortableElement(
-  ({ payload, editPageSettings, targetPageId, id }) => {
+  ({ payload, editPageSettings, targetPageId, id, deletePage }) => {
     let bindStyle = targetPageId === id ? selected : layerItemStyle
     return (
       <div className="layer-item" style={bindStyle}>
@@ -48,14 +49,16 @@ const SortableItem = SortableElement(
         <Button onClick={() => editPageSettings(true, payload, targetPageId)}>
           设置
         </Button>
-        <Button type="danger">删除</Button>
+        <Button onClick={() => deletePage(id)} type="danger">
+          删除
+        </Button>
       </div>
     )
   }
 )
 
 const SortableList = SortableContainer(
-  ({ items, editPageSettings, targetPageId }) => {
+  ({ items, editPageSettings, targetPageId, deletePage }) => {
     return (
       <div className="layers">
         {items.map((value, index) => (
@@ -66,6 +69,7 @@ const SortableList = SortableContainer(
             {...value.settings}
             editPageSettings={editPageSettings}
             targetPageId={targetPageId}
+            deletePage={deletePage}
           />
         ))}
       </div>
@@ -82,7 +86,8 @@ class Pages extends React.Component<Props> {
       focusPage,
       editPageSettings,
       targetPageId,
-      order
+      order,
+      deletePage
     } = this.props
 
     const editPage = {
@@ -105,7 +110,12 @@ class Pages extends React.Component<Props> {
         <div className="layer-function">
           <Button onClick={() => addPage()}>新增</Button>
         </div>
-        <SortableList items={pagesSorted} onSortEnd={onSortEnd} {...editPage} />
+        <SortableList
+          items={pagesSorted}
+          onSortEnd={onSortEnd}
+          {...editPage}
+          deletePage={deletePage}
+        />
         <Settings
           {...settings}
           editPageSettings={editPageSettings}

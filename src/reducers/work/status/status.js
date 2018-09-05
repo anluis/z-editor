@@ -126,7 +126,7 @@ const status = (state: State = initState, action: Action): State => {
         ...state,
         ...{
           page: {
-            order: state.page.order,
+            order: state.page.order.filter(item => item !== action.id),
             current: 0
           },
           com: {

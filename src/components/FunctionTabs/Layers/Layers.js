@@ -29,31 +29,39 @@ const selected = {
   color: 'red'
 }
 
-const SortableItem = SortableElement(({ value, selectedId }) => {
-  let bindStyle = selectedId === value.id ? selected : layerItemStyle
-  return (
-    <div className="layer-item" style={bindStyle}>
-      {value.attribute.name}
-      <Button>设置</Button>
-      <Button type="danger">删除</Button>
-    </div>
-  )
-})
+const SortableItem = SortableElement(
+  ({ value, selectedId, deleteCom, targetPageId }) => {
+    let bindStyle = selectedId === value.id ? selected : layerItemStyle
+    return (
+      <div className="layer-item" style={bindStyle}>
+        {value.attribute.name}
+        <Button>设置</Button>
+        <Button type="danger" onClick={() => deleteCom(value.id, targetPageId)}>
+          删除
+        </Button>
+      </div>
+    )
+  }
+)
 
-const SortableList = SortableContainer(({ items, selectedId }) => {
-  return (
-    <div className="layers">
-      {items.map((value, index) => (
-        <SortableItem
-          key={`item-${index}`}
-          index={index}
-          value={value}
-          selectedId={selectedId}
-        />
-      ))}
-    </div>
-  )
-})
+const SortableList = SortableContainer(
+  ({ items, selectedId, deleteCom, targetPageId }) => {
+    return (
+      <div className="layers">
+        {items.map((value, index) => (
+          <SortableItem
+            key={`item-${index}`}
+            index={index}
+            value={value}
+            selectedId={selectedId}
+            deleteCom={deleteCom}
+            targetPageId={targetPageId}
+          />
+        ))}
+      </div>
+    )
+  }
+)
 
 type Props = {
   order: Array<number>,
@@ -68,7 +76,8 @@ type Props = {
     newIndex: number,
     targetPageId: string,
     layers: Array<Object>
-  ) => void
+  ) => void,
+  deleteCom: (id: string, target: string) => void
 }
 
 class Layers extends React.Component<Props> {
@@ -89,13 +98,15 @@ class Layers extends React.Component<Props> {
     )
   }
   render() {
-    const { layers, order, currentComId } = this.props
+    const { layers, order, currentComId, deleteCom, targetPageId } = this.props
     let layersSorted = makeLayersSortByOrder(layers, order)
     return (
       <SortableList
         items={layersSorted}
         onSortEnd={this.onSortEnd}
         selectedId={currentComId}
+        deleteCom={deleteCom}
+        targetPageId={targetPageId}
       />
     )
   }

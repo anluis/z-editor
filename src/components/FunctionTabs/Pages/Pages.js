@@ -49,9 +49,15 @@ const SortableItem = SortableElement(
         <Button onClick={() => editPageSettings(true, payload, targetPageId)}>
           设置
         </Button>
-        <Button onClick={() => deletePage(id)} type="danger">
-          删除
-        </Button>
+        {id === 0 ? (
+          <Button disabled type="danger">
+            删除
+          </Button>
+        ) : (
+          <Button onClick={() => deletePage(id)} type="danger">
+            删除
+          </Button>
+        )}
       </div>
     )
   }

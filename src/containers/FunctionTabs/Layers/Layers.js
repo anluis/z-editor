@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { updateComZindex } from '../../../actions/Coms'
+import { updateComZindex, deleteCom } from '../../../actions/Coms'
 import Layers from '../../../components/FunctionTabs/Layers/Layers'
 
 const mapStateToProps = state => {
@@ -23,6 +23,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       updateComZindex(order, oldIndex, newIndex, targetPageId, chooseComId)
     )
+  },
+  deleteCom: (id, targetPageId) => {
+    dispatch(deleteCom(id, targetPageId))
   }
 })
 

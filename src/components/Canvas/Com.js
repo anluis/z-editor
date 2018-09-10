@@ -4,7 +4,9 @@ import {
   INPUT_MODULE,
   VEDIO_MODULE,
   TEXT_MODULE,
-  PHOTO_MODULE
+  PHOTO_MODULE,
+  IMG_MODULE,
+  BACKGROUND_MODULE
 } from '../../constants/ModuleTypes'
 import 'animate.css'
 
@@ -38,11 +40,21 @@ class Com extends React.Component<Props> {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      border: 'solid 1px #ddd',
+      backgroundColor: 'transparent',
+      zIndex: zIndex
+    }
+
+    const innerAnimation = {
+      width: '100%',
+      height: '100%',
       background: attribute.background,
-      backgroundSize: 'cover',
+      animationName: attribute.animationName,
+      animationDuration: attribute.animationDuration + 's',
+      animationDelay: attribute.animationDelay + 's',
+      animationIterationCount: attribute.animationIterationCount,
       backgroundImage: `url("` + attribute.imgUrl + `")`,
-      zIndex: zIndex,
+      backgroundSize: 'cover',
+      border: 'solid 1px #ddd',
       color: attribute.color,
       opacity: attribute.opacity,
       borderWidth: attribute.borderWidth + 'px',
@@ -54,11 +66,7 @@ class Com extends React.Component<Props> {
       fontSize: attribute.fontSize + 'px',
       lineHeight: attribute.lineHeight,
       letterSpacing: attribute.letterSpacing + 'em',
-      wordBreak: 'break-all',
-      animationName: attribute.animationName,
-      animationDuration: attribute.animationDuration + 's',
-      animationDelay: attribute.animationDelay + 's',
-      animationIterationCount: attribute.animationIterationCount
+      wordBreak: 'break-all'
     }
     return (
       <Rnd
@@ -101,8 +109,12 @@ class Com extends React.Component<Props> {
       >
         {attribute.type === INPUT_MODULE ||
         attribute.type === TEXT_MODULE ||
-        attribute.type === PHOTO_MODULE ? (
-          attribute.content
+        attribute.type === PHOTO_MODULE ||
+        attribute.type === IMG_MODULE ||
+        attribute.type === BACKGROUND_MODULE ? (
+          <div id="inner" style={innerAnimation}>
+            {attribute.content}
+          </div>
         ) : attribute.type === VEDIO_MODULE ? (
           <Vedio {...attribute} />
         ) : null}

@@ -35,22 +35,22 @@ const mapDispatchToProps = dispatch => ({
   addCom: (targetPageId, moduleType) => {
     switch (moduleType) {
       case IMG_MODULE:
-        dispatch(addCom(imageModule, targetPageId))
+        dispatch(addCom(imageModule, targetPageId, moduleType))
         break
       case BACKGROUND_MODULE:
-        dispatch(addCom(backgroundModule, targetPageId))
+        dispatch(addCom(backgroundModule, targetPageId, moduleType))
         break
       case INPUT_MODULE:
-        dispatch(addCom(inputModule, targetPageId))
+        dispatch(addCom(inputModule, targetPageId, moduleType))
         break
       case VEDIO_MODULE:
-        dispatch(addCom(vedioModule, targetPageId))
+        dispatch(addCom(vedioModule, targetPageId, moduleType))
         break
       case TEXT_MODULE:
-        dispatch(addCom(textModule, targetPageId))
+        dispatch(addCom(textModule, targetPageId, moduleType))
         break
       case PHOTO_MODULE:
-        dispatch(addCom(photoModule, targetPageId))
+        dispatch(addCom(photoModule, targetPageId, moduleType))
         break
       default:
         break

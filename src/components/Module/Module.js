@@ -57,15 +57,15 @@ export const inputModule = {
   animationIterationCount: 1
 }
 
-export const vedioModule = {
+export const videoModule = {
   name: '视频',
-  vedioUrl:
+  videoUrl:
     'http://h5-images.oss-cn-shanghai.aliyuncs.com/xingshidu_h5/marketing/pages/ad/vedio.mp4',
   height: 200,
   width: 300,
   x: 0,
   y: 0,
-  type: ModuleTypes.VEDIO_MODULE,
+  type: ModuleTypes.VIDEO_MODULE,
   borderWidth: 0,
   background: 'none',
   borderColor: '#000',

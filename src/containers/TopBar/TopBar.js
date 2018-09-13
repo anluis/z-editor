@@ -8,7 +8,7 @@ import {
   imageModule,
   backgroundModule,
   inputModule,
-  vedioModule,
+  videoModule,
   textModule,
   photoModule
 } from '../../components/Module/Module'
@@ -16,7 +16,7 @@ import {
   IMG_MODULE,
   BACKGROUND_MODULE,
   INPUT_MODULE,
-  VEDIO_MODULE,
+  VIDEO_MODULE,
   TEXT_MODULE,
   PHOTO_MODULE
 } from '../../constants/ModuleTypes'
@@ -43,8 +43,8 @@ const mapDispatchToProps = dispatch => ({
       case INPUT_MODULE:
         dispatch(addCom(inputModule, targetPageId, moduleType))
         break
-      case VEDIO_MODULE:
-        dispatch(addCom(vedioModule, targetPageId, moduleType))
+      case VIDEO_MODULE:
+        dispatch(addCom(videoModule, targetPageId, moduleType))
         break
       case TEXT_MODULE:
         dispatch(addCom(textModule, targetPageId, moduleType))

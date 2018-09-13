@@ -92,7 +92,7 @@ class TopBar extends React.Component<Props> {
           <div
             className="func-item"
             onClick={() => {
-              addCom(currentPageId, ModuleTypes.VEDIO_MODULE)
+              addCom(currentPageId, ModuleTypes.VIDEO_MODULE)
             }}
           >
             视频

@@ -12,7 +12,7 @@ import Textarea from './Textarea'
 import {
   BACKGROUND_MODULE,
   IMG_MODULE,
-  VEDIO_MODULE,
+  VIDEO_MODULE,
   INPUT_MODULE,
   TEXT_MODULE
 } from '../../../constants/ModuleTypes'
@@ -63,7 +63,7 @@ class Attribute extends React.Component<Props> {
       const inputDisplay = {
         display: 'none'
       }
-      const vedioDisplay = {
+      const videoDisplay = {
         display: 'none'
       }
       const textDisplay = {
@@ -95,10 +95,10 @@ class Attribute extends React.Component<Props> {
       } else {
         imgDisplay.display = 'none'
       }
-      if (focusCom.attribute.type === VEDIO_MODULE) {
-        vedioDisplay.display = 'block'
+      if (focusCom.attribute.type === VIDEO_MODULE) {
+        videoDisplay.display = 'block'
       } else {
-        vedioDisplay.display = 'none'
+        videoDisplay.display = 'none'
       }
 
       if (focusCom.attribute.type === INPUT_MODULE) {
@@ -162,7 +162,7 @@ class Attribute extends React.Component<Props> {
             <Vedio
               updateCom={updateCom}
               focusCom={focusCom}
-              style={vedioDisplay}
+              style={videoDisplay}
             />
             <Link
               updateCom={updateCom}

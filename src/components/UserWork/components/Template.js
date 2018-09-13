@@ -1,34 +1,34 @@
 import React from 'react'
 import Loadable from 'react-loadable'
-import * as types from '../constants/ActionTypes'
+import * as ModuleTypes from '../../../constants/ModuleTypes'
 
 const LoadableImageComponent = Loadable({
-  loader: () => import('../basic/Image'),
+  loader: () => import('./basic/Image'),
   loading: () => <div>Loading...</div>
 })
 
 const LoadableBackgroundComponent = Loadable({
-  loader: () => import('../basic/Background'),
+  loader: () => import('./basic/Background'),
   loading: () => <div>Loading</div>
 })
 
 const LoadableTextComponent = Loadable({
-  loader: () => import('../basic/Text'),
+  loader: () => import('./basic/Text'),
   loading: () => <div>Loading</div>
 })
 
 const LoadableInputComponent = Loadable({
-  loader: () => import('../basic/Input'),
+  loader: () => import('./basic/Input'),
   loading: () => <div>Loading</div>
 })
 
 const LoadableVedioComponent = Loadable({
-  loader: () => import('../basic/Vedio'),
+  loader: () => import('./basic/Vedio'),
   loading: () => <div>Loading</div>
 })
 
 const LoadablePhotoComponent = Loadable({
-  loader: () => import('../basic/Photo'),
+  loader: () => import('./basic/Photo'),
   loading: () => <div>Loading</div>
 })
 
@@ -47,17 +47,17 @@ const Photo = context => <LoadablePhotoComponent {...context} />
 class Template extends React.Component {
   renderComponent(context, index) {
     switch (context.type) {
-      case types.IMG_MODULE:
+      case ModuleTypes.IMG_MODULE:
         return <ImageComponent key={index} {...context} />
-      case types.BACKGROUND_MODULE:
+      case ModuleTypes.BACKGROUND_MODULE:
         return <Background key={index} {...context} />
-      case types.TEXT_MODULE:
+      case ModuleTypes.TEXT_MODULE:
         return <Text key={index} {...context} />
-      case types.INPUT_MODULE:
+      case ModuleTypes.INPUT_MODULE:
         return <Input key={index} {...context} />
-      case types.VIDEO_MODULE:
+      case ModuleTypes.VIDEO_MODULE:
         return <Video key={index} {...context} />
-      case types.Photo:
+      case ModuleTypes.PHOTO_MODULE:
         return <Photo key={index} {...context} />
       default:
         return null

@@ -2,7 +2,7 @@ import React from 'react'
 import Rnd from 'react-rnd'
 import {
   INPUT_MODULE,
-  VEDIO_MODULE,
+  VIDEO_MODULE,
   TEXT_MODULE,
   PHOTO_MODULE,
   IMG_MODULE,
@@ -13,7 +13,7 @@ import 'animate.css'
 const Vedio = (attribute: Object) => {
   return (
     <video
-      src={attribute.vedioUrl}
+      src={attribute.videoUrl}
       controls="controls"
       style={{
         width: attribute.width + 'px',
@@ -115,7 +115,7 @@ class Com extends React.Component<Props> {
           <div id="inner" style={innerAnimation}>
             {attribute.content}
           </div>
-        ) : attribute.type === VEDIO_MODULE ? (
+        ) : attribute.type === VIDEO_MODULE ? (
           <Vedio {...attribute} />
         ) : null}
       </Rnd>

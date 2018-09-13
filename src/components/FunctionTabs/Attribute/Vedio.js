@@ -21,11 +21,11 @@ const Vedio = ({
           onChange={e => {
             let updatedAttr = {
               ...focusCom.attribute,
-              vedioUrl: e.target.value
+              videoUrl: e.target.value
             }
             updateCom(focusCom.id, updatedAttr)
           }}
-          value={focusCom.attribute.vedioUrl}
+          value={focusCom.attribute.videoUrl}
         />
       </div>
     )

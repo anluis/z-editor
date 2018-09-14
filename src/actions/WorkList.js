@@ -9,7 +9,7 @@ export const fetchWorksSuccess = items => ({
   payload: { items }
 })
 
-export const fetchWorksError = error => ({
+export const fetchWorksFailure = error => ({
   type: types.FETCH_WORKS_FAILURE,
   payload: { error }
 })

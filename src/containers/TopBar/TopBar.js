@@ -1,6 +1,11 @@
 // 顶部功能区域
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/Coms'
+import {
+  saveWorkBegin,
+  saveWorkSuccess,
+  saveWorkFailure
+} from '../../actions/Work'
 import { undo, redo } from '../../actions/index'
 import { changeWorkSettings } from '../../actions/Status'
 import TopBar from '../../components/TopBar/TopBar'
@@ -64,6 +69,15 @@ const mapDispatchToProps = dispatch => ({
   },
   changeWorkSettingVisible: (status, payload) => {
     dispatch(changeWorkSettings(status, payload))
+  },
+  saveWorkBegin: () => {
+    dispatch(saveWorkBegin())
+  },
+  saveWorkSuccess: () => {
+    dispatch(saveWorkSuccess())
+  },
+  saveWorkFailure: () => {
+    dispatch(saveWorkFailure())
   }
 })
 

@@ -22,8 +22,8 @@ const LoadableInputComponent = Loadable({
   loading: () => <div>Loading</div>
 })
 
-const LoadableVedioComponent = Loadable({
-  loader: () => import('./basic/Vedio'),
+const LoadableVideoComponent = Loadable({
+  loader: () => import('./basic/Video'),
   loading: () => <div>Loading</div>
 })
 
@@ -40,7 +40,7 @@ const Text = context => <LoadableTextComponent {...context} />
 
 const Input = context => <LoadableInputComponent {...context} />
 
-const Video = context => <LoadableVedioComponent {...context} />
+const Video = context => <LoadableVideoComponent {...context} />
 
 const Photo = context => <LoadablePhotoComponent {...context} />
 

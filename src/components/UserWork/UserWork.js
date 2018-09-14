@@ -13,9 +13,11 @@ class UserWork extends React.Component {
   async componentDidMount() {
     // get work by url search
     console.dir(this.props.location)
-    const res = await axios.get(
-      'http://exelook.com/client/goodsxsd/?id=1056444&mobile=13056565656&api=json'
-    )
+    const getUrl = 'http://exelook.com/client/goodsxsd/?'
+    const getParam = {}
+    const res = await axios.get(getUrl, {
+      params: { ...getParam }
+    })
     this.setState({
       coms: res,
       loading: false

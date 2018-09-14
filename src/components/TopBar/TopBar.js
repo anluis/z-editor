@@ -3,6 +3,7 @@ import React from 'react'
 import { Button } from 'antd'
 import * as ModuleTypes from '../../constants/ModuleTypes'
 import SettingModal from './SettingModal'
+import Axios from 'axios'
 
 type Props = {
   addCom: (currentPageId: string, module: string) => void,
@@ -30,6 +31,18 @@ type Props = {
 }
 
 class TopBar extends React.Component<Props> {
+  handleWorkPublish = () => {
+    const { saveWorkBegin, saveWorkSuccess, saveWorkFailure } = this.props
+    let url = ''
+    saveWorkBegin()
+    Axios.post(url)
+      .then(r => {
+        saveWorkSuccess()
+      })
+      .catch(e => {
+        saveWorkFailure()
+      })
+  }
   render() {
     const {
       addCom,
@@ -41,6 +54,7 @@ class TopBar extends React.Component<Props> {
       workSettings,
       changeWorkSettingVisible
     } = this.props
+
     return (
       <div className="function-area">
         <SettingModal
@@ -116,7 +130,14 @@ class TopBar extends React.Component<Props> {
             >
               设置
             </Button>
-            <Button className="pub-item">发布</Button>
+            <Button
+              className="pub-item"
+              onClick={() => {
+                this.handleWorkPublish()
+              }}
+            >
+              发布
+            </Button>
           </div>
         </div>
       </div>

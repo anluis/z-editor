@@ -1,7 +1,12 @@
 import React from 'react'
 
 class Image extends React.Component {
-  processAttr() {}
+  processAttr(attrs) {
+    for (let item in attrs) {
+      if (item.includes()) {
+      }
+    }
+  }
 
   render() {
     const { attribute } = this.props
@@ -38,7 +43,8 @@ class Image extends React.Component {
       letterSpacing: attribute.letterSpacing + 'em',
       wordBreak: 'break-all'
     }
-
+    // 遍历所有attr的属性
+    // 转化数值、字符串为css属性
     return (
       <div style={outStyle}>
         <div style={inStyle}>{attribute.context}</div>

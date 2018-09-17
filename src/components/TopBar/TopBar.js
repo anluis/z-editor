@@ -31,10 +31,11 @@ type Props = {
 }
 
 class TopBar extends React.Component<Props> {
-  handleWorkPublish = () => {
+  handleWorkPublish = tree => {
     const { saveWorkBegin, saveWorkSuccess, saveWorkFailure } = this.props
     let url = ''
     saveWorkBegin()
+    console.dir(tree)
     Axios.post(url)
       .then(r => {
         saveWorkSuccess()
@@ -52,7 +53,8 @@ class TopBar extends React.Component<Props> {
       canRedo,
       canUndo,
       workSettings,
-      changeWorkSettingVisible
+      changeWorkSettingVisible,
+      myWorkTree
     } = this.props
 
     return (
@@ -133,7 +135,7 @@ class TopBar extends React.Component<Props> {
             <Button
               className="pub-item"
               onClick={() => {
-                this.handleWorkPublish()
+                this.handleWorkPublish(myWorkTree)
               }}
             >
               发布

@@ -6,8 +6,8 @@ class UserWork extends React.Component {
   constructor() {
     super()
     this.state = {
-      loading: true,
-      coms: null
+      mywork: null,
+      loading: true
     }
   }
   async componentDidMount() {
@@ -19,14 +19,21 @@ class UserWork extends React.Component {
       params: { ...getParam }
     })
     this.setState({
-      coms: res,
+      mywork: res,
       loading: false
     })
   }
   render() {
-    const { loading, coms } = this.state
+    const { loading, mywork } = this.state
 
-    return loading ? <div>loading</div> : <Template components={coms} />
+    const comList = mywork.comList
+    const pageList = mywork.pageList
+
+    return loading ? (
+      <div>loading</div>
+    ) : (
+      <Template comList={comList} pageList={pageList} />
+    )
   }
 }
 

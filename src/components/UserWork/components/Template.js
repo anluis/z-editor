@@ -1,6 +1,7 @@
 import React from 'react'
 import Loadable from 'react-loadable'
 import * as ModuleTypes from '../../../constants/ModuleTypes'
+import '../../../assets/style/userPage.less'
 
 const LoadableImageComponent = Loadable({
   loader: () => import('./basic/Image'),
@@ -63,12 +64,38 @@ class Template extends React.Component {
         return null
     }
   }
+
+  handleWorkSettings(s) {
+    document.title = s.title
+  }
+
   render() {
-    const { components } = this.props
-    const allComponents = components.map((context, index) => {
+    const sortByOrder = (items: Array<any>, order: Array<number>) => {
+      let result = []
+      order.forEach(e => {
+        let r = items.find(item => item.id === e)
+        if (r !== undefined) {
+          result.push(r)
+        }
+      })
+      return result
+    }
+    const { comList, pageList, status } = this.props
+    const allComponents = sortByOrder(comList, pageList.order)
+    const renderComponents = allComponents.map((context, index) => {
       return this.renderComponent(context, index)
     })
-    return <div>{allComponents}</div>
+    const bindStyle = {
+      height: window.innerHeight,
+      width: '100%'
+    }
+    // set workSettings
+    this.handleWorkSettings(status)
+    return (
+      <div style={bindStyle} className="user-root">
+        {renderComponents}
+      </div>
+    )
   }
 }
 

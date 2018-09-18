@@ -10,13 +10,19 @@ class Image extends React.Component {
 
   render() {
     const { attribute } = this.props
+    console.dir(attribute)
 
     // need to process Styles
     const outStyle = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      width: attribute.width + 'px',
+      height: attribute.height + 'px',
+      position: 'absolute',
+      left: (attribute.x / 375) * window.innerWidth + 'px',
+      top: (attribute.y / 667) * window.innerWidth + 'px'
     }
 
     const inStyle = {

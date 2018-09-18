@@ -1,7 +1,6 @@
 import React from 'react'
-import axios from 'axios'
 import Template from './components/Template'
-
+import data from './mockData'
 class UserWork extends React.Component {
   constructor() {
     super()
@@ -12,22 +11,20 @@ class UserWork extends React.Component {
   }
   async componentDidMount() {
     // get work by url search
-    console.dir(this.props.location)
-    const getUrl = 'http://exelook.com/client/goodsxsd/?'
-    const getParam = {}
-    const res = await axios.get(getUrl, {
-      params: { ...getParam }
-    })
+    const res = data
     this.setState({
-      mywork: res,
+      mywork: res.results[0],
       loading: false
     })
   }
   render() {
     const { loading, mywork } = this.state
-
-    const comList = mywork.comList
-    const pageList = mywork.pageList
+    let comList,
+      pageList = []
+    if (!loading) {
+      comList = mywork.comList
+      pageList = mywork.pageList[0]
+    }
 
     return loading ? (
       <div>loading</div>

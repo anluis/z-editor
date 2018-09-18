@@ -47,7 +47,7 @@ const Photo = context => <LoadablePhotoComponent {...context} />
 
 class Template extends React.Component {
   renderComponent(context, index) {
-    switch (context.type) {
+    switch (context.attribute.type) {
       case ModuleTypes.IMG_MODULE:
         return <ImageComponent key={index} {...context} />
       case ModuleTypes.BACKGROUND_MODULE:
@@ -66,7 +66,7 @@ class Template extends React.Component {
   }
 
   handleWorkSettings(s) {
-    document.title = s.title
+    document.title = s.settings.payload.name
   }
 
   render() {
@@ -80,7 +80,7 @@ class Template extends React.Component {
       })
       return result
     }
-    const { comList, pageList, status } = this.props
+    const { comList, pageList } = this.props
     const allComponents = sortByOrder(comList, pageList.order)
     const renderComponents = allComponents.map((context, index) => {
       return this.renderComponent(context, index)
@@ -90,7 +90,7 @@ class Template extends React.Component {
       width: '100%'
     }
     // set workSettings
-    this.handleWorkSettings(status)
+    this.handleWorkSettings(pageList)
     return (
       <div style={bindStyle} className="user-root">
         {renderComponents}

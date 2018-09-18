@@ -33,10 +33,13 @@ type Props = {
 class TopBar extends React.Component<Props> {
   handleWorkPublish = tree => {
     const { saveWorkBegin, saveWorkSuccess, saveWorkFailure } = this.props
-    let url = ''
     saveWorkBegin()
-    console.dir(tree)
-    Axios.post(url)
+
+    const url = ''
+    const rq_header = {
+      headers: {}
+    }
+    Axios.post(url, tree, rq_header)
       .then(r => {
         saveWorkSuccess()
       })

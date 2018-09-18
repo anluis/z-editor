@@ -1,6 +1,7 @@
 import React from 'react'
 import Loadable from 'react-loadable'
 import * as ModuleTypes from '../../../constants/ModuleTypes'
+import '../../../assets/style/userPage.less'
 
 const LoadableImageComponent = Loadable({
   loader: () => import('./basic/Image'),
@@ -46,7 +47,7 @@ const Photo = context => <LoadablePhotoComponent {...context} />
 
 class Template extends React.Component {
   renderComponent(context, index) {
-    switch (context.type) {
+    switch (context.attribute.type) {
       case ModuleTypes.IMG_MODULE:
         return <ImageComponent key={index} {...context} />
       case ModuleTypes.BACKGROUND_MODULE:
@@ -63,12 +64,38 @@ class Template extends React.Component {
         return null
     }
   }
+
+  handleWorkSettings(s) {
+    document.title = s.settings.payload.name
+  }
+
   render() {
-    const { components } = this.props
-    const allComponents = components.map((context, index) => {
+    const sortByOrder = (items: Array<any>, order: Array<number>) => {
+      let result = []
+      order.forEach(e => {
+        let r = items.find(item => item.id === e)
+        if (r !== undefined) {
+          result.push(r)
+        }
+      })
+      return result
+    }
+    const { comList, pageList } = this.props
+    const allComponents = sortByOrder(comList, pageList.order)
+    const renderComponents = allComponents.map((context, index) => {
       return this.renderComponent(context, index)
     })
-    return <div>{allComponents}</div>
+    const bindStyle = {
+      height: window.innerHeight,
+      width: '100%'
+    }
+    // set workSettings
+    this.handleWorkSettings(pageList)
+    return (
+      <div style={bindStyle} className="user-root">
+        {renderComponents}
+      </div>
+    )
   }
 }
 

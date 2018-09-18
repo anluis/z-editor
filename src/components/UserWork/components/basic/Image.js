@@ -1,17 +1,28 @@
 import React from 'react'
 
 class Image extends React.Component {
-  processAttr() {}
+  processAttr(attrs) {
+    for (let item in attrs) {
+      if (item.includes()) {
+      }
+    }
+  }
 
   render() {
     const { attribute } = this.props
+    console.dir(attribute)
 
     // need to process Styles
     const outStyle = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
+      width: attribute.width + 'px',
+      height: attribute.height + 'px',
+      position: 'absolute',
+      left: (attribute.x / 375) * window.innerWidth + 'px',
+      top: (attribute.y / 667) * window.innerWidth + 'px'
     }
 
     const inStyle = {
@@ -38,7 +49,8 @@ class Image extends React.Component {
       letterSpacing: attribute.letterSpacing + 'em',
       wordBreak: 'break-all'
     }
-
+    // 遍历所有attr的属性
+    // 转化数值、字符串为css属性
     return (
       <div style={outStyle}>
         <div style={inStyle}>{attribute.context}</div>

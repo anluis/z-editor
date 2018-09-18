@@ -32,7 +32,8 @@ const mapStateToProps = state => {
     canRedo: state.mywork.future.length > 0,
     canUndo: state.mywork.past.length > 0,
     project: state.mywork.present.status.project,
-    workSettings: state.mywork.present.status.workSettings
+    workSettings: state.mywork.present.status.workSettings,
+    myWorkTree: state.mywork.present
   }
 }
 

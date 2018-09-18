@@ -1,32 +1,36 @@
 import React from 'react'
-import axios from 'axios'
 import Template from './components/Template'
-
+import data from './mockData'
 class UserWork extends React.Component {
   constructor() {
     super()
     this.state = {
-      loading: true,
-      coms: null
+      mywork: null,
+      loading: true
     }
   }
   async componentDidMount() {
     // get work by url search
-    console.dir(this.props.location)
-    const getUrl = 'http://exelook.com/client/goodsxsd/?'
-    const getParam = {}
-    const res = await axios.get(getUrl, {
-      params: { ...getParam }
-    })
+    const res = data
     this.setState({
-      coms: res,
+      mywork: res.results[0],
       loading: false
     })
   }
   render() {
-    const { loading, coms } = this.state
+    const { loading, mywork } = this.state
+    let comList,
+      pageList = []
+    if (!loading) {
+      comList = mywork.comList
+      pageList = mywork.pageList[0]
+    }
 
-    return loading ? <div>loading</div> : <Template components={coms} />
+    return loading ? (
+      <div>loading</div>
+    ) : (
+      <Template comList={comList} pageList={pageList} />
+    )
   }
 }
 

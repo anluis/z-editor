@@ -2,35 +2,36 @@ import React from 'react'
 import Loadable from 'react-loadable'
 import * as ModuleTypes from '../../../constants/ModuleTypes'
 import '../../../assets/style/userPage.less'
+import Loading from './common/Loading'
 
 const LoadableImageComponent = Loadable({
   loader: () => import('./basic/Image'),
-  loading: () => <div>Loading...</div>
+  loading: () => <Loading />
 })
 
 const LoadableBackgroundComponent = Loadable({
   loader: () => import('./basic/Background'),
-  loading: () => <div>Loading</div>
+  loading: () => <Loading />
 })
 
 const LoadableTextComponent = Loadable({
   loader: () => import('./basic/Text'),
-  loading: () => <div>Loading</div>
+  loading: () => <Loading />
 })
 
 const LoadableInputComponent = Loadable({
   loader: () => import('./basic/Input'),
-  loading: () => <div>Loading</div>
+  loading: () => <Loading />
 })
 
 const LoadableVideoComponent = Loadable({
   loader: () => import('./basic/Video'),
-  loading: () => <div>Loading</div>
+  loading: () => <Loading />
 })
 
 const LoadablePhotoComponent = Loadable({
   loader: () => import('./basic/Photo'),
-  loading: () => <div>Loading</div>
+  loading: () => <Loading />
 })
 
 const ImageComponent = context => <LoadableImageComponent {...context} />

@@ -1,5 +1,5 @@
 // 参考Store结构
-const aWork = {
+const myWork = {
   comList: [
     {
       id: 0,
@@ -32,3 +32,4 @@ const aWork = {
     }
   }
 }
+export default myWork

@@ -10,9 +10,7 @@ class Image extends React.Component {
 
   render() {
     const { attribute } = this.props
-    console.dir(attribute)
 
-    // need to process Styles
     const outStyle = {
       display: 'flex',
       alignItems: 'center',
@@ -22,7 +20,7 @@ class Image extends React.Component {
       height: attribute.height + 'px',
       position: 'absolute',
       left: (attribute.x / 375) * window.innerWidth + 'px',
-      top: (attribute.y / 667) * window.innerWidth + 'px'
+      top: (attribute.y / 667) * window.innerHeight + 'px'
     }
 
     const inStyle = {

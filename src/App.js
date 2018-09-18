@@ -7,6 +7,7 @@ import './assets/style/App.less'
 import 'normalize.css'
 
 const App = () => {
+  document.title = 'H5制作系统'
   return (
     <div className="main-wrap">
       <div className="main-top">

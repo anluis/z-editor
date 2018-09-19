@@ -69,10 +69,10 @@ class TopBar extends React.Component<Props> {
         <div className="function-head">
           此处缺logo
           <Button disabled={!canUndo} onClick={undo}>
-            Undo
+            撤销
           </Button>
           <Button disabled={!canRedo} onClick={redo}>
-            Redo
+            重做
           </Button>
         </div>
         <div className="function-funcs">

@@ -1,4 +1,4 @@
-import * as ModuleTypes from '../../constants/ModuleTypes'
+import * as ModuleTypes from './ModuleTypes'
 
 export const backgroundModule = {
   name: '背景',

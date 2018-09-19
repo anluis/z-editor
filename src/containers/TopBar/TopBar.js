@@ -16,7 +16,7 @@ import {
   videoModule,
   textModule,
   photoModule
-} from '../../components/Module/Module'
+} from '../../constants/ModuleDefaultSettings'
 import {
   IMG_MODULE,
   BACKGROUND_MODULE,

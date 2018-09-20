@@ -7,7 +7,7 @@ import Link from './Link'
 import Extend from './Extend'
 import Opacity from './Opacity'
 import Text from './Text'
-import Vedio from './Vedio'
+import Video from './Video'
 import Textarea from './Textarea'
 import {
   BACKGROUND_MODULE,
@@ -48,69 +48,7 @@ class Attribute extends React.Component<Props> {
     if (focusCom === undefined) {
       return null
     } else {
-      const opacityDisplay = {
-        display: 'none'
-      }
-      const linkDisplay = {
-        display: 'none'
-      }
-      const imgDisplay = {
-        display: 'none'
-      }
-      const extendDisplay = {
-        display: 'none'
-      }
-      const inputDisplay = {
-        display: 'none'
-      }
-      const videoDisplay = {
-        display: 'none'
-      }
-      const textDisplay = {
-        display: 'none'
-      }
-      if (focusCom.attribute.type !== BACKGROUND_MODULE) {
-        extendDisplay.display = 'block'
-      } else {
-        extendDisplay.display = 'none'
-      }
-
-      if (focusCom.attribute.type === BACKGROUND_MODULE) {
-        opacityDisplay.display = 'block'
-      } else {
-        opacityDisplay.display = 'none'
-      }
-
-      if (focusCom.attribute.type === IMG_MODULE) {
-        linkDisplay.display = 'block'
-      } else {
-        linkDisplay.display = 'none'
-      }
-
-      if (
-        focusCom.attribute.type === IMG_MODULE ||
-        focusCom.attribute.type === BACKGROUND_MODULE
-      ) {
-        imgDisplay.display = 'block'
-      } else {
-        imgDisplay.display = 'none'
-      }
-      if (focusCom.attribute.type === VIDEO_MODULE) {
-        videoDisplay.display = 'block'
-      } else {
-        videoDisplay.display = 'none'
-      }
-
-      if (focusCom.attribute.type === INPUT_MODULE) {
-        inputDisplay.display = 'block'
-      } else {
-        inputDisplay.display = 'none'
-      }
-      if (focusCom.attribute.type === TEXT_MODULE) {
-        textDisplay.display = 'block'
-      } else {
-        textDisplay.display = 'none'
-      }
+      const type = focusCom.attribute.type
 
       return (
         <div className="attributes">
@@ -130,7 +68,7 @@ class Attribute extends React.Component<Props> {
                 value={focusCom.attribute.name}
               />
             </div>
-            <div className="attr-item background" style={opacityDisplay}>
+            <div className="attr-item background">
               纯色背景:
               <SketchPicker
                 color={focusCom.attribute.background}
@@ -144,42 +82,27 @@ class Attribute extends React.Component<Props> {
                 }}
               />
             </div>
-            <Text
-              updateCom={updateCom}
-              focusCom={focusCom}
-              style={inputDisplay}
-            />
-            <Textarea
-              updateCom={updateCom}
-              focusCom={focusCom}
-              style={textDisplay}
-            />
-            <Image
-              updateCom={updateCom}
-              focusCom={focusCom}
-              style={imgDisplay}
-            />
-            <Vedio
-              updateCom={updateCom}
-              focusCom={focusCom}
-              style={videoDisplay}
-            />
-            <Link
-              updateCom={updateCom}
-              focusCom={focusCom}
-              style={linkDisplay}
-            />
-            <Opacity
-              updateCom={updateCom}
-              focusCom={focusCom}
-              style={opacityDisplay}
-            />
+            {type === INPUT_MODULE && (
+              <Text updateCom={updateCom} focusCom={focusCom} />
+            )}
+            {type === TEXT_MODULE && (
+              <Textarea updateCom={updateCom} focusCom={focusCom} />
+            )}
+            {(type === IMG_MODULE || type === BACKGROUND_MODULE) && (
+              <Image updateCom={updateCom} focusCom={focusCom} />
+            )}
+            {type === VIDEO_MODULE && (
+              <Video updateCom={updateCom} focusCom={focusCom} />
+            )}
+            {type === IMG_MODULE && (
+              <Link updateCom={updateCom} focusCom={focusCom} />
+            )}
+
+            <Opacity updateCom={updateCom} focusCom={focusCom} />
           </div>
-          <Extend
-            updateCom={updateCom}
-            focusCom={focusCom}
-            style={extendDisplay}
-          />
+          {type !== BACKGROUND_MODULE && (
+            <Extend updateCom={updateCom} focusCom={focusCom} />
+          )}
           <div className="attr-item delete">
             <div>
               <Button

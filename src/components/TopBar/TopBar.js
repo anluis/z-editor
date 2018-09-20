@@ -27,11 +27,15 @@ type Props = {
       name: string,
       desc: string
     }
-  ) => void
+  ) => void,
+  saveWorkBegin: () => void,
+  saveWorkSuccess: () => void,
+  saveWorkFailure: () => void,
+  myWorkTree: Object
 }
 
 class TopBar extends React.Component<Props> {
-  handleWorkPublish = tree => {
+  handleWorkPublish = (tree: Object) => {
     const { saveWorkBegin, saveWorkSuccess, saveWorkFailure } = this.props
     saveWorkBegin()
     const url = ''
@@ -123,7 +127,7 @@ class TopBar extends React.Component<Props> {
               addCom(currentPageId, ModuleTypes.PHOTO_MODULE)
             }}
           >
-            照片边框
+            提取位置
           </div>
         </div>
         <div className="function-publish">

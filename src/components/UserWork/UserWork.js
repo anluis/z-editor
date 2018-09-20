@@ -1,13 +1,9 @@
 import React from 'react'
 import Template from './components/Template'
-<<<<<<< HEAD
-import data from './mockData'
-=======
 import queryString from 'query-string'
 import Axios from 'axios'
 import { $wechat, isInWechat } from './services/index'
 
->>>>>>> local-upload-review
 class UserWork extends React.Component {
   constructor() {
     super()
@@ -35,7 +31,7 @@ class UserWork extends React.Component {
     const obj = {
       objectId: values.wid
     }
-    const url = ''
+    const url = '' + JSON.stringify(obj)
     const rq_header = {
       headers: {}
     }

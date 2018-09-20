@@ -10,7 +10,7 @@ import {
 } from '../../constants/ModuleTypes'
 import 'animate.css'
 
-const Vedio = (attribute: Object) => {
+const Video = (attribute: Object) => {
   return (
     <video
       src={attribute.videoUrl}
@@ -116,7 +116,7 @@ class Com extends React.Component<Props> {
             {attribute.content}
           </div>
         ) : attribute.type === VIDEO_MODULE ? (
-          <Vedio {...attribute} />
+          <Video {...attribute} />
         ) : null}
       </Rnd>
     )

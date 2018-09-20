@@ -1,15 +1,12 @@
 import React from 'react'
 import Rnd from 'react-rnd'
 import {
-  INPUT_MODULE,
   VIDEO_MODULE,
   TEXT_MODULE,
-  PHOTO_MODULE,
-  IMG_MODULE,
-  BACKGROUND_MODULE
+  LOTTIE_MODULE
 } from '../../constants/ModuleTypes'
 import 'animate.css'
-
+import Lottie from './Coms/Lottie'
 const Video = (attribute: Object) => {
   return (
     <video
@@ -41,7 +38,8 @@ class Com extends React.Component<Props> {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: 'transparent',
-      zIndex: zIndex
+      zIndex: zIndex,
+      overflow: 'hidden'
     }
 
     const innerAnimation = {
@@ -107,17 +105,15 @@ class Com extends React.Component<Props> {
           focusCom(id)
         }}
       >
-        {attribute.type === INPUT_MODULE ||
-        attribute.type === TEXT_MODULE ||
-        attribute.type === PHOTO_MODULE ||
-        attribute.type === IMG_MODULE ||
-        attribute.type === BACKGROUND_MODULE ? (
+        {attribute.type === VIDEO_MODULE ? (
+          <Video {...attribute} />
+        ) : attribute.type === LOTTIE_MODULE ? (
+          <Lottie {...attribute} />
+        ) : (
           <div id="inner" style={innerAnimation}>
             {attribute.content}
           </div>
-        ) : attribute.type === VIDEO_MODULE ? (
-          <Video {...attribute} />
-        ) : null}
+        )}
       </Rnd>
     )
   }

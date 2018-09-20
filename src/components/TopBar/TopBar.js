@@ -129,6 +129,14 @@ class TopBar extends React.Component<Props> {
           >
             提取位置
           </div>
+          <div
+            className="func-item"
+            onClick={() => {
+              addCom(currentPageId, ModuleTypes.LOTTIE_MODULE)
+            }}
+          >
+            动画
+          </div>
         </div>
         <div className="function-publish">
           <div>

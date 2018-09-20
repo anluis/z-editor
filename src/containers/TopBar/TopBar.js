@@ -15,7 +15,8 @@ import {
   inputModule,
   videoModule,
   textModule,
-  photoModule
+  photoModule,
+  lottieModule
 } from '../../constants/ModuleDefaultSettings'
 import {
   IMG_MODULE,
@@ -23,7 +24,8 @@ import {
   INPUT_MODULE,
   VIDEO_MODULE,
   TEXT_MODULE,
-  PHOTO_MODULE
+  PHOTO_MODULE,
+  LOTTIE_MODULE
 } from '../../constants/ModuleTypes'
 
 const mapStateToProps = state => {
@@ -57,6 +59,9 @@ const mapDispatchToProps = dispatch => ({
         break
       case PHOTO_MODULE:
         dispatch(addCom(photoModule, targetPageId, moduleType))
+        break
+      case LOTTIE_MODULE:
+        dispatch(addCom(lottieModule, targetPageId, moduleType))
         break
       default:
         break

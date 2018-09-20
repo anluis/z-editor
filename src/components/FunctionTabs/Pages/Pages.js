@@ -11,7 +11,8 @@ type Props = {
   focusPage: (id: string) => void,
   editPageSettings: (visible: boolean, payload: Object) => void,
   targetPageId: string,
-  deletePage: (id: string) => void
+  deletePage: (id: string) => void,
+  order: Array<number>
 }
 
 const makePagesSortByOrder = (layers, order) => {

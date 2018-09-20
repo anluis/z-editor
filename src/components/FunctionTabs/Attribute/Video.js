@@ -6,8 +6,7 @@ type Props = {
   focusCom: (id: string) => void,
   updateCom: (id: string, attr: Object) => void
 }
-
-class Image extends React.Component<Props> {
+class Video extends React.Component<Props> {
   render() {
     const { focusCom, updateCom } = this.props
     if (focusCom === undefined) {
@@ -15,20 +14,20 @@ class Image extends React.Component<Props> {
     } else {
       return (
         <div className="attr-item img">
-          图片:
+          视频:
           <Input
             onChange={e => {
               let updatedAttr = {
                 ...focusCom.attribute,
-                imgUrl: e.target.value
+                videoUrl: e.target.value
               }
               updateCom(focusCom.id, updatedAttr)
             }}
-            value={focusCom.attribute.imgUrl}
+            value={focusCom.attribute.videoUrl}
           />
         </div>
       )
     }
   }
 }
-export default Image
+export default Video

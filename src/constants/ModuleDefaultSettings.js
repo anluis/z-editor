@@ -102,13 +102,31 @@ export const textModule = {
 }
 
 export const photoModule = {
+  type: ModuleTypes.PHOTO_MODULE,
   name: '照片',
   content: '我是照片',
   height: 400,
   width: 250,
   x: 0,
   y: 0,
-  type: ModuleTypes.PHOTO_MODULE,
+  borderWidth: 1,
+  background: 'none',
+  borderColor: '#08a1ef',
+  borderStyle: 'solid',
+  borderRadius: 0,
+  animationName: 'none',
+  animationDuration: 1,
+  animationDelay: 0,
+  animationIterationCount: 1
+}
+
+export const lottieModule = {
+  type: ModuleTypes.LOTTIE_MODULE,
+  name: 'Lottie',
+  height: 400,
+  width: 250,
+  x: 0,
+  y: 0,
   borderWidth: 1,
   background: 'none',
   borderColor: '#08a1ef',

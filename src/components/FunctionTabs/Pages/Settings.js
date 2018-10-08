@@ -107,6 +107,18 @@ class Settings extends React.Component<Props, State> {
             }}
           />
         </div>
+        <div className="attr-item" style={{ marginBottom: 20 }}>
+          是否为长页面:
+          <Input
+            defaultValue={payload.isLongPage}
+            maxLength="12"
+            onChange={e => {
+              this.setState({
+                wxShareImgUrl: e.target.value
+              })
+            }}
+          />
+        </div>
       </Modal>
     )
   }

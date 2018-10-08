@@ -94,9 +94,8 @@ class Attribute extends React.Component<Props> {
             {type === VIDEO_MODULE && (
               <Video updateCom={updateCom} focusCom={focusCom} />
             )}
-            {type === IMG_MODULE && (
-              <Link updateCom={updateCom} focusCom={focusCom} />
-            )}
+
+            <Link updateCom={updateCom} focusCom={focusCom} />
 
             <Opacity updateCom={updateCom} focusCom={focusCom} />
           </div>

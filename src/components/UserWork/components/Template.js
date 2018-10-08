@@ -3,6 +3,7 @@ import Loadable from 'react-loadable'
 import * as ModuleTypes from '../../../constants/ModuleTypes'
 import '../../../assets/style/userPage.less'
 import Loading from './common/Loading'
+import Jump from '../services/utils/jump'
 
 const LoadableImageComponent = Loadable({
   loader: () => import('./basic/Image'),
@@ -50,17 +51,53 @@ class Template extends React.Component {
   renderComponent(context, index) {
     switch (context.attribute.type) {
       case ModuleTypes.IMG_MODULE:
-        return <ImageComponent key={index} {...context} />
+        return (
+          <ImageComponent
+            key={index}
+            {...context}
+            onClick={Jump(context.attribute.link)}
+          />
+        )
       case ModuleTypes.BACKGROUND_MODULE:
-        return <Background key={index} {...context} />
+        return (
+          <Background
+            key={index}
+            {...context}
+            onClick={Jump(context.attribute.link)}
+          />
+        )
       case ModuleTypes.TEXT_MODULE:
-        return <Text key={index} {...context} />
+        return (
+          <Text
+            key={index}
+            {...context}
+            onClick={Jump(context.attribute.link)}
+          />
+        )
       case ModuleTypes.INPUT_MODULE:
-        return <Input key={index} {...context} />
+        return (
+          <Input
+            key={index}
+            {...context}
+            onClick={Jump(context.attribute.link)}
+          />
+        )
       case ModuleTypes.VIDEO_MODULE:
-        return <Video key={index} {...context} />
+        return (
+          <Video
+            key={index}
+            {...context}
+            onClick={Jump(context.attribute.link)}
+          />
+        )
       case ModuleTypes.PHOTO_MODULE:
-        return <Photo key={index} {...context} />
+        return (
+          <Photo
+            key={index}
+            {...context}
+            onClick={Jump(context.attribute.link)}
+          />
+        )
       default:
         return null
     }

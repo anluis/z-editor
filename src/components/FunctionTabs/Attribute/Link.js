@@ -14,7 +14,7 @@ class Link extends React.Component<Props> {
     } else {
       return (
         <div className="attr-item link">
-          跳转链接:
+          跳转链接(链接或者页码，页码从0开始):
           <Input
             onChange={e => {
               let updatedAttr = {

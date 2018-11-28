@@ -7,7 +7,7 @@ import {
   UPDATE_PAGE_ORDER,
   EDIT_PAGE_SETTINGS,
   DELETE_PAGE
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
 type State = Array<Object>

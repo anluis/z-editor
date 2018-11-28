@@ -5,8 +5,8 @@ import {
   addPage,
   editPageSettings,
   deletePage
-} from '../../../actions/Pages'
-import Pages from '../../../components/FunctionTabs/Pages/Pages'
+} from '@/actions/Pages'
+import Pages from '@/components/FunctionTabs/Pages/Pages'
 
 const mapStateToProps = state => ({
   pages: state.mywork.present.pageList,

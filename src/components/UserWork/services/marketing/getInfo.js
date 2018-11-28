@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const MARKETING_API = 'http://sapi.xingstation.com/api'
-const PLAY_RESULT_API = '/open/play/playResults/'
-const IMAGE_API = 'http://exelook.com:8010/goodsxsd/?api=json&id='
+const MARKETING_API = ''
+const PLAY_RESULT_API = ''
+const IMAGE_API = ''
 
 const getPlayResultById = id => {
   return new Promise((resolve, reject) => {

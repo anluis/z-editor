@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import UserWork from '../../components/UserWork/UserWork'
+import UserWork from '@/components/UserWork/UserWork'
 
 const mapStateToProps = state => {
   return {}

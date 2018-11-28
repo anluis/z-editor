@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { updateCom, deleteCom } from '../../../actions/Coms'
-import Attribute from '../../../components/FunctionTabs/Attribute/Attribute'
+import { updateCom, deleteCom } from '@/actions/Coms'
+import Attribute from '@/components/FunctionTabs/Attribute/Attribute'
 
 const mapStateToProps = state => ({
   focusCom: state.mywork.present.comList.find(

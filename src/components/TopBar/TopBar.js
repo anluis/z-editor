@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { Button } from 'antd'
-import * as ModuleTypes from '../../constants/ModuleTypes'
+import * as ModuleTypes from '@/constants/ModuleTypes'
 import SettingModal from './SettingModal'
 import Axios from 'axios'
 

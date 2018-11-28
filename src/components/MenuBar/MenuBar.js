@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
-import WorkManage from '../../containers/MenuBar/WorkManage/WorkManage'
-import Template from '../../containers/MenuBar/Template/Template'
-import Material from '../../containers/MenuBar/Material/Material'
+import WorkManage from '@/containers/MenuBar/WorkManage/WorkManage'
+import Template from '@/containers/MenuBar/Template/Template'
+import Material from '@/containers/MenuBar/Material/Material'
 
 type State = {
   isExpand: boolean,

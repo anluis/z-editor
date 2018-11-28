@@ -9,7 +9,7 @@ import {
   SWITCH_PAGE_SETTINGS,
   CHANGE_WORK_SETTINGS,
   DELETE_PAGE
-} from '../../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 import { arrayMove } from 'react-sortable-hoc'
 
 type State = {

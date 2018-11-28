@@ -3,7 +3,7 @@ import {
   FETCH_WORKS_BEGIN,
   FETCH_WORKS_SUCCESS,
   FETCH_WORKS_FAILURE
-} from '../../constants/ActionTypes'
+} from '@/constants/ActionTypes'
 type Action = FETCH_WORKS_BEGIN | FETCH_WORKS_SUCCESS | FETCH_WORKS_FAILURE
 type State = Array<Object>
 

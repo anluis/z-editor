@@ -1,7 +1,7 @@
 import React from 'react'
 import Loadable from 'react-loadable'
-import * as ModuleTypes from '../../../constants/ModuleTypes'
-import '../../../assets/style/userPage.less'
+import * as ModuleTypes from '@/constants/ModuleTypes'
+import '@/assets/style/userPage.less'
 import Loading from './common/Loading'
 import Jump from '../services/utils/jump'
 

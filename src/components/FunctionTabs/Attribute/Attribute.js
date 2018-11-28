@@ -15,7 +15,7 @@ import {
   VIDEO_MODULE,
   INPUT_MODULE,
   TEXT_MODULE
-} from '../../../constants/ModuleTypes'
+} from '@/constants/ModuleTypes'
 
 const confirm = Modal.confirm
 

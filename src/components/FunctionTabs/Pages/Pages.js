@@ -3,6 +3,7 @@ import React from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { Button } from 'antd'
 import Settings from './Settings'
+import { listItemSortByOrder } from '@/utils/helpers/listItemSortByOrder'
 
 type Props = {
   pages: Array<Object>,
@@ -13,17 +14,6 @@ type Props = {
   targetPageId: string,
   deletePage: (id: string) => void,
   order: Array<number>
-}
-
-const makePagesSortByOrder = (layers, order) => {
-  let result = []
-  order.forEach(e => {
-    let r = layers.find(item => item.id === e)
-    if (r !== undefined) {
-      result.push(r)
-    }
-  })
-  return result
 }
 
 const layerItemStyle = {
@@ -110,7 +100,7 @@ class Pages extends React.Component<Props> {
       focusPage(oldIndex)
     }
 
-    const pagesSorted = makePagesSortByOrder(pages, order)
+    const pagesSorted = listItemSortByOrder(pages, order)
 
     return (
       <div>

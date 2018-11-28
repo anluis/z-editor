@@ -4,7 +4,7 @@ import {
   VIDEO_MODULE,
   TEXT_MODULE,
   LOTTIE_MODULE
-} from '../../constants/ModuleTypes'
+} from '@/constants/ModuleTypes'
 import 'animate.css'
 import Lottie from './Coms/Lottie'
 const Video = (attribute: Object) => {
@@ -40,6 +40,10 @@ class Com extends React.Component<Props> {
       backgroundColor: 'transparent',
       zIndex: zIndex,
       overflow: 'hidden'
+    }
+
+    if (attribute.type === LOTTIE_MODULE) {
+      deafultStyle.border = '1px solid red'
     }
 
     const innerAnimation = {

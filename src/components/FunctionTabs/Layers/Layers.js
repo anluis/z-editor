@@ -2,17 +2,7 @@
 import React from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { Button } from 'antd'
-
-const makeLayersSortByOrder = (layers, order) => {
-  let result = []
-  order.forEach(e => {
-    let r = layers.find(item => item.id === e)
-    if (r !== undefined) {
-      result.push(r)
-    }
-  })
-  return result
-}
+import { listItemSortByOrder } from '@/utils/helpers/listItemSortByOrder'
 
 const layerItemStyle = {
   background: '#fff',
@@ -94,12 +84,12 @@ class Layers extends React.Component<Props> {
       oldIndex,
       newIndex,
       targetPageId,
-      makeLayersSortByOrder(layers, order)[oldIndex].id
+      listItemSortByOrder(layers, order)[oldIndex].id
     )
   }
   render() {
     const { layers, order, currentComId, deleteCom, targetPageId } = this.props
-    let layersSorted = makeLayersSortByOrder(layers, order)
+    let layersSorted = listItemSortByOrder(layers, order)
     return (
       <SortableList
         items={layersSorted}

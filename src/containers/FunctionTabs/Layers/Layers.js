@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { updateComZindex, deleteCom } from '../../../actions/Coms'
-import Layers from '../../../components/FunctionTabs/Layers/Layers'
+import { updateComZindex, deleteCom } from '@/actions/Coms'
+import Layers from '@/components/FunctionTabs/Layers/Layers'
 
 const mapStateToProps = state => {
   let targetPageItem = state.mywork.present.pageList.find(

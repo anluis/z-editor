@@ -3,8 +3,8 @@ import {
   fetchWorksBegin,
   fetchWorksSuccess,
   fetchWorksFailure
-} from '../../../actions/WorkList'
-import WorkManage from '../../../components/MenuBar/WorkManage/WorkManage'
+} from '@/actions/WorkList'
+import WorkManage from '@/components/MenuBar/WorkManage/WorkManage'
 
 const mapStateToProps = state => ({})
 

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Material from '../../../components/MenuBar/Material/Material'
+import Material from '@/components/MenuBar/Material/Material'
 
 const mapStateToProps = state => ({})
 

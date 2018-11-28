@@ -1,14 +1,10 @@
 // 顶部功能区域
 import { connect } from 'react-redux'
-import { addCom } from '../../actions/Coms'
-import {
-  saveWorkBegin,
-  saveWorkSuccess,
-  saveWorkFailure
-} from '../../actions/Work'
+import { addCom } from '@/actions/Coms'
+import { saveWorkBegin, saveWorkSuccess, saveWorkFailure } from '@/actions/Work'
 import { undo, redo } from '../../actions/index'
-import { changeWorkSettings } from '../../actions/Status'
-import TopBar from '../../components/TopBar/TopBar'
+import { changeWorkSettings } from '@/actions/Status'
+import TopBar from '@/components/TopBar/TopBar'
 import {
   imageModule,
   backgroundModule,
@@ -17,7 +13,7 @@ import {
   textModule,
   photoModule,
   lottieModule
-} from '../../constants/ModuleDefaultSettings'
+} from '@/constants/ModuleDefaultSettings'
 import {
   IMG_MODULE,
   BACKGROUND_MODULE,
@@ -26,7 +22,7 @@ import {
   TEXT_MODULE,
   PHOTO_MODULE,
   LOTTIE_MODULE
-} from '../../constants/ModuleTypes'
+} from '@/constants/ModuleTypes'
 
 const mapStateToProps = state => {
   return {

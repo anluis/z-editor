@@ -1,17 +1,16 @@
 import { connect } from 'react-redux'
-import { updateCom, focusCom } from '../../actions/Coms'
-import Canvas from '../../components/Canvas/Canvas'
+import { updateCom, focusCom } from '@/actions/Coms'
+import Canvas from '@/components/Canvas/Canvas'
 
 const mapStateToProps = state => ({
-  comList: state.mywork.present.comList.filter(
-    item =>
-      state.mywork.present.pageList.find(
-        e => e.id === state.mywork.present.status.page.current
-      ) === undefined
-        ? []
-        : state.mywork.present.pageList
-            .find(e => e.id === state.mywork.present.status.page.current)
-            .order.includes(item.id)
+  comList: state.mywork.present.comList.filter(item =>
+    state.mywork.present.pageList.find(
+      e => e.id === state.mywork.present.status.page.current
+    ) === undefined
+      ? []
+      : state.mywork.present.pageList
+          .find(e => e.id === state.mywork.present.status.page.current)
+          .order.includes(item.id)
   ),
   currentCom: state.mywork.present.pageList.find(
     e => e.id === state.mywork.present.status.page.current

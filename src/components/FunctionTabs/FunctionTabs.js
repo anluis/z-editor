@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
-import Attribute from '../../containers/FunctionTabs/Attribute/Attribute'
-import Layers from '../../containers/FunctionTabs/Layers/Layers'
-import Pages from '../../containers/FunctionTabs/Pages/Pages'
+import Attribute from '@/containers/FunctionTabs/Attribute/Attribute'
+import Layers from '@/containers/FunctionTabs/Layers/Layers'
+import Pages from '@/containers/FunctionTabs/Pages/Pages'
 
 type State = {
   selectedItem: number

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Template from '../../../components/MenuBar/Template/Template'
+import Template from '@/components/MenuBar/Template/Template'
 
 const mapStateToProps = state => ({})
 

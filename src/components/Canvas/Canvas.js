@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import Com from './Com'
+import { listItemSortByOrder } from '@/utils/helpers/listItemSortByOrder'
 
 type Props = {
   comList: Array<any>,
@@ -18,20 +19,9 @@ class Canvas extends React.Component<Props> {
       backgroundColor: '#eef1f6'
     }
 
-    const sortByOrder = (items: Array<any>, order: Array<number>) => {
-      let result = []
-      order.forEach(e => {
-        let r = items.find(item => item.id === e)
-        if (r !== undefined) {
-          result.push(r)
-        }
-      })
-      return result
-    }
-
     const { comList, currentCom, currentPage, updateCom, focusCom } = this.props
 
-    let renderComs = sortByOrder(
+    let renderComs = listItemSortByOrder(
       comList.filter(item => currentCom.includes(item.id)),
       currentCom
     )

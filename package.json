@@ -124,5 +124,6 @@
     "babel-preset-flow": "^6.23.0",
     "eslint-plugin-html": "^4.0.5",
     "flow-bin": "^0.78.0"
-  }
+  },
+  "homepage": "."
 }

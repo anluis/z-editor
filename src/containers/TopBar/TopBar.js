@@ -2,7 +2,7 @@
 import { connect } from 'react-redux'
 import { addCom } from '@/actions/Coms'
 import { saveWorkBegin, saveWorkSuccess, saveWorkFailure } from '@/actions/Work'
-import { undo, redo } from '../../actions/index'
+import { undo, redo } from '@/actions/index'
 import { changeWorkSettings } from '@/actions/Status'
 import TopBar from '@/components/TopBar/TopBar'
 import {

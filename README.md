@@ -1,12 +1,5 @@
 ## Online Example
   <http://anluis.coding.me/static-pages>
-## Todo
-
-- **Add unit test.**<br>
-
-- **Config backend(Eggjs).**<br>
-
-- **Pack axios as a module.**<br>
 
 ## Features
 
@@ -28,6 +21,14 @@
 yarn
 yarn start
 ```
+
+## Todo
+
+- **Add unit test.**<br>
+
+- **Config backend(Eggjs).**<br>
+
+- **Pack axios as a module.**<br>
 
 ## License
 

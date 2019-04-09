@@ -26,10 +26,13 @@ const initState = [
     id: 0,
     order: [],
     settings: {
-      name: '页面-0',
-      size: {
-        width: 375,
-        height: 667
+      visible: false,
+      payload: {
+        name: '页面-0',
+        size: {
+          width: 375,
+          height: 667
+        }
       }
     }
   }

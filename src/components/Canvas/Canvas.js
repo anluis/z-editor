@@ -12,27 +12,32 @@ type Props = {
   currentPageItem: {
     name: string,
     settings: {
-      size: {
-        height: number,
-        width: number
+      payload: {
+        size: {
+          height: number,
+          width: number
+        }
       }
     }
-  },
-
+  }
 }
+
 class Canvas extends React.Component<Props> {
 
   constructor() {
     super()
     this.state = {
       baseY: 0,
+      baseHeight: 0,
       moving: false
     }
   }
 
   handleMouseDown = (e) => {
+    // console.log(e.clientY)
     this.setState({
       baseY: e.clientY,
+      baseHeight: this.props.currentPageItem.settings.payload.size.height,
       moving: true
     })
   }
@@ -44,27 +49,29 @@ class Canvas extends React.Component<Props> {
     const { currentPageItem, updatePage, currentPage } = this.props
     const itemCopy = { ...currentPageItem }
     if (moving) {
-      itemCopy.settings.size.height += e.clientY - this.state.baseY
+      // console.log(e.clientY - this.state.baseY)
+      // itemCopy.settings.payload.size.height += e.clientY - this.state.baseY + this.state.baseHeight
+      let caculatedHeight = e.clientY - this.state.baseY + this.state.baseHeight
+      // console.log(caculatedHeight)
+      itemCopy.settings.payload.size.height = caculatedHeight
       updatePage(currentPage, currentPageItem)
     }
   }
 
   handleMouseUp = (e) => {
-    console.log('up')
     this.setState({
       moving: false
     })
   }
 
   handleMouseOver = (e) => {
-    console.log('over')
     this.setState({
       moving: false
     })
   }
 
   render() {
-    const { height, width } = this.props.currentPageItem.settings.size
+    const { height, width } = this.props.currentPageItem.settings.payload.size
     const designArea = {
       width: `${width}px`,
       height: `${height}px`,
@@ -74,7 +81,7 @@ class Canvas extends React.Component<Props> {
 
     const dragArea = {
       width: `${width}px`,
-      height: '60px',
+      height: '30px',
       textAlign: 'center',
       cursor: 'pointer',
       border: '1px solid black'
@@ -85,6 +92,7 @@ class Canvas extends React.Component<Props> {
       height: 'auto',
       userSelect: 'none'
     }
+
     const { comList, currentCom, currentPage, updateCom, focusCom } = this.props
 
     let renderComs = listItemSortByOrder(

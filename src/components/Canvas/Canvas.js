@@ -35,6 +35,7 @@ class Canvas extends React.Component<Props> {
 
   handleMouseDown = (e) => {
     // console.log(e.clientY)
+    e.preventDefault()
     this.setState({
       baseY: e.clientY,
       baseHeight: this.props.currentPageItem.settings.payload.size.height,
@@ -43,6 +44,7 @@ class Canvas extends React.Component<Props> {
   }
 
   handleMouseMove = (e) => {
+    e.preventDefault()
     // maybe use component's own state
     // then async to store
     const { moving } = this.state
@@ -59,12 +61,14 @@ class Canvas extends React.Component<Props> {
   }
 
   handleMouseUp = (e) => {
+    e.preventDefault()
     this.setState({
       moving: false
     })
   }
 
   handleMouseOver = (e) => {
+    e.preventDefault()
     this.setState({
       moving: false
     })

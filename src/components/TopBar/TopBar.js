@@ -4,6 +4,7 @@ import { Button } from 'antd'
 import * as ModuleTypes from '@/constants/ModuleTypes'
 import SettingModal from './SettingModal'
 import Axios from 'axios'
+import { logo } from '../../constants/common/commonImgUrls'
 
 type Props = {
   addCom: (currentPageId: string, module: string) => void,
@@ -70,7 +71,7 @@ class TopBar extends React.Component<Props> {
         <div className="function-head">
           <img
             className="head-logo"
-            src="http://cdn.exe666.com/fe/editor/img/logo.png"
+            src={logo}
             alt="logo"
           />
           <Button disabled={!canUndo} onClick={undo}>

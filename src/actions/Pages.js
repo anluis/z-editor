@@ -28,3 +28,9 @@ export const editPageSettings = (visible, payload, targetPageId) => ({
   payload,
   targetPageId
 })
+
+export const updatePage = (id, pageItem) => ({
+  type: types.UPDATE_PAGE,
+  targetPageId: id,
+  payload: pageItem
+})

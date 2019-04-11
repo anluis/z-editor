@@ -1,31 +1,13 @@
-import React from 'react'
-import Canvas from './containers/Canvas/Canvas'
-import MenuBar from './components/MenuBar/MenuBar'
-import TopBar from './containers/TopBar/TopBar'
-import FunctionTabs from './components/FunctionTabs/FunctionTabs'
+import React, { Component } from 'react'
+import Routes from './routes/Routes'
 import './assets/style/App.less'
 import 'normalize.css'
+import { withRouter } from 'react-router-dom'
 
-const App = () => {
-  document.title = 'H5制作系统'
-  return (
-    <div className="main-wrap">
-      <div className="main-top">
-        <TopBar />
-      </div>
-      <div className="main-remain">
-        <div className="main-left">
-          <MenuBar />
-        </div>
-        <div className="main-middle">
-          <Canvas />
-        </div>
-        <div className="main-right">
-          <FunctionTabs />
-        </div>
-      </div>
-    </div>
-  )
+class App extends Component {
+  render() {
+    return <Routes />
+  }
 }
 
-export default App
+export default withRouter(App)

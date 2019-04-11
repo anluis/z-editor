@@ -1,4 +1,5 @@
 // @flow
+// local Status not upload through apis
 import {
   FOCUS_COM,
   ADD_COM,
@@ -14,8 +15,8 @@ import { arrayMove } from 'react-sortable-hoc'
 
 type State = {
   +com: { current: number | null },
-  +page: { current: number, order: Array<number> },
-  +shouldSettingsShow: boolean
++page: { current: number, order: Array<number> },
++shouldSettingsShow: boolean
 }
 type Action =
   | FOCUS_COM

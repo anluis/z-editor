@@ -1,6 +1,9 @@
 import * as types from '../constants/ActionTypes'
 let nextComId = 1
 
+// 增加新的组件
+// id 自增
+// 属性
 export const addCom = (attribute, targetPageId, comType) => ({
   type: types.ADD_COM,
   id: nextComId++,
@@ -29,6 +32,7 @@ export const deleteCom = (id, targetPageId) => ({
   targetPageId
 })
 
+// 组件层级变更
 export const updateComZindex = (
   layers,
   oldIndex,

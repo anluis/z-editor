@@ -113,15 +113,10 @@ const pageList = (state: State = initState, action: Action): State => {
     case ADD_PAGE:
       return [
         ...state,
-        {
-          id: action.id,
-          order: [],
-          settings: {
-            name: '页面-0',
-            size: {
-              width: 375,
-              height: 667
-            }
+        ...{
+          ...{
+            id: action.id,
+            ...initState
           }
         }
       ]

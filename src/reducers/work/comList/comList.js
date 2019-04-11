@@ -2,25 +2,10 @@
 import { ADD_COM, DELETE_COM, UPDATE_COM } from '@/constants/ActionTypes'
 
 type Action = ADD_COM | DELETE_COM | UPDATE_COM
-type State = Array<Object>
+type State = ReadonlyArray<Object>
 // 初始状态
 const initState = []
 
-//所有组件状态
-const updateObjectInArray = (
-  array: Array<Object>,
-  action: Object
-): Array<Object> => {
-  return array.map(item => {
-    if (item.id !== action.id) {
-      return item
-    }
-    return {
-      ...item,
-      ...action
-    }
-  })
-}
 
 // 组件Reducer
 const comList = (state: State = initState, action: Action): State => {
@@ -41,5 +26,25 @@ const comList = (state: State = initState, action: Action): State => {
       return state
   }
 }
+
+// 辅助方法
+// 更新组件属性
+const updateObjectInArray = (
+  array: Array<Object>,
+  action: Object
+): Array<Object> => {
+  return array.map(item => {
+    if (item.id !== action.id) {
+      return item
+    }
+    return {
+      ...item,
+      attribute: {
+        ...action.attribute
+      }
+    }
+  })
+}
+
 
 export default comList

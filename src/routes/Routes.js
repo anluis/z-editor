@@ -10,7 +10,7 @@ const Routes = () => {
     <Suspense fallback={null}>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route path="/editor" component={Editor} excat />
+        <Route path="/editor" component={Editor} exact />
         <Route component={Error404Page} />
       </Switch>
     </Suspense>

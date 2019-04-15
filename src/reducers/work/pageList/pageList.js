@@ -21,21 +21,23 @@ type Action =
   | EDIT_PAGE_SETTINGS
   | UPDATE_PAGE
 
-const initState = [
-  {
-    id: 0,
-    order: [],
-    settings: {
-      visible: false,
-      payload: {
-        name: '页面-0',
-        size: {
-          width: 375,
-          height: 667
-        }
+const initStateItem = {
+  id: 0,
+  order: [],
+  settings: {
+    visible: false,
+    payload: {
+      name: '页面-0',
+      size: {
+        width: 375,
+        height: 667
       }
     }
   }
+}
+
+const initState = [
+  initStateItem
 ]
 
 const addIdInPageItem = (array: Array<Object>, action: Action): State => {
@@ -102,6 +104,16 @@ const updatePage = (array: Array<Object>, action: Action): S => {
   })
 }
 
+const addPage = (pageList: Array<Object>, action: Action): S => {
+  let pageItemCopy = { ...initStateItem }
+  pageItemCopy.id = action.id
+  console.log(pageItemCopy)
+  let pageListCopy = [...pageList]
+  pageListCopy = [...pageListCopy, pageItemCopy]
+  console.log(pageListCopy)
+  return pageListCopy
+}
+
 const pageList = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case ADD_COM:
@@ -111,15 +123,7 @@ const pageList = (state: State = initState, action: Action): State => {
     case UPDATE_COM_ZINDEX:
       return updateOrderInPageItem(state, action)
     case ADD_PAGE:
-      return [
-        ...state,
-        ...{
-          ...{
-            id: action.id,
-            ...initState
-          }
-        }
-      ]
+      return addPage(state, action)
     case UPDATE_PAGE:
       return updatePage(state, action)
     case UPDATE_PAGE_ORDER:

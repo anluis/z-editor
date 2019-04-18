@@ -1,6 +1,11 @@
-type State = {}
+import { StatusActions, Status } from '../../types/status'
 
-const initState = {}
+type State = Status
+
+const initState: State = {
+  currentPageId: 0,
+  currentComId: 0
+}
 
 type Action = StatusActions
 

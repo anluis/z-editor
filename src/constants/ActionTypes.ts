@@ -30,3 +30,6 @@ export const APPLY_WORK = 'APPLY_WORK'
 // main
 export const UNDO = 'UNDO'
 export const REDO = 'REDO'
+
+// status 
+export const SET_CURRENT_ID = 'SET_CURRENT_ID'

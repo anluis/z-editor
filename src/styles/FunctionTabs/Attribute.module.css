@@ -1,0 +1,29 @@
+.attributes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px 0;
+}
+.base {
+  padding:0 20px 10px;
+}
+.extend {
+  padding: 0 0 10px;
+}
+.attr {
+  min-height: 36px;
+  padding: 2px 0;
+  line-height: 36px;
+}
+.attr-id {
+  composes: 'attr';
+}
+.attr-name {
+  composes: 'attr';
+}
+.attr-bg {
+  composes: 'attr';
+}
+.attr-delete {
+  composes: 'attr';
+}

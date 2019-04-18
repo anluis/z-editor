@@ -2,12 +2,23 @@ import { ADD_PAGE, DELETE_PAGE, UPDATE_PAGE, FOCUS_PAGE } from '../constants/Act
 
 export type Pages = Array<Page>
 
-export type Page = {
+export interface PageStyles {
+  width: number
+  height: number
+}
+
+export interface PageSettings {
+  wechatShareTitle: string
+  wechatShareDescription: string
+  wechatShareIcon: string
+}
+
+export interface Page {
   id: number
   order: Array<number>
   name: string
-  width: number
-  height: number
+  styles: PageStyles
+  settings: PageSettings
 }
 
 interface AddPageAction {

@@ -6,7 +6,7 @@ export interface BaseCom {
 }
 
 export interface BaseComStyle {
-  left: number
+  left: string
   top: number
   width: number
   height: number
@@ -18,6 +18,8 @@ export interface ImageComStyle extends BaseComStyle {
 
 export interface TextStyle extends BaseComStyle {
   fontSize: string
+  color: string
+  letterSpacing: string
 }
 
 export interface ImageCom extends BaseCom {

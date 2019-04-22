@@ -33,3 +33,7 @@ export const REDO = 'REDO'
 
 // status 
 export const SET_CURRENT_ID = 'SET_CURRENT_ID'
+
+// auth
+export const UPDATE_AUTH = 'UPDATE_AUTH'
+export const DELETE_AUTH = 'DELETE_AUTH'

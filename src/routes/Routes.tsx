@@ -19,7 +19,8 @@ class Routes extends React.Component<RoutesProps> {
     return (
       <Suspense fallback={null}>
         <Switch>
-          <ProtectedRoute {...defaultProtectedRouteProps} exact path="/" component={Editor} />
+          <Route path='/' component={Login} exact />
+          <ProtectedRoute {...defaultProtectedRouteProps} exact path="/editor" component={Editor} />
           <Route path="/login" component={Login} />
         </Switch>
       </Suspense>

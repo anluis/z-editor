@@ -10,7 +10,7 @@ export class ProtectedRoute extends Route<ProtectedRouteProps> {
   public render() {
     let redirectPath: string = ''
     const { isAuthenticated, authenticationPath } = this.props
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       redirectPath = authenticationPath
     }
     if (redirectPath) {

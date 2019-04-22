@@ -7,7 +7,7 @@ type State = AuthState
 
 const initState: AuthState = {
   accessToken: '',
-  isAuthenticated: true
+  isAuthenticated: false
 }
 
 const authReducer = (state: State = initState, action: Action): State => {

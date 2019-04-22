@@ -32,7 +32,8 @@ export const UNDO = 'UNDO'
 export const REDO = 'REDO'
 
 // status 
-export const SET_CURRENT_ID = 'SET_CURRENT_ID'
+export const SET_CURRENT_PAGE_ID = 'SET_CURRENT_PAGE_ID'
+export const SET_CURRENT_COM_ID = 'SET_CURRENT_COM_ID'
 
 // auth
 export const UPDATE_AUTH = 'UPDATE_AUTH'

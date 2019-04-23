@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styles from './FunctionTabs.module.css'
 const Attribute = React.lazy(() => import('./Attribute/Attribute'))
 const Layers = React.lazy(() => import('./Layers/Layers'))
 const Pages = React.lazy(() => import('./Pages/Pages'))
@@ -29,7 +30,7 @@ class FunctionTabs extends React.Component<{}, State> {
     return isSelected ? (
       <div
         key={index}
-        className="tabs-item selected"
+        className={`${styles.item} ${styles.itemSelected}`}
         onClick={() => this.handleMenuSelect(index)}
       >
         {name}
@@ -37,7 +38,7 @@ class FunctionTabs extends React.Component<{}, State> {
     ) : (
         <div
           key={index}
-          className="tabs-item"
+          className={`${styles.item}`}
           onClick={() => this.handleMenuSelect(index)}
         >
           {name}
@@ -59,7 +60,7 @@ class FunctionTabs extends React.Component<{}, State> {
   }
 
   render() {
-    let tabs = ['属性', '图层', '页面']
+    let tabs = ['Attribute', 'Layers', 'Pages']
     let renderTabs = tabs.map((item, index) => {
       let value
       if (index === this.state.selectedItem) {
@@ -71,9 +72,9 @@ class FunctionTabs extends React.Component<{}, State> {
     })
     let renderDetail = this.renderTabsDetail(this.state.selectedItem)
     return (
-      <div className="functiontabs">
-        <div className="inner-tabs">{renderTabs}</div>
-        <div className="item-detail">{renderDetail}</div>
+      <div className={styles.functiontabs}>
+        <div className={styles.tabs}>{renderTabs}</div>
+        <div className={styles.itemDetail}>{renderDetail}</div>
       </div>
     )
   }

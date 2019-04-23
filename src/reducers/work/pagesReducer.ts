@@ -6,8 +6,10 @@ const initPageItem = {
   id: 0,
   order: [],
   name: '',
-  width: 375,
-  height: 667
+  styles: {
+    width: 375,
+    height: 667
+  }
 }
 
 const initState = [

@@ -1,6 +1,6 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { setLoading } from '../actions/status'
+import { setLoading, setErrorMessage } from '../actions/status'
 import { signIn } from '../apis/authorizations'
 import { UPDATE_AUTH, DELETE_AUTH } from '../constants/ActionTypes';
 
@@ -18,12 +18,13 @@ export const login = (username: string, password: string): ThunkAction<Promise<v
     try {
       dispatch(setLoading(true))
       const signInResult = await signIn({ username, password })
-      console.dir(signInResult)
       if (signInResult.data.access_token) {
         dispatch(updateAuth(signInResult.data.access_token))
       }
       dispatch(setLoading(false))
     } catch (err) {
+      const { message } = err.response.data
+      dispatch(setErrorMessage(message))
       dispatch(setLoading(false))
     }
   }

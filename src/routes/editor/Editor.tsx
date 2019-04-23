@@ -26,18 +26,11 @@ class Editor extends React.Component<Props> {
       return <Redirect to='/login' />
     }
     return <div className={styles.main}>
-      <div className={styles.topbar}>
-        <TopBar />
-      </div>
-      <div className={styles.playground}>
-        <MenuBar />
-        <div className={styles.create}>
-          <Route path="/editor" component={PlayGround} exact />
-          <Route path="/editor/material/" component={Material} />
-          <Route path="/editor/works/" component={Works} />
-          <Route path="/editor/templates" component={Templates} />
-        </div>
-      </div>
+      <MenuBar />
+      <Route path="/editor" component={PlayGround} exact />
+      {/* <Route path="/editor/material/" component={Material} />
+      <Route path="/editor/works/" component={Works} />
+      <Route path="/editor/templates" component={Templates} /> */}
     </div>
   }
 }

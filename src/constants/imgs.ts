@@ -1,5 +1,5 @@
 import { cdnUrl } from './base'
-export const logoUrl = '${cdnUrl}'
+export const logoUrl = `${cdnUrl}/fe/actiview/img/actiview-logo.png`
 export const textIcon = `${cdnUrl}/fe/editor/img/wenzi.png`
 export const imgIcon = `${cdnUrl}/fe/editor/img/image.png`
 export const bgIcon = `${cdnUrl}/fe/editor/img/beij.png`

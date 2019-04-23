@@ -15,15 +15,3 @@
   padding: 2px 0;
   line-height: 36px;
 }
-.attr-id {
-  composes: 'attr';
-}
-.attr-name {
-  composes: 'attr';
-}
-.attr-bg {
-  composes: 'attr';
-}
-.attr-delete {
-  composes: 'attr';
-}

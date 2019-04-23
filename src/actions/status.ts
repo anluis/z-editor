@@ -26,3 +26,8 @@ export const setLoading = (isLoading: boolean) => ({
   type: types.SET_LOADING_STATUS,
   isLoading
 })
+
+export const setErrorMessage = (message: string) => ({
+  type: types.SET_ERROR_MESSAGE,
+  message
+})

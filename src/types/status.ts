@@ -1,9 +1,10 @@
-import { SET_CURRENT_PAGE_ID, SET_CURRENT_COM_ID, SET_LOADING_STATUS } from '../constants/ActionTypes'
+import { SET_CURRENT_PAGE_ID, SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE } from '../constants/ActionTypes'
 
 export interface StatusState {
   currentPageId: number
   currentComId: number
   isLoading: boolean
+  errorMessage: string
 }
 
 export interface SetLoadingStatus {
@@ -21,4 +22,10 @@ export interface SetCurrentComId {
   id: number
 }
 
-export type StatusAction = SetCurrentPageId | SetCurrentComId | SetLoadingStatus
+export interface SetErrorMessage {
+  type: typeof SET_ERROR_MESSAGE
+  message: string
+}
+
+
+export type StatusAction = SetCurrentPageId | SetCurrentComId | SetLoadingStatus | SetErrorMessage

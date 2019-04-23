@@ -34,6 +34,7 @@ export const REDO = 'REDO'
 // status 
 export const SET_CURRENT_PAGE_ID = 'SET_CURRENT_PAGE_ID'
 export const SET_CURRENT_COM_ID = 'SET_CURRENT_COM_ID'
+export const SET_LOADING_STATUS = 'SET_LOADING_STATUS'
 
 // auth
 export const UPDATE_AUTH = 'UPDATE_AUTH'

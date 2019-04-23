@@ -1,6 +1,6 @@
 import { Coms } from "./coms";
 import { Pages } from "./pages";
-import { Status } from "./status";
+import { StatusState } from "./status";
 
 interface IStoreState {
   auth: {
@@ -10,8 +10,8 @@ interface IStoreState {
   work: {
     coms: Coms,
     pages: Pages,
-    status: Status
-  }
+  },
+  status: StatusState
 }
 
 export default IStoreState

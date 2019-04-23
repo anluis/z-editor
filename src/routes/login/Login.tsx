@@ -4,6 +4,11 @@ import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/s
 import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core';
 import outstyles from './Login.module.css'
+import { connect } from 'react-redux'
+import IStoreState from '../../types/IStoreState'
+import { ThunkDispatch } from 'redux-thunk'
+import { login } from '../../actions/auth';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -23,7 +28,16 @@ const styles = (theme: Theme) =>
     },
   });
 
-export interface Props extends WithStyles<typeof styles> { }
+
+interface DispatchProps {
+  login: (username: string, password: string) => Promise<void>
+}
+export interface OwnProps extends WithStyles<typeof styles>, RouteComponentProps {
+  isAuthenticated: boolean
+  isLoading: boolean
+}
+
+type Props = OwnProps & DispatchProps
 
 interface State {
   userName: string
@@ -39,42 +53,66 @@ class Login extends React.Component<Props, State> {
     }
   }
 
+  componentDidMount() {
+    const { isAuthenticated } = this.props
+    if (isAuthenticated) {
+      this.naviToEditor()
+    }
+  }
+
   handleChange = (name: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       [name]: event.target.value,
     } as Pick<State, keyof State>);
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    try {
+      const { login } = this.props
+      await login(this.state.userName, this.state.passWord)
+    } catch (err) {
+
+    }
 
   }
 
+  naviToEditor = () => {
+    this.props.history.push({
+      pathname: '/editor'
+    })
+  }
+
   render() {
+    const { isAuthenticated } = this.props
     const { classes } = this.props
     return (
-      <div className={outstyles.login}>
-        <form className={classes.container} noValidate autoComplete="off">
-          <TextField
-            id="outlined-name"
-            label="Name"
-            className={classes.textField}
-            value={this.state.userName}
-            onChange={this.handleChange('userName')}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-password-input"
-            label="Password"
-            className={classes.textField}
-            type="password"
-            autoComplete="current-password"
-            margin="normal"
-            variant="outlined"
-          />
-        </form>
-        <Button onClick={() => this.handleSubmit}>提交</Button>
-      </div>
+      isAuthenticated ?
+        <Redirect to="/editor" />
+        :
+        <div className={outstyles.login}>
+          <form className={classes.container} noValidate autoComplete="off">
+            <TextField
+              id="outlined-name"
+              label="Name"
+              className={classes.textField}
+              value={this.state.userName}
+              onChange={this.handleChange('userName')}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-password-input"
+              label="Password"
+              className={classes.textField}
+              type="password"
+              onChange={this.handleChange('passWord')}
+              autoComplete="current-password"
+              margin="normal"
+              variant="outlined"
+            />
+          </form>
+          <Button variant="contained" color="primary" onClick={this.handleSubmit}>提交</Button>
+        </div>
     )
 
   }
@@ -84,4 +122,21 @@ class Login extends React.Component<Props, State> {
   classes: PropTypes.object.isRequired,
 } as any
 
-export default withStyles(styles)(Login)
+const mapStateToProps = (state: IStoreState) => {
+  const { isLoading } = state.status
+  const { isAuthenticated } = state.auth
+  return {
+    isLoading,
+    isAuthenticated
+  }
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+  return {
+    login: async (username: string, password: string) => {
+      dispatch(login(username, password))
+    }
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login)))

@@ -6,7 +6,7 @@ interface SignInArgs {
   password: string
 }
 
-const login = (payload: SignInArgs) => {
+const signIn = (payload: SignInArgs) => {
   const requestUrl = `${apiUrl}/authorizations`
   const requestParams = {
     username: payload.username,
@@ -20,4 +20,4 @@ const login = (payload: SignInArgs) => {
   })
 }
 
-export { login }
+export { signIn }

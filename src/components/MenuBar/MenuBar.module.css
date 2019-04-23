@@ -7,6 +7,7 @@
   align-items: center;
   background-color: #0a0923;
   width: 70px;
+  position: relative;
 }
 
 .pane {
@@ -17,4 +18,9 @@
   height: 70px;
   color: white;
   cursor: pointer;
+}
+
+.logout {
+  position: absolute;
+  bottom: 0;
 }

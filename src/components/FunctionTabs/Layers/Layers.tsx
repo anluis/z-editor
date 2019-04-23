@@ -73,7 +73,7 @@ class Layers extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { currentPageId } = state.work.status
+  const { currentPageId } = state.status
   return {
     currentComs: getComsByCurrentPageId(state),
     currentPageId

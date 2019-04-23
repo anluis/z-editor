@@ -13,7 +13,11 @@ const initState: AuthState = {
 const authReducer = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case UPDATE_AUTH:
-      return state
+      console.log(action)
+      return {
+        isAuthenticated: true,
+        accessToken: action.accessToken
+      }
     default:
       return state
   }

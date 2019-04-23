@@ -50,7 +50,8 @@ class Attribute extends React.Component<Props, any> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { coms, status } = state.work
+  const { coms } = state.work
+  const { status } = state
   const Com = coms.find(e => e.id === status.currentComId) as ImageCom
   return {
     Com

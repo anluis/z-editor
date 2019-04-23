@@ -1,5 +1,5 @@
 import { AuthState, AuthAction } from '../../types/auth'
-import { UPDATE_AUTH } from '../../constants/ActionTypes';
+import { UPDATE_AUTH, DELETE_AUTH } from '../../constants/ActionTypes';
 
 type Action = AuthAction
 
@@ -13,11 +13,12 @@ const initState: AuthState = {
 const authReducer = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case UPDATE_AUTH:
-      console.log(action)
       return {
         isAuthenticated: true,
         accessToken: action.accessToken
       }
+    case DELETE_AUTH:
+      return initState
     default:
       return state
   }

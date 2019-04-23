@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from '../../../styles/FunctionTabs/Attribute/Attribute.module.css'
+import styles from './Attribute.module.css'
 import Input from '@material-ui/core/Input';
 import { SketchPicker } from 'react-color'
 import IStoreState from '../../../types/IStoreState'

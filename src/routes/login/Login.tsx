@@ -1,14 +1,15 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core';
-import outstyles from './Login.module.css'
 import { connect } from 'react-redux'
+import TextField from '@material-ui/core/TextField'
+import outstyles from './Login.module.css'
 import IStoreState from '../../types/IStoreState'
 import { ThunkDispatch } from 'redux-thunk'
 import { login } from '../../actions/auth';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom'
+import Paper from '@material-ui/core/Paper';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -73,7 +74,6 @@ class Login extends React.Component<Props, State> {
     } catch (err) {
 
     }
-
   }
 
   naviToEditor = () => {
@@ -90,28 +90,31 @@ class Login extends React.Component<Props, State> {
         <Redirect to="/editor" />
         :
         <div className={outstyles.login}>
-          <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-              id="outlined-name"
-              label="Name"
-              className={classes.textField}
-              value={this.state.userName}
-              onChange={this.handleChange('userName')}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              className={classes.textField}
-              type="password"
-              onChange={this.handleChange('passWord')}
-              autoComplete="current-password"
-              margin="normal"
-              variant="outlined"
-            />
-          </form>
-          <Button variant="contained" color="primary" onClick={this.handleSubmit}>提交</Button>
+          <Paper>
+            <form className={outstyles.dialog} noValidate autoComplete="off">
+              <TextField
+                id="outlined-name"
+                label="Name"
+                className={classes.textField}
+                value={this.state.userName}
+                onChange={this.handleChange('userName')}
+                margin="normal"
+                variant="outlined"
+              />
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                className={classes.textField}
+                type="password"
+                onChange={this.handleChange('passWord')}
+                autoComplete="current-password"
+                margin="normal"
+                variant="outlined"
+              />
+              <Button variant="contained" color="primary" onClick={this.handleSubmit}>Login</Button>
+            </form>
+          </Paper>
+
         </div>
     )
 

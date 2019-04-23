@@ -4,4 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('https://cdn.xingstation.cn/fe/cms/img/login-bg.png');
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }

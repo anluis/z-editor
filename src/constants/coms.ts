@@ -1,0 +1,5 @@
+export const TEXT = 'TEXT'
+export const IMAGE = 'IMAGE'
+export const VIDEO = 'VIDEO'
+export const PHOTO_GET = 'PHOTO_GET'
+export const LOTTIE = 'LOTTIE'

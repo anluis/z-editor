@@ -32,12 +32,11 @@ class Editor extends React.Component<Props> {
         <div className={styles.playmain}>
           <div className={styles.canvas}>
             <div className={styles.design} style={designStyles}>
-
+              {/* <RenderComsWithControl /> */}
             </div>
           </div>
           <FunctionTabs />
         </div>
-
       </div>
     )
   }

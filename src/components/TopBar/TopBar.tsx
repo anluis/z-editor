@@ -6,14 +6,18 @@ import IStoreState from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk'
 import { redo, undo } from '../../actions/status'
 import { connect } from 'react-redux'
+import { addCom } from '../../actions/coms'
+import { Com } from '../../types/coms'
+import { topBarItem, topBarSettings } from '../../constants/topBar'
 
 interface OwnProps {
-
+  currentPageId: number
 }
 
 interface DispatchProps {
   redo: () => void
   undo: () => void
+  addCom: (id: number, com: Com) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -35,11 +39,25 @@ class TopBar extends React.Component<Props> {
 
   }
 
-  addCom = () => {
-
+  handleAddCom = (type: string) => {
+    const { currentPageId } = this.props
+    // addCom(currentPageId, )
   }
 
+
+
   render() {
+    const renderItem = (item: topBarItem, index: number) => {
+      return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
+        {item.name}
+        <img className={styles.icon} src={item.imgUrl} />
+      </div>
+
+    }
+    const renderItems = topBarSettings.map((item, index) => {
+      return (renderItem(item, index))
+    })
+
     return (
       <>
         <div className={styles.head}>
@@ -48,34 +66,7 @@ class TopBar extends React.Component<Props> {
         </div>
 
         <div className={styles.functions}>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            Text
-            <img className={styles.icon} src={textIcon} alt="文字组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            Image
-            <img className={styles.icon} src={imgIcon} alt="图片组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            Bg
-            <img className={styles.icon} src={bgIcon} alt="背景组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            Input
-            <img className={styles.icon} src={bgIcon} alt="输入框组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            Video
-            <img className={styles.icon} src={videoIcon} alt="视频组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            PhotoGet
-            <img className={styles.icon} src={getIcon} alt="提取组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            Lottie
-            <img className={styles.icon} src={lottieIcon} alt="动画组件" />
-          </div>
+          {renderItems}
         </div>
 
         <div className={styles.publish}>
@@ -92,7 +83,11 @@ class TopBar extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  return {}
+  const { currentComId, currentPageId } = state.status
+  return {
+    currentComId,
+    currentPageId
+  }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
@@ -102,6 +97,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     undo: () => {
       dispatch(undo())
+    },
+    addCom: (id: number) => {
+      // dispatch(addCom(id, com))
     }
   }
 }

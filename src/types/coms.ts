@@ -3,6 +3,7 @@ import { ADD_COM, UPDATE_COM, DELETE_COM, FOCUS_COM } from "../constants/ActionT
 export interface BaseCom {
   id: number
   name: string
+  type: string
 }
 
 export interface BaseComStyle {

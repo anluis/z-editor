@@ -1,7 +1,0 @@
-export const IMG_MODULE = 'IMG_MODULE'
-export const BACKGROUND_MODULE = 'BACKGROUND_MODULE'
-export const TEXT_MODULE = 'TEXT_MODULE'
-export const INPUT_MODULE = 'INPUT_MODULE'
-export const VIDEO_MODULE = 'VIDEO_MODULE'
-export const PHOTO_MODULE = 'PHOTO_MODULE'
-export const LOTTIE_MODULE = 'LOTTIE_MODULE'

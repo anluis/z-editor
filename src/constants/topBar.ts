@@ -1,4 +1,5 @@
 import { videoIcon, getIcon, lottieIcon, imgIcon, textIcon } from "./imgs";
+import { TEXT, IMAGE, VIDEO, PHOTO_GET, LOTTIE } from "./coms";
 
 export interface topBarItem {
   name: string
@@ -8,27 +9,27 @@ export interface topBarItem {
 const topBarSettings: Array<topBarItem> = [
   {
     name: 'Text',
-    type: 'Text',
+    type: TEXT,
     imgUrl: textIcon
   },
   {
     name: 'Image',
-    type: 'Image',
+    type: IMAGE,
     imgUrl: imgIcon
   },
   {
     name: 'Video',
-    type: 'Video',
+    type: VIDEO,
     imgUrl: videoIcon
   },
   {
     name: 'PhotoGet',
-    type: 'PhotoGet',
+    type: PHOTO_GET,
     imgUrl: getIcon
   },
   {
     name: 'Lottie',
-    type: 'Lottie',
+    type: LOTTIE,
     imgUrl: lottieIcon
   }
 

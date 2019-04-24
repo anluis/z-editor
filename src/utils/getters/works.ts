@@ -8,7 +8,7 @@ export const getComsByCurrentPageId = (state: IStoreState): Coms => {
   if (!currentPage) {
     return []
   }
-  const filterResult = coms.filter(com => { currentPage.order.includes(com.id) })
+  const filterResult = coms.filter(com => { return currentPage.order.includes(com.id) })
   return filterResult
 }
 

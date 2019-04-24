@@ -1,7 +1,6 @@
 import * as React from 'react'
 import styles from './TopBar.module.css'
 import { Button } from '@material-ui/core'
-import { textIcon, imgIcon, bgIcon, lottieIcon, getIcon, videoIcon } from '../../constants/imgs'
 import IStoreState from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk'
 import { redo, undo } from '../../actions/status'
@@ -9,9 +8,11 @@ import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
 import { Com } from '../../types/coms'
 import { topBarItem, topBarSettings } from '../../constants/topBar'
+import { TEXT, initText } from '../../constants/coms';
 
 interface OwnProps {
   currentPageId: number
+  comsLength: number
 }
 
 interface DispatchProps {
@@ -40,8 +41,18 @@ class TopBar extends React.Component<Props> {
   }
 
   handleAddCom = (type: string) => {
-    const { currentPageId } = this.props
-    // addCom(currentPageId, )
+    const { currentPageId, comsLength, addCom } = this.props
+    switch (type) {
+      case TEXT:
+        const newText = {
+          ...initText,
+          name: `Text-${comsLength + 1}`,
+          id: comsLength,
+        }
+        addCom(currentPageId, newText)
+      default:
+        return
+    }
   }
 
 
@@ -84,9 +95,11 @@ class TopBar extends React.Component<Props> {
 
 const mapStateToProps = (state: IStoreState) => {
   const { currentComId, currentPageId } = state.status
+  const comsLength = state.work.coms.length
   return {
     currentComId,
-    currentPageId
+    currentPageId,
+    comsLength
   }
 }
 
@@ -98,8 +111,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     undo: () => {
       dispatch(undo())
     },
-    addCom: (id: number) => {
-      // dispatch(addCom(id, com))
+    addCom: (id: number, com: Com) => {
+      dispatch(addCom(id, com))
     }
   }
 }

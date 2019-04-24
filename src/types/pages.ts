@@ -8,9 +8,9 @@ export interface PageStyles {
 }
 
 export interface PageSettings {
-  wechatShareTitle: string
-  wechatShareDescription: string
-  wechatShareIcon: string
+  wechatShareTitle?: string
+  wechatShareDescription?: string
+  wechatShareIcon?: string
 }
 
 export interface Page {
@@ -23,7 +23,7 @@ export interface Page {
 
 interface AddPageAction {
   type: typeof ADD_PAGE,
-  id: number
+  page: Page
 }
 
 interface DeletePage {

@@ -1,7 +1,19 @@
 import * as React from 'react'
-class Text extends React.Component {
+import { TextCom } from '../../types/coms'
+interface Props extends TextCom {
+
+}
+class Text extends React.Component<Props> {
   render() {
-    return null
+    const { width, height, fontSize, context } = this.props
+    const bindStyle = {
+      width: width + 'px',
+      height: height + 'px',
+      fontSize: fontSize + 'px'
+    }
+    return <div style={bindStyle}>
+      {context}
+    </div>
   }
 }
 

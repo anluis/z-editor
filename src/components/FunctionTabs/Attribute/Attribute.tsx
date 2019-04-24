@@ -33,7 +33,7 @@ class Attribute extends React.Component<Props, any> {
           </div>
           <div className={styles.attrName}>
             <Input
-              inputProps={{ maxlength: 12 }}
+              inputProps={{ maxLength: 12 }}
               onChange={e => this.updateName(e.target.value)}
               value={currentCom.name}
             />

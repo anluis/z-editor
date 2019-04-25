@@ -4,10 +4,11 @@ import Input from '@material-ui/core/Input';
 import { SketchPicker } from 'react-color'
 import IStoreState from '../../../types/IStoreState'
 import { connect } from 'react-redux'
-import { ImageCom } from '../../../types/coms';
+import { Com } from '../../../types/coms';
+import { getCurrentComById } from '../../../utils/getters/works'
 
 interface Props {
-  Com: ImageCom | undefined
+  currentCom: Com | undefined
 }
 
 class Attribute extends React.Component<Props, any> {
@@ -20,27 +21,27 @@ class Attribute extends React.Component<Props, any> {
   }
 
   render() {
-    const { Com } = this.props
-    if (!Com) {
-      return
+    const { currentCom } = this.props
+    if (!currentCom) {
+      return null
     }
     return (
       <div className={styles.attributes}>
         <div className={styles.base}>
           <div className={styles.attrId}>
-            组件编号: {Com.id}
+            组件编号: {currentCom.id}
           </div>
           <div className={styles.attrName}>
             <Input
-              inputProps={{ maxlength: 12 }}
+              inputProps={{ maxLength: 12 }}
               onChange={e => this.updateName(e.target.value)}
-              value={Com.name}
+              value={currentCom.name}
             />
           </div>
           <div className={styles.attrBg}>
             纯色背景
             <SketchPicker
-              color={Com.styles.backgroundColor}
+            // color={currentCom.styles.backgroundColor}
             />
           </div>
         </div>
@@ -50,11 +51,9 @@ class Attribute extends React.Component<Props, any> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { coms } = state.work
-  const { status } = state
-  const Com = coms.find(e => e.id === status.currentComId) as ImageCom
+  const currentCom = getCurrentComById(state)
   return {
-    Com
+    currentCom
   }
 }
 

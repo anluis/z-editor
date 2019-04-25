@@ -23,6 +23,7 @@
     "react-color": "^2.17.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.2",
+    "react-rnd": "7.4.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-sortable-hoc": "^1.8.3",
@@ -47,5 +48,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
+  }
 }

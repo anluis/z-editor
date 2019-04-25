@@ -1,19 +1,24 @@
 import * as React from 'react'
 import styles from './TopBar.module.css'
 import { Button } from '@material-ui/core'
-import { logoUrl, textIcon, imgIcon, bgIcon, lottieIcon, getIcon, videoIcon } from '../../constants/imgs'
 import IStoreState from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk'
 import { redo, undo } from '../../actions/status'
 import { connect } from 'react-redux'
+import { addCom } from '../../actions/coms'
+import { Com } from '../../types/coms'
+import { topBarItem, topBarSettings } from '../../constants/topBar'
+import { TEXT, initText } from '../../constants/coms';
 
 interface OwnProps {
-
+  currentPageId: number
+  comsLength: number
 }
 
 interface DispatchProps {
   redo: () => void
   undo: () => void
+  addCom: (id: number, com: Com) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -35,59 +40,52 @@ class TopBar extends React.Component<Props> {
 
   }
 
-  addCom = () => {
-
+  handleAddCom = (type: string) => {
+    const { currentPageId, comsLength, addCom } = this.props
+    switch (type) {
+      case TEXT:
+        const newText = {
+          ...initText,
+          name: `Text-${comsLength + 1}`,
+          id: comsLength,
+        }
+        addCom(currentPageId, newText)
+      default:
+        return
+    }
   }
 
+
+
   render() {
+    const renderItem = (item: topBarItem, index: number) => {
+      return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
+        {item.name}
+        <img className={styles.icon} src={item.imgUrl} />
+      </div>
+
+    }
+    const renderItems = topBarSettings.map((item, index) => {
+      return (renderItem(item, index))
+    })
+
     return (
       <>
         <div className={styles.head}>
-          <img
-            className={styles.logo}
-            src={logoUrl}
-            alt="logo"
-          />
-          <Button onClick={() => this.undo}>撤销</Button>
-          <Button onClick={() => this.undo}>重做</Button>
+          <Button variant="contained" color="primary" onClick={() => this.undo}>Undo</Button>
+          <Button variant="contained" color="primary" onClick={() => this.undo}>Redo</Button>
         </div>
 
         <div className={styles.functions}>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            文字
-            <img className={styles.icon} src={textIcon} alt="文字组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            图片
-            <img className={styles.icon} src={imgIcon} alt="图片组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            背景
-            <img className={styles.icon} src={bgIcon} alt="背景组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            输入框
-            <img className={styles.icon} src={bgIcon} alt="输入框组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            视频
-            <img className={styles.icon} src={videoIcon} alt="视频组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            提取
-            <img className={styles.icon} src={getIcon} alt="提取组件" />
-          </div>
-          <div className={styles.fitem} onClick={() => this.addCom}>
-            动画
-            <img className={styles.icon} src={lottieIcon} alt="动画组件" />
-          </div>
+          {renderItems}
         </div>
 
         <div className={styles.publish}>
           <Button
+            variant="contained" color="primary"
             onClick={() => this.publish}
             className={styles.publishbt}>
-            发布
+            Publish
           </Button>
         </div>
       </>
@@ -96,7 +94,13 @@ class TopBar extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  return {}
+  const { currentComId, currentPageId } = state.status
+  const comsLength = state.work.coms.length
+  return {
+    currentComId,
+    currentPageId,
+    comsLength
+  }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
@@ -106,6 +110,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     undo: () => {
       dispatch(undo())
+    },
+    addCom: (id: number, com: Com) => {
+      dispatch(addCom(id, com))
     }
   }
 }

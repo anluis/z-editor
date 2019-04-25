@@ -3,33 +3,23 @@ import { ADD_COM, UPDATE_COM, DELETE_COM, FOCUS_COM } from "../constants/ActionT
 export interface BaseCom {
   id: number
   name: string
-}
-
-export interface BaseComStyle {
-  left: string
-  top: number
+  type: string
+  x: number
+  y: number
   width: number
   height: number
 }
 
-export interface ImageComStyle extends BaseComStyle {
+export interface ImageCom extends BaseCom {
   backgroundColor: string
 }
 
-export interface TextStyle extends BaseComStyle {
+export interface TextCom extends BaseCom {
   fontSize: string
   color: string
   letterSpacing: string
+  context: string
 }
-
-export interface ImageCom extends BaseCom {
-  styles: ImageComStyle
-}
-
-export interface TextCom extends BaseCom {
-  styles: TextStyle
-}
-
 
 export type Com = ImageCom | TextCom
 

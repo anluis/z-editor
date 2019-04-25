@@ -1,9 +1,9 @@
 import * as types from '../constants/ActionTypes'
 import { Page, PageAction } from '../types/pages'
 
-export const addPage = (id: number): PageAction => ({
+export const addPage = (page: Page): PageAction => ({
   type: types.ADD_PAGE,
-  id
+  page
 })
 
 export const focusPage = (id: number): PageAction => ({

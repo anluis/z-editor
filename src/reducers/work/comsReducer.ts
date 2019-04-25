@@ -24,7 +24,7 @@ const updateObjectInArray = (
 const comsReducer = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case ADD_COM:
-    // return updateObjectInArray(state, action)
+      return [...state, action.com]
     case UPDATE_COM:
       return updateObjectInArray(state, action.com)
     default:

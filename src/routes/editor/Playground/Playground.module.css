@@ -1,0 +1,33 @@
+.playground {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #eaeaea;
+  position: relative;
+}
+.topbar {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+.playmain {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #eaeaea;
+}
+
+.canvas {
+  height: 100%;
+  flex: 10;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  overflow-y: scroll;
+}
+
+

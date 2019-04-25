@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import comsReducer from './comsReducer'
-import pagesReducer from './pagesReducer'
+import coms from './comsReducer'
+import pages from './pagesReducer'
 
 export default combineReducers({
-  comsReducer,
-  pagesReducer
+  coms,
+  pages
 })

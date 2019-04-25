@@ -5,6 +5,7 @@ import { ProtectedRouteProps, ProtectedRoute } from '../components/abstract/Priv
 
 const Login = lazy(() => import('./login/Login'))
 const Editor = lazy(() => import('./editor/Editor'))
+const Work = lazy(() => import('./work/Work'))
 
 interface RoutesProps {
   isAuthenticated: boolean
@@ -22,6 +23,7 @@ class Routes extends React.Component<RoutesProps> {
           <Route path='/' component={Login} exact />
           <ProtectedRoute {...defaultProtectedRouteProps} exact path="/editor" component={Editor} />
           <Route path="/login" component={Login} />
+          <Route path="/work" component={Work} />
         </Switch>
       </Suspense>
     )

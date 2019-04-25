@@ -96,6 +96,13 @@ class Login extends React.Component<Props, State> {
     })
   }
 
+  handleKeyPress = (key: string) => {
+    if (key === 'Enter') {
+      // Do code here
+      this.handleSubmit()
+    }
+  }
+
   render() {
     const { isAuthenticated, errorMessage, classes } = this.props
     const { snackbarStatus } = this.state
@@ -117,7 +124,9 @@ class Login extends React.Component<Props, State> {
           :
           <div className={outstyles.login}>
             <Paper>
-              <form className={outstyles.dialog} noValidate autoComplete="off">
+              <form className={outstyles.dialog} noValidate autoComplete="off" onKeyPress={(ev) => {
+                this.handleKeyPress(ev.key)
+              }}>
                 <TextField
                   error={isError}
                   id="outlined-name"

@@ -63,11 +63,12 @@ class Layers extends React.Component<Props> {
   render() {
     const { currentComs } = this.props
     return (
-      <SortableList
-        items={currentComs}
-        onSortEnd={this.onSortEnd}
-        deleteCom={this.deleteCom}
-      />
+      // <SortableList
+      //   items={currentComs}
+      //   onSortEnd={this.onSortEnd}
+      //   deleteCom={this.deleteCom}
+      // />
+      null
     )
   }
 }

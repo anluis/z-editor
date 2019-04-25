@@ -1,83 +1,72 @@
 import * as React from 'react'
-import styles from './FunctionTabs.module.css'
+// import styles from './FunctionTabs.module.css'
+import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
 const Attribute = React.lazy(() => import('./Attribute/Attribute'))
 const Layers = React.lazy(() => import('./Layers/Layers'))
 const Pages = React.lazy(() => import('./Pages/Pages'))
+// import Attribute from './Attribute/Attribute'
+// import Layers from './Layers/Layers'
+// import Pages from './Pages/Pages'
 
-interface Props {
-
+function TabContainer(props: any) {
+  return (
+    <Typography component="div" style={{ padding: 8 }}>
+      {props.children}
+    </Typography>
+  );
 }
 
-interface State {
-  selectedItem: number
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: '350px',
+    flexGrow: 1,
+    backgroundColor: 'white'
+  },
+}));
+
+function SimpleTabs() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+  // what? so fasion
+  function handleChange(event: any, newValue: any) {
+    setValue(newValue);
+  }
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="属性" />
+          <Tab label="图层" />
+          <Tab label="页面" />
+        </Tabs>
+      </AppBar>
+      {value === 0 && <TabContainer>
+        <React.Suspense fallback={null}>
+          <Attribute />
+        </React.Suspense>
+      </TabContainer>}
+      {value === 1 && <TabContainer>
+        <React.Suspense fallback={null}>
+          <Layers />
+        </React.Suspense>
+      </TabContainer>}
+      {value === 2 && <TabContainer>
+        <React.Suspense fallback={null}>
+          <Pages />
+        </React.Suspense>
+      </TabContainer>}
+    </div>
+  );
 }
 
-class FunctionTabs extends React.Component<{}, State> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      selectedItem: 0
-    }
-  }
-
-  handleMenuSelect = (order: number) => {
-    this.setState({
-      selectedItem: order
-    })
-  }
-
-  renderTabsItem(isSelected: boolean, name: string, index: number) {
-    return isSelected ? (
-      <div
-        key={index}
-        className={`${styles.item} ${styles.itemSelected}`}
-        onClick={() => this.handleMenuSelect(index)}
-      >
-        {name}
-      </div>
-    ) : (
-        <div
-          key={index}
-          className={`${styles.item}`}
-          onClick={() => this.handleMenuSelect(index)}
-        >
-          {name}
-        </div>
-      )
-  }
-
-  renderTabsDetail(index: number) {
-    switch (index) {
-      case 0:
-        return <Attribute />
-      case 1:
-        return <Layers />
-      case 2:
-        return <Pages />
-      default:
-        return <Attribute />
-    }
-  }
-
-  render() {
-    let tabs = ['Attribute', 'Layers', 'Pages']
-    let renderTabs = tabs.map((item, index) => {
-      let value
-      if (index === this.state.selectedItem) {
-        value = this.renderTabsItem(true, item, index)
-      } else {
-        value = this.renderTabsItem(false, item, index)
-      }
-      return value
-    })
-    let renderDetail = this.renderTabsDetail(this.state.selectedItem)
-    return (
-      <div className={styles.functiontabs}>
-        <div className={styles.tabs}>{renderTabs}</div>
-        <div className={styles.itemDetail}>{renderDetail}</div>
-      </div>
-    )
-  }
-}
-
-export default FunctionTabs
+export default SimpleTabs

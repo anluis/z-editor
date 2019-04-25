@@ -1,4 +1,5 @@
 import { ADD_COM, UPDATE_COM, DELETE_COM, FOCUS_COM } from "../constants/ActionTypes";
+import { RouteComponentProps } from "react-router";
 
 export interface BaseCom {
   id: number
@@ -11,7 +12,7 @@ export interface BaseCom {
 }
 
 export interface ImageCom extends BaseCom {
-  backgroundColor: string
+  imgUrl: string
 }
 
 export interface TextCom extends BaseCom {
@@ -21,7 +22,20 @@ export interface TextCom extends BaseCom {
   context: string
 }
 
-export type Com = ImageCom | TextCom
+export interface VideoCom extends BaseCom {
+  videoUrl: string
+}
+
+export interface PhotoGetCom extends BaseCom, RouteComponentProps {
+
+}
+
+export interface LottieCom extends BaseCom {
+  path: string
+  assetsPath: string
+}
+
+export type Com = ImageCom | TextCom | VideoCom | PhotoGetCom | LottieCom
 
 export type Coms = Array<Com>
 

@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Com, TextCom } from '../../types/coms';
+import { Com, TextCom, ImageCom, VideoCom, PhotoGetCom, LottieCom } from '../../types/coms';
+import { TEXT, IMAGE, VIDEO, PHOTO_GET, LOTTIE } from '../../constants/coms'
 import Text from '../create/Text'
 import Image from '../create/Image'
 import Video from '../create/Video'
-import { TEXT, IMAGE, VIDEO, PHOTO_GET, LOTTIE } from '../../constants/coms'
 import PhotoGet from '../create/PhotoGet';
 import Lottie from '../create/Lottie';
 
@@ -17,13 +17,13 @@ const RenderCom: React.SFC<RenderComProps> = (props) => {
     case TEXT:
       return <Text {...com as TextCom} />
     case IMAGE:
-      return <Image />
+      return <Image {...com as ImageCom} />
     case VIDEO:
-      return <Video />
+      return <Video {...com as VideoCom} />
     case PHOTO_GET:
-      return <PhotoGet />
+      return <PhotoGet {...com as PhotoGetCom} />
     case LOTTIE:
-      return <Lottie />
+      return <Lottie {...com as LottieCom} />
     default:
       return null
   }

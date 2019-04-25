@@ -1,7 +1,22 @@
 import * as React from 'react'
-class Image extends React.Component {
+import { ImageCom } from '../../types/coms'
+
+interface Props extends ImageCom {
+
+}
+
+class Image extends React.Component<Props> {
   render() {
-    return null
+    const { width, height, imgUrl } = this.props
+    const bindStyle = {
+      width: width + 'px',
+      height: height + 'px',
+      backgroundImage: `url("` + imgUrl + `")`,
+      backgroundSize: 'cover',
+    }
+    return (
+      <div style={bindStyle}></div>
+    )
   }
 }
 

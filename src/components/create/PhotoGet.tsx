@@ -5,8 +5,9 @@ import goodsxsd from '../../apis/common/goodsxsd'
 // interface OwnProps extends RouteComponentProps {
 
 // }
-
-type Props = PhotoGetCom
+interface Props extends PhotoGetCom {
+  mode?: string
+}
 
 interface OwnState {
   imgUrl: string | null

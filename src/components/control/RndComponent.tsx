@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 
 interface OwnProps {
   com: Com
+  mode?: string
 }
 
 interface DispatchProps {
@@ -21,11 +22,15 @@ type Props = OwnProps & DispatchProps
 
 class RndComponent extends React.Component<Props> {
   render() {
-    const { com, focusCom, updateCom } = this.props
+    const { com, focusCom, updateCom, mode } = this.props
+    const bindRndStyle = {
+      border: '1px solid rgb(8, 161, 239)',
+      overflow: 'hidden'
+    }
     return (
       <Rnd
         bounds={'.bound'}
-        style={{ border: '1px solid rgb(8, 161, 239)', paddingTop: '20px' }}
+        style={bindRndStyle}
         size={{ width: com.width, height: com.height }}
         position={{ x: com.x, y: com.y }}
         onDragStart={() => {
@@ -51,7 +56,7 @@ class RndComponent extends React.Component<Props> {
           updateCom(com.id, comCopy)
         }}
       >
-        <RenderCom com={com} />
+        <RenderCom com={com} mode={mode} />
       </Rnd>
     )
   }

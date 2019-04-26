@@ -3,7 +3,7 @@ const lottie = require('lottie-web')
 import { LottieCom } from '../../types/coms'
 
 interface Props extends LottieCom {
-
+  mode?: string
 }
 
 class Lottie extends React.Component<Props> {

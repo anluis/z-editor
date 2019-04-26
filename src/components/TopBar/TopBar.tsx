@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
 import { Com } from '../../types/coms'
 import { topBarItem, topBarSettings } from '../../constants/topBar'
-import { TEXT, initText } from '../../constants/coms';
+import { TEXT, initText, IMAGE, initImage } from '../../constants/coms';
 
 interface OwnProps {
   currentPageId: number
@@ -46,10 +46,18 @@ class TopBar extends React.Component<Props> {
       case TEXT:
         const newText = {
           ...initText,
-          name: `Text-${comsLength + 1}`,
+          name: `Text-${comsLength}`,
           id: comsLength,
         }
         addCom(currentPageId, newText)
+      case IMAGE:
+        const newImage = {
+          ...initImage,
+          id: comsLength,
+          name: `Image-${comsLength}`,
+          imgUrl: 'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'
+        }
+        addCom(currentPageId, newImage)
       default:
         return
     }
@@ -58,6 +66,7 @@ class TopBar extends React.Component<Props> {
 
 
   render() {
+    const { comsLength } = this.props
     const renderItem = (item: topBarItem, index: number) => {
       return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
         {item.name}

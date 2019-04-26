@@ -9,9 +9,6 @@ import Typography from '@material-ui/core/Typography';
 const Attribute = React.lazy(() => import('./Attribute/Attribute'))
 const Layers = React.lazy(() => import('./Layers/Layers'))
 const Pages = React.lazy(() => import('./Pages/Pages'))
-// import Attribute from './Attribute/Attribute'
-// import Layers from './Layers/Layers'
-// import Pages from './Pages/Pages'
 
 function TabContainer(props: any) {
   return (

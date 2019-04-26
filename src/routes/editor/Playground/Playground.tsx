@@ -2,7 +2,7 @@ import * as React from 'react'
 import styles from './Playground.module.css'
 import FunctionTabs from '../../../components/FunctionTabs/FunctionTabs'
 import IStoreState from '../../../types/IStoreState';
-import { getCurrentPage, getCurrentComById } from '../../../utils/getters/works'
+import { getCurrentPage } from '../../../utils/getters/works'
 import { Page } from '../../../types/pages';
 import { connect } from 'react-redux'
 import TopBar from '../../../components/TopBar/TopBar';
@@ -30,10 +30,9 @@ class Editor extends React.Component<Props> {
       border: '1px dashed #a3afb7',
       width: `${width}px`,
       backgroundColor: '#eef1f6',
-      boxSizing: 'border-box'
     }
     const RenderComsWithControl = currentComs.map((item) => {
-      return <RndComponent com={item} key={`${item.type}-${item.id}`} />
+      return <RndComponent com={item} key={`${item.type}-${item.id}`} mode={'editor'} />
     })
     return (
       <div className={styles.playground}>

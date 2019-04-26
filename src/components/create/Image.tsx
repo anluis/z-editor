@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ImageCom } from '../../types/coms'
 
 interface Props extends ImageCom {
-
+  mode?: string
 }
 
 class Image extends React.Component<Props> {

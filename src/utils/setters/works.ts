@@ -1,11 +1,12 @@
 import { State } from '../../reducers/work/pagesReducer'
 import { Com } from '../../types/coms'
+import { Page } from '../../types/pages'
 export const addComOrderInCurrentPage = (state: State, currentPageId: number, com: Com) => {
-  const findResult = state.findIndex(item => item.id === currentPageId)
-  if (findResult === -1) {
-    return state
-  } else {
-    state[findResult].order.push(com.id)
-    return state
-  }
+  let stateCopy = [...state]
+  stateCopy.map((item: Page, index: number) => {
+    if (item.id === currentPageId) {
+      item.order = item.order.concat([com.id])
+    }
+  })
+  return stateCopy
 }

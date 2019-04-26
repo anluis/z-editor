@@ -3,7 +3,7 @@ import { Com, ComAction } from '../types/coms';
 
 export const addCom = (addInWhatPagesId: number, com: Com): ComAction => ({
   type: types.ADD_COM,
-  id: addInWhatPagesId,
+  targetPageId: addInWhatPagesId,
   com
 })
 

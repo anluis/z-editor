@@ -1,7 +1,5 @@
 import { ADD_PAGE, DELETE_PAGE, UPDATE_PAGE, FOCUS_PAGE } from '../constants/ActionTypes'
 
-export type Pages = Array<Page>
-
 export interface PageStyles {
   width: number
   height: number
@@ -20,6 +18,8 @@ export interface Page {
   styles: PageStyles
   settings: PageSettings
 }
+
+export type Pages = Array<Page>
 
 interface AddPageAction {
   type: typeof ADD_PAGE,

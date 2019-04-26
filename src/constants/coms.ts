@@ -1,4 +1,4 @@
-import { TextCom } from "../types/coms";
+import { TextCom, ImageCom } from "../types/coms";
 export const TEXT = 'TEXT'
 export const IMAGE = 'IMAGE'
 export const VIDEO = 'VIDEO'
@@ -10,11 +10,24 @@ export const initText: TextCom = {
   y: 0,
   width: 100,
   height: 100,
-  fontSize: '14',
+  fontSize: 14,
   color: 'black',
   letterSpacing: '0',
   name: '',
   type: TEXT,
   id: 0,
-  context: ''
+  context: '',
+  backgroundColor: 'rgba(0,0,0,0)',
+  opacity: 0
+}
+
+export const initImage: ImageCom = {
+  name: '',
+  type: 'IMAGE',
+  id: 0,
+  x: 0,
+  y: 0,
+  width: 100,
+  height: 100,
+  imgUrl: ''
 }

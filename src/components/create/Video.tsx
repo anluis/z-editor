@@ -2,7 +2,7 @@ import * as React from 'react'
 import { VideoCom } from '../../types/coms'
 
 interface Props extends VideoCom {
-
+  mode?: string
 }
 
 class Video extends React.Component<Props> {

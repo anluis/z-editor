@@ -27,7 +27,9 @@ class Editor extends React.Component<Props> {
     }
     return <div className={styles.main}>
       <MenuBar />
-      <Route path="/editor" component={PlayGround} exact />
+      <React.Suspense fallback={null}>
+        <Route path="/editor" component={PlayGround} exact />
+      </React.Suspense>
       {/* <Route path="/editor/material/" component={Material} />
       <Route path="/editor/works/" component={Works} />
       <Route path="/editor/templates" component={Templates} /> */}

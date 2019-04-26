@@ -1,7 +1,7 @@
-import { PageAction } from '../../types/pages'
+import { PageAction, Pages } from '../../types/pages'
 import { ADD_COM, ADD_PAGE } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
-export type State = Array<any>
+export type State = Pages
 export type Action = PageAction | ComAction
 import { addComOrderInCurrentPage } from '../../utils/setters/works'
 import { initPage } from '../../constants/pages'
@@ -13,7 +13,7 @@ const initState = [
 const pagesReducers = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case ADD_COM:
-      return addComOrderInCurrentPage(state, action.id, action.com)
+      return addComOrderInCurrentPage(state, action.targetPageId, action.com)
     case ADD_PAGE:
       return [...state, action.page]
     default:

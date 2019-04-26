@@ -4,7 +4,6 @@ import { RouteComponentProps } from "react-router";
 export interface BaseCom {
   id: number
   name: string
-  type: string
   x: number
   y: number
   width: number
@@ -13,26 +12,32 @@ export interface BaseCom {
 
 export interface ImageCom extends BaseCom {
   imgUrl: string
+  type: 'IMAGE'
 }
 
 export interface TextCom extends BaseCom {
-  fontSize: string
+  fontSize: number
   color: string
   letterSpacing: string
   context: string
+  type: 'TEXT'
+  backgroundColor: string
+  opacity: number
 }
 
 export interface VideoCom extends BaseCom {
   videoUrl: string
+  type: 'VIDEO'
 }
 
 export interface PhotoGetCom extends BaseCom, RouteComponentProps {
-
+  type: 'PHOTO_GET'
 }
 
 export interface LottieCom extends BaseCom {
   path: string
   assetsPath: string
+  type: 'LOTTIE'
 }
 
 export type Com = ImageCom | TextCom | VideoCom | PhotoGetCom | LottieCom
@@ -41,7 +46,7 @@ export type Coms = Array<Com>
 
 export interface AddCom {
   type: typeof ADD_COM
-  id: number
+  targetPageId: number
   com: Com
 }
 

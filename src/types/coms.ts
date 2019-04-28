@@ -30,8 +30,9 @@ export interface VideoCom extends BaseCom {
   type: 'VIDEO'
 }
 
-export interface PhotoGetCom extends BaseCom, RouteComponentProps {
-  type: 'PHOTO_GET'
+export interface PhotoGetCom extends BaseCom {
+  type: 'PHOTO_GET',
+  filter?: string
 }
 
 export interface LottieCom extends BaseCom {
@@ -59,6 +60,7 @@ export interface UpdateCom {
 export interface DeleteCom {
   type: typeof DELETE_COM
   id: number
+  targetPageId: number
 }
 
 export interface FocusCom {

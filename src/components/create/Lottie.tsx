@@ -26,7 +26,11 @@ class Lottie extends React.Component<Props> {
   }
   render() {
     const { id, width, height } = this.props
-    return <div id={`lottie-${id}`}></div>
+    const bindStyle = {
+      width: width + 'px',
+      height: height + 'px'
+    }
+    return <div id={`lottie-${id}`} style={bindStyle}></div>
   }
 }
 

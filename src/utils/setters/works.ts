@@ -10,3 +10,15 @@ export const addComOrderInCurrentPage = (state: State, currentPageId: number, co
   })
   return stateCopy
 }
+
+export const removeComOrderInCurrentPage = (state: State, targetPageId: number, comId: number, ) => {
+  let stateCopy = [...state]
+  stateCopy.map((item: Page, pageIndex) => {
+    if (item.id === targetPageId) {
+      // item.order.filter(n => n !== comId)
+      stateCopy[pageIndex].order = item.order.filter(n => n !== comId)
+    }
+  })
+  console.log(stateCopy)
+  return stateCopy
+}

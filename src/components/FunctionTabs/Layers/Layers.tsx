@@ -15,23 +15,23 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  deleteCom: (id: number) => void
+  deleteCom: (id: number, currentPageId: number) => void
   updateCom: (id: number, com: Com) => void
 }
 
 type Props = StateProps & DispatchProps
 
-const SortableItem = SortableElement(({ item, deleteCom }: { item: Com, deleteCom: (id: number) => void }) => {
+const SortableItem = SortableElement(({ item, currentPageId, deleteCom }: { item: Com, currentPageId: number, deleteCom: (id: number, currentPageId: number) => void }) => {
   return (
     <div className={styles.layerItem}>
       {item.name}
       <Button>设置</Button>
-      <Button onClick={() => deleteCom(item.id)}>删除</Button>
+      <Button onClick={() => deleteCom(item.id, currentPageId)}>删除</Button>
     </div>
   )
 })
 
-const SortableList = SortableContainer(({ items, deleteCom }: { items: Coms, deleteCom: (id: number) => void }) => {
+const SortableList = SortableContainer(({ items, currentPageId, deleteCom }: { items: Coms, currentPageId: number, deleteCom: (id: number) => void }) => {
   return (
     <div className={styles.layers}>
       {items.map((item, index) => {
@@ -39,6 +39,7 @@ const SortableList = SortableContainer(({ items, deleteCom }: { items: Coms, del
           item={item}
           key={`sortableItem-${index}`}
           index={index}
+          currentPageId={currentPageId}
           deleteCom={deleteCom}
         />
       })}
@@ -55,8 +56,8 @@ class Layers extends React.Component<Props> {
 
   }
 
-  deleteCom = (id: number) => {
-    this.props.deleteCom(id)
+  deleteCom = (id: number, currentPageId: number) => {
+    this.props.deleteCom(id, currentPageId)
   }
 
 
@@ -83,8 +84,8 @@ const mapStateToProps = (state: IStoreState) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
   return {
-    deleteCom: (id: number) => {
-      dispatch(deleteCom(id))
+    deleteCom: (id: number, currentPageId: number) => {
+      dispatch(deleteCom(id, currentPageId))
     },
     updateCom: (id: number, com: Com) => {
       dispatch(updateCom(id, com))

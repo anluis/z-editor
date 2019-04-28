@@ -9,22 +9,52 @@ import { getCurrentComById } from '../../../utils/getters/works'
 import InputLabel from '@material-ui/core/InputLabel';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { updateCom } from '../../../actions/coms'
+import { updateCom, deleteCom } from '../../../actions/coms'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 interface DispatchProps {
   updateCom: (id: number, com: Com) => void
+  deleteCom: (id: number, targetPageId: number) => void
 }
 
 interface OwnProps {
   currentCom: Com | undefined
+  targetPageId: number
+}
+
+interface OwnState {
+  deleteDialogOpen: boolean
 }
 
 type Props = DispatchProps & OwnProps
 
-class Attribute extends React.Component<Props, any> {
-  // constructor(props: Props) {
-  //   super(props)
-  // }
+type State = OwnState
+
+class Attribute extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      deleteDialogOpen: false
+    }
+  }
+
+  handleDialogOpen = () => {
+    this.setState({ deleteDialogOpen: true })
+  }
+
+  hanldeDialogClose = () => {
+    this.setState({ deleteDialogOpen: false })
+    const { currentCom, targetPageId } = this.props
+    if (!currentCom) {
+      return
+    }
+    this.props.deleteCom(currentCom.id, targetPageId)
+  }
 
   updateTextContext = (e: string) => {
     const { currentCom, updateCom } = this.props
@@ -92,11 +122,14 @@ class Attribute extends React.Component<Props, any> {
   render() {
     const { currentCom } = this.props
     if (!currentCom) {
-      return null
+      return <div> 你竟然没有选中任何一个组件 </div>
     }
     return (
       <div className={styles.attributes}>
         <div className={styles.base}>
+          <Button variant="outlined" color="secondary" onClick={this.handleDialogOpen}>
+            删除
+          </Button>
           <div className={styles.attrId}>
             <InputLabel>组件编号:  </InputLabel>
             <Input
@@ -168,6 +201,27 @@ class Attribute extends React.Component<Props, any> {
               </Input>
             </div>)}
         </div>
+        <Dialog
+          open={this.state.deleteDialogOpen}
+          onClose={this.hanldeDialogClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">前方高能预警！</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              你确实要删除组件{currentCom.name}吗？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.hanldeDialogClose} color="primary">
+              取消
+            </Button>
+            <Button onClick={this.hanldeDialogClose} color="primary" autoFocus>
+              确定
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     )
   }
@@ -175,8 +229,10 @@ class Attribute extends React.Component<Props, any> {
 
 const mapStateToProps = (state: IStoreState) => {
   const currentCom = getCurrentComById(state)
+  const targetPageId = state.status.currentPageId
   return {
-    currentCom
+    currentCom,
+    targetPageId
   }
 }
 
@@ -184,6 +240,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
   return {
     updateCom: (id: number, com: Com) => {
       dispatch(updateCom(id, com))
+    },
+    deleteCom: (id: number,targetPageId: number) => {
+      dispatch(deleteCom(id, targetPageId))
     }
   }
 }

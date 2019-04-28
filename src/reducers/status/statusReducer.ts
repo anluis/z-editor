@@ -1,5 +1,5 @@
 import { StatusAction, StatusState } from '../../types/status'
-import { SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE, FOCUS_COM } from '../../constants/ActionTypes';
+import { SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE, FOCUS_COM, DELETE_COM, ADD_COM } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
 
 type Action = StatusAction | ComAction
@@ -31,6 +31,16 @@ const statusReducer = (state: State = initState, action: Action): State => {
       return {
         ...state,
         currentComId: action.id
+      }
+    case DELETE_COM:
+      return {
+        ...state,
+        currentComId: null
+      }
+    case ADD_COM:
+      return {
+        ...state,
+        currentComId: action.com.id
       }
     default:
       return state

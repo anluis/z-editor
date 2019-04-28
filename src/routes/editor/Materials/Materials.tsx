@@ -1,5 +1,5 @@
 import * as React from 'react'
-import templates from '../../../apis/templates/templates'
+import materials from '../../../apis/materials/materials'
 import IStoreState from '../../../types/IStoreState';
 import { connect } from 'react-redux'
 
@@ -9,7 +9,7 @@ interface OwnProps {
 
 type Props = OwnProps
 
-class Templates extends React.Component<Props> {
+class Materials extends React.Component<Props> {
   componentDidMount() {
     const { accessToken } = this.props
     const args = {
@@ -17,7 +17,7 @@ class Templates extends React.Component<Props> {
       page: 1,
       perPage: 10
     }
-    templates(args).then(r => {
+    materials(args).then(r => {
       console.dir(r)
     })
   }
@@ -35,4 +35,4 @@ const mapStateToProps = (state: IStoreState) => {
 
 
 
-export default connect(mapStateToProps)(Templates)
+export default connect(mapStateToProps)(Materials)

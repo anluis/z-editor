@@ -2,7 +2,7 @@ import { SET_CURRENT_PAGE_ID, SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_
 
 export interface StatusState {
   currentPageId: number
-  currentComId: number
+  currentComId: number | null
   isLoading: boolean
   errorMessage: string
 }

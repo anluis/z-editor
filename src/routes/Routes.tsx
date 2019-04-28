@@ -15,13 +15,13 @@ class Routes extends React.Component<RoutesProps> {
   render() {
     const defaultProtectedRouteProps: ProtectedRouteProps = {
       isAuthenticated: this.props.isAuthenticated,
-      authenticationPath: 'login'
+      authenticationPath: '/login'
     }
     return (
       <Suspense fallback={null}>
         <Switch>
           <Route path='/' component={Login} exact />
-          <ProtectedRoute {...defaultProtectedRouteProps} exact path="/editor" component={Editor} />
+          <ProtectedRoute {...defaultProtectedRouteProps} path="/editor" component={Editor} />
           <Route path="/login" component={Login} />
           <Route path="/work" component={Work} />
         </Switch>

@@ -6,6 +6,7 @@ export interface topBarItem {
   type: string
   imgUrl: string
 }
+
 const topBarSettings: Array<topBarItem> = [
   {
     name: 'Text',

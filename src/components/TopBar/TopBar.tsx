@@ -8,11 +8,24 @@ import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
 import { Com } from '../../types/coms'
 import { topBarItem, topBarSettings } from '../../constants/topBar'
-import { TEXT, initText, IMAGE, initImage } from '../../constants/coms';
+import maxOfArray from '../../utils/helper/maxOfArray'
+
+import {
+  TEXT,
+  initText,
+  IMAGE,
+  initImage,
+  VIDEO,
+  initVideo,
+  LOTTIE,
+  initLottie,
+  PHOTO_GET,
+  initPhotoGet
+} from '../../constants/coms';
 
 interface OwnProps {
   currentPageId: number
-  comsLength: number
+  comsIds: Array<number>
 }
 
 interface DispatchProps {
@@ -41,23 +54,54 @@ class TopBar extends React.Component<Props> {
   }
 
   handleAddCom = (type: string) => {
-    const { currentPageId, comsLength, addCom } = this.props
+    const { currentPageId, comsIds, addCom } = this.props
+    const newId = maxOfArray(comsIds) + 1
     switch (type) {
       case TEXT:
+
         const newText = {
           ...initText,
-          name: `Text-${comsLength}`,
-          id: comsLength,
+          name: `Text-${newId}`,
+          id: newId,
         }
         addCom(currentPageId, newText)
+        return
       case IMAGE:
         const newImage = {
           ...initImage,
-          id: comsLength,
-          name: `Image-${comsLength}`,
+          id: newId,
+          name: `Image-${newId}`,
           imgUrl: 'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'
         }
         addCom(currentPageId, newImage)
+        return
+      case VIDEO:
+        const newVideo = {
+          ...initVideo,
+          id: newId,
+          name: `Video-${newId}`,
+          videoUrl: 'http://h5-images.oss-cn-shanghai.aliyuncs.com/xingshidu_h5/marketing/pages/ad/vedio.mp4'
+        }
+        addCom(currentPageId, newVideo)
+        return
+      case LOTTIE:
+        const newLottie = {
+          ...initLottie,
+          id: newId,
+          name: `Lottie-${newId}`,
+          path: 'http://cdn.xingstation.cn/fe/marketing/jqsjb/json/data.json',
+          assetsPath: 'http://cdn.xingstation.cn/fe/marketing/jqsjb/img/'
+        }
+        addCom(currentPageId, newLottie)
+        return
+      case PHOTO_GET:
+        const newPhotoGet = {
+          ...initPhotoGet,
+          id: newId,
+          name: `PhotoGet-${newId}`
+        }
+        addCom(currentPageId, newPhotoGet)
+        return
       default:
         return
     }
@@ -66,11 +110,10 @@ class TopBar extends React.Component<Props> {
 
 
   render() {
-    const { comsLength } = this.props
     const renderItem = (item: topBarItem, index: number) => {
-      return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
+      return <div key={index} className={styles.fitem} >
         {item.name}
-        <img className={styles.icon} src={item.imgUrl} />
+        <img className={styles.icon} src={item.imgUrl} onClick={() => this.handleAddCom(item.type)} />
       </div>
 
     }
@@ -104,11 +147,11 @@ class TopBar extends React.Component<Props> {
 
 const mapStateToProps = (state: IStoreState) => {
   const { currentComId, currentPageId } = state.status
-  const comsLength = state.work.coms.length
+  const comsIds = state.work.coms.map(item => { return item.id })
   return {
     currentComId,
     currentPageId,
-    comsLength
+    comsIds
   }
 }
 

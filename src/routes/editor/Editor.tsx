@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styles from './Editor.module.css'
-import TopBar from '../../components/TopBar/TopBar';
 import { Route, Redirect } from 'react-router-dom';
 import MenuBar from '../../components/MenuBar/MenuBar';
 import { RouteComponentProps } from 'react-router-dom'
@@ -8,7 +7,7 @@ import { connect } from 'react-redux'
 import IStoreState from '../../types/IStoreState';
 
 const PlayGround = React.lazy(() => import('./Playground/Playground'))
-const Material = React.lazy(() => import('./Material/Material'))
+const Materials = React.lazy(() => import('./Materials/Materials'))
 const Works = React.lazy(() => import('./Works/Works'))
 const Templates = React.lazy(() => import('./Templates/Templates'))
 
@@ -28,11 +27,12 @@ class Editor extends React.Component<Props> {
     return <div className={styles.main}>
       <MenuBar />
       <React.Suspense fallback={null}>
-        <Route path="/editor" component={PlayGround} exact />
+        <Route path="/editor" exact component={PlayGround} />
+        <Route path="/editor/materials" component={Materials} />
+        <Route path="/editor/works" component={Works} />
+        <Route path="/editor/templates" component={Templates} />
       </React.Suspense>
-      {/* <Route path="/editor/material/" component={Material} />
-      <Route path="/editor/works/" component={Works} />
-      <Route path="/editor/templates" component={Templates} /> */}
+
     </div>
   }
 }

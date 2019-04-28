@@ -10,8 +10,15 @@ interface OwnProps {
 type Props = OwnProps
 
 class Pages extends React.Component<Props> {
+
   render() {
-    return null
+    const bindStyles: React.CSSProperties = {
+      textAlign: 'center',
+      padding: '20px'
+    }
+    return <div style={bindStyles}>
+      当前暂时只支持单页面
+    </div>
   }
 }
 

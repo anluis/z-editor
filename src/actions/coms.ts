@@ -18,7 +18,8 @@ export const focusCom = (id: number): ComAction => ({
   id
 })
 
-export const deleteCom = (id: number): ComAction => ({
+export const deleteCom = (comId: number, targetPageId: number): ComAction => ({
   type: types.DELETE_COM,
-  id
+  id: comId,
+  targetPageId
 })

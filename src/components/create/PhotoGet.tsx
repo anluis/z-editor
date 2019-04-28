@@ -2,10 +2,9 @@ import * as React from 'react'
 const queryString = require('query-string')
 import { PhotoGetCom } from '../../types/coms';
 import goodsxsd from '../../apis/common/goodsxsd'
-// interface OwnProps extends RouteComponentProps {
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-// }
-interface Props extends PhotoGetCom {
+interface Props extends PhotoGetCom, RouteComponentProps {
   mode?: string
 }
 
@@ -28,6 +27,9 @@ class PhotoGet extends React.Component<Props, State> {
 
   fetchPhoto = async () => {
     const { id } = queryString.parse(this.props.location.search)
+    if (!id) {
+      return
+    }
     try {
       const res = await goodsxsd(id)
       if (res && res.image) {
@@ -41,15 +43,27 @@ class PhotoGet extends React.Component<Props, State> {
   }
 
   render() {
-    const { width, height } = this.props
+    const { width, height, filter } = this.props
     const { imgUrl } = this.state
     const bindStyle = {
       width: width + 'px',
       height: height + 'px',
       backgroundImage: `url("` + imgUrl + `")`,
     }
+    const bindStyleNotWithImg = {
+      width: width + 'px',
+      height: height + 'px',
+      background: 'gray',
+      filter: filter,
+      display: 'flex',
+      justifyContext: 'center',
+      alignItems: 'center'
+    }
     if (!this.state.imgUrl) {
-      return null
+      return <div style={bindStyleNotWithImg}>
+        <div>提取的照片将会出现在这里</div>
+        <div>照片比例为 {width} * {height}</div>
+      </div>
     }
     return <div style={bindStyle}>
 
@@ -57,4 +71,4 @@ class PhotoGet extends React.Component<Props, State> {
   }
 }
 
-export default PhotoGet
+export default withRouter(PhotoGet)

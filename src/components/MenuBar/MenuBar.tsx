@@ -22,21 +22,30 @@ class MenuBar extends React.Component<Props> {
     this.props.logout()
   }
 
+  navigate = (path: string) => {
+    this.props.history.push({
+      pathname: `/${path}`
+    })
+  }
+
   render() {
     return <div className={styles.menubar}>
-      <div className={styles.pane}>
-        Works
+      <div className={styles.pane} onClick={() => this.navigate('editor')}>
+        工作区
       </div>
-      <div className={styles.pane}>
-        Templates
+      <div className={styles.pane} onClick={() => this.navigate('editor/works')}>
+        作品
       </div>
-      <div className={styles.pane}>
-        Material
+      <div className={styles.pane} onClick={() => this.navigate('editor/templates')}>
+        模版
+      </div>
+      <div className={styles.pane} onClick={() => this.navigate('editor/materials')}>
+        素材
       </div>
       <div
         className={`${styles.pane} ${styles.logout}`}
         onClick={this.handleLogOut}>
-        logOut
+        登出
       </div>
     </div>
   }

@@ -1,3 +1,15 @@
 .layers {
-  
+  position: relative;
+  overflow-y: scroll;
+}
+.layerItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  border-top: 1px solid rgb(236, 230, 230);
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

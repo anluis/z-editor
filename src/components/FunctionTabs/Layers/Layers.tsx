@@ -17,6 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 interface StateProps {
   currentComs: Coms
   currentPageId: number
+
 }
 
 interface DispatchProps {
@@ -27,16 +28,18 @@ interface DispatchProps {
 interface State {
   deleteDialogOpen: boolean
   choosenCom: Com | null
+  topRemindText: string
+  canBeSort: boolean
 }
 
 type Props = StateProps & DispatchProps
 
-const SortableItem = SortableElement(({ item, currentPageId, handleDialogOpen }: { item: Com, currentPageId: number, handleDialogOpen: (com: Com) => void }) => {
+const SortableItem = SortableElement(({ item, canBeSort, handleDialogOpen }: { item: Com, canBeSort: boolean, handleDialogOpen: (com: Com) => void }) => {
   return (
     <div className={styles.layerItem}>
       {item.name}
-      <Button variant="outlined">设置</Button>
-      <Button
+      {/* <Button variant="outlined">设置</Button> */}
+      {!canBeSort && <Button
         variant="outlined"
         color="secondary"
         onClick={(e) => {
@@ -45,23 +48,24 @@ const SortableItem = SortableElement(({ item, currentPageId, handleDialogOpen }:
         }}
       >
         删除
-      </Button>
+      </Button>}
+      {canBeSort && <img className={styles.dragbutton} src={'https://cdn.xingstation.cn/fe/cms/img/drag.svg'} />}
     </div>
   )
 })
 
-const SortableList = SortableContainer(({ items, currentPageId, handleDialogOpen }: { items: Coms, currentPageId: number, handleDialogOpen: (com: Com) => void }) => {
+const SortableList = SortableContainer(({ items, currentPageId, handleDialogOpen, canBeSort }: { items: Coms, currentPageId: number, handleDialogOpen: (com: Com) => void, canBeSort: boolean }) => {
   return (
     <div className={styles.layers}>
       {items.map((item, index) => {
         return (
           <SortableItem
             // need to process Here
-            // disabled
+            disabled={!canBeSort}
+            canBeSort={canBeSort}
             item={item}
             key={`sortableItem-${index}`}
             index={index}
-            currentPageId={currentPageId}
             handleDialogOpen={handleDialogOpen}
           />
         )
@@ -75,12 +79,13 @@ class Layers extends React.Component<Props, State> {
     super(props)
     this.state = {
       deleteDialogOpen: false,
-      choosenCom: null
+      choosenCom: null,
+      topRemindText: '点击进入排序',
+      canBeSort: false
     }
   }
 
   handleDialogOpen = (item: Com) => {
-    console.log(22)
     this.setState({ deleteDialogOpen: true, choosenCom: item })
   }
 
@@ -95,19 +100,34 @@ class Layers extends React.Component<Props, State> {
   }
 
   onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number, newIndex: number }) => {
-
+    console.log(oldIndex)
+    console.log(newIndex)
   }
 
   deleteCom = (id: number, currentPageId: number) => {
     this.props.deleteCom(id, currentPageId)
   }
 
+  sortModeChange = () => {
+    this.setState({
+      topRemindText: this.state.canBeSort ? '点击进入排序' : '关闭排序模式',
+      canBeSort: !this.state.canBeSort
+    })
+  }
+
 
   render() {
     const { currentComs, currentPageId } = this.props
+    const { topRemindText, canBeSort } = this.state
     return (
       <>
+        <div className={styles.inaddmode}>
+          <Button color="primary" onClick={this.sortModeChange}>
+            {topRemindText}
+          </Button>
+        </div>
         <SortableList
+          canBeSort={canBeSort}
           items={currentComs}
           currentPageId={currentPageId}
           onSortEnd={this.onSortEnd}

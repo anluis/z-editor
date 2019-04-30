@@ -1,5 +1,4 @@
 import { ADD_COM, UPDATE_COM, DELETE_COM, FOCUS_COM } from "../constants/ActionTypes";
-import { RouteComponentProps } from "react-router";
 
 export interface BaseCom {
   id: number

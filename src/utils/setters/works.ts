@@ -19,6 +19,19 @@ export const removeComOrderInCurrentPage = (state: State, targetPageId: number, 
       stateCopy[pageIndex].order = item.order.filter(n => n !== comId)
     }
   })
-  console.log(stateCopy)
+  return stateCopy
+}
+
+export const exchangeOrderInPage = (state: State, targetPageId: number, oldComId: number, newComId: number) => {
+  let stateCopy = [...state]
+  stateCopy.map((item: Page, pageIndex) => {
+    if (item.id === targetPageId) {
+      const oldIndex = stateCopy[pageIndex].order.findIndex(e => e === oldComId)
+      const newIndex = stateCopy[pageIndex].order.findIndex(e => e === newComId)
+      let temp = stateCopy[pageIndex].order[oldIndex]
+      stateCopy[pageIndex].order[oldIndex] = stateCopy[pageIndex].order[newIndex]
+      stateCopy[pageIndex].order[newIndex] = temp
+    }
+  })
   return stateCopy
 }

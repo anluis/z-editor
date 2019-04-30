@@ -12,7 +12,7 @@ const Pages = React.lazy(() => import('./Pages/Pages'))
 
 function TabContainer(props: any) {
   return (
-    <Typography component="div" style={{ padding: 8 }}>
+    <Typography component="div" style={{ padding: 8, height: 'calc(100vh - 134px)', overflowY: 'scroll' }}>
       {props.children}
     </Typography>
   );

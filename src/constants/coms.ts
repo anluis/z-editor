@@ -8,8 +8,8 @@ export const LOTTIE = 'LOTTIE'
 export const initText: TextCom = {
   x: 0,
   y: 0,
-  width: 100,
-  height: 20,
+  width: 200,
+  height: 50,
   fontSize: 14,
   color: 'black',
   letterSpacing: '0',

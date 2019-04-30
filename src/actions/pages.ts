@@ -20,3 +20,10 @@ export const deletePage = (id: number): PageAction => ({
   type: types.DELETE_PAGE,
   id
 })
+
+export const exchangeComOrder = (targetPageId: number, oldComId: number, newComId: number) => ({
+  type: types.EXCHANGE_COM_ORDER,
+  targetPageId,
+  oldComId,
+  newComId
+})

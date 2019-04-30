@@ -53,6 +53,10 @@ class TopBar extends React.Component<Props> {
 
   }
 
+  preview = () => {
+
+  }
+
   handleAddCom = (type: string) => {
     const { currentPageId, comsIds, addCom } = this.props
     const newId = maxOfArray(comsIds) + 1
@@ -124,8 +128,8 @@ class TopBar extends React.Component<Props> {
     return (
       <>
         <div className={styles.head}>
-          <Button variant="contained" color="primary" onClick={() => this.undo}>Undo</Button>
-          <Button variant="contained" color="primary" onClick={() => this.undo}>Redo</Button>
+          <Button variant="contained" color="primary" onClick={() => this.undo}>撤销</Button>
+          <Button variant="contained" color="primary" onClick={() => this.undo}>重做</Button>
         </div>
 
         <div className={styles.functions}>
@@ -135,9 +139,15 @@ class TopBar extends React.Component<Props> {
         <div className={styles.publish}>
           <Button
             variant="contained" color="primary"
+            onClick={() => this.preview}
+            className={styles.publishbt}>
+            预览
+          </Button>
+          <Button
+            variant="contained" color="primary"
             onClick={() => this.publish}
             className={styles.publishbt}>
-            Publish
+            发布
           </Button>
         </div>
       </>

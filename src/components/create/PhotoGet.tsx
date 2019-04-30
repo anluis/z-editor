@@ -6,6 +6,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 interface Props extends PhotoGetCom, RouteComponentProps {
   mode?: string
+  zIndex: number
 }
 
 interface OwnState {
@@ -43,12 +44,13 @@ class PhotoGet extends React.Component<Props, State> {
   }
 
   render() {
-    const { width, height, filter } = this.props
+    const { width, height, filter, zIndex } = this.props
     const { imgUrl } = this.state
     const bindStyle = {
       width: width + 'px',
       height: height + 'px',
       backgroundImage: `url("` + imgUrl + `")`,
+      zIndex: zIndex
     }
     const bindStyleNotWithImg = {
       width: width + 'px',
@@ -57,7 +59,8 @@ class PhotoGet extends React.Component<Props, State> {
       filter: filter,
       display: 'flex',
       justifyContext: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      zIndex: zIndex
     }
     if (!this.state.imgUrl) {
       return <div style={bindStyleNotWithImg}>

@@ -2,10 +2,11 @@ import * as React from 'react'
 import { TextCom } from '../../types/coms'
 interface Props extends TextCom {
   mode?: string
+  zIndex: number
 }
 class Text extends React.Component<Props> {
   render() {
-    const { width, height, fontSize, context, letterSpacing, color, mode, x, y, backgroundColor } = this.props
+    const { width, height, fontSize, context, letterSpacing, color, mode, x, y, backgroundColor, zIndex } = this.props
     let bindStyle: React.CSSProperties = {
       position: 'absolute',
       width: width + 'px',
@@ -15,7 +16,8 @@ class Text extends React.Component<Props> {
       letterSpacing: letterSpacing + 'px',
       top: y + 'px',
       left: x + 'px',
-      backgroundColor: backgroundColor
+      backgroundColor: backgroundColor,
+      zIndex: zIndex
     }
     if (mode === 'editor') {
       bindStyle.top = '0'

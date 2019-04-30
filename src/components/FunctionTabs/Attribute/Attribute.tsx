@@ -49,7 +49,16 @@ class Attribute extends React.Component<Props, State> {
 
   hanldeDialogClose = () => {
     this.setState({ deleteDialogOpen: false })
-    const { currentCom, targetPageId } = this.props
+    // const { currentCom, targetPageId } = this.props
+    // if (!currentCom) {
+    //   return
+    // }
+    // this.props.deleteCom(currentCom.id, targetPageId)
+  }
+
+  hanldeDialogCloseAndDeleteCom = () => {
+    this.setState({ deleteDialogOpen: false })
+    const { targetPageId, currentCom } = this.props
     if (!currentCom) {
       return
     }
@@ -103,18 +112,6 @@ class Attribute extends React.Component<Props, State> {
     if ('letterSpacing' in currentCom) {
       let comCopy = { ...currentCom }
       comCopy.letterSpacing = letterSpacing
-      updateCom(currentCom.id, comCopy)
-    }
-  }
-
-  updateOpacity = (e: number) => {
-    const { currentCom, updateCom } = this.props
-    if (!currentCom || e > 1 || e < 0) {
-      return
-    }
-    if ('letterSpacing' in currentCom) {
-      let comCopy = { ...currentCom }
-      comCopy.opacity = e
       updateCom(currentCom.id, comCopy)
     }
   }
@@ -190,16 +187,6 @@ class Attribute extends React.Component<Props, State> {
               />
             </div>)
           }
-          {('opacity' in currentCom &&
-            <div className={styles.attr}>
-              <InputLabel>透明度:  </InputLabel>
-              <Input
-                inputProps={{ maxLength: 12 }}
-                onChange={e => this.updateOpacity(Number(e.target.value))}
-                value={currentCom.opacity}
-              >
-              </Input>
-            </div>)}
         </div>
         <Dialog
           open={this.state.deleteDialogOpen}
@@ -217,7 +204,7 @@ class Attribute extends React.Component<Props, State> {
             <Button onClick={this.hanldeDialogClose} color="primary">
               取消
             </Button>
-            <Button onClick={this.hanldeDialogClose} color="primary" autoFocus>
+            <Button onClick={this.hanldeDialogCloseAndDeleteCom} color="primary" autoFocus>
               确定
             </Button>
           </DialogActions>
@@ -241,7 +228,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
     updateCom: (id: number, com: Com) => {
       dispatch(updateCom(id, com))
     },
-    deleteCom: (id: number,targetPageId: number) => {
+    deleteCom: (id: number, targetPageId: number) => {
       dispatch(deleteCom(id, targetPageId))
     }
   }

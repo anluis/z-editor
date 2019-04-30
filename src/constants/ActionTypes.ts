@@ -29,6 +29,9 @@ export const SAVE_WORK_SUCCESS = 'SAVE_WORK_SUCCESS'
 export const SAVE_WORK_FAILURE = 'SAVE_WORK_FAILURE'
 export const APPLY_WORK = 'APPLY_WORK'
 
+// settings
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS'
+
 // main
 export const UNDO = 'UNDO'
 export const REDO = 'REDO'

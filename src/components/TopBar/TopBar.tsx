@@ -7,8 +7,15 @@ import { redo, undo } from '../../actions/status'
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
 import { Com } from '../../types/coms'
+import { updateSettings } from '../../actions/settings'
 import { topBarItem, topBarSettings } from '../../constants/topBar'
 import maxOfArray from '../../utils/helper/maxOfArray'
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import {
   TEXT,
@@ -26,19 +33,33 @@ import {
 interface OwnProps {
   currentPageId: number
   comsIds: Array<number>
+  title: string
+  desc: string
 }
 
 interface DispatchProps {
   redo: () => void
   undo: () => void
   addCom: (id: number, com: Com) => void
+  updateSettings: (title: string, desc: string) => void
 }
 
 type Props = DispatchProps & OwnProps
 
-class TopBar extends React.Component<Props> {
+interface State {
+  settingOpen: boolean
+  title: string
+  desc: string
+}
+
+class TopBar extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    this.state = {
+      settingOpen: false,
+      title: '',
+      desc: ''
+    }
   }
 
   undo = () => {
@@ -53,8 +74,26 @@ class TopBar extends React.Component<Props> {
 
   }
 
-  preview = () => {
+  handleSettingsOpen = () => {
+    const { title, desc } = this.props
+    this.setState({
+      title: title,
+      desc: desc,
+      settingOpen: true
+    })
+  }
 
+  handleDialogClose = () => {
+    this.setState({
+      settingOpen: false
+    })
+  }
+
+  hanldeDialogCloseAndSave = () => {
+    this.props.updateSettings(this.state.title, this.state.desc)
+    this.setState({
+      settingOpen: false
+    })
   }
 
   handleAddCom = (type: string) => {
@@ -62,7 +101,6 @@ class TopBar extends React.Component<Props> {
     const newId = maxOfArray(comsIds) + 1
     switch (type) {
       case TEXT:
-
         const newText = {
           ...initText,
           name: `Text-${newId}`,
@@ -111,7 +149,17 @@ class TopBar extends React.Component<Props> {
     }
   }
 
+  handleTitleChange = (e: string) => {
+    this.setState({
+      title: e
+    })
+  }
 
+  handleDescChange = (e: string) => {
+    this.setState({
+      desc: e
+    })
+  }
 
   render() {
     const renderItem = (item: topBarItem, index: number) => {
@@ -139,29 +187,70 @@ class TopBar extends React.Component<Props> {
         <div className={styles.publish}>
           <Button
             variant="contained" color="primary"
-            onClick={() => this.preview}
+            onClick={this.handleSettingsOpen}
             className={styles.publishbt}>
-            预览
+            设置
           </Button>
           <Button
             variant="contained" color="primary"
-            onClick={() => this.publish}
+            onClick={this.publish}
             className={styles.publishbt}>
             发布
           </Button>
         </div>
+
+        <Dialog
+          open={this.state.settingOpen}
+          onClose={this.handleDialogClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">作品设置</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              请填写关于作品的设置
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="title"
+              label="标题"
+              fullWidth
+              value={this.state.title}
+              onChange={(e) => this.handleTitleChange(e.target.value)}
+            />
+            <TextField
+              margin="dense"
+              id="desc"
+              label="简介"
+              fullWidth
+              value={this.state.desc}
+              onChange={(e) => this.handleDescChange(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleDialogClose} color="primary">
+              取消
+            </Button>
+            <Button onClick={this.hanldeDialogCloseAndSave} color="primary">
+              确定
+            </Button>
+          </DialogActions>
+        </Dialog>
       </>
     )
   }
 }
 
 const mapStateToProps = (state: IStoreState) => {
+  const { desc, title } = state.work.settings
   const { currentComId, currentPageId } = state.status
   const comsIds = state.work.coms.map(item => { return item.id })
   return {
     currentComId,
     currentPageId,
-    comsIds
+    comsIds,
+    desc,
+    title
   }
 }
 
@@ -175,6 +264,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     addCom: (id: number, com: Com) => {
       dispatch(addCom(id, com))
+    },
+    updateSettings: (title: string, desc: string) => {
+      dispatch(updateSettings(title, desc))
     }
   }
 }

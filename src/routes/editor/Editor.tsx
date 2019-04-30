@@ -5,6 +5,7 @@ import MenuBar from '../../components/MenuBar/MenuBar';
 import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import IStoreState from '../../types/IStoreState';
+import FullScreenMaterialDialog from '../../components/Dialogs/FullScreen'
 
 const PlayGround = React.lazy(() => import('./Playground/Playground'))
 const Materials = React.lazy(() => import('./Materials/Materials'))
@@ -25,6 +26,7 @@ class Editor extends React.Component<Props> {
       return <Redirect to='/login' />
     }
     return <div className={styles.main}>
+      <FullScreenMaterialDialog />
       <MenuBar />
       <React.Suspense fallback={null}>
         <Route path="/editor" exact component={PlayGround} />

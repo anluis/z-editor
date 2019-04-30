@@ -31,3 +31,8 @@ export const setErrorMessage = (message: string) => ({
   type: types.SET_ERROR_MESSAGE,
   message
 })
+
+export const setDialogStatus = (status: boolean) => ({
+  type: types.SET_DIALOG_STATUS,
+  status
+})

@@ -1,0 +1,6 @@
+.top {
+  height: 70px;
+  width: 100%;
+  flex-direction: flex-end;
+  align-items: center;
+}

@@ -2,6 +2,9 @@ import * as React from 'react'
 import templates from '../../../apis/templates/templates'
 import IStoreState from '../../../types/IStoreState';
 import { connect } from 'react-redux'
+import styles from './Templates.module.css'
+import { Pagination } from 'antd';
+import 'antd/lib/pagination/style/css';
 
 interface OwnProps {
   accessToken: string
@@ -22,7 +25,9 @@ class Templates extends React.Component<Props> {
     })
   }
   render() {
-    return null
+    return <div className={styles.templates}>
+      <Pagination />
+    </div>
   }
 }
 

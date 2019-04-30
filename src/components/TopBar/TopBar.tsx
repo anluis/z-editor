@@ -6,6 +6,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { redo, undo } from '../../actions/status'
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
+import { setDialogStatus } from '../../actions/status'
 import { Com } from '../../types/coms'
 import { updateSettings } from '../../actions/settings'
 import { topBarItem, topBarSettings } from '../../constants/topBar'
@@ -42,6 +43,7 @@ interface DispatchProps {
   undo: () => void
   addCom: (id: number, com: Com) => void
   updateSettings: (title: string, desc: string) => void
+  setDialogStatus: (status: boolean) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -97,7 +99,7 @@ class TopBar extends React.Component<Props, State> {
   }
 
   handleAddCom = (type: string) => {
-    const { currentPageId, comsIds, addCom } = this.props
+    const { currentPageId, comsIds, addCom, setDialogStatus } = this.props
     const newId = maxOfArray(comsIds) + 1
     switch (type) {
       case TEXT:
@@ -115,6 +117,7 @@ class TopBar extends React.Component<Props, State> {
           name: `Image-${newId}`,
           imgUrl: 'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'
         }
+        // setDialogStatus(true)
         addCom(currentPageId, newImage)
         return
       case VIDEO:
@@ -267,6 +270,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     updateSettings: (title: string, desc: string) => {
       dispatch(updateSettings(title, desc))
+    },
+    setDialogStatus: (status: boolean) => {
+      dispatch(setDialogStatus(status))
     }
   }
 }

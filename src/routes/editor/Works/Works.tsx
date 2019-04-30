@@ -2,6 +2,7 @@ import * as React from 'react'
 import works from '../../../apis/works/works'
 import IStoreState from '../../../types/IStoreState';
 import { connect } from 'react-redux'
+import styles from './Works.module.css'
 
 interface OwnProps {
   accessToken: string
@@ -22,7 +23,7 @@ class Works extends React.Component<Props> {
     })
   }
   render() {
-    return null
+    return <div className={styles.works}></div>
   }
 }
 

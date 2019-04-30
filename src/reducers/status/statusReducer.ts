@@ -1,5 +1,5 @@
 import { StatusAction, StatusState } from '../../types/status'
-import { SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE, FOCUS_COM, DELETE_COM, ADD_COM } from '../../constants/ActionTypes';
+import { SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE, FOCUS_COM, DELETE_COM, ADD_COM, SET_DIALOG_STATUS } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
 
 type Action = StatusAction | ComAction
@@ -10,10 +10,12 @@ const initState: State = {
   currentPageId: 0,
   currentComId: 0,
   isLoading: false,
-  errorMessage: ''
+  errorMessage: '',
+  dialogShow: false
 }
 
 const statusReducer = (state: State = initState, action: Action): State => {
+  console.log(action)
   switch (action.type) {
     case SET_CURRENT_COM_ID:
       return state
@@ -41,6 +43,11 @@ const statusReducer = (state: State = initState, action: Action): State => {
       return {
         ...state,
         currentComId: action.com.id
+      }
+    case SET_DIALOG_STATUS:
+      return {
+        ...state,
+        dialogShow: action.status
       }
     default:
       return state

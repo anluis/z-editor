@@ -115,6 +115,29 @@ class Attribute extends React.Component<Props, State> {
       updateCom(currentCom.id, comCopy)
     }
   }
+  updateImgUrl = (imgUrl: string) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('imgUrl' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.imgUrl = imgUrl
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateVideoUrl = (videoUrl: string) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('videoUrl' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.videoUrl = videoUrl
+      updateCom(currentCom.id, comCopy)
+    }
+  }
 
   render() {
     const { currentCom } = this.props
@@ -150,6 +173,24 @@ class Attribute extends React.Component<Props, State> {
                 value={currentCom.context}
               />
             </div>}
+          {('imgUrl' in currentCom) &&
+            <div className={styles.attr}>
+              <InputLabel>图片链接:  </InputLabel>
+              <Input
+                onChange={e => this.updateImgUrl(e.target.value)}
+                value={currentCom.imgUrl}
+              />
+            </div>
+          }
+          {('videoUrl' in currentCom) &&
+            <div className={styles.attr}>
+              <InputLabel>视频链接:  </InputLabel>
+              <Input
+                onChange={e => this.updateVideoUrl(e.target.value)}
+                value={currentCom.videoUrl}
+              />
+            </div>
+          }
           {('backgroundColor' in currentCom) &&
             <div className={styles.attr}>
               <InputLabel>背景颜色:  </InputLabel>

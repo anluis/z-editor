@@ -8,6 +8,8 @@ export const ADD_PAGE = 'ADD_PAGE'
 export const DELETE_PAGE = 'DELETE_PAGE'
 export const FOCUS_PAGE = 'FOCUS_PAGE'
 export const UPDATE_PAGE = 'UPDATE_PAGE'
+export const EXCHANGE_COM_ORDER = 'EXCHANGE_COM_ORDER'
+
 
 // template
 export const FETCH_TEMPLATELIST_BEGIN = 'FETCH_TEMPLATELIST_BEGIN'

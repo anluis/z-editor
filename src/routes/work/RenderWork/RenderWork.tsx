@@ -4,6 +4,7 @@ import work from '../../../apis/works/work'
 import RenderCom from '../../../components/abstract/RenderCom'
 import { Com, Coms } from '../../../types/coms';
 import styles from './RenderWork.module.css'
+import { Page } from '../../../types/pages';
 
 interface OwnProps extends RouteComponentProps<any> {
 
@@ -13,6 +14,7 @@ type Props = OwnProps
 
 interface OwnState {
   works: Coms
+  page: Page
 }
 
 type State = OwnState
@@ -48,7 +50,7 @@ class RenderWork extends React.Component<Props, State> {
   render() {
     const { works } = this.state
     const RenderComs = works.map((item: Com) => {
-      return <RenderCom com={item} key={`${item.type}-${item.id}`} />
+      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={1} />
     })
     return <div className={styles.workroot}>
       {RenderComs}

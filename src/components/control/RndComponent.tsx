@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 interface OwnProps {
   com: Com
   mode?: string
+  zIndex: number
 }
 
 interface DispatchProps {
@@ -22,10 +23,11 @@ type Props = OwnProps & DispatchProps
 
 class RndComponent extends React.Component<Props> {
   render() {
-    const { com, focusCom, updateCom, mode } = this.props
+    const { com, focusCom, updateCom, mode, zIndex } = this.props
     const bindRndStyle = {
       border: '1px solid rgb(8, 161, 239)',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      zIndex: zIndex
     }
     return (
       <Rnd
@@ -56,7 +58,7 @@ class RndComponent extends React.Component<Props> {
           updateCom(com.id, comCopy)
         }}
       >
-        <RenderCom com={com} mode={mode} />
+        <RenderCom com={com} mode={mode} zIndex={zIndex} />
       </Rnd>
     )
   }

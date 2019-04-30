@@ -32,7 +32,8 @@ class Editor extends React.Component<Props> {
       backgroundColor: '#eef1f6',
     }
     const RenderComsWithControl = currentComs.map((item) => {
-      return <RndComponent com={item} key={`${item.type}-${item.id}`} mode={'editor'} />
+      const zIndex = currentPage.order.findIndex(e => e === item.id)
+      return <RndComponent com={item} key={`${item.type}-${item.id}`} mode={'editor'} zIndex={zIndex} />
     })
     return (
       <div className={styles.playground}>

@@ -49,7 +49,16 @@ class Attribute extends React.Component<Props, State> {
 
   hanldeDialogClose = () => {
     this.setState({ deleteDialogOpen: false })
-    const { currentCom, targetPageId } = this.props
+    // const { currentCom, targetPageId } = this.props
+    // if (!currentCom) {
+    //   return
+    // }
+    // this.props.deleteCom(currentCom.id, targetPageId)
+  }
+
+  hanldeDialogCloseAndDeleteCom = () => {
+    this.setState({ deleteDialogOpen: false })
+    const { targetPageId, currentCom } = this.props
     if (!currentCom) {
       return
     }
@@ -195,7 +204,7 @@ class Attribute extends React.Component<Props, State> {
             <Button onClick={this.hanldeDialogClose} color="primary">
               取消
             </Button>
-            <Button onClick={this.hanldeDialogClose} color="primary" autoFocus>
+            <Button onClick={this.hanldeDialogCloseAndDeleteCom} color="primary" autoFocus>
               确定
             </Button>
           </DialogActions>

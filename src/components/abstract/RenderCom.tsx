@@ -10,21 +10,22 @@ import Lottie from '../create/Lottie';
 interface RenderComProps {
   com: Com
   mode?: string
+  zIndex: number
 }
 
 const RenderCom: React.SFC<RenderComProps> = (props) => {
-  const { com, mode } = props
+  const { com, mode, zIndex } = props
   switch (com.type) {
     case TEXT:
-      return <Text {...com as TextCom} mode={mode} />
+      return <Text {...com as TextCom} mode={mode} zIndex={zIndex} />
     case IMAGE:
-      return <Image {...com as ImageCom} mode={mode} />
+      return <Image {...com as ImageCom} mode={mode} zIndex={zIndex} />
     case VIDEO:
-      return <Video {...com as VideoCom} mode={mode} />
+      return <Video {...com as VideoCom} mode={mode} zIndex={zIndex} />
     case PHOTO_GET:
-      return <PhotoGet {...com as PhotoGetCom} mode={mode} />
+      return <PhotoGet {...com as PhotoGetCom} mode={mode} zIndex={zIndex} />
     case LOTTIE:
-      return <Lottie {...com as LottieCom} mode={mode} />
+      return <Lottie {...com as LottieCom} mode={mode} zIndex={zIndex} />
     default:
       return null
   }

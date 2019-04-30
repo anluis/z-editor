@@ -3,14 +3,16 @@ import { VideoCom } from '../../types/coms'
 
 interface Props extends VideoCom {
   mode?: string
+  zIndex: number
 }
 
 class Video extends React.Component<Props> {
   render() {
-    const { videoUrl, width, height } = this.props
+    const { videoUrl, width, height, zIndex } = this.props
     const bindStyle = {
       width: width + 'px',
-      height: height + 'px'
+      height: height + 'px',
+      zIndex: zIndex
     }
     return (
       <video

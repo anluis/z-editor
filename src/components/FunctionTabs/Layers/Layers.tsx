@@ -13,16 +13,21 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { exchangeComOrder } from '../../../actions/pages'
+import listItemSortByOrder from '../../../utils/getters/coms'
+import { getCurrentPage } from '../../../utils/getters/works'
+import { Page } from '../../../types/pages';
 
 interface StateProps {
   currentComs: Coms
   currentPageId: number
-
+  currentPage: Page | undefined
 }
 
 interface DispatchProps {
   deleteCom: (id: number, targetPageId: number) => void
   updateCom: (id: number, com: Com) => void
+  exchangeComOrder: (targetPageId: number, oldComId: number, newComId: number) => void
 }
 
 interface State {
@@ -60,7 +65,6 @@ const SortableList = SortableContainer(({ items, currentPageId, handleDialogOpen
       {items.map((item, index) => {
         return (
           <SortableItem
-            // need to process Here
             disabled={!canBeSort}
             canBeSort={canBeSort}
             item={item}
@@ -91,7 +95,11 @@ class Layers extends React.Component<Props, State> {
 
   hanldeDialogClose = () => {
     this.setState({ deleteDialogOpen: false })
-    const { currentPageId, } = this.props
+  }
+
+  hanldeDialogCloseAndDeleteCom = () => {
+    this.setState({ deleteDialogOpen: false })
+    const { currentPageId } = this.props
     const { choosenCom } = this.state
     if (!choosenCom) {
       return
@@ -100,8 +108,8 @@ class Layers extends React.Component<Props, State> {
   }
 
   onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number, newIndex: number }) => {
-    console.log(oldIndex)
-    console.log(newIndex)
+    const { currentComs, exchangeComOrder } = this.props
+    exchangeComOrder(this.props.currentPageId, currentComs[oldIndex].id, currentComs[newIndex].id)
   }
 
   deleteCom = (id: number, currentPageId: number) => {
@@ -117,8 +125,12 @@ class Layers extends React.Component<Props, State> {
 
 
   render() {
-    const { currentComs, currentPageId } = this.props
+    const { currentComs, currentPageId, currentPage } = this.props
     const { topRemindText, canBeSort } = this.state
+    if (!currentPage) {
+      return
+    }
+    const listSorted = listItemSortByOrder(currentComs, currentPage.order)
     return (
       <>
         <div className={styles.inaddmode}>
@@ -128,7 +140,7 @@ class Layers extends React.Component<Props, State> {
         </div>
         <SortableList
           canBeSort={canBeSort}
-          items={currentComs}
+          items={listSorted}
           currentPageId={currentPageId}
           onSortEnd={this.onSortEnd}
           handleDialogOpen={this.handleDialogOpen}
@@ -150,7 +162,7 @@ class Layers extends React.Component<Props, State> {
             <Button onClick={this.hanldeDialogClose} color="primary">
               取消
             </Button>
-            <Button onClick={this.hanldeDialogClose} color="primary" autoFocus>
+            <Button onClick={this.hanldeDialogCloseAndDeleteCom} color="primary" autoFocus>
               确定
             </Button>
           </DialogActions>
@@ -162,9 +174,11 @@ class Layers extends React.Component<Props, State> {
 
 const mapStateToProps = (state: IStoreState) => {
   const { currentPageId } = state.status
+  const currentPage = getCurrentPage(state)
   return {
     currentComs: getComsByCurrentPageId(state),
-    currentPageId
+    currentPageId,
+    currentPage
   }
 }
 
@@ -175,6 +189,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     updateCom: (id: number, com: Com) => {
       dispatch(updateCom(id, com))
+    },
+    exchangeComOrder: (tagetPageId: number, oldComId: number, newComId: number) => {
+      dispatch(exchangeComOrder(tagetPageId, oldComId, newComId))
     }
   }
 }

@@ -1,8 +1,20 @@
 import { StatusAction, StatusState } from '../../types/status'
-import { SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE, FOCUS_COM, DELETE_COM, ADD_COM, SET_DIALOG_STATUS } from '../../constants/ActionTypes';
+import {
+  SET_CURRENT_COM_ID,
+  SET_LOADING_STATUS,
+  SET_ERROR_MESSAGE,
+  FOCUS_COM,
+  DELETE_COM,
+  ADD_COM,
+  SET_DIALOG_STATUS,
+  ADD_PAGE,
+  DELETE_PAGE,
+  FOCUS_PAGE
+} from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
+import { PageAction } from '../../types/pages';
 
-type Action = StatusAction | ComAction
+type Action = StatusAction | ComAction | PageAction
 
 type State = StatusState
 
@@ -48,6 +60,22 @@ const statusReducer = (state: State = initState, action: Action): State => {
       return {
         ...state,
         dialogShow: action.status
+      }
+    case ADD_PAGE:
+      return {
+        ...state,
+        currentPageId: action.page.id
+      }
+    case DELETE_PAGE:
+      return {
+        ...state,
+        currentComId: null,
+        currentPageId: action.nextPageId
+      }
+    case FOCUS_PAGE:
+      return {
+        ...state,
+        currentPageId: action.id
       }
     default:
       return state

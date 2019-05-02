@@ -1,7 +1,7 @@
 import { SET_CURRENT_PAGE_ID, SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE, SET_DIALOG_STATUS } from '../constants/ActionTypes'
 
 export interface StatusState {
-  currentPageId: number
+  currentPageId: number | null
   currentComId: number | null
   isLoading: boolean
   errorMessage: string

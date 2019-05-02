@@ -27,17 +27,18 @@ interface AddPageAction {
 }
 
 interface DeletePage {
-  type: typeof DELETE_PAGE,
+  type: typeof DELETE_PAGE
   id: number
+  nextPageId: number
 }
 
 interface UpdatePage {
-  type: typeof UPDATE_PAGE,
+  type: typeof UPDATE_PAGE
   page: Page
 }
 
 interface FocusPage {
-  type: typeof FOCUS_PAGE,
+  type: typeof FOCUS_PAGE
   id: number
 }
 

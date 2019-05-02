@@ -32,7 +32,7 @@ import {
 } from '../../constants/coms';
 
 interface OwnProps {
-  currentPageId: number
+  currentPageId: number | null
   comsIds: Array<number>
   title: string
   desc: string
@@ -100,6 +100,10 @@ class TopBar extends React.Component<Props, State> {
 
   handleAddCom = (type: string) => {
     const { currentPageId, comsIds, addCom, setDialogStatus } = this.props
+    console.log(currentPageId)
+    if (currentPageId === null) {
+      return
+    }
     const newId = maxOfArray(comsIds) + 1
     switch (type) {
       case TEXT:

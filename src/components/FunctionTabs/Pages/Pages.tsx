@@ -10,22 +10,26 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { ThunkDispatch } from 'redux-thunk';
-import { deletePage } from '../../../actions/pages';
+import { deletePage, addPage, focusPage } from '../../../actions/pages';
+import { initPage } from '../../../constants/pages';
+import maxOfArray from '../../../utils/helper/maxOfArray';
+import minOfArray from '../../../utils/helper/minOfArray';
 
 interface OwnProps {
   currentPages: PagesType
+  currentPageId: number | null
 }
 
 interface DispatchProps {
-  deletePage: (id: number) => void
+  deletePage: (id: number, nextPageId: number) => void
+  addPage: (page: Page) => void
+  focusPage: (id: number) => void
 }
 
 type Props = OwnProps & DispatchProps
 
 interface OwnState {
   deleteDialogOpen: boolean
-  topRemindText: string
-  canBeSort: boolean
   choosenPage: Page | null
 }
 
@@ -36,51 +40,81 @@ class Pages extends React.Component<Props, State> {
     super(props)
     this.state = {
       deleteDialogOpen: false,
-      topRemindText: '点击进入排序',
-      canBeSort: false,
       choosenPage: null
     }
   }
 
-  hanldeDialogOpen = (item: PagesType) => {
+  handleDialogOpen = (item: Page) => {
     this.setState({
       deleteDialogOpen: true,
       choosenPage: item
     })
   }
 
-  hanldeDialogClose = () => {
+  handleDialogClose = () => {
     this.setState({ deleteDialogOpen: false })
   }
 
-  hanldeDialogCloseAndDeletePage = () => {
+  handleDialogCloseAndDeletePage = () => {
     this.setState({ deleteDialogOpen: false })
     const { choosenPage } = this.state
     if (!choosenPage) {
       return
     }
-    this.props.deletePage(choosenPage.id)
+    const pageIds = this.props.currentPages.map(item => { return item.id })
+    const nextPageId = minOfArray(pageIds)
+    this.props.deletePage(choosenPage.id, nextPageId)
   }
 
-  sortModeChange = () => {
-    this.setState({
-      topRemindText: this.state.canBeSort ? '点击进入排序' : '关闭排序模式',
-      canBeSort: !this.state.canBeSort
-    })
+  handleAddPage = () => {
+    let pageCopy = { ...initPage }
+    const pageIds = this.props.currentPages.map(item => item.id)
+    const newPageId = maxOfArray(pageIds) + 1
+    const newPage = {
+      ...pageCopy,
+      id: newPageId,
+      name: '页面 - ' + newPageId,
+      order: [],
+      settings: {}
+
+    }
+    this.props.addPage(newPage)
+  }
+
+  handlePageItemFocus = (id: number) => {
+    this.props.focusPage(id)
+  }
+
+  renderPageItem = (item: Page, index: number) => {
+    return <div className={item.id === this.props.currentPageId ? styles.pageItemf : styles.pageItem} key={index} onClick={() => this.handlePageItemFocus(item.id)}>
+      {item.name}
+      <Button variant="outlined">设置</Button>
+      {index !== 0 && <Button
+        variant="outlined"
+        color="secondary"
+        onClick={
+          () => this.handleDialogOpen(item)
+        }
+      >
+        删除
+      </Button>}
+    </div>
   }
 
   render() {
-    const { topRemindText } = this.state
+    const { currentPages } = this.props
+    const renderPageMenuItems = currentPages.map((item, index) => {
+      return this.renderPageItem(item, index)
+    })
     return (
       <>
-        <div className={styles.inaddmode}>
-          <Button color="primary" onClick={this.sortModeChange}>
-            {topRemindText}
-          </Button>
+        <div className={styles.pagefunc}>
+          <Button variant="contained" color="primary" onClick={this.handleAddPage}>新增</Button>
         </div>
+        {renderPageMenuItems}
         <Dialog
           open={this.state.deleteDialogOpen}
-          onClose={this.hanldeDialogClose}
+          onClose={this.handleDialogClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -91,10 +125,10 @@ class Pages extends React.Component<Props, State> {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.hanldeDialogClose} color="primary">
+            <Button onClick={this.handleDialogClose} color="primary">
               取消
             </Button>
-            <Button onClick={this.hanldeDialogCloseAndDeletePage} color="primary" autoFocus>
+            <Button onClick={this.handleDialogCloseAndDeletePage} color="primary" autoFocus>
               确定
             </Button>
           </DialogActions>
@@ -106,15 +140,23 @@ class Pages extends React.Component<Props, State> {
 
 const mapStateToProps = (state: IStoreState) => {
   const currentPages = state.work.pages
+  const { currentPageId } = state.status
   return {
-    currentPages
+    currentPages,
+    currentPageId
   }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
   return {
-    deletePage: (id: number) => {
-      dispatch(deletePage(id))
+    deletePage: (id: number, nextPageId: number) => {
+      dispatch(deletePage(id, nextPageId))
+    },
+    addPage: (page: Page) => {
+      dispatch(addPage(page))
+    },
+    focusPage: (id: number) => {
+      dispatch(focusPage(id))
     }
   }
 }

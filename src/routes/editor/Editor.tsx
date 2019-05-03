@@ -5,7 +5,7 @@ import MenuBar from '../../components/MenuBar/MenuBar';
 import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import IStoreState from '../../types/IStoreState';
-import FullScreenMaterialDialog from '../../components/Dialogs/FullScreen'
+import FullScreenMaterialDialog from '../../components/Dialogs/MaterialFullScreen'
 
 const PlayGround = React.lazy(() => import('./Playground/Playground'))
 const Materials = React.lazy(() => import('./Materials/Materials'))

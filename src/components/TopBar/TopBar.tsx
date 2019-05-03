@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { redo, undo } from '../../actions/status'
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
-import { setDialogStatus } from '../../actions/status'
+import { setMaterialDialogStatus } from '../../actions/status'
 import { Com } from '../../types/coms'
 import { updateSettings } from '../../actions/settings'
 import { topBarItem, topBarSettings } from '../../constants/topBar'
@@ -43,7 +43,7 @@ interface DispatchProps {
   undo: () => void
   addCom: (id: number, com: Com) => void
   updateSettings: (title: string, desc: string) => void
-  setDialogStatus: (status: boolean) => void
+  setMaterialDialogStatus: (status: boolean) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -99,7 +99,7 @@ class TopBar extends React.Component<Props, State> {
   }
 
   handleAddCom = (type: string) => {
-    const { currentPageId, comsIds, addCom, setDialogStatus } = this.props
+    const { currentPageId, comsIds, addCom, setMaterialDialogStatus } = this.props
     console.log(currentPageId)
     if (currentPageId === null) {
       return
@@ -275,8 +275,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     updateSettings: (title: string, desc: string) => {
       dispatch(updateSettings(title, desc))
     },
-    setDialogStatus: (status: boolean) => {
-      dispatch(setDialogStatus(status))
+    setMaterialDialogStatus: (status: boolean) => {
+      dispatch(setMaterialDialogStatus(status))
     }
   }
 }

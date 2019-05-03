@@ -1,11 +1,18 @@
-import { SET_CURRENT_PAGE_ID, SET_CURRENT_COM_ID, SET_LOADING_STATUS, SET_ERROR_MESSAGE, SET_DIALOG_STATUS } from '../constants/ActionTypes'
+import {
+  SET_CURRENT_PAGE_ID,
+  SET_CURRENT_COM_ID,
+  SET_LOADING_STATUS,
+  SET_ERROR_MESSAGE,
+  SET_MATERIAL_DIALOG_STATUS,
+  SET_PAGE_SETTINGS_DIALOG_STATUS
+} from '../constants/ActionTypes'
 
 export interface StatusState {
   currentPageId: number | null
   currentComId: number | null
   isLoading: boolean
   errorMessage: string
-  dialogShow: boolean
+  materialDialogShow: boolean
 }
 
 export interface SetLoadingStatus {
@@ -15,7 +22,8 @@ export interface SetLoadingStatus {
 
 export interface SetCurrentPageId {
   type: typeof SET_CURRENT_PAGE_ID
-  id: number
+  id: number,
+  nextPageId: number
 }
 
 export interface SetCurrentComId {
@@ -28,9 +36,19 @@ export interface SetErrorMessage {
   message: string
 }
 
-export interface SetDialogStatus {
-  type: typeof SET_DIALOG_STATUS
+export interface SetMaterialDialogStatus {
+  type: typeof SET_MATERIAL_DIALOG_STATUS
   status: boolean
 }
 
-export type StatusAction = SetCurrentPageId | SetCurrentComId | SetLoadingStatus | SetErrorMessage | SetDialogStatus
+export interface SetPageSettingsDialogStatus {
+  type: typeof SET_PAGE_SETTINGS_DIALOG_STATUS
+  status: boolean
+}
+
+export type StatusAction =
+  SetCurrentPageId |
+  SetCurrentComId |
+  SetLoadingStatus |
+  SetErrorMessage |
+  SetMaterialDialogStatus

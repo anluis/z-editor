@@ -6,18 +6,30 @@ import styles from './Materials.module.css'
 import { Button } from '@material-ui/core'
 import { Pagination } from 'antd';
 import 'antd/lib/pagination/style/css';
+import { setErrorMessage } from '../../../actions/status';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { RouteComponentProps } from 'react-router';
+import { deleteAuth } from '../../../actions/auth';
 
-interface OwnProps {
+interface OwnProps extends RouteComponentProps {
   accessToken: string
 }
 
-type Props = OwnProps
+interface DispatchProps {
+  setErrorMessage: (message: string) => void
+  deleteAuth: () => void
+}
+
+type Props = OwnProps & DispatchProps
 
 interface OwnState {
   totalPages: number
   currentPage: number
   data: Array<any>
 }
+
+
 
 type State = OwnState
 
@@ -41,7 +53,7 @@ class Materials extends React.Component<Props, State> {
     this.fetchList()
   }
 
-  fetchList = () => {
+  fetchList = async () => {
     const { accessToken } = this.props
     const { currentPage } = this.state
     const args = {
@@ -49,13 +61,19 @@ class Materials extends React.Component<Props, State> {
       page: currentPage,
       perPage: 10
     }
-    materials(args).then((r: any) => {
-      console.dir(r)
+    try {
+      const r: any = await materials(args)
       this.setState({
         totalPages: r.data.meta.pagination.total_pages,
         data: r.data.data
       })
-    })
+    } catch (e) {
+      // this.props.setErrorMessage(e.message)
+      this.props.deleteAuth()
+      this.props.history.replace({
+        pathname: '/login'
+      })
+    }
   }
 
   render() {
@@ -90,6 +108,17 @@ const mapStateToProps = (state: IStoreState) => {
   }
 }
 
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+  return {
+    setErrorMessage: (message: string) => {
+      dispatch(setErrorMessage(message))
+    },
+    deleteAuth: () => {
+      dispatch(deleteAuth())
+    }
+  }
+}
 
 
-export default connect(mapStateToProps)(Materials)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Materials)

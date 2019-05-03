@@ -6,14 +6,14 @@ import { connect } from 'react-redux'
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { ThunkDispatch } from 'redux-thunk';
-import { setDialogStatus } from '../../actions/status'
+import { setMaterialDialogStatus } from '../../actions/status'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { Button } from '@material-ui/core'
 
-const styles = {
+const styles: any = {
   appBar: {
     position: 'relative',
   },
@@ -23,11 +23,12 @@ const styles = {
 };
 
 interface OwnProps {
-  dialogShow: boolean
+  materialDialogShow: boolean
+  classes: any
 }
 
 interface DispatchProps {
-  setDialogStatus: (status: boolean) => void
+  setMaterialDialogStatus: (status: boolean) => void
 }
 
 type Props = OwnProps & DispatchProps
@@ -43,16 +44,15 @@ class FullScreenDialog extends React.Component<Props> {
   // };
 
   handleClose = () => {
-    this.props.setDialogStatus(false)
+    this.props.setMaterialDialogStatus(false)
   };
 
   render() {
-    // @ts-ignore
-    const { dialogShow, classes } = this.props
+    const { materialDialogShow, classes } = this.props
     return (
       <Dialog
         fullScreen
-        open={dialogShow}
+        open={materialDialogShow}
         onClose={this.handleClose}
         TransitionComponent={Transition}
       >
@@ -75,19 +75,18 @@ class FullScreenDialog extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { dialogShow } = state.status
+  const { materialDialogShow } = state.status
   return {
-    dialogShow
+    materialDialogShow
   }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
   return {
-    setDialogStatus: (status: boolean) => {
-      dispatch(setDialogStatus(status))
+    setMaterialDialogStatus: (status: boolean) => {
+      dispatch(setMaterialDialogStatus(status))
     }
   }
 }
 
-// @ts-ignore
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FullScreenDialog))

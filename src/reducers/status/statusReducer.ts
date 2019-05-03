@@ -1,4 +1,4 @@
-import { StatusAction, StatusState } from '../../types/status'
+import { StatusState, StatusAction } from '../../types/status'
 import {
   SET_CURRENT_COM_ID,
   SET_LOADING_STATUS,
@@ -6,7 +6,7 @@ import {
   FOCUS_COM,
   DELETE_COM,
   ADD_COM,
-  SET_DIALOG_STATUS,
+  SET_MATERIAL_DIALOG_STATUS,
   ADD_PAGE,
   DELETE_PAGE,
   FOCUS_PAGE
@@ -23,11 +23,10 @@ const initState: State = {
   currentComId: 0,
   isLoading: false,
   errorMessage: '',
-  dialogShow: false
+  materialDialogShow: false
 }
 
 const statusReducer = (state: State = initState, action: Action): State => {
-  console.log(action)
   switch (action.type) {
     case SET_CURRENT_COM_ID:
       return state
@@ -56,10 +55,10 @@ const statusReducer = (state: State = initState, action: Action): State => {
         ...state,
         currentComId: action.com.id
       }
-    case SET_DIALOG_STATUS:
+    case SET_MATERIAL_DIALOG_STATUS:
       return {
         ...state,
-        dialogShow: action.status
+        materialDialogShow: action.status
       }
     case ADD_PAGE:
       return {

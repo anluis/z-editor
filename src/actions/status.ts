@@ -32,7 +32,7 @@ export const setErrorMessage = (message: string) => ({
   message
 })
 
-export const setDialogStatus = (status: boolean) => ({
-  type: types.SET_DIALOG_STATUS,
+export const setMaterialDialogStatus = (status: boolean) => ({
+  type: types.SET_MATERIAL_DIALOG_STATUS,
   status
 })

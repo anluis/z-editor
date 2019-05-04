@@ -8,11 +8,18 @@ interface Props extends VideoCom {
 
 class Video extends React.Component<Props> {
   render() {
-    const { videoUrl, width, height, zIndex } = this.props
-    const bindStyle = {
+    const { videoUrl, width, height, zIndex, x, y, mode } = this.props
+    let bindStyle: React.CSSProperties = {
+      position: 'absolute',
       width: width + 'px',
       height: height + 'px',
-      zIndex: zIndex
+      zIndex: zIndex,
+      left: x + 'px',
+      top: y + 'px'
+    }
+    if (mode === 'editor') {
+      bindStyle.left = '0'
+      bindStyle.top = '0'
     }
     return (
       <video

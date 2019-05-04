@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import work from '../../../apis/works/work'
 import RenderCom from '../../../components/abstract/RenderCom'
-import { Com, Coms } from '../../../types/coms';
+import { Com } from '../../../types/coms';
 import styles from './RenderWork.module.css'
-import { Page } from '../../../types/pages';
+import { testWork } from '../../../constants/testWork'
+import { Work } from '../../../types/IStoreState';
 
 interface OwnProps extends RouteComponentProps<any> {
 
@@ -13,18 +13,24 @@ interface OwnProps extends RouteComponentProps<any> {
 type Props = OwnProps
 
 interface OwnState {
-  works: Coms
-  page: Page
+  work: Work | null
 }
 
 type State = OwnState
 
 class RenderWork extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      work: null
+    }
+  }
+
   FETCH_WORK_CORRECTLY_OR_U_WILL_BE_DESTORY = async () => {
     const { id, page } = this.props.match.params
     try {
-      let fetchPage = 1
-      if (!id) {
+      let fetchPage = 0
+      if (!id || id !== 'test') {
         return
       }
       if (page) {
@@ -34,23 +40,44 @@ class RenderWork extends React.Component<Props, State> {
         workId: id,
         workPage: page
       }
-      const resWork: any = await work(workArgs)
+      // let resWork: any = await work(workArgs)
+      let resWork: any
+      if (id === 'test') {
+        resWork = testWork
+      }
       // if (resWork.data.)
-      // this.setState({
-      //   work: resWork
-      // })
+      this.setState({
+        work: resWork
+      })
     } catch (e) {
       console.warn(e.message)
     }
   }
+
   componentDidMount() {
     this.FETCH_WORK_CORRECTLY_OR_U_WILL_BE_DESTORY()
   }
 
   render() {
-    const { works } = this.state
-    const RenderComs = works.map((item: Com) => {
-      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={1} />
+    const { work } = this.state
+    if (work === null) {
+      return <div>找不到该作品</div>
+    }
+    const { page } = this.props.match.params
+    const { pages, coms } = work
+    console.dir(pages)
+    const findPageResult = pages.find(pageItem => {
+      console.dir(pageItem)
+      return pageItem.id === Number(page)
+    })
+    console.log(findPageResult)
+    const renderPageIds = findPageResult ? findPageResult.order : []
+    console.dir(renderPageIds)
+
+    const comsAfterFilter = coms.filter(com => renderPageIds.includes(com.id))
+    console.dir(comsAfterFilter)
+    const RenderComs = comsAfterFilter.map((item: Com) => {
+      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={item.id} />
     })
     return <div className={styles.workroot}>
       {RenderComs}

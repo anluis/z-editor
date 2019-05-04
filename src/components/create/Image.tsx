@@ -8,13 +8,20 @@ interface Props extends ImageCom {
 
 class Image extends React.Component<Props> {
   render() {
-    const { width, height, imgUrl, zIndex } = this.props
-    const bindStyle = {
+    const { width, height, imgUrl, zIndex, x, y, mode } = this.props
+    let bindStyle: React.CSSProperties = {
+      position: 'absolute',
       width: width + 'px',
       height: height + 'px',
       backgroundImage: `url("` + imgUrl + `")`,
       backgroundSize: 'cover',
-      zIndex: zIndex
+      zIndex: zIndex,
+      left: x + 'px',
+      top: y + 'px'
+    }
+    if (mode === 'editor') {
+      bindStyle.left = '0'
+      bindStyle.top = '0'
     }
     return (
       <div style={bindStyle}></div>

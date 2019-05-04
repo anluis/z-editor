@@ -1,8 +1,9 @@
 import { State } from '../../reducers/work/pagesReducer'
 import { Com } from '../../types/coms'
-import { Page } from '../../types/pages'
+import { Page, PageSettings } from '../../types/pages'
+import { cloneDeep } from 'lodash'
 export const addComOrderInCurrentPage = (state: State, currentPageId: number, com: Com) => {
-  let stateCopy = [...state]
+  let stateCopy = cloneDeep(state)
   stateCopy.map((item: Page, index: number) => {
     if (item.id === currentPageId) {
       item.order = item.order.concat([com.id])
@@ -12,7 +13,7 @@ export const addComOrderInCurrentPage = (state: State, currentPageId: number, co
 }
 
 export const removeComOrderInCurrentPage = (state: State, targetPageId: number, comId: number, ) => {
-  let stateCopy = [...state]
+  let stateCopy = cloneDeep(state)
   stateCopy.map((item: Page, pageIndex) => {
     if (item.id === targetPageId) {
       // item.order.filter(n => n !== comId)
@@ -23,7 +24,7 @@ export const removeComOrderInCurrentPage = (state: State, targetPageId: number, 
 }
 
 export const exchangeOrderInPage = (state: State, targetPageId: number, oldComId: number, newComId: number) => {
-  let stateCopy = [...state]
+  let stateCopy = cloneDeep(state)
   stateCopy.map((item: Page, pageIndex) => {
     if (item.id === targetPageId) {
       const oldIndex = stateCopy[pageIndex].order.findIndex(e => e === oldComId)
@@ -31,6 +32,16 @@ export const exchangeOrderInPage = (state: State, targetPageId: number, oldComId
       let temp = stateCopy[pageIndex].order[oldIndex]
       stateCopy[pageIndex].order[oldIndex] = stateCopy[pageIndex].order[newIndex]
       stateCopy[pageIndex].order[newIndex] = temp
+    }
+  })
+  return stateCopy
+}
+
+export const setPageSettingsByPageId = (state: State, pageSettings: PageSettings, pageId: number) => {
+  let stateCopy = cloneDeep(state)
+  stateCopy.map(item => {
+    if (item.id === pageId) {
+      item.settings = pageSettings
     }
   })
   return stateCopy

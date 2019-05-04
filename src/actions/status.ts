@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes'
+import { Com } from '../types/coms';
 
 export const addComCount = () => ({
   type: types.ADD_COM
@@ -35,4 +36,20 @@ export const setErrorMessage = (message: string) => ({
 export const setMaterialDialogStatus = (status: boolean) => ({
   type: types.SET_MATERIAL_DIALOG_STATUS,
   status
+})
+
+export const setPageSettingsDialogStatus = (status: boolean, choosenPageId: number | null) => ({
+  type: types.SET_PAGE_SETTINGS_DIALOG_STATUS,
+  status,
+  choosenPageId
+})
+
+export const setMaterialCurrentValue = (value: number) => ({
+  type: types.SET_MATERIAL_CURRENT_VALUE,
+  value
+})
+
+export const setMaterialChoosenCom = (com: Com | null) => ({
+  type: types.SET_MATERIAL_CHOOSEN_COM,
+  com
 })

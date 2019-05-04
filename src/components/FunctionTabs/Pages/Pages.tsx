@@ -14,6 +14,7 @@ import { deletePage, addPage, focusPage } from '../../../actions/pages';
 import { initPage } from '../../../constants/pages';
 import maxOfArray from '../../../utils/helper/maxOfArray';
 import minOfArray from '../../../utils/helper/minOfArray';
+import { setPageSettingsDialogStatus } from '../../../actions/status';
 
 interface OwnProps {
   currentPages: PagesType
@@ -24,6 +25,7 @@ interface DispatchProps {
   deletePage: (id: number, nextPageId: number) => void
   addPage: (page: Page) => void
   focusPage: (id: number) => void
+  setPageSettingsDialogStatus: (status: boolean, choosenPageId: number) => void
 }
 
 type Props = OwnProps & DispatchProps
@@ -85,10 +87,19 @@ class Pages extends React.Component<Props, State> {
     this.props.focusPage(id)
   }
 
+  handlePageSettingDialogOpen = (choosenPageId: number) => {
+    this.props.setPageSettingsDialogStatus(true, choosenPageId)
+  }
+
   renderPageItem = (item: Page, index: number) => {
     return <div className={item.id === this.props.currentPageId ? styles.pageItemf : styles.pageItem} key={index} onClick={() => this.handlePageItemFocus(item.id)}>
       {item.name}
-      <Button variant="outlined">设置</Button>
+      <Button
+        variant="outlined"
+        onClick={() => this.handlePageSettingDialogOpen(item.id)}
+      >
+        设置
+      </Button>
       {index !== 0 && <Button
         variant="outlined"
         color="secondary"
@@ -157,6 +168,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     focusPage: (id: number) => {
       dispatch(focusPage(id))
+    },
+    setPageSettingsDialogStatus: (status: boolean, choosenPageId: number) => {
+      dispatch(setPageSettingsDialogStatus(status, choosenPageId))
     }
   }
 }

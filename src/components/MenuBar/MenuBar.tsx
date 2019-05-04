@@ -5,6 +5,13 @@ import { connect } from 'react-redux'
 import IStoreState from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk';
 import { logout } from '../../actions/auth'
+import { Button } from '@material-ui/core';
+import WorkIcon from '@material-ui/icons/Work';
+import NoteIcon from '@material-ui/icons/Note';
+import FilterIcon from '@material-ui/icons/Filter';
+import MaterialIcon from '@material-ui/icons/Palette'
+
+
 
 interface DispatchProps {
   logout: () => Promise<void>
@@ -31,21 +38,32 @@ class MenuBar extends React.Component<Props> {
   render() {
     return <div className={styles.menubar}>
       <div className={styles.pane} onClick={() => this.navigate('editor')}>
-        工作区
+        <Button size="medium" color="inherit">
+          <WorkIcon fontSize={'small'} />
+          工作区
+        </Button>
       </div>
       <div className={styles.pane} onClick={() => this.navigate('editor/works')}>
-        作品
+        <Button size="medium" color="inherit">
+          <NoteIcon fontSize={'small'} />
+          作品库
+        </Button>
+
       </div>
       <div className={styles.pane} onClick={() => this.navigate('editor/templates')}>
-        模版
+        <Button size="medium" color="inherit">
+          <FilterIcon fontSize={'small'} />
+          模版库
+        </Button>
       </div>
       <div className={styles.pane} onClick={() => this.navigate('editor/materials')}>
-        素材
+        <Button size="medium" color="inherit">
+          <MaterialIcon fontSize={'small'} />
+          素材库
+        </Button>
       </div>
-      <div
-        className={`${styles.pane} ${styles.logout}`}
-        onClick={this.handleLogOut}>
-        登出
+      <div className={`${styles.pane} ${styles.logout}`} >
+        <Button size="medium" color="inherit" onClick={this.handleLogOut}>登出</Button>
       </div>
     </div>
   }

@@ -1,4 +1,4 @@
-import { ADD_PAGE, DELETE_PAGE, UPDATE_PAGE, FOCUS_PAGE, EXCHANGE_COM_ORDER } from '../constants/ActionTypes'
+import { ADD_PAGE, DELETE_PAGE, UPDATE_PAGE, FOCUS_PAGE, EXCHANGE_COM_ORDER, SET_PAGE_SETTINGS } from '../constants/ActionTypes'
 
 export interface PageStyles {
   width: number
@@ -49,4 +49,10 @@ interface ExchangeComOrder {
   newComId: number
 }
 
-export type PageAction = AddPageAction | DeletePage | UpdatePage | FocusPage | ExchangeComOrder
+interface SetPageSettings {
+  type: typeof SET_PAGE_SETTINGS,
+  pageSettings: PageSettings,
+  id: number
+}
+
+export type PageAction = AddPageAction | DeletePage | UpdatePage | FocusPage | ExchangeComOrder | SetPageSettings

@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import { Page, PageAction } from '../types/pages'
+import { Page, PageAction, PageSettings } from '../types/pages'
 
 export const addPage = (page: Page): PageAction => ({
   type: types.ADD_PAGE,
@@ -27,4 +27,10 @@ export const exchangeComOrder = (targetPageId: number, oldComId: number, newComI
   targetPageId,
   oldComId,
   newComId
+})
+
+export const setPageSettings = (pageSettingArgs: PageSettings, pageId: number) => ({
+  type: types.SET_PAGE_SETTINGS,
+  pageSettingArgs,
+  pageId
 })

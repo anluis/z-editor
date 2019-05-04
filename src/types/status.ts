@@ -4,8 +4,11 @@ import {
   SET_LOADING_STATUS,
   SET_ERROR_MESSAGE,
   SET_MATERIAL_DIALOG_STATUS,
-  SET_PAGE_SETTINGS_DIALOG_STATUS
+  SET_PAGE_SETTINGS_DIALOG_STATUS,
+  SET_MATERIAL_CURRENT_VALUE,
+  SET_MATERIAL_CHOOSEN_COM
 } from '../constants/ActionTypes'
+import { Com } from './coms';
 
 export interface StatusState {
   currentPageId: number | null
@@ -13,6 +16,10 @@ export interface StatusState {
   isLoading: boolean
   errorMessage: string
   materialDialogShow: boolean
+  pageSettingDialogShow: boolean
+  choosenPageId: number | null
+  materialCurrentValue: number
+  materialChoosenCom: Com | null
 }
 
 export interface SetLoadingStatus {
@@ -43,7 +50,18 @@ export interface SetMaterialDialogStatus {
 
 export interface SetPageSettingsDialogStatus {
   type: typeof SET_PAGE_SETTINGS_DIALOG_STATUS
-  status: boolean
+  status: boolean,
+  choosenPageId: number
+}
+
+export interface SetMaterialCurrentValue {
+  type: typeof SET_MATERIAL_CURRENT_VALUE,
+  value: number
+}
+
+export interface SetMaterialChoosenCom {
+  type: typeof SET_MATERIAL_CHOOSEN_COM,
+  com: Com | null
 }
 
 export type StatusAction =
@@ -51,4 +69,7 @@ export type StatusAction =
   SetCurrentComId |
   SetLoadingStatus |
   SetErrorMessage |
-  SetMaterialDialogStatus
+  SetMaterialDialogStatus |
+  SetPageSettingsDialogStatus |
+  SetMaterialCurrentValue |
+  SetMaterialChoosenCom

@@ -1,16 +1,17 @@
 import * as React from 'react'
 import styles from './Editor.module.css'
 import { Route, Redirect } from 'react-router-dom';
-import MenuBar from '../../components/MenuBar/MenuBar';
 import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
+import MenuBar from '../../components/MenuBar/MenuBar';
 import IStoreState from '../../types/IStoreState';
-import FullScreenMaterialDialog from '../../components/Dialogs/MaterialFullScreen'
 
 const PlayGround = React.lazy(() => import('./Playground/Playground'))
 const Materials = React.lazy(() => import('./Materials/Materials'))
 const Works = React.lazy(() => import('./Works/Works'))
 const Templates = React.lazy(() => import('./Templates/Templates'))
+const FullScreenMaterialDialog = React.lazy(() => import('../../components/Dialogs/MaterialFullScreen'))
+const PageSettingDialog = React.lazy(() => import('../../components/Dialogs/PageSettingDialog'))
 
 interface OwnProps extends RouteComponentProps {
   isLoading: boolean
@@ -26,7 +27,6 @@ class Editor extends React.Component<Props> {
       return <Redirect to='/login' />
     }
     return <div className={styles.main}>
-      <FullScreenMaterialDialog />
       <MenuBar />
       <React.Suspense fallback={null}>
         <Route path="/editor" exact component={PlayGround} />
@@ -34,7 +34,8 @@ class Editor extends React.Component<Props> {
         <Route path="/editor/works" component={Works} />
         <Route path="/editor/templates" component={Templates} />
       </React.Suspense>
-
+      <FullScreenMaterialDialog />
+      <PageSettingDialog />
     </div>
   }
 }

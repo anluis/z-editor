@@ -20,7 +20,7 @@ import { Page } from '../../../types/pages';
 
 interface StateProps {
   currentComs: Coms
-  currentPageId: number
+  currentPageId: number | null
   currentPage: Page | undefined
 }
 
@@ -59,7 +59,7 @@ const SortableItem = SortableElement(({ item, canBeSort, handleDialogOpen }: { i
   )
 })
 
-const SortableList = SortableContainer(({ items, currentPageId, handleDialogOpen, canBeSort }: { items: Coms, currentPageId: number, handleDialogOpen: (com: Com) => void, canBeSort: boolean }) => {
+const SortableList = SortableContainer(({ items, handleDialogOpen, canBeSort }: { items: Coms, handleDialogOpen: (com: Com) => void, canBeSort: boolean }) => {
   return (
     <div className={styles.layers}>
       {items.map((item, index) => {
@@ -104,15 +104,24 @@ class Layers extends React.Component<Props, State> {
     if (!choosenCom) {
       return
     }
+    if (currentPageId === null) {
+      return
+    }
     this.props.deleteCom(choosenCom.id, currentPageId)
   }
 
   onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number, newIndex: number }) => {
-    const { currentComs, exchangeComOrder } = this.props
-    exchangeComOrder(this.props.currentPageId, currentComs[oldIndex].id, currentComs[newIndex].id)
+    const { currentComs, exchangeComOrder, currentPageId } = this.props
+    if (currentPageId === null) {
+      return
+    }
+    exchangeComOrder(currentPageId, currentComs[oldIndex].id, currentComs[newIndex].id)
   }
 
   deleteCom = (id: number, currentPageId: number) => {
+    if (currentPageId === null) {
+      return
+    }
     this.props.deleteCom(id, currentPageId)
   }
 
@@ -125,7 +134,7 @@ class Layers extends React.Component<Props, State> {
 
 
   render() {
-    const { currentComs, currentPageId, currentPage } = this.props
+    const { currentComs, currentPage } = this.props
     const { topRemindText, canBeSort } = this.state
     if (!currentPage) {
       return
@@ -141,7 +150,6 @@ class Layers extends React.Component<Props, State> {
         <SortableList
           canBeSort={canBeSort}
           items={listSorted}
-          currentPageId={currentPageId}
           onSortEnd={this.onSortEnd}
           handleDialogOpen={this.handleDialogOpen}
           pressThreshold={20}
@@ -184,7 +192,10 @@ const mapStateToProps = (state: IStoreState) => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
   return {
-    deleteCom: (id: number, currentPageId: number) => {
+    deleteCom: (id: number, currentPageId: number | null) => {
+      if (currentPageId === null) {
+        return
+      }
       dispatch(deleteCom(id, currentPageId))
     },
     updateCom: (id: number, com: Com) => {

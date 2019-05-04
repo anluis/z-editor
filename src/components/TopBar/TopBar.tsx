@@ -3,9 +3,10 @@ import styles from './TopBar.module.css'
 import { Button } from '@material-ui/core'
 import IStoreState from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk'
-import { redo, undo } from '../../actions/status'
+import { redo, undo, setMaterialCurrentValue } from '../../actions/status'
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
+import { setMaterialDialogStatus } from '../../actions/status'
 import { Com } from '../../types/coms'
 import { updateSettings } from '../../actions/settings'
 import { topBarItem, topBarSettings } from '../../constants/topBar'
@@ -31,7 +32,7 @@ import {
 } from '../../constants/coms';
 
 interface OwnProps {
-  currentPageId: number
+  currentPageId: number | null
   comsIds: Array<number>
   title: string
   desc: string
@@ -42,6 +43,8 @@ interface DispatchProps {
   undo: () => void
   addCom: (id: number, com: Com) => void
   updateSettings: (title: string, desc: string) => void
+  setMaterialDialogStatus: (status: boolean) => void
+  setMaterialCurrentValue: (value: number) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -63,11 +66,11 @@ class TopBar extends React.Component<Props, State> {
   }
 
   undo = () => {
-
+    alert('Opps!功能还未开放')
   }
 
   redo = () => {
-
+    alert('Opps!功能还未开放')
   }
 
   publish = () => {
@@ -97,7 +100,10 @@ class TopBar extends React.Component<Props, State> {
   }
 
   handleAddCom = (type: string) => {
-    const { currentPageId, comsIds, addCom } = this.props
+    const { currentPageId, comsIds, addCom, setMaterialDialogStatus, setMaterialCurrentValue } = this.props
+    if (currentPageId === null) {
+      return
+    }
     const newId = maxOfArray(comsIds) + 1
     switch (type) {
       case TEXT:
@@ -109,32 +115,16 @@ class TopBar extends React.Component<Props, State> {
         addCom(currentPageId, newText)
         return
       case IMAGE:
-        const newImage = {
-          ...initImage,
-          id: newId,
-          name: `Image-${newId}`,
-          imgUrl: 'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'
-        }
-        addCom(currentPageId, newImage)
+        setMaterialCurrentValue(0)
+        setMaterialDialogStatus(true)
         return
       case VIDEO:
-        const newVideo = {
-          ...initVideo,
-          id: newId,
-          name: `Video-${newId}`,
-          videoUrl: 'http://h5-images.oss-cn-shanghai.aliyuncs.com/xingshidu_h5/marketing/pages/ad/vedio.mp4'
-        }
-        addCom(currentPageId, newVideo)
+        setMaterialCurrentValue(1)
+        setMaterialDialogStatus(true)
         return
       case LOTTIE:
-        const newLottie = {
-          ...initLottie,
-          id: newId,
-          name: `Lottie-${newId}`,
-          path: 'http://cdn.xingstation.cn/fe/marketing/jqsjb/json/data.json',
-          assetsPath: 'http://cdn.xingstation.cn/fe/marketing/jqsjb/img/'
-        }
-        addCom(currentPageId, newLottie)
+        setMaterialCurrentValue(2)
+        setMaterialDialogStatus(true)
         return
       case PHOTO_GET:
         const newPhotoGet = {
@@ -176,8 +166,8 @@ class TopBar extends React.Component<Props, State> {
     return (
       <>
         <div className={styles.head}>
-          <Button variant="contained" color="primary" onClick={() => this.undo}>撤销</Button>
-          <Button variant="contained" color="primary" onClick={() => this.undo}>重做</Button>
+          <Button variant="contained" color="primary" onClick={this.undo}>撤销</Button>
+          <Button variant="contained" color="primary" onClick={this.undo}>重做</Button>
         </div>
 
         <div className={styles.functions}>
@@ -267,6 +257,12 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     updateSettings: (title: string, desc: string) => {
       dispatch(updateSettings(title, desc))
+    },
+    setMaterialDialogStatus: (status: boolean) => {
+      dispatch(setMaterialDialogStatus(status))
+    },
+    setMaterialCurrentValue: (value: number) => {
+      dispatch(setMaterialCurrentValue(value))
     }
   }
 }

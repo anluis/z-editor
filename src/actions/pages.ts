@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes'
-import { Page, PageAction } from '../types/pages'
+import { Page, PageAction, PageSettings } from '../types/pages'
 
 export const addPage = (page: Page): PageAction => ({
   type: types.ADD_PAGE,
@@ -16,9 +16,10 @@ export const updatePage = (id: number, page: Page): PageAction => ({
   page
 })
 
-export const deletePage = (id: number): PageAction => ({
+export const deletePage = (id: number, nextPageId: number): PageAction => ({
   type: types.DELETE_PAGE,
-  id
+  id,
+  nextPageId
 })
 
 export const exchangeComOrder = (targetPageId: number, oldComId: number, newComId: number) => ({
@@ -26,4 +27,10 @@ export const exchangeComOrder = (targetPageId: number, oldComId: number, newComI
   targetPageId,
   oldComId,
   newComId
+})
+
+export const setPageSettings = (pageSettingArgs: PageSettings, pageId: number) => ({
+  type: types.SET_PAGE_SETTINGS,
+  pageSettingArgs,
+  pageId
 })

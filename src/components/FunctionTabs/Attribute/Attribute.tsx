@@ -19,12 +19,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 interface DispatchProps {
   updateCom: (id: number, com: Com) => void
-  deleteCom: (id: number, targetPageId: number) => void
+  deleteCom: (id: number, currentPageId: number) => void
 }
 
 interface OwnProps {
   currentCom: Com | undefined
-  targetPageId: number
+  currentPageId: number | null
 }
 
 interface OwnState {
@@ -58,11 +58,14 @@ class Attribute extends React.Component<Props, State> {
 
   hanldeDialogCloseAndDeleteCom = () => {
     this.setState({ deleteDialogOpen: false })
-    const { targetPageId, currentCom } = this.props
+    const { currentPageId, currentCom } = this.props
     if (!currentCom) {
       return
     }
-    this.props.deleteCom(currentCom.id, targetPageId)
+    if (currentPageId === null) {
+      return
+    }
+    this.props.deleteCom(currentCom.id, currentPageId)
   }
 
   updateTextContext = (e: string) => {
@@ -115,6 +118,29 @@ class Attribute extends React.Component<Props, State> {
       updateCom(currentCom.id, comCopy)
     }
   }
+  updateImgUrl = (imgUrl: string) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('imgUrl' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.imgUrl = imgUrl
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateVideoUrl = (videoUrl: string) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('videoUrl' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.videoUrl = videoUrl
+      updateCom(currentCom.id, comCopy)
+    }
+  }
 
   render() {
     const { currentCom } = this.props
@@ -150,6 +176,24 @@ class Attribute extends React.Component<Props, State> {
                 value={currentCom.context}
               />
             </div>}
+          {('imgUrl' in currentCom) &&
+            <div className={styles.attr}>
+              <InputLabel>图片链接:  </InputLabel>
+              <Input
+                onChange={e => this.updateImgUrl(e.target.value)}
+                value={currentCom.imgUrl}
+              />
+            </div>
+          }
+          {('videoUrl' in currentCom) &&
+            <div className={styles.attr}>
+              <InputLabel>视频链接:  </InputLabel>
+              <Input
+                onChange={e => this.updateVideoUrl(e.target.value)}
+                value={currentCom.videoUrl}
+              />
+            </div>
+          }
           {('backgroundColor' in currentCom) &&
             <div className={styles.attr}>
               <InputLabel>背景颜色:  </InputLabel>
@@ -216,10 +260,10 @@ class Attribute extends React.Component<Props, State> {
 
 const mapStateToProps = (state: IStoreState) => {
   const currentCom = getCurrentComById(state)
-  const targetPageId = state.status.currentPageId
+  const { currentPageId } = state.status
   return {
     currentCom,
-    targetPageId
+    currentPageId
   }
 }
 
@@ -228,8 +272,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
     updateCom: (id: number, com: Com) => {
       dispatch(updateCom(id, com))
     },
-    deleteCom: (id: number, targetPageId: number) => {
-      dispatch(deleteCom(id, targetPageId))
+    deleteCom: (id: number, currentPageId: number) => {
+      dispatch(deleteCom(id, currentPageId))
     }
   }
 }

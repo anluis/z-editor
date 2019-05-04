@@ -1,0 +1,47 @@
+.pages {
+  position: relative;
+  overflow-y: scroll;
+}
+.pageItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  border-top: 1px solid rgb(236, 230, 230);
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.pageItemf {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: rgb(255, 255, 255);
+  border-top: 1px solid rgb(236, 230, 230);
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid red;
+}
+.inaddmode {
+  width: 100%;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dragbutton {
+  height: 30px;
+  cursor: pointer;
+}
+
+.pagefunc {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  box-sizing: border-box;
+}

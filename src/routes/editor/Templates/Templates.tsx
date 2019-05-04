@@ -1,7 +1,7 @@
 import * as React from 'react'
-import templates from '../../../apis/templates/templates'
 import IStoreState from '../../../types/IStoreState';
 import { connect } from 'react-redux'
+import styles from './Templates.module.css'
 
 interface OwnProps {
   accessToken: string
@@ -10,19 +10,11 @@ interface OwnProps {
 type Props = OwnProps
 
 class Templates extends React.Component<Props> {
-  componentDidMount() {
-    const { accessToken } = this.props
-    const args = {
-      Authorization: 'Bearer ' + accessToken,
-      page: 1,
-      perPage: 10
-    }
-    templates(args).then(r => {
-      console.dir(r)
-    })
-  }
+
   render() {
-    return null
+    return <div className={styles.templates}>
+       <img src="https://cdn.xingstation.cn/fe/actiview/img/actiview-logo.png" />
+    </div>
   }
 }
 

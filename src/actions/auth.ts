@@ -24,6 +24,7 @@ export const login = (username: string, password: string): ThunkAction<Promise<v
       dispatch(setLoading(false))
     } catch (err) {
       const { message } = err.response.data
+      alert(message)
       dispatch(setErrorMessage(message))
       dispatch(setLoading(false))
     }

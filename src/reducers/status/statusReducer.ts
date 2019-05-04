@@ -12,7 +12,8 @@ import {
   FOCUS_PAGE,
   SET_PAGE_SETTINGS_DIALOG_STATUS,
   SET_MATERIAL_CURRENT_VALUE,
-  SET_MATERIAL_CHOOSEN_COM
+  SET_MATERIAL_CHOOSEN_COM,
+  SET_BASIC_DIALOG_STATUS
 } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
 import { PageAction } from '../../types/pages';
@@ -26,11 +27,15 @@ const initState: State = {
   currentComId: 0,
   isLoading: false,
   errorMessage: '',
+  isError: false,
   materialDialogShow: false,
   pageSettingDialogShow: false,
   choosenPageId: null,
   materialCurrentValue: 0,
-  materialChoosenCom: null
+  materialChoosenCom: null,
+  basicDialogShow: false,
+  basicDialogMessage: '',
+  latestWorkId: '5cc2d9356fac5400083a09c2'
 }
 
 const statusReducer = (state: State = initState, action: Action): State => {
@@ -98,6 +103,12 @@ const statusReducer = (state: State = initState, action: Action): State => {
       return {
         ...state,
         materialChoosenCom: action.com
+      }
+    case SET_BASIC_DIALOG_STATUS:
+      return {
+        ...state,
+        basicDialogMessage: action.basicDialogMessage,
+        basicDialogShow: action.status
       }
     default:
       return state

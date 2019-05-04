@@ -11,8 +11,6 @@ import { login } from '../../actions/auth';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper';
 import { setErrorMessage } from '../../actions/status';
-import Fade from '@material-ui/core/Fade'
-import Snackbar from '@material-ui/core/Snackbar'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -80,7 +78,6 @@ class Login extends React.Component<Props, State> {
       const { login } = this.props
       await login(this.state.userName, this.state.passWord)
     } catch (err) {
-
     }
   }
 
@@ -90,11 +87,7 @@ class Login extends React.Component<Props, State> {
     })
   }
 
-  handleClose = () => {
-    this.setState({
-      snackbarStatus: ''
-    })
-  }
+
 
   handleKeyPress = (key: string) => {
     if (key === 'Enter') {
@@ -110,15 +103,6 @@ class Login extends React.Component<Props, State> {
     const isSnackBarOpen = isError
     return (
       <>
-        <Snackbar
-          open={isSnackBarOpen}
-          onClose={this.handleClose}
-          TransitionComponent={Fade}
-          ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">{errorMessage}</span>}
-        />
         {isAuthenticated ?
           <Redirect to="/editor" />
           :
@@ -151,7 +135,6 @@ class Login extends React.Component<Props, State> {
                 <Button variant="contained" color="primary" onClick={this.handleSubmit}>Login</Button>
               </form>
             </Paper>
-
           </div>}
       </>
     )

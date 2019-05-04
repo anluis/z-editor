@@ -3,7 +3,7 @@ import styles from './TopBar.module.css'
 import { Button } from '@material-ui/core'
 import IStoreState from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk'
-import { redo, undo, setMaterialCurrentValue } from '../../actions/status'
+import { redo, undo, setMaterialCurrentValue, setBasicDialogStatus } from '../../actions/status'
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
 import { setMaterialDialogStatus } from '../../actions/status'
@@ -45,6 +45,7 @@ interface DispatchProps {
   updateSettings: (title: string, desc: string) => void
   setMaterialDialogStatus: (status: boolean) => void
   setMaterialCurrentValue: (value: number) => void
+  setBasicDialogShowStatus: (status: boolean, msg: string) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -73,8 +74,24 @@ class TopBar extends React.Component<Props, State> {
     alert('Opps!功能还未开放')
   }
 
-  publish = () => {
+  showPublishDialog = () => {
+    this.props.setBasicDialogShowStatus(true, '发布成功')
+  }
 
+  checkCanPublish = () => {
+    const { desc, title } = this.props
+    if (desc === '' || title === '') {
+      alert('请填写作品设置')
+      return false
+    } else {
+      return true
+    }
+  }
+
+  publish = () => {
+    if (this.checkCanPublish()) {
+      this.showPublishDialog()
+    }
   }
 
   handleSettingsOpen = () => {
@@ -263,6 +280,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     setMaterialCurrentValue: (value: number) => {
       dispatch(setMaterialCurrentValue(value))
+    },
+    setBasicDialogShowStatus: (status: boolean, msg: string) => {
+      dispatch(setBasicDialogStatus(status, msg))
     }
   }
 }

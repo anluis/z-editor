@@ -53,3 +53,9 @@ export const setMaterialChoosenCom = (com: Com | null) => ({
   type: types.SET_MATERIAL_CHOOSEN_COM,
   com
 })
+
+export const setBasicDialogStatus = (status: boolean, basicDialogMessage: string) => ({
+  type: types.SET_BASIC_DIALOG_STATUS,
+  status,
+  basicDialogMessage
+})

@@ -3,7 +3,7 @@ import styles from './TopBar.module.css'
 import { Button } from '@material-ui/core'
 import IStoreState from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk'
-import { redo, undo, setMaterialCurrentValue, setBasicDialogStatus } from '../../actions/status'
+import { redo, undo, setMaterialCurrentValue, setBasicDialogStatus, setLatestWorkId } from '../../actions/status'
 import { connect } from 'react-redux'
 import { addCom } from '../../actions/coms'
 import { setMaterialDialogStatus } from '../../actions/status'
@@ -22,11 +22,8 @@ import {
   TEXT,
   initText,
   IMAGE,
-  initImage,
   VIDEO,
-  initVideo,
   LOTTIE,
-  initLottie,
   PHOTO_GET,
   initPhotoGet
 } from '../../constants/coms';
@@ -46,6 +43,7 @@ interface DispatchProps {
   setMaterialDialogStatus: (status: boolean) => void
   setMaterialCurrentValue: (value: number) => void
   setBasicDialogShowStatus: (status: boolean, msg: string) => void
+  setLatestWorkId: (id: string) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -81,7 +79,7 @@ class TopBar extends React.Component<Props, State> {
   checkCanPublish = () => {
     const { desc, title } = this.props
     if (desc === '' || title === '') {
-      alert('请填写作品设置')
+      this.props.setBasicDialogShowStatus(true, '请填写作品设置')
       return false
     } else {
       return true
@@ -168,6 +166,11 @@ class TopBar extends React.Component<Props, State> {
     })
   }
 
+  preview = () => {
+    this.props.setLatestWorkId('test')
+    this.props.setBasicDialogShowStatus(true, '请点击链接预览，调整浏览器至手机模式。')
+  }
+
   render() {
     const renderItem = (item: topBarItem, index: number) => {
       return <div key={index} className={styles.fitem} >
@@ -200,10 +203,17 @@ class TopBar extends React.Component<Props, State> {
           </Button>
           <Button
             variant="contained" color="primary"
+            onClick={this.preview}
+            className={styles.publishbt}>
+            预览
+          </Button>
+          <Button
+            variant="contained" color="primary"
             onClick={this.publish}
             className={styles.publishbt}>
             发布
           </Button>
+
         </div>
 
         <Dialog
@@ -283,6 +293,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     },
     setBasicDialogShowStatus: (status: boolean, msg: string) => {
       dispatch(setBasicDialogStatus(status, msg))
+    },
+    setLatestWorkId: (id: string) => {
+      dispatch(setLatestWorkId(id))
     }
   }
 }

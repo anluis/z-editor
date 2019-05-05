@@ -29,12 +29,12 @@ class BasicDialog extends React.Component<Props> {
   };
 
   render() {
-    const { latestWorkId } = this.props
-    const workUrl = window.location.hostname + '/' + latestWorkId + '/1'
+    const { latestWorkId, basicDialogMessage } = this.props
+    const workUrl = window.location.origin + '/work/' + latestWorkId + '/0'
     const renderUrl =
       <>
-        <span>发布链接为: </span>
-        <a href={workUrl}>{workUrl}</a>
+        <span>链接为: </span>
+        <a href={workUrl} target="_blank">{workUrl}</a>
       </>
     return (
       <Dialog
@@ -44,11 +44,11 @@ class BasicDialog extends React.Component<Props> {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          恭喜！
+          提示
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {this.props.basicDialogMessage}
+            {basicDialogMessage}
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
             {latestWorkId !== null && renderUrl}

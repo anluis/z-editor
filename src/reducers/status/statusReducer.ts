@@ -13,7 +13,8 @@ import {
   SET_PAGE_SETTINGS_DIALOG_STATUS,
   SET_MATERIAL_CURRENT_VALUE,
   SET_MATERIAL_CHOOSEN_COM,
-  SET_BASIC_DIALOG_STATUS
+  SET_BASIC_DIALOG_STATUS,
+  SET_LATEST_WORK_ID
 } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
 import { PageAction } from '../../types/pages';
@@ -109,6 +110,11 @@ const statusReducer = (state: State = initState, action: Action): State => {
         ...state,
         basicDialogMessage: action.basicDialogMessage,
         basicDialogShow: action.status
+      }
+    case SET_LATEST_WORK_ID:
+      return {
+        ...state,
+        latestWorkId: action.id
       }
     default:
       return state

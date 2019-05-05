@@ -59,3 +59,8 @@ export const setBasicDialogStatus = (status: boolean, basicDialogMessage: string
   status,
   basicDialogMessage
 })
+
+export const setLatestWorkId = (id: string) => ({
+  type: types.SET_LATEST_WORK_ID,
+  id
+})

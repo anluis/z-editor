@@ -1,5 +1,5 @@
 
-import { UPDATE_SETTINGS } from '../../constants/ActionTypes'
+import { UPDATE_SETTINGS, APPLY_WORK } from '../../constants/ActionTypes'
 import { Settings, SettingsAction } from '../../types/settings'
 
 type State = Settings
@@ -17,6 +17,12 @@ const settingsReducer = (state: State = initState, action: Action): State => {
         ...state,
         desc: action.desc,
         title: action.title
+      }
+    case APPLY_WORK:
+      return {
+        ...state,
+        desc: action.work.settings.desc,
+        title: action.work.settings.title
       }
     default:
       return state

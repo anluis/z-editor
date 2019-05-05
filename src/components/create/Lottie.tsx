@@ -38,6 +38,9 @@ class Lottie extends React.Component<Props> {
     if (mode === 'editor') {
       bindStyle.left = '0'
       bindStyle.top = '0'
+      bindStyle.width = '100%'
+      bindStyle.height = '100%'
+
     }
     return <div id={`lottie-${id}`} style={bindStyle}></div>
   }

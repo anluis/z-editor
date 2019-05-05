@@ -22,6 +22,8 @@ class Text extends React.Component<Props> {
     if (mode === 'editor') {
       bindStyle.top = '0'
       bindStyle.left = '0'
+      bindStyle.width = '100%'
+      bindStyle.height = '100%'
     }
     return <div style={bindStyle}>
       {context}

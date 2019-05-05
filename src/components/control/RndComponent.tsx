@@ -26,8 +26,8 @@ class RndComponent extends React.Component<Props> {
     const { com, focusCom, updateCom, mode, zIndex } = this.props
     const bindRndStyle = {
       border: '1px solid rgb(8, 161, 239)',
-      overflow: 'hidden',
-      zIndex: zIndex
+      zIndex: zIndex,
+      boxSizing: 'unset'
     }
     return (
       <Rnd

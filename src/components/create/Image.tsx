@@ -22,6 +22,8 @@ class Image extends React.Component<Props> {
     if (mode === 'editor') {
       bindStyle.left = '0'
       bindStyle.top = '0'
+      bindStyle.height = '100%'
+      bindStyle.width = '100%'
     }
     return (
       <div style={bindStyle}></div>

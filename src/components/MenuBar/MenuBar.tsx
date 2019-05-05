@@ -10,7 +10,7 @@ import WorkIcon from '@material-ui/icons/Work';
 import NoteIcon from '@material-ui/icons/Note';
 import FilterIcon from '@material-ui/icons/Filter';
 import MaterialIcon from '@material-ui/icons/Palette'
-
+import SubscribeIcon from '@material-ui/icons/PlaylistAdd'
 
 
 interface DispatchProps {
@@ -35,8 +35,15 @@ class MenuBar extends React.Component<Props> {
     })
   }
 
+  navigateToSaaS = () => {
+    window.location.href = 'http://h5.xingstation.com/m/y6541h00/6d7143ab847f2d24c131'
+  }
+
   render() {
     return <div className={styles.menubar}>
+      <div className={styles.pane}>
+        <img className={styles.logo} src={'https://cdn.xingstation.cn/fe/actiview/img/actiview-logo.png'} />
+      </div>
       <div className={styles.pane} onClick={() => this.navigate('editor')}>
         <Button size="medium" color="inherit">
           <WorkIcon fontSize={'small'} />
@@ -60,6 +67,12 @@ class MenuBar extends React.Component<Props> {
         <Button size="medium" color="inherit">
           <MaterialIcon fontSize={'small'} />
           素材库
+        </Button>
+      </div>
+      <div className={styles.pane} onClick={this.navigateToSaaS}>
+        <Button size="medium" color="inherit">
+          <SubscribeIcon fontSize={'small'} />
+          订阅服务
         </Button>
       </div>
       <div className={`${styles.pane} ${styles.logout}`} >

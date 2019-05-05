@@ -15,6 +15,9 @@ import moduleStyles from './Material.module.css'
 import VideoCard from '../Cards/VideoCard/VideoCard';
 import LottieCard from '../Cards/LottieCard/LottieCard';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import AddIcon from '@material-ui/icons/Add';
+import classNames from 'classnames';
+import green from '@material-ui/core/colors/green';
 
 function TabContainer(props: any) {
   return (
@@ -33,6 +36,18 @@ const styles = (theme: any) => ({
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
+  } as any,
+  fabGreen: {
+    color: theme.palette.common.white,
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[600],
+    },
   },
 });
 
@@ -77,6 +92,7 @@ class Material extends React.Component<Props> {
         </AppBar>
         {value === 0 && <TabContainer>
           <ImageCard belong={belong} imgUrl={'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'} />
+          <AddIcon color='inherit' className={classNames(classes.fab, classes.fabGreen)} />
         </TabContainer>}
         {value === 1 && <TabContainer>
           <VideoCard belong={belong} videoUrl={'https://cdn.xingstation.cn/fe/cms/sample/vedio.mp4'} />

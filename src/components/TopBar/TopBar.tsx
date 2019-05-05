@@ -43,7 +43,7 @@ interface DispatchProps {
   setMaterialDialogStatus: (status: boolean) => void
   setMaterialCurrentValue: (value: number) => void
   setBasicDialogShowStatus: (status: boolean, msg: string) => void
-  setLatestWorkId: (id: string) => void
+  setLatestWorkId: (id: string | null) => void
 }
 
 type Props = DispatchProps & OwnProps
@@ -65,11 +65,13 @@ class TopBar extends React.Component<Props, State> {
   }
 
   undo = () => {
-    alert('Opps!功能还未开放')
+    this.props.setLatestWorkId(null)
+    this.props.setBasicDialogShowStatus(true, '功能还在debug...')
   }
 
   redo = () => {
-    alert('Opps!功能还未开放')
+    this.props.setLatestWorkId(null)
+    this.props.setBasicDialogShowStatus(true, '功能还在debug...')
   }
 
   showPublishDialog = () => {
@@ -79,6 +81,7 @@ class TopBar extends React.Component<Props, State> {
   checkCanPublish = () => {
     const { desc, title } = this.props
     if (desc === '' || title === '') {
+      this.props.setLatestWorkId(null)
       this.props.setBasicDialogShowStatus(true, '请填写作品设置')
       return false
     } else {
@@ -294,7 +297,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
     setBasicDialogShowStatus: (status: boolean, msg: string) => {
       dispatch(setBasicDialogStatus(status, msg))
     },
-    setLatestWorkId: (id: string) => {
+    setLatestWorkId: (id: string | null) => {
       dispatch(setLatestWorkId(id))
     }
   }

@@ -114,7 +114,7 @@ class Login extends React.Component<Props, State> {
                 <TextField
                   error={isError}
                   id="outlined-name"
-                  label="Name"
+                  label="用户名"
                   className={classes.textField}
                   value={this.state.userName}
                   onChange={this.handleChange('userName')}
@@ -124,7 +124,7 @@ class Login extends React.Component<Props, State> {
                 <TextField
                   error={isError}
                   id="outlined-password-input"
-                  label="Password"
+                  label="密码"
                   className={classes.textField}
                   type="password"
                   onChange={this.handleChange('passWord')}
@@ -132,7 +132,7 @@ class Login extends React.Component<Props, State> {
                   margin="normal"
                   variant="outlined"
                 />
-                <Button variant="contained" color="primary" onClick={this.handleSubmit}>Login</Button>
+                <Button variant="contained" color="primary" onClick={this.handleSubmit}>Go</Button>
               </form>
             </Paper>
           </div>}

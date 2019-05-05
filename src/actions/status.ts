@@ -60,7 +60,7 @@ export const setBasicDialogStatus = (status: boolean, basicDialogMessage: string
   basicDialogMessage
 })
 
-export const setLatestWorkId = (id: string) => ({
+export const setLatestWorkId = (id: string | null) => ({
   type: types.SET_LATEST_WORK_ID,
   id
 })

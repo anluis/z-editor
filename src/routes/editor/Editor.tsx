@@ -30,15 +30,28 @@ class Editor extends React.Component<Props> {
     return <div className={styles.main}>
       <React.Suspense fallback={null}>
         <MenuBar />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
         <Route path="/editor" exact component={PlayGround} />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
         <Route path="/editor/materials" component={Materials} />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
         <Route path="/editor/works" component={Works} />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
         <Route path="/editor/templates" component={Templates} />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
         <FullScreenMaterialDialog />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
         <PageSettingDialog />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
         <BasicDialog />
       </React.Suspense>
-      
     </div>
   }
 }

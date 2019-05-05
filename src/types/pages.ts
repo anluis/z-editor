@@ -1,4 +1,5 @@
-import { ADD_PAGE, DELETE_PAGE, UPDATE_PAGE, FOCUS_PAGE, EXCHANGE_COM_ORDER, SET_PAGE_SETTINGS } from '../constants/ActionTypes'
+import { ADD_PAGE, DELETE_PAGE, UPDATE_PAGE, FOCUS_PAGE, EXCHANGE_COM_ORDER, SET_PAGE_SETTINGS, APPLY_WORK } from '../constants/ActionTypes'
+import { Work } from './IStoreState';
 
 export interface PageStyles {
   width: number
@@ -55,4 +56,9 @@ interface SetPageSettings {
   id: number
 }
 
-export type PageAction = AddPageAction | DeletePage | UpdatePage | FocusPage | ExchangeComOrder | SetPageSettings
+interface ApplyWork {
+  type: typeof APPLY_WORK,
+  work: Work
+}
+
+export type PageAction = AddPageAction | DeletePage | UpdatePage | FocusPage | ExchangeComOrder | SetPageSettings | ApplyWork

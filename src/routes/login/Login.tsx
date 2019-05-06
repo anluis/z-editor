@@ -11,6 +11,7 @@ import { login } from '../../actions/auth';
 import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom'
 import Paper from '@material-ui/core/Paper';
 import { setErrorMessage } from '../../actions/status';
+import './Login.scss'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -101,12 +102,16 @@ class Login extends React.Component<Props, State> {
     const { snackbarStatus } = this.state
     const isError = errorMessage !== '' ? true : false
     const isSnackBarOpen = isError
+    const animateSpan = [...Array(100)].map((item, index) => {
+      return <span className="animatespan" key={`ani-${index}`}></span>
+    })
     return (
       <>
         {isAuthenticated ?
           <Redirect to="/editor" />
           :
           <div className={outstyles.login}>
+            {animateSpan}
             <Paper>
               <form className={outstyles.dialog} noValidate autoComplete="off" onKeyPress={(ev) => {
                 this.handleKeyPress(ev.key)

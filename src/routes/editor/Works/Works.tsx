@@ -6,6 +6,7 @@ import styles from './Works.module.css'
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { deleteAuth } from '../../../actions/auth';
+import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 
 interface OwnProps {
   accessToken: string
@@ -28,9 +29,7 @@ class Works extends React.Component<Props> {
     try {
       const resWors = await works(args)
     } catch (e) {
-      if (e.response.status === 401) {
-        this.props.deleteAuth()
-      }
+      handleAxiosAsyncError(e)
     }
   }
   render() {

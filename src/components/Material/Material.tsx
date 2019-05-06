@@ -18,6 +18,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/Add';
 import classNames from 'classnames';
 import green from '@material-ui/core/colors/green';
+import InContainer from './InContainer/InContainer';
 
 function TabContainer(props: any) {
   return (
@@ -91,8 +92,9 @@ class Material extends React.Component<Props> {
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer>
-          <ImageCard belong={belong} imgUrl={'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'} />
-          <AddIcon color='inherit' className={classNames(classes.fab, classes.fabGreen)} />
+          <InContainer />
+          {/* <ImageCard belong={belong} imgUrl={'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'} />
+          <AddIcon color='inherit' className={classNames(classes.fab, classes.fabGreen)} /> */}
         </TabContainer>}
         {value === 1 && <TabContainer>
           <VideoCard belong={belong} videoUrl={'https://cdn.xingstation.cn/fe/cms/sample/vedio.mp4'} />

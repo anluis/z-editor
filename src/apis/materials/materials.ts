@@ -1,17 +1,18 @@
 import axios from 'axios'
 import { apiUrl } from '../../constants/base';
+import { accessToken } from '../../utils/getters/auth'
 
-interface Args {
+export interface MaterialArgs {
   page: number
   perPage: number
-  Authorization: string
+  type?: string
 }
 
-const materials = (args: Args) => {
+const materials = (args: MaterialArgs) => {
   const url = apiUrl + '/materials/'
   const params = {
     headers: {
-      Authorization: args.Authorization
+      Authorization: 'Bearer ' + accessToken()
     },
     params: {
       page: args.page,

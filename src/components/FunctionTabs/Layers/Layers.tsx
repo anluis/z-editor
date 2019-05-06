@@ -115,6 +115,8 @@ class Layers extends React.Component<Props, State> {
     if (currentPageId === null) {
       return
     }
+    console.log(currentComs[oldIndex].id)
+    console.log(currentComs[newIndex].id)
     exchangeComOrder(currentPageId, currentComs[oldIndex].id, currentComs[newIndex].id)
   }
 

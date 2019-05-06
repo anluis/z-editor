@@ -4,6 +4,7 @@ export const IMAGE = 'IMAGE'
 export const VIDEO = 'VIDEO'
 export const PHOTO_GET = 'PHOTO_GET'
 export const LOTTIE = 'LOTTIE'
+export const AUDIO = 'AUDIO'
 
 export const initText: TextCom = {
   x: 0,

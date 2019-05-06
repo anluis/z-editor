@@ -119,6 +119,7 @@ class Login extends React.Component<Props, State> {
                 this.handleKeyPress(ev.key)
               }}>
                 <TextField
+                  type="username"
                   error={isError}
                   id="outlined-name"
                   label="用户名"

@@ -14,6 +14,7 @@ import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosEr
 
 interface OwnProps {
   materialCurrentValue: number
+  belong: string
 }
 
 type Props = OwnProps
@@ -79,11 +80,12 @@ class InContainer extends React.Component<Props, State> {
 
   render() {
     const { tabValueSecond, materialsList } = this.state
+    const { belong } = this.props
 
     const renderItemByType = (item: Material, index: number) => {
       switch (item.type) {
         case IMAGE:
-          return <ImageCard {...item} />
+          return <ImageCard {...item} belong={belong} />
         case VIDEO:
           return <VideoCard {...item} />
         case LOTTIE:

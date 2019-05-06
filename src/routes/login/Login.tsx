@@ -111,8 +111,10 @@ class Login extends React.Component<Props, State> {
           <Redirect to="/editor" />
           :
           <div className={outstyles.login}>
+            <img className={outstyles.logo} src="https://cdn.xingstation.cn/fe/actiview/img/actiview-logo.png" />
             {animateSpan}
             <Paper>
+              <div className={outstyles.welcome}>欢迎登陆</div>
               <form className={outstyles.dialog} noValidate autoComplete="off" onKeyPress={(ev) => {
                 this.handleKeyPress(ev.key)
               }}>
@@ -124,10 +126,12 @@ class Login extends React.Component<Props, State> {
                   value={this.state.userName}
                   onChange={this.handleChange('userName')}
                   margin="normal"
+                  fullWidth
                   variant="outlined"
                 />
                 <TextField
                   error={isError}
+                  fullWidth
                   id="outlined-password-input"
                   label="密码"
                   className={classes.textField}
@@ -137,7 +141,7 @@ class Login extends React.Component<Props, State> {
                   margin="normal"
                   variant="outlined"
                 />
-                <Button variant="contained" color="primary" onClick={this.handleSubmit}>Go</Button>
+                <Button variant="contained" color="primary" onClick={this.handleSubmit}>下一步</Button>
               </form>
             </Paper>
           </div>}

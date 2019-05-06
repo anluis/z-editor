@@ -2,7 +2,7 @@
   min-height: 100vh;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   /* background-image: url('https://cdn.xingstation.cn/fe/cms/img/login-bg.png'); */
   background: #123456;
@@ -11,6 +11,26 @@
 .dialog {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  padding: 10px;
+  width: 300px;
+  height: 250px;
+  padding: 50px;
+}
+
+.welcome {
+  padding-top: 5%;
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+  color: rgb(32, 33, 36);
+  direction: ltr;
+  font-family: roboto, "Noto Sans Myanmar UI", arial, sans-serif;
+}
+
+.logo {
+  width: 120px;
+  position: absolute;
+  top: 3%;
+  left: 3%
 }

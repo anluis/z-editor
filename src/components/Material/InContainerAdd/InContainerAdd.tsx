@@ -55,7 +55,7 @@ class InContainerAdd extends React.Component<Props, State> {
         return
       }
       const { name } = file
-      const time = moment("x")
+      const time = moment().unix()
       const suffix = `${time}-${name}`
       const key = encodeURI(`${suffix}`)
       let args: any = new FormData()

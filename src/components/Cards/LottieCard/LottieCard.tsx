@@ -15,6 +15,7 @@ import IStoreState from '../../../types/IStoreState';
 import { connect } from 'react-redux'
 import { cloneDeep } from 'lodash'
 import maxOfArray from '../../../utils/helper/maxOfArray'
+import CardMedia from '@material-ui/core/CardMedia';
 
 const styles = {
   card: {
@@ -33,8 +34,9 @@ const styles = {
 };
 
 interface OwnProps {
-  classes: any,
-  title?: string,
+  classes: any
+  name: string
+  imgUrl: string
   desc?: string
   belong?: string
   comsIds: Array<number>
@@ -61,15 +63,20 @@ function ImageCard(props: Props) {
   const bindStyles = {
     margin: '20px'
   }
-  const { classes, title, desc, belong } = props;
+  const { classes, name, desc, belong, imgUrl } = props;
   return (
     <Card className={classes.card} style={bindStyles}>
+      <CardMedia
+        className={classes.media}
+        image={imgUrl}
+        title={name}
+      />
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {title ? title : '无名称'}
+          {name}
         </Typography>
         <Typography component="p">
-          {desc ? desc : '暂无描述'}
+          {desc}
         </Typography>
       </CardContent>
       <CardActions>

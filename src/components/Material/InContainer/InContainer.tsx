@@ -11,6 +11,8 @@ import ImageCard from '../../Cards/ImageCard/ImageCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import LottieCard from '../../Cards/LottieCard/LottieCard';
 import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
+import MaterialAddButton from '../../Little/MaterialAddButton/MaterialAddButton';
+import InContainerAdd from '../InContainerAdd/InContainerAdd';
 
 interface OwnProps {
   materialCurrentValue: number
@@ -39,7 +41,6 @@ class InContainer extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    console.log('incotainer')
     this.fetchMaterialList()
   }
 
@@ -78,18 +79,24 @@ class InContainer extends React.Component<Props, State> {
     }
   }
 
+  handleMaterialAdd = () => {
+    this.setState({
+      tabValueSecond: 1
+    })
+  }
+
   render() {
     const { tabValueSecond, materialsList } = this.state
-    const { belong } = this.props
+    const { belong, materialCurrentValue } = this.props
 
     const renderItemByType = (item: Material, index: number) => {
       switch (item.type) {
         case IMAGE:
-          return <ImageCard {...item} belong={belong} />
+          return <ImageCard {...item} belong={belong} key={index} />
         case VIDEO:
-          return <VideoCard {...item} />
+          return <VideoCard {...item} belong={belong} key={index} />
         case LOTTIE:
-          return <LottieCard {...item} />
+          return <LottieCard {...item} belong={belong} key={index} />
         default:
           return null
       }
@@ -103,12 +110,13 @@ class InContainer extends React.Component<Props, State> {
     })
     return (
       <div className={styles.inctn}>
+        <MaterialAddButton handleMaterialAdd={this.handleMaterialAdd} />
         {/* step1 choose current materials */}
         {tabValueSecond === 0 &&
           renderListItems}
         {/* step2 upload materials */}
         {tabValueSecond === 1 &&
-          <></>}
+          <InContainerAdd materialCurrentValue={materialCurrentValue} />}
       </div>
     )
   }

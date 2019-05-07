@@ -6,6 +6,7 @@
   align-items: center;
   /* background-image: url('https://cdn.xingstation.cn/fe/cms/img/login-bg.png'); */
   background: #123456;
+  overflow: hidden;
 }
 
 .dialog {

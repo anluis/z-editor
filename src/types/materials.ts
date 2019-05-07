@@ -7,26 +7,27 @@ export interface baseMaterial {
   updated_at?: string
 }
 
-export interface ImgMaterial {
+export interface ImgMaterial extends baseMaterial {
   type: typeof IMAGE
   imgUrl: string
 }
 
-export interface LottieMaterial {
+export interface LottieMaterial extends baseMaterial {
   type: typeof LOTTIE
   imgUrl: string
   path: string
   assetsPath: string
 }
 
-export interface VideoMaterial {
+export interface VideoMaterial extends baseMaterial {
   type: typeof VIDEO
   videoUrl: string
+  imgUrl: string
 }
 
-export interface MusicMaterial {
+export interface AudioMaterial extends baseMaterial {
   type: typeof AUDIO
   audioUrl: string
 }
 
-export type Material = ImgMaterial | LottieMaterial | VideoMaterial | MusicMaterial
+export type Material = ImgMaterial | LottieMaterial | VideoMaterial | AudioMaterial

@@ -12,11 +12,12 @@ const materials = (args: MaterialArgs) => {
   const url = apiUrl + '/materials/'
   const params = {
     headers: {
-      Authorization: 'Bearer ' + accessToken()
+      Authorization: accessToken()
     },
     params: {
       page: args.page,
       perPage: args.perPage,
+      type: args.type
     }
   }
   return new Promise((resolve, reject) => {

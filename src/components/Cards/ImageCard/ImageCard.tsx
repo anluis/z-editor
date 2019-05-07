@@ -35,7 +35,7 @@ const styles = {
 
 interface OwnProps {
   classes: any,
-  title?: string,
+  name?: string,
   imgUrl: string
   belong?: string
   comsIds: Array<number>
@@ -61,17 +61,17 @@ function ImageCard(props: Props) {
   const bindStyles = {
     margin: '20px'
   }
-  const { classes, title, imgUrl, belong } = props;
+  const { classes, name, imgUrl, belong } = props;
   return (
     <Card className={classes.card} style={bindStyles}>
       <CardMedia
         className={classes.media}
         image={imgUrl}
-        title="Contemplative Reptile"
+        title={name}
       />
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {title ? title : '无名称'}
+          {name}
         </Typography>
       </CardContent>
       {belong === 'dialog' && <CardActions>

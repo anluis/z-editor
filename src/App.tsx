@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import IStoreState from './types/IStoreState'
 import Routes from './routes/Routes';
-
+import './App.css'
 interface OwnProps extends RouteComponentProps<any> {
 
 }

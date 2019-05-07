@@ -35,7 +35,8 @@ const styles = {
 
 interface OwnProps {
   classes: any,
-  title?: string,
+  name: string,
+  imgUrl: string
   videoUrl: string
   belong?: string
   comsIds: Array<number>
@@ -60,18 +61,17 @@ function VideoCard(props: Props) {
   const bindStyles = {
     margin: '20px'
   }
-  const { classes, title, videoUrl, belong } = props;
+  const { classes, name, imgUrl, belong } = props;
   return (
     <Card className={classes.card} style={bindStyles}>
       <CardMedia
-        component="iframe"
         className={classes.media}
-        title="Contemplative Reptile"
-        image={videoUrl}
+        title={name}
+        image={imgUrl}
       />
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {title ? title : '无名称'}
+          {name ? name : '无名称'}
         </Typography>
       </CardContent>
       <CardActions>

@@ -44,13 +44,16 @@ class PhotoGet extends React.Component<Props, State> {
   }
 
   render() {
-    const { width, height, filter, zIndex } = this.props
+    const { width, height, filter, zIndex, mode, x, y } = this.props
     const { imgUrl } = this.state
-    const bindStyle = {
+    const bindStyle: React.CSSProperties = {
       width: width + 'px',
       height: height + 'px',
-      backgroundImage: `url("` + imgUrl + `")`,
-      zIndex: zIndex
+      // backgroundImage: `url("` + imgUrl + `")`,
+      zIndex: zIndex,
+      position: 'absolute',
+      left: x + 'px',
+      top: y + 'px'
     }
     const bindStyleNotWithImg = {
       width: width + 'px',
@@ -62,14 +65,18 @@ class PhotoGet extends React.Component<Props, State> {
       alignItems: 'center',
       zIndex: zIndex
     }
-    if (!this.state.imgUrl) {
+    const innerImgStyle = {
+      width: width + 'px',
+      height: height + 'px'
+    }
+    if (mode === 'editor') {
       return <div style={bindStyleNotWithImg}>
         <div>提取的照片将会出现在这里</div>
         <div>照片比例为 {width} * {height}</div>
       </div>
     }
     return <div style={bindStyle}>
-
+      {imgUrl !== null && <img src={imgUrl} style={innerImgStyle} />}
     </div>
   }
 }

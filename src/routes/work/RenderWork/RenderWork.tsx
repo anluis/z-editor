@@ -67,11 +67,11 @@ class RenderWork extends React.Component<Props, State> {
       return <div>找不到该作品</div>
     }
     const { pages, coms } = work
-    console.dir(pages)
+    // console.dir(pages)
     const findPageResult = pages.find(pageItem => {
       return pageItem.id === Number(page)
     })
-    console.dir(findPageResult)
+    // console.dir(findPageResult)
 
     const renderPageIds = findPageResult ? findPageResult.order : []
     const comsAfterFilter = coms.filter(com => renderPageIds.includes(com.id))

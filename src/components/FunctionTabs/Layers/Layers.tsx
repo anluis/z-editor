@@ -111,13 +111,17 @@ class Layers extends React.Component<Props, State> {
   }
 
   onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number, newIndex: number }) => {
-    const { currentComs, exchangeComOrder, currentPageId } = this.props
-    if (currentPageId === null) {
+    const { currentComs, exchangeComOrder, currentPageId, currentPage } = this.props
+    if (currentPageId === null || !currentPage) {
       return
     }
-    console.log(currentComs[oldIndex].id)
-    console.log(currentComs[newIndex].id)
-    exchangeComOrder(currentPageId, currentComs[oldIndex].id, currentComs[newIndex].id)
+    const listSorted = listItemSortByOrder(currentComs, currentPage.order)
+    console.dir(listSorted)
+    console.log(listSorted[oldIndex].id)
+    console.log(listSorted[newIndex].id)
+    exchangeComOrder(currentPageId, listSorted[oldIndex].id, listSorted[newIndex].id)
+    console.dir(listSorted)
+
   }
 
   deleteCom = (id: number, currentPageId: number) => {

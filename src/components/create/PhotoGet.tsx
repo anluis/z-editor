@@ -3,6 +3,7 @@ const queryString = require('query-string')
 import { PhotoGetCom } from '../../types/coms';
 import goodsxsd from '../../apis/common/goodsxsd'
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
 
 interface Props extends PhotoGetCom, RouteComponentProps {
   mode?: string
@@ -68,6 +69,12 @@ class PhotoGet extends React.Component<Props, State> {
     const innerImgStyle = {
       width: width + 'px',
       height: height + 'px'
+    }
+    if (mode !== 'editor') {
+      bindStyle.left = x * zoomByDevice() + 'px'
+      bindStyle.top = y * zoomByDevice() + 'px'
+      bindStyle.height = height * zoomByDevice() + 'px'
+      bindStyle.width = width * zoomByDevice() + 'px'
     }
     if (mode === 'editor') {
       return <div style={bindStyleNotWithImg}>

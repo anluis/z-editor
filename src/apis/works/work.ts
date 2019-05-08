@@ -1,16 +1,20 @@
 import axios from 'axios'
 import { apiUrl } from '../../constants/base';
+import { accessToken } from '../../utils/getters/auth';
 
 interface Args {
   workId: string
   workPage: number
 }
 
-const work = (args: Args) => {
+export const work = (args: Args) => {
   const url = apiUrl + '/works/' + args.workId
   const params = {
     params: {
-      workPage: args.workPage,
+      ...args,
+      headers: {
+        Authorization: accessToken()
+      }
     }
   }
   return new Promise((resolve, reject) => {

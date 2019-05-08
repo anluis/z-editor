@@ -3,7 +3,6 @@ import { RouteComponentProps } from 'react-router-dom'
 import RenderCom from '../../../components/abstract/RenderCom'
 import { Com } from '../../../types/coms';
 import styles from './RenderWork.module.css'
-import { testWork } from '../../../constants/testWork'
 import IStoreState, { Work } from '../../../types/IStoreState';
 import { connect } from 'react-redux'
 

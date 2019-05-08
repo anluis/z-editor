@@ -1,5 +1,5 @@
 import * as React from 'react'
-import works from '../../../apis/works/works'
+import workList from '../../../apis/works/workList'
 import IStoreState from '../../../types/IStoreState';
 import { connect } from 'react-redux'
 import styles from './Works.module.css'
@@ -9,7 +9,6 @@ import { deleteAuth } from '../../../actions/auth';
 import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 
 interface OwnProps {
-  accessToken: string
 }
 
 interface DispatchProps {
@@ -20,14 +19,13 @@ type Props = OwnProps & DispatchProps
 
 class Works extends React.Component<Props> {
   async componentDidMount() {
-    const { accessToken } = this.props
     const args = {
-      Authorization: 'Bearer ' + accessToken,
       page: 1,
       perPage: 10
     }
     try {
-      const resWors = await works(args)
+      const resWorks = await workList(args)
+      console.dir(resWorks)
     } catch (e) {
       handleAxiosAsyncError(e)
     }
@@ -40,9 +38,7 @@ class Works extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { accessToken } = state.auth
   return {
-    accessToken
   }
 }
 

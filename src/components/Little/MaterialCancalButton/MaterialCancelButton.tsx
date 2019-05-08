@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import AddIcon from '@material-ui/icons/Add'
+import CloseIcon from '@material-ui/icons/Close'
 import Fab from '@material-ui/core/Fab'
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -16,17 +16,12 @@ const styles = (theme: any) => ({
 });
 
 function SimpleTooltips(props: any) {
-  const { classes, handleMaterialAdd } = props;
+  const { classes, handleMaterialChooseAndFresh } = props;
   return (
     <>
-      {/* <Tooltip title="Add" aria-label="Add">
-        <Fab color="primary" className={classes.fab}>
-          <AddIcon />
-        </Fab>
-      </Tooltip> */}
-      <Tooltip title="新增" aria-label="Add">
-        <Fab color="primary" className={classes.absolute} onClick={handleMaterialAdd}>
-          <AddIcon />
+      <Tooltip title="取消" aria-label="Add">
+        <Fab color="primary" className={classes.absolute} onClick={handleMaterialChooseAndFresh}>
+          <CloseIcon />
         </Fab>
       </Tooltip>
     </>

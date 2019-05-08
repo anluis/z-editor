@@ -23,17 +23,14 @@ export const getQiniuToken = () => {
   })
 }
 
-
-
-export const saveImgToQiniu = (args: any) => {
-  return new Promise(function (resolve, reject) {
+// save to the server
+export const saveUploadResult = (args: any) => {
+  return new Promise((resolve, reject) => {
     axios
-      .post('http://upload.qiniu.com', args)
-      .then(
-        r => {
-          resolve(r)
-        }
-      )
+      .post(apiUrl + '/media', args, { headers: { Authorization: accessToken() } })
+      .then(r => {
+        resolve(r)
+      })
       .catch(e => {
         reject(e)
       })

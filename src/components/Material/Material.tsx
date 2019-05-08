@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -8,15 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import IStoreState from '../../types/IStoreState';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { withStyles, Theme } from '@material-ui/core/styles';
 import { AnyAction } from 'redux';
 import { setMaterialCurrentValue } from '../../actions/status';
-import ImageCard from '../Cards/ImageCard/ImageCard';
-import moduleStyles from './Material.module.css'
-import VideoCard from '../Cards/VideoCard/VideoCard';
-import LottieCard from '../Cards/LottieCard/LottieCard';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
-import classNames from 'classnames';
+import moduleStyles from './Material.module.css'
 import green from '@material-ui/core/colors/green';
 const InContainer = React.lazy(() => import('./InContainer/InContainer'))
 
@@ -32,7 +27,7 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const styles = (theme: any) => ({
+const styles = (theme: Theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',

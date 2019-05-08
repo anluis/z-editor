@@ -2,7 +2,7 @@ import { IMAGE, LOTTIE, VIDEO, AUDIO } from '../constants/coms'
 export interface baseMaterial {
   type: string
   name: string
-  _id: string
+  _id?: string
   created_at?: string
   updated_at?: string
 }

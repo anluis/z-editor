@@ -4,7 +4,6 @@ import IStoreState from '../../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
-import { IMAGE, VIDEO, LOTTIE, AUDIO } from '../../../constants/coms';
 import materials, { MaterialArgs } from '../../../apis/materials/materials';
 import { Material } from '../../../types/materials'
 import ImageCard from '../../Cards/ImageCard/ImageCard';
@@ -13,6 +12,9 @@ import LottieCard from '../../Cards/LottieCard/LottieCard';
 import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 import MaterialAddButton from '../../Little/MaterialAddButton/MaterialAddButton';
 import InContainerAdd from '../InContainerAdd/InContainerAdd';
+import materialTypeByValue from '../../../utils/helper/typeReturner/materialTypeByValue'
+import { IMAGE, VIDEO, LOTTIE, AUDIO } from '../../../constants/coms';
+import MaterialCancelButton from '../../Little/MaterialCancalButton/MaterialCancelButton';
 
 interface OwnProps {
   materialCurrentValue: number
@@ -44,31 +46,17 @@ class InContainer extends React.Component<Props, State> {
     this.fetchMaterialList()
   }
 
-  get materialTypeByValue() {
-    const { materialCurrentValue } = this.props
-    switch (materialCurrentValue) {
-      case 0:
-        return IMAGE
-      case 1:
-        return VIDEO
-      case 2:
-        return LOTTIE
-      case 3:
-        return AUDIO
-      default:
-        return null
-    }
-  }
-
   fetchMaterialList = async () => {
     const { page } = this.state
+    const { materialCurrentValue } = this.props
     try {
       let requestArgs: MaterialArgs = {
         page: page,
         perPage: 10
       }
-      if (this.materialTypeByValue !== null) {
-        requestArgs.type = this.materialTypeByValue
+      const type = materialTypeByValue(materialCurrentValue)
+      if (type !== null) {
+        requestArgs.type = type
       }
       const listRes: any = await materials(requestArgs)
       this.setState({
@@ -83,6 +71,13 @@ class InContainer extends React.Component<Props, State> {
     this.setState({
       tabValueSecond: 1
     })
+  }
+
+  handleMaterialChooseAndFresh = () => {
+    this.setState({
+      tabValueSecond: 0
+    })
+    this.fetchMaterialList()
   }
 
   render() {
@@ -110,13 +105,14 @@ class InContainer extends React.Component<Props, State> {
     })
     return (
       <div className={styles.inctn}>
-        <MaterialAddButton handleMaterialAdd={this.handleMaterialAdd} />
+        {tabValueSecond === 0 && <MaterialAddButton handleMaterialAdd={this.handleMaterialAdd} />}
+        {tabValueSecond !== 0 && <MaterialCancelButton handleMaterialChooseAndFresh={this.handleMaterialChooseAndFresh} />}
         {/* step1 choose current materials */}
         {tabValueSecond === 0 &&
           renderListItems}
         {/* step2 upload materials */}
         {tabValueSecond === 1 &&
-          <InContainerAdd materialCurrentValue={materialCurrentValue} />}
+          <InContainerAdd materialCurrentValue={materialCurrentValue} handleMaterialChooseAndFresh={this.handleMaterialChooseAndFresh} />}
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { apiUrl } from '../../constants/base';
 import { accessToken } from '../../utils/getters/auth'
+import { Material } from '../../types/materials';
 
 export interface MaterialArgs {
   page: number
@@ -12,11 +13,12 @@ const materials = (args: MaterialArgs) => {
   const url = apiUrl + '/materials/'
   const params = {
     headers: {
-      Authorization: 'Bearer ' + accessToken()
+      Authorization: accessToken()
     },
     params: {
       page: args.page,
       perPage: args.perPage,
+      type: args.type
     }
   }
   return new Promise((resolve, reject) => {
@@ -33,4 +35,17 @@ const materials = (args: MaterialArgs) => {
   })
 }
 
+// export type MaterialPostArgs = Material
+
+export const materialsPost = (args: any) => {
+  const url = apiUrl + '/materials'
+  const config = {
+    headers: {
+      Authorization: accessToken()
+    }
+  }
+  return new Promise((resolve, reject) => {
+    axios.post(url, args, config).then(r => resolve(r)).catch(e => reject(e))
+  })
+}
 export default materials

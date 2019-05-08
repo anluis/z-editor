@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -8,17 +7,13 @@ import Typography from '@material-ui/core/Typography';
 import IStoreState from '../../types/IStoreState';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { withStyles, Theme } from '@material-ui/core/styles';
 import { AnyAction } from 'redux';
 import { setMaterialCurrentValue } from '../../actions/status';
-import ImageCard from '../Cards/ImageCard/ImageCard';
-import moduleStyles from './Material.module.css'
-import VideoCard from '../Cards/VideoCard/VideoCard';
-import LottieCard from '../Cards/LottieCard/LottieCard';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
-import classNames from 'classnames';
+import moduleStyles from './Material.module.css'
 import green from '@material-ui/core/colors/green';
-import InContainer from './InContainer/InContainer';
+const InContainer = React.lazy(() => import('./InContainer/InContainer'))
 
 function TabContainer(props: any) {
   return (
@@ -32,7 +27,7 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const styles = (theme: any) => ({
+const styles = (theme: Theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
@@ -73,7 +68,6 @@ class Material extends React.Component<Props> {
     const { pathname } = this.props.location
     const belong = pathname.includes('materials') ? 'materials' : 'dialog'
     const { classes, materialCurrentValue: value } = this.props;
-
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -92,15 +86,19 @@ class Material extends React.Component<Props> {
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer>
-          {/* <InContainer belong={belong} /> */}
-          <ImageCard belong={belong} imgUrl={'https://dn-coding-net-production-static.qbox.me/d4c0b468-29dd-4996-ae65-58a4b038fc39.JPG?imageMogr2/auto-orient/format/jpeg/crop/!538x538a0a0'} />
-          <AddIcon color='inherit' className={classNames(classes.fab, classes.fabGreen)} />
+          <React.Suspense fallback={null}>
+            <InContainer belong={belong} />
+          </React.Suspense>
         </TabContainer>}
         {value === 1 && <TabContainer>
-          <VideoCard belong={belong} videoUrl={'https://cdn.xingstation.cn/fe/cms/sample/vedio.mp4'} />
+          <React.Suspense fallback={null}>
+            <InContainer belong={belong} />
+          </React.Suspense>
         </TabContainer>}
         {value === 2 && <TabContainer>
-          <LottieCard belong={belong} path={'http://cdn.xingstation.cn/fe/marketing/jqsjb/json/data.json'} assetsPath={'http://cdn.xingstation.cn/fe/marketing/jqsjb/img/'} />
+          <React.Suspense fallback={null}>
+            <InContainer belong={belong} />
+          </React.Suspense>
         </TabContainer>}
         {value === 3 && <TabContainer>暂无音乐</TabContainer>}
       </div>

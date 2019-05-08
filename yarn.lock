@@ -1143,6 +1143,11 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
   integrity sha512-eqz8c/0kwNi/OEHQfvIuJVLTst3in0e7uTKeuY+WL/zfKn0xVujOTp42bS/vUUokhK5P2BppLd9JXMOMHcgbjA==
 
+"@types/qiniu-js@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@types/qiniu-js/-/qiniu-js-2.5.0.tgz#6d4e3948eae48dd65ee8fd39e4570799042aed0a"
+  integrity sha512-8GbFdCGLSWwfGJIrceSfe4tE0WDdrJjwDRkqd55/6pZwweGRym5JKpIYphTaVezX3VOxRmEoiTDWNSwONUhA9w==
+
 "@types/react-color@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/react-color/-/react-color-3.0.0.tgz#626ae0f3da34338ccae37279de32d1d9828424e4"
@@ -6905,6 +6910,11 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   dependencies:
     minimist "0.0.8"
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
+
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -8574,6 +8584,11 @@ q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qiniu-js@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/qiniu-js/-/qiniu-js-2.5.4.tgz#9d708bbdb9b5c326a42b59900eacd6d4497c81e4"
+  integrity sha512-3zx4ZrTB3LEUgEb7LHM75e9OR5E5vLZzB4c1gUMqk40FK0MHFOXA0xEFOwqJvEF03bdT+mcKmHvgVG8Gp6zwew==
 
 qs@6.5.2, qs@~6.5.2:
   version "6.5.2"

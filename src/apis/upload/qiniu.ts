@@ -1,46 +1,36 @@
 import axios from 'axios'
 import { apiUrl } from '../../constants/base';
+import { accessToken } from '../../utils/getters/auth'
 
-export interface getQiniuTokenArgs {
-  Authorization: string
-}
-
-export const getQiniuToken = (args: getQiniuTokenArgs) => {
+export const getQiniuToken = () => {
   return new Promise((resolve, reject) => {
-    const url = apiUrl + '/templets/works/'
+    const url = apiUrl + '/qiniu_oauth'
     const params = {
       headers: {
-        Authorization: args.Authorization
+        Authorization: accessToken()
       }
     }
-    return new Promise((resolve, reject) => {
-      axios
-        .get(url, params)
-        .then(
-          r => {
-            resolve(r)
-          }
-        )
-        .catch(e => {
-          reject(e)
-        })
-    })
-  })
-}
-
-export interface saveImgToQiniuArgs {
-
-}
-
-export const saveImgToQiniu = (args: saveImgToQiniuArgs) => {
-  return new Promise(function (resolve, reject) {
     axios
-      .post('http://upload.qiniu.com', args)
+      .get(url, params)
       .then(
         r => {
           resolve(r)
         }
       )
+      .catch(e => {
+        reject(e)
+      })
+  })
+}
+
+// save to the server
+export const saveUploadResult = (args: any) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(apiUrl + '/media', args, { headers: { Authorization: accessToken() } })
+      .then(r => {
+        resolve(r)
+      })
       .catch(e => {
         reject(e)
       })

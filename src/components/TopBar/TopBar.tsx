@@ -176,9 +176,9 @@ class TopBar extends React.Component<Props, State> {
 
   render() {
     const renderItem = (item: topBarItem, index: number) => {
-      return <div key={index} className={styles.fitem} >
+      return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
         {item.name}
-        <img className={styles.icon} src={item.imgUrl} onClick={() => this.handleAddCom(item.type)} />
+        <img className={styles.icon} src={item.imgUrl} />
       </div>
 
     }

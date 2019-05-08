@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { ImageCom } from '../../types/coms'
+import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
 
 interface Props extends ImageCom {
   mode?: string
@@ -24,6 +25,12 @@ class Image extends React.Component<Props> {
       bindStyle.top = '0'
       bindStyle.height = '100%'
       bindStyle.width = '100%'
+    }
+    if (mode !== 'editor') {
+      bindStyle.left = x * zoomByDevice() + 'px'
+      bindStyle.top = y * zoomByDevice() + 'px'
+      bindStyle.height = height * zoomByDevice() + 'px'
+      bindStyle.width = width * zoomByDevice() + 'px'
     }
     return (
       <div style={bindStyle}></div>

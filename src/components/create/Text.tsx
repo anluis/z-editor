@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { TextCom } from '../../types/coms'
+import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
 interface Props extends TextCom {
   mode?: string
   zIndex: number
@@ -24,6 +25,13 @@ class Text extends React.Component<Props> {
       bindStyle.left = '0'
       bindStyle.width = '100%'
       bindStyle.height = '100%'
+    }
+    if (mode !== 'editor') {
+      bindStyle.left = x * zoomByDevice() + 'px'
+      bindStyle.top = y * zoomByDevice() + 'px'
+      bindStyle.fontSize = fontSize * zoomByDevice() + 'px'
+      bindStyle.height = height * zoomByDevice() + 'px'
+      bindStyle.width = width * zoomByDevice() + 'px'
     }
     return <div style={bindStyle}>
       {context}

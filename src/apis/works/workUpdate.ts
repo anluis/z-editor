@@ -3,15 +3,11 @@ import { apiUrl } from "../../constants/base";
 import { accessToken } from "../../utils/getters/auth";
 import { Work } from "../../types/IStoreState";
 
-export interface WorkPublishArgs {
-  work: Work
-  id: string
-}
+export type WorkPublishArgs = Work
 
-export const workUpdate = (args: WorkPublishArgs) => {
-  const url = apiUrl + '/works/'
+export const workUpdate = (latestWorkId: string, args: WorkPublishArgs) => {
+  const url = apiUrl + `/works/${latestWorkId}`
   const config = {
-    _id: args.id,
     headers: {
       Authorization: accessToken()
     }

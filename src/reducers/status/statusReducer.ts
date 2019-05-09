@@ -14,7 +14,9 @@ import {
   SET_MATERIAL_CURRENT_VALUE,
   SET_MATERIAL_CHOOSEN_COM,
   SET_BASIC_DIALOG_STATUS,
-  SET_LATEST_WORK_ID
+  SET_LATEST_WORK_ID,
+  APPLY_WORK,
+  CREATE_WORK
 } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
 import { PageAction } from '../../types/pages';
@@ -37,7 +39,7 @@ const initState: State = {
   basicDialogShow: false,
   basicDialogMessage: '',
   // latestWorkId: '5cc2d9356fac5400083a09c2',
-  latestWorkId: ''
+  latestWorkId: null
 }
 
 const statusReducer = (state: State = initState, action: Action): State => {
@@ -112,10 +114,14 @@ const statusReducer = (state: State = initState, action: Action): State => {
         basicDialogMessage: action.basicDialogMessage,
         basicDialogShow: action.status
       }
-    case SET_LATEST_WORK_ID:
+    case APPLY_WORK:
       return {
         ...state,
-        latestWorkId: action.id
+        latestWorkId: action.work._id ? action.work._id : null
+      }
+    case CREATE_WORK:
+      return {
+        ...initState
       }
     default:
       return state

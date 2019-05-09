@@ -9,12 +9,17 @@ import { deleteAuth } from '../../../actions/auth';
 import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 import PageNavi from '../../../components/Little/PageNavi/PageNavi'
 import WorkCard from '../../../components/Cards/WorkCard/WorkCard';
+import MaterialAddButton from '../../../components/Little/MaterialAddButton/MaterialAddButton';
+import { createWork } from '../../../actions/works';
+import { RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router-dom'
 
-interface OwnProps {
+interface OwnProps extends RouteComponentProps<any> {
 }
 
 interface DispatchProps {
   deleteAuth: () => void
+  createWork: () => void
 }
 
 type Props = OwnProps & DispatchProps
@@ -80,6 +85,12 @@ class Works extends React.Component<Props, State> {
     this.fetchList()
   }
 
+  handleWorkAdd = () => {
+    this.props.createWork()
+    this.props.history.push({
+      pathname: '/editor'
+    })
+  }
 
   render() {
     const { workList } = this.state
@@ -90,6 +101,7 @@ class Works extends React.Component<Props, State> {
       <div className={styles.workflex}>
         {renderWorkCards}
       </div>
+      <MaterialAddButton handleMaterialAdd={this.handleWorkAdd} />
       <PageNavi handleNaviBefore={this.handleNaviBefore} handleNaviNext={this.handleNaviNext} />
     </div>
   }
@@ -104,10 +116,13 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
   return {
     deleteAuth: () => {
       dispatch(deleteAuth())
+    },
+    createWork: () => {
+      dispatch(createWork())
     }
   }
 }
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Works)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Works))

@@ -18,6 +18,7 @@ import maxOfArray from '../../../utils/helper/maxOfArray'
 import CardMedia from '@material-ui/core/CardMedia';
 import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 import materialDelete from '../../../apis/materials/materialDelete';
+import { Material, LottieMaterial } from '../../../types/materials';
 
 const styles = {
   card: {
@@ -37,15 +38,11 @@ const styles = {
 
 interface OwnProps {
   classes: any
-  name: string
-  imgUrl: string
-  desc?: string
   belong?: string
   comsIds: Array<number>
-  path: string
-  assetsPath: string
-  _id?: string
-  removeMaterialItem: (_id: string) => void
+  material: LottieMaterial
+  handleDeleteDialog: (material: Material) => void
+
 }
 
 interface DispatchProps {
@@ -60,26 +57,16 @@ function ImageCard(props: Props) {
     const newLottie = cloneDeep(initLottie)
     newLottie.id = newId
     newLottie.name = `Lottie-${newId}`
-    newLottie.path = props.path
-    newLottie.assetsPath = props.assetsPath
+    newLottie.path = props.material.path
+    newLottie.assetsPath = props.material.assetsPath
     props.setMaterialChoosenCom(newLottie)
   }
   const bindStyles = {
     margin: '20px'
   }
-  const { classes, name, desc, belong, imgUrl, removeMaterialItem } = props;
-  const handleMaterialDelete = async () => {
-    // if (!props._id) {
-    //   return
-    // }
-    // try {
-    //   const deleteResult = await materialDelete({ _id: props._id })
-    //   removeMaterialItem(props._id)
-    // } catch (err) {
-    //   handleAxiosAsyncError(err)
-    // }
-    alert('暂时不支持删除Lottie')
-  }
+  const { classes, belong, material, handleDeleteDialog } = props
+  const { name, desc, imgUrl } = props.material
+
   return (
     <Card className={classes.card} style={bindStyles}>
       <CardMedia
@@ -97,7 +84,7 @@ function ImageCard(props: Props) {
       </CardContent>
       <CardActions>
         {belong === 'dialog' && <Button size="small" onClick={generateComAndSetInStore}>选择</Button>}
-        {belong !== 'dialog' && <Button size="small" color="secondary" onClick={handleMaterialDelete}>删除</Button>}
+        {belong !== 'dialog' && <Button size="small" color="secondary" onClick={() => handleDeleteDialog(material)}>删除</Button>}
       </CardActions>
     </Card>
   );

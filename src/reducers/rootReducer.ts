@@ -17,10 +17,15 @@ const workPersistConfig = {
   storage: storage,
 }
 
+const statusPersistConfig = {
+  key: 'status',
+  storage: storage
+}
+
 // const work = undoable(workReducer)
 const rootReducer = combineReducers({
   work: persistReducer(workPersistConfig, work),
   auth: persistReducer(authPersistConfig, auth),
-  status: status as Reducer
+  status: persistReducer(statusPersistConfig, status)
 })
 export default rootReducer

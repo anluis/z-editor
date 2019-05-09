@@ -29,6 +29,7 @@ import {
 } from '../../constants/coms';
 import { handleAxiosAsyncError } from '../../utils/helper/errorHandle/axiosError';
 import workPublish from '../../apis/works/workPublish';
+import workUpdate from '../../apis/works/workUpdate';
 
 interface OwnProps {
   currentPageId: number | null
@@ -36,6 +37,7 @@ interface OwnProps {
   title: string
   desc: string
   work: Work
+  latestWorkId: string | null
 }
 
 interface DispatchProps {
@@ -93,10 +95,15 @@ class TopBar extends React.Component<Props, State> {
   }
 
   publish = async () => {
+    const { latestWorkId } = this.props
     if (this.checkCanPublish()) {
       try {
-        const publishResult: any = await workPublish(this.props.work)
-        this.props.setLatestWorkId(publishResult.data._id)
+        if (latestWorkId === null) {
+          const publishResult: any = await workPublish(this.props.work)
+          this.props.setLatestWorkId(publishResult.data._id)
+        } else {
+          await workUpdate(latestWorkId, this.props.work)
+        }
 
       } catch (err) {
         handleAxiosAsyncError(err)
@@ -191,6 +198,7 @@ class TopBar extends React.Component<Props, State> {
   }
 
   render() {
+    const { latestWorkId } = this.props
     const renderItem = (item: topBarItem, index: number) => {
       return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
         {item.name}
@@ -230,7 +238,8 @@ class TopBar extends React.Component<Props, State> {
             variant="contained" color="primary"
             onClick={this.publish}
             className={styles.publishbt}>
-            发布
+            {latestWorkId === null && <>发布</>}
+            {latestWorkId !== null && <>更新</>}
           </Button>
 
         </div>
@@ -280,7 +289,7 @@ class TopBar extends React.Component<Props, State> {
 const mapStateToProps = (state: IStoreState) => {
   const { work } = state
   const { desc, title } = state.work.settings
-  const { currentComId, currentPageId } = state.status
+  const { currentComId, currentPageId, latestWorkId } = state.status
   const comsIds = state.work.coms.map(item => { return item.id })
   return {
     currentComId,
@@ -288,7 +297,8 @@ const mapStateToProps = (state: IStoreState) => {
     comsIds,
     desc,
     title,
-    work
+    work,
+    latestWorkId
   }
 }
 

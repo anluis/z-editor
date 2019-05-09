@@ -6,7 +6,8 @@ import {
   EXCHANGE_COM_ORDER,
   DELETE_PAGE,
   SET_PAGE_SETTINGS,
-  APPLY_WORK
+  APPLY_WORK,
+  CREATE_WORK
 } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
 export type State = Pages
@@ -39,6 +40,10 @@ const pagesReducers = (state: State = initState, action: Action): State => {
       return exchangeOrderInPage(state, action.targetPageId, action.oldComId, action.newComId)
     case SET_PAGE_SETTINGS:
       return setPageSettingsByPageId(state, action.pageSettings, action.id)
+    case CREATE_WORK:
+      return [
+        initPage
+      ]
     default:
       return state
   }

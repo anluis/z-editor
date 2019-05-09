@@ -23,6 +23,7 @@ class AlertDialog extends React.Component<Props> {
 
   handleConfirm = () => {
     this.props.confirmDeleteFunction()
+    console.log('confirm')
   }
 
   render() {
@@ -53,4 +54,5 @@ class AlertDialog extends React.Component<Props> {
   }
 }
 
-export default AlertDialog;
+
+export default AlertDialog

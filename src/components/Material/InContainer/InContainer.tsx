@@ -80,6 +80,12 @@ class InContainer extends React.Component<Props, State> {
     this.fetchMaterialList()
   }
 
+  removeMaterialItem = (_id: string) => {
+    this.setState({
+      materialsList: this.state.materialsList.filter(item => item._id !== _id)
+    })
+  }
+
   render() {
     const { tabValueSecond, materialsList } = this.state
     const { belong, materialCurrentValue } = this.props
@@ -87,11 +93,11 @@ class InContainer extends React.Component<Props, State> {
     const renderItemByType = (item: Material, index: number) => {
       switch (item.type) {
         case IMAGE:
-          return <ImageCard {...item} belong={belong} key={index} />
+          return <ImageCard {...item} belong={belong} key={index} removeMaterialItem={this.removeMaterialItem} />
         case VIDEO:
-          return <VideoCard {...item} belong={belong} key={index} />
+          return <VideoCard {...item} belong={belong} key={index} removeMaterialItem={this.removeMaterialItem} />
         case LOTTIE:
-          return <LottieCard {...item} belong={belong} key={index} />
+          return <LottieCard {...item} belong={belong} key={index} removeMaterialItem={this.removeMaterialItem} />
         default:
           return null
       }

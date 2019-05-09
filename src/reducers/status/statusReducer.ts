@@ -36,7 +36,8 @@ const initState: State = {
   materialChoosenCom: null,
   basicDialogShow: false,
   basicDialogMessage: '',
-  latestWorkId: '5cc2d9356fac5400083a09c2'
+  // latestWorkId: '5cc2d9356fac5400083a09c2',
+  latestWorkId: ''
 }
 
 const statusReducer = (state: State = initState, action: Action): State => {

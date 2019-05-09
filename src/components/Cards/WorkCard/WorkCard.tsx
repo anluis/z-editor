@@ -10,11 +10,11 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { applyWork } from '../../../actions/works';
 import { connect } from 'react-redux'
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-export interface WorkCardProps {
+export interface WorkCardProps extends RouteComponentProps {
   classes: any
-  title: string
-  desc: string
+  work: Work
 }
 
 interface DispatchProps {
@@ -23,14 +23,10 @@ interface DispatchProps {
 
 type Props = WorkCardProps & DispatchProps
 
-export interface WorkCardState {
-
-}
-
 const styles = {
   card: {
-    minWidth: 275,
-    maxWidth: 275
+    minWidth: 400,
+    maxWidth: 400
   },
   media: {
     height: 140,
@@ -51,22 +47,36 @@ const bindStyles = {
 }
 
 function WorkCard(props: Props) {
-  const { classes, title, desc } = props
+  const { classes, applyWork, work } = props
+  const { title, desc } = props.work.settings
+  const { _id } = props.work
+  const hanldeApplyWork = () => {
+    applyWork(work)
+    props.history.push({
+      pathname: '/editor'
+    })
+  }
+  const workUrl = window.location.origin + `/work/${_id}/0`
   return (
     <Card className={classes.card} style={bindStyles}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {title ? title : '无名称'}
+          {title}
         </Typography>
       </CardContent>
       <CardContent>
         <Typography className={classes.desc} color="textSecondary" gutterBottom>
-          {desc ? desc : '无名称'}
+          {desc}
+        </Typography>
+      </CardContent>
+      <CardContent>
+        <Typography className={classes.desc} color="textSecondary" gutterBottom>
+          作品链接: <a href={workUrl} target="_blank">{workUrl}</a>
         </Typography>
       </CardContent>
       <CardActions>
         {/* edit here */}
-        <Button size="small" onClick={() => null}>选择</Button>
+        <Button size="small" onClick={() => hanldeApplyWork()}>选择</Button>
       </CardActions>
     </Card>
   )
@@ -86,4 +96,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(WorkCard))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(WorkCard)))

@@ -10,11 +10,11 @@ interface Args {
 export const work = (args: Args) => {
   const url = apiUrl + '/works/' + args.workId
   const params = {
+    headers: {
+      Authorization: accessToken()
+    },
     params: {
-      ...args,
-      headers: {
-        Authorization: accessToken()
-      }
+      ...args
     }
   }
   return new Promise((resolve, reject) => {

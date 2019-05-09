@@ -1,9 +1,13 @@
 .works {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: #eaeaea;
   position: relative;
 }
+
+.workflex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap
+}
+

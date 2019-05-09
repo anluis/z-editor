@@ -6,10 +6,11 @@ import { Work } from "../../types/IStoreState";
 export type WorkPublishArgs = Work
 
 export const workPublish = (args: WorkPublishArgs) => {
-  const url = apiUrl + '/works/'
+  const url = apiUrl + '/works'
   const config = {
     headers: {
-      Authorization: accessToken()
+      Authorization: accessToken(),
+      "Content-Type": 'application/json'
     }
   }
   return new Promise((resolve, reject) => {

@@ -16,6 +16,8 @@ import { connect } from 'react-redux'
 import { initImage } from '../../../constants/coms';
 import { cloneDeep } from 'lodash'
 import maxOfArray from '../../../utils/helper/maxOfArray'
+import materialDelete from '../../../apis/materials/materialDelete';
+import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 
 const styles = {
   card: {
@@ -39,6 +41,8 @@ interface OwnProps {
   imgUrl: string
   belong?: string
   comsIds: Array<number>
+  _id?: string
+  removeMaterialItem: (_id: string) => void
 }
 
 interface DispatchProps {
@@ -61,7 +65,18 @@ function ImageCard(props: Props) {
   const bindStyles = {
     margin: '20px'
   }
-  const { classes, name, imgUrl, belong } = props;
+  const { classes, name, imgUrl, belong, removeMaterialItem } = props;
+  const handleMaterialDelete = async () => {
+    if (!props._id) {
+      return
+    }
+    try {
+      const deleteResult = await materialDelete({ _id: props._id })
+      removeMaterialItem(props._id)
+    } catch (err) {
+      handleAxiosAsyncError(err)
+    }
+  }
   return (
     <Card className={classes.card} style={bindStyles}>
       <CardMedia
@@ -74,9 +89,10 @@ function ImageCard(props: Props) {
           {name}
         </Typography>
       </CardContent>
-      {belong === 'dialog' && <CardActions>
-        <Button size="small" onClick={generateComAndSetInStore}>选择</Button>
-      </CardActions>}
+      <CardActions>
+        {belong === 'dialog' && <Button size="small" onClick={generateComAndSetInStore}>选择</Button>}
+        {belong !== 'dialog' && <Button size="small" color="secondary" onClick={handleMaterialDelete}>删除</Button>}
+      </CardActions>
     </Card>
   );
 }

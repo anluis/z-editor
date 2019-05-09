@@ -116,12 +116,7 @@ class Layers extends React.Component<Props, State> {
       return
     }
     const listSorted = listItemSortByOrder(currentComs, currentPage.order)
-    console.dir(listSorted)
-    console.log(listSorted[oldIndex].id)
-    console.log(listSorted[newIndex].id)
     exchangeComOrder(currentPageId, listSorted[oldIndex].id, listSorted[newIndex].id)
-    console.dir(listSorted)
-
   }
 
   deleteCom = (id: number, currentPageId: number) => {

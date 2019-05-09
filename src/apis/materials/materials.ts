@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { apiUrl } from '../../constants/base';
 import { accessToken } from '../../utils/getters/auth'
-import { Material } from '../../types/materials';
 
 export interface MaterialArgs {
   page: number

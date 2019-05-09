@@ -1,9 +1,15 @@
 .works {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #eaeaea;
+  background-color: white;
   position: relative;
+  height: 100vh;
+  width: 100%;
 }
+
+.workflex {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap
+}
+

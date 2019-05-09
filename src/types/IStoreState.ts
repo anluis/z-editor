@@ -8,6 +8,7 @@ export interface Work {
   coms: Coms
   pages: Pages
   settings: Settings
+  _id?: string
 }
 
 interface IStoreState {

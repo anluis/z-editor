@@ -1,5 +1,5 @@
 import { ComAction, Coms, Com } from "../../types/coms";
-import { ADD_COM, UPDATE_COM, DELETE_COM, APPLY_WORK } from "../../constants/ActionTypes";
+import { ADD_COM, UPDATE_COM, DELETE_COM, APPLY_WORK, CREATE_WORK } from "../../constants/ActionTypes";
 
 type Action = ComAction
 type State = Coms
@@ -31,6 +31,8 @@ const comsReducer = (state: State = initState, action: Action): State => {
       return state.filter(item => item.id !== action.id)
     case APPLY_WORK:
       return action.work.coms
+    case CREATE_WORK:
+      return initState
     default:
       return state
   }

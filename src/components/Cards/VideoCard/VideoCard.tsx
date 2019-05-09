@@ -16,6 +16,9 @@ import { AnyAction } from 'redux';
 import IStoreState from '../../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux'
+import materialDelete from '../../../apis/materials/materialDelete';
+import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
+import { VideoMaterial, Material } from '../../../types/materials';
 
 const styles = {
   card: {
@@ -35,11 +38,10 @@ const styles = {
 
 interface OwnProps {
   classes: any,
-  name: string,
-  imgUrl: string
-  videoUrl: string
   belong?: string
   comsIds: Array<number>
+  material: VideoMaterial
+  handleDeleteDialog: (material: Material) => void
 }
 
 interface DispatchProps {
@@ -55,13 +57,15 @@ function VideoCard(props: Props) {
     const newVideo = cloneDeep(initVideo)
     newVideo.id = newId
     newVideo.name = `Video-${newId}`
-    newVideo.videoUrl = props.videoUrl
+    newVideo.videoUrl = props.material.videoUrl
     props.setMaterialChoosenCom(newVideo)
   }
   const bindStyles = {
     margin: '20px'
   }
-  const { classes, name, imgUrl, belong } = props;
+  const { classes, belong, handleDeleteDialog, material } = props
+  const { name, imgUrl } = material
+
   return (
     <Card className={classes.card} style={bindStyles}>
       <CardMedia
@@ -76,6 +80,7 @@ function VideoCard(props: Props) {
       </CardContent>
       <CardActions>
         {belong === 'dialog' && <Button size="small" onClick={generateComAndSetInStore}>选择</Button>}
+        {belong !== 'dialog' && <Button size="small" color="secondary" onClick={() => handleDeleteDialog(material)}>删除</Button>}
       </CardActions>
     </Card>
   );

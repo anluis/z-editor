@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styles from './TopBar.module.css'
 import { Button } from '@material-ui/core'
-import IStoreState from '../../types/IStoreState';
+import IStoreState, { Work } from '../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk'
 import { redo, undo, setMaterialCurrentValue, setBasicDialogStatus, setLatestWorkId } from '../../actions/status'
 import { connect } from 'react-redux'
@@ -27,12 +27,17 @@ import {
   PHOTO_GET,
   initPhotoGet
 } from '../../constants/coms';
+import { handleAxiosAsyncError } from '../../utils/helper/errorHandle/axiosError';
+import workPublish from '../../apis/works/workPublish';
+import workUpdate from '../../apis/works/workUpdate';
 
 interface OwnProps {
   currentPageId: number | null
   comsIds: Array<number>
   title: string
   desc: string
+  work: Work
+  latestWorkId: string | null
 }
 
 interface DispatchProps {
@@ -75,13 +80,13 @@ class TopBar extends React.Component<Props, State> {
   }
 
   showPublishDialog = () => {
-    this.props.setBasicDialogShowStatus(true, '发布成功')
+    this.props.setBasicDialogShowStatus(true, '请点击链接预览，调整浏览器至手机模式。')
   }
 
   checkCanPublish = () => {
     const { desc, title } = this.props
     if (desc === '' || title === '') {
-      this.props.setLatestWorkId(null)
+      // this.props.setLatestWorkId(null)
       this.props.setBasicDialogShowStatus(true, '请填写作品设置')
       return false
     } else {
@@ -89,8 +94,20 @@ class TopBar extends React.Component<Props, State> {
     }
   }
 
-  publish = () => {
+  publish = async () => {
+    const { latestWorkId } = this.props
     if (this.checkCanPublish()) {
+      try {
+        if (latestWorkId === null) {
+          const publishResult: any = await workPublish(this.props.work)
+          this.props.setLatestWorkId(publishResult.data._id)
+        } else {
+          await workUpdate(latestWorkId, this.props.work)
+        }
+
+      } catch (err) {
+        handleAxiosAsyncError(err)
+      }
       this.showPublishDialog()
     }
   }
@@ -169,12 +186,19 @@ class TopBar extends React.Component<Props, State> {
     })
   }
 
-  preview = () => {
-    this.props.setLatestWorkId('test')
-    this.props.setBasicDialogShowStatus(true, '请点击链接预览，调整浏览器至手机模式。')
+  preview = async () => {
+    try {
+      const publishResult = await workPublish(this.props.work)
+      console.dir(publishResult)
+    } catch (err) {
+      handleAxiosAsyncError(err)
+    }
+    // this.props.setLatestWorkId('test')
+    // this.props.setBasicDialogShowStatus(true, '请点击链接预览，调整浏览器至手机模式。')
   }
 
   render() {
+    const { latestWorkId } = this.props
     const renderItem = (item: topBarItem, index: number) => {
       return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
         {item.name}
@@ -204,17 +228,18 @@ class TopBar extends React.Component<Props, State> {
             className={styles.publishbt}>
             设置
           </Button>
-          <Button
+          {/* <Button
             variant="contained" color="primary"
             onClick={this.preview}
             className={styles.publishbt}>
             预览
-          </Button>
+          </Button> */}
           <Button
             variant="contained" color="primary"
             onClick={this.publish}
             className={styles.publishbt}>
-            发布
+            {latestWorkId === null && <>发布</>}
+            {latestWorkId !== null && <>更新</>}
           </Button>
 
         </div>
@@ -262,15 +287,18 @@ class TopBar extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
+  const { work } = state
   const { desc, title } = state.work.settings
-  const { currentComId, currentPageId } = state.status
+  const { currentComId, currentPageId, latestWorkId } = state.status
   const comsIds = state.work.coms.map(item => { return item.id })
   return {
     currentComId,
     currentPageId,
     comsIds,
     desc,
-    title
+    title,
+    work,
+    latestWorkId
   }
 }
 

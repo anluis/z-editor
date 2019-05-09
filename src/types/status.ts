@@ -8,7 +8,8 @@ import {
   SET_MATERIAL_CURRENT_VALUE,
   SET_MATERIAL_CHOOSEN_COM,
   SET_BASIC_DIALOG_STATUS,
-  SET_LATEST_WORK_ID
+  SET_LATEST_WORK_ID,
+  CREATE_WORK
 } from '../constants/ActionTypes'
 import { Com } from './coms';
 
@@ -81,6 +82,10 @@ export interface SetLatestWorkId {
   id: string
 }
 
+export interface CreateWork {
+  type: typeof CREATE_WORK
+}
+
 export type StatusAction =
   SetCurrentPageId |
   SetCurrentComId |
@@ -91,4 +96,5 @@ export type StatusAction =
   SetMaterialCurrentValue |
   SetMaterialChoosenCom |
   SetBasicDialogStatus |
-  SetLatestWorkId
+  SetLatestWorkId |
+  CreateWork

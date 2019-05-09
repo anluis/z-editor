@@ -57,12 +57,12 @@ class MenuBar extends React.Component<Props> {
         </Button>
 
       </div>
-      <div className={styles.pane} onClick={() => this.navigate('editor/templates')}>
+      {/* <div className={styles.pane} onClick={() => this.navigate('editor/templates')}>
         <Button size="medium" color="inherit">
           <FilterIcon fontSize={'small'} />
           模版库
         </Button>
-      </div>
+      </div> */}
       <div className={styles.pane} onClick={() => this.navigate('editor/materials')}>
         <Button size="medium" color="inherit">
           <MaterialIcon fontSize={'small'} />

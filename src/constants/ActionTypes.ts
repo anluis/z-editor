@@ -29,6 +29,7 @@ export const SAVE_WORK_BEGIN = 'SAVE_WORK_BEGIN'
 export const SAVE_WORK_SUCCESS = 'SAVE_WORK_SUCCESS'
 export const SAVE_WORK_FAILURE = 'SAVE_WORK_FAILURE'
 export const APPLY_WORK = 'APPLY_WORK'
+export const CREATE_WORK = "CREATE_WORK"
 
 // settings
 export const UPDATE_SETTINGS = 'UPDATE_SETTINGS'

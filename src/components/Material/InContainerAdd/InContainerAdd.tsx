@@ -26,9 +26,12 @@ interface Props {
 }
 
 interface State {
-  name: string
+  imgName: string
+  videoName: string
   imgPreviewUrl: string
   imgNameError: string
+  videoError: string
+  videoPreviewUrl: string
 }
 
 class InContainerAdd extends React.Component<Props, State> {
@@ -36,9 +39,12 @@ class InContainerAdd extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = {
-      name: '',
+      imgName: '',
+      videoName: '',
       imgPreviewUrl: '',
-      imgNameError: ''
+      imgNameError: '',
+      videoError: '',
+      videoPreviewUrl: ''
     }
   }
 
@@ -46,44 +52,56 @@ class InContainerAdd extends React.Component<Props, State> {
     this.setState({ [name]: event.target.value } as Pick<State, keyof State>);
   };
 
-  handleImageUpload = async () => {
-    try {
-      const qiniuToken: any = await getQiniuToken()
-      console.log(qiniuToken.data.data)
-    } catch (err) {
-      handleAxiosAsyncError(err)
-    }
-  }
-
-  handleSubmit = async () => {
-    const { name, imgPreviewUrl } = this.state
+  handleSubmitImage = async () => {
+    const { imgName, imgPreviewUrl } = this.state
     const { materialCurrentValue, handleMaterialChooseAndFresh } = this.props
     const type = materialTypeByValue(materialCurrentValue)
-    if (name === '') {
+    if (imgName === '' || type === null) {
       this.setState({
         imgNameError: 'error'
       })
       return
     }
-    if (type === null) {
-      return
-    }
     const materialArgs = {
-      name: name,
+      name: imgName,
       type: type,
       imgUrl: imgPreviewUrl
     }
     try {
-      const uploadMaterial = await materialsPost(materialArgs)
+      await materialsPost(materialArgs)
       handleMaterialChooseAndFresh()
     } catch (err) {
       handleAxiosAsyncError(err)
     }
   }
 
-  handleInputUpLoad = async (e: any) => {
+  handleSubmitVideo = async () => {
+    const { videoName, videoPreviewUrl, imgPreviewUrl } = this.state
+    const { materialCurrentValue, handleMaterialChooseAndFresh } = this.props
+    const type = materialTypeByValue(materialCurrentValue)
+    if (videoName === '' || type === null || imgPreviewUrl === '' || videoPreviewUrl === '') {
+      this.setState({
+        imgNameError: 'error'
+      })
+      return
+    }
+    const materialArgs = {
+      name: videoName,
+      type: type,
+      imgUrl: imgPreviewUrl,
+      videoUrl: videoPreviewUrl
+    }
     try {
-      console.log(e.target.files[0])
+      await materialsPost(materialArgs)
+      handleMaterialChooseAndFresh()
+    } catch (err) {
+      handleAxiosAsyncError(err)
+    }
+  }
+
+  handleImageInputUpLoad = async (e: any) => {
+    try {
+      // console.log(e.target.files[0])
       const file = e.target.files[0]
       if (!file) {
         return
@@ -124,7 +142,54 @@ class InContainerAdd extends React.Component<Props, State> {
         }
       }
       const subscription = observable.subscribe(observer)
+    } catch (err) {
+      handleAxiosAsyncError(err)
+    }
+  }
 
+  handleVideoInputUpload = async (e: any) => {
+    try {
+      // console.log(e.target.files[0])
+      const file = e.target.files[0]
+      if (!file) {
+        return
+      }
+      const { name } = file
+      const time = moment().unix()
+      const suffix = `${time}-${name}`
+      const key = encodeURI(`${suffix}`)
+      const qiniuToken: any = await getQiniuToken()
+      const putExtra = {
+        fname: file.name,
+        params: {},
+        mimeType: ["video/mp4"]
+      }
+      const config = {
+        useCdnDomain: true
+      }
+      const observable = qiniu.upload(file, key, qiniuToken.data, putExtra, config)
+      const that = this
+      const observer = {
+        next(res: any) {
+        },
+        error(err: any) {
+        },
+        complete(res: any) {
+          const uploadArgs = {
+            size: file.size,
+            name: res.hash,
+            key: res.key
+          }
+          saveUploadResult(uploadArgs).then((r: any) => {
+            that.setState({
+              videoPreviewUrl: r.data.url
+            })
+          }).catch(e => {
+            handleAxiosAsyncError(e)
+          })
+        }
+      }
+      const subscription = observable.subscribe(observer)
     } catch (err) {
       handleAxiosAsyncError(err)
     }
@@ -132,33 +197,70 @@ class InContainerAdd extends React.Component<Props, State> {
 
   render() {
     const { classes, materialCurrentValue } = this.props
-    const { imgPreviewUrl, imgNameError } = this.state
+    const { imgPreviewUrl, imgNameError, videoError, videoPreviewUrl } = this.state
     return <div className={styles.containeradd}>
       {materialCurrentValue === 0 &&
         <>
           <TextField
-            id="standard-name"
+            id="image-name"
             label="图片名称"
             className={classes.textField}
-            value={this.state.name}
-            onChange={this.handleChange('name')}
+            value={this.state.imgName}
+            onChange={this.handleChange('imgName')}
             margin="normal"
             autoFocus
             error={imgNameError === 'error'}
           />
           <input
             className={styles.imginput}
-            onChange={e => this.handleInputUpLoad(e)}
+            onChange={e => this.handleImageInputUpLoad(e)}
             accept="image/*"
-            id="raised-button-file"
-            multiple
+            id="img-upload"
             type="file"
           />
           {imgPreviewUrl !== '' && <img src={imgPreviewUrl} />}
-          <label htmlFor="raised-button-file">
+          <label htmlFor="img-upload">
             <Button variant="contained" component="span">上传</Button>
           </label>
-          <Button variant="contained" color="primary" onClick={this.handleSubmit}>提交</Button>
+          <Button variant="contained" color="primary" onClick={this.handleSubmitImage}>提交</Button>
+        </>}
+
+      {materialCurrentValue === 1 &&
+        <>
+          <TextField
+            id="video-name"
+            label="视频名称"
+            className={classes.textField}
+            value={this.state.videoName}
+            onChange={this.handleChange('videoName')}
+            margin="normal"
+            autoFocus
+            error={videoError === 'error'}
+          />
+          <input
+            className={styles.imginput}
+            onChange={e => this.handleVideoInputUpload(e)}
+            accept="video/*"
+            id="video-upload"
+            type="file"
+          />
+          {videoPreviewUrl !== '' && <>已上传视频: {videoPreviewUrl}</>}
+          <label htmlFor="video-upload">
+            <Button variant="contained" component="span">点击上传视频</Button>
+          </label>
+
+          <input
+            className={styles.imginput}
+            onChange={e => this.handleImageInputUpLoad(e)}
+            accept="image/*"
+            id="img-upload"
+            type="file"
+          />
+          {imgPreviewUrl !== '' && <img src={imgPreviewUrl} />}
+          <label htmlFor="img-upload">
+            <Button variant="contained" component="span">点击上传视频封面</Button>
+          </label>
+          <Button variant="contained" color="primary" onClick={this.handleSubmitVideo}>提交</Button>
         </>}
     </div>
   }

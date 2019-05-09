@@ -1,4 +1,4 @@
-import { UPDATE_SETTINGS, APPLY_WORK } from "../constants/ActionTypes";
+import { UPDATE_SETTINGS, APPLY_WORK, CREATE_WORK } from "../constants/ActionTypes";
 import { Work } from "./IStoreState";
 
 export interface Settings {
@@ -17,4 +17,8 @@ export interface ApplyWork {
   work: Work
 }
 
-export type SettingsAction = UpdateSettings | ApplyWork
+export interface CreateWork {
+  type: typeof CREATE_WORK
+}
+
+export type SettingsAction = UpdateSettings | ApplyWork | CreateWork

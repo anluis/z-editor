@@ -1,4 +1,4 @@
-import { ADD_COM, UPDATE_COM, DELETE_COM, FOCUS_COM, APPLY_WORK } from "../constants/ActionTypes";
+import { ADD_COM, UPDATE_COM, DELETE_COM, FOCUS_COM, APPLY_WORK, CREATE_WORK } from "../constants/ActionTypes";
 import { Work } from "./IStoreState";
 
 export interface BaseCom {
@@ -73,4 +73,8 @@ export interface ApplyWork {
   work: Work
 }
 
-export type ComAction = AddCom | UpdateCom | DeleteCom | FocusCom | ApplyWork
+export interface CreateWork {
+  type: typeof CREATE_WORK
+}
+
+export type ComAction = AddCom | UpdateCom | DeleteCom | FocusCom | ApplyWork | CreateWork

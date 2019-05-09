@@ -5,3 +5,7 @@ export const applyWork = (work: Work) => ({
   type: types.APPLY_WORK,
   work
 })
+
+export const createWork = () => ({
+  type: types.CREATE_WORK
+})

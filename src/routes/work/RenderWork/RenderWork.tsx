@@ -3,9 +3,10 @@ import { RouteComponentProps } from 'react-router-dom'
 import RenderCom from '../../../components/abstract/RenderCom'
 import { Com } from '../../../types/coms';
 import styles from './RenderWork.module.css'
-import { testWork } from '../../../constants/testWork'
 import IStoreState, { Work } from '../../../types/IStoreState';
 import { connect } from 'react-redux'
+import work from '../../../apis/works/work';
+import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 
 interface OwnProps extends RouteComponentProps<any> {
   work: Work
@@ -27,34 +28,37 @@ class RenderWork extends React.Component<Props, State> {
     }
   }
 
-  FETCH_WORK_CORRECTLY_OR_U_WILL_BE_DESTORY = async () => {
-    // const { id, page } = this.props.match.params
-    // try {
-    //   let fetchPage = 0
-    //   if (!id || id !== 'test') {
-    //     return
-    //   }
-    //   if (page) {
-    //     fetchPage = Number(page)
-    //   }
-    //   const workArgs = {
-    //     workId: id,
-    //     workPage: page
-    //   }
-    //   let resWork: any = await work(workArgs)
-    //   if (id === 'test') {
-    //     resWork = testWork
-    //   }
-    //   this.setState({
-    //     work: resWork
-    //   })
-    // } catch (e) {
-    //   console.warn(e.message)
-    // }
+  fetchWork = async () => {
+    const { id, page } = this.props.match.params
+    try {
+      let fetchPage = 0
+      if (!id || id === 'test') {
+        return
+      }
+      if (page) {
+        fetchPage = Number(page)
+      }
+      const workArgs = {
+        workId: id,
+        workPage: fetchPage
+      }
+      let resWork: any = await work(workArgs)
+      console.dir(resWork)
+      this.setState({
+        work: resWork.data
+      })
+    } catch (e) {
+      // handleAxiosAsyncError(e)
+      console.warn(e.message)
+    }
   }
 
   componentDidMount() {
-    this.FETCH_WORK_CORRECTLY_OR_U_WILL_BE_DESTORY()
+    const { id } = this.props.match.params
+    if (id === 'test') {
+      return
+    }
+    this.fetchWork()
   }
 
   render() {
@@ -64,7 +68,7 @@ class RenderWork extends React.Component<Props, State> {
       work = this.props.work
     }
     if (work === null) {
-      return <div>找不到该作品</div>
+      return null
     }
     const { pages, coms } = work
     // console.dir(pages)
@@ -72,7 +76,7 @@ class RenderWork extends React.Component<Props, State> {
       return pageItem.id === Number(page)
     })
     // console.dir(findPageResult)
-
+    document.title = work.settings.title
     const renderPageIds = findPageResult ? findPageResult.order : []
     const comsAfterFilter = coms.filter(com => renderPageIds.includes(com.id))
     const RenderComs = comsAfterFilter.map((item: Com) => {

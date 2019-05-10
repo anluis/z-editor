@@ -20,6 +20,9 @@ class Image extends React.Component<Props> {
       left: x + 'px',
       top: y + 'px'
     }
+    let bindInnerImg: React.CSSProperties = {
+      height: '100%'
+    }
     if (mode === 'editor') {
       bindStyle.left = '0'
       bindStyle.top = '0'
@@ -31,9 +34,14 @@ class Image extends React.Component<Props> {
       bindStyle.top = y * zoomByDevice() + 'px'
       bindStyle.height = height * zoomByDevice() + 'px'
       bindStyle.width = width * zoomByDevice() + 'px'
+      bindStyle.overflow = 'hidden'
+      delete bindInnerImg.backgroundImage
+      delete bindInnerImg.backgroundSize
     }
     return (
-      <div style={bindStyle}></div>
+      <div style={bindStyle}>
+        {mode !== 'editor' && <img src={imgUrl} style={bindInnerImg} />}
+      </div>
     )
   }
 }

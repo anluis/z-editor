@@ -9,7 +9,8 @@ const UndoTypes = [
   types.DELETE_PAGE,
   types.FOCUS_PAGE,
   types.UPDATE_PAGE,
-  types.EXCHANGE_COM_ORDER
+  types.EXCHANGE_COM_ORDER,
+  types.SET_CURRENT_PAGE_ID
 ]
 
 export default UndoTypes

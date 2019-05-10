@@ -71,8 +71,9 @@ class Works extends React.Component<Props, State> {
     }
     this.setState({
       page: this.state.page - 1
+    }, () => {
+      this.fetchList()
     })
-    this.fetchList()
   }
 
   handleNaviNext = () => {
@@ -81,8 +82,9 @@ class Works extends React.Component<Props, State> {
     }
     this.setState({
       page: this.state.page + 1
+    }, () => {
+      this.fetchList()
     })
-    this.fetchList()
   }
 
   handleWorkAdd = () => {
@@ -93,7 +95,7 @@ class Works extends React.Component<Props, State> {
   }
 
   render() {
-    const { workList } = this.state
+    const { workList, page, lastPage } = this.state
     const renderWorkCards = workList.map((item, index) => {
       return <WorkCard work={item} key={index} />
     })
@@ -102,7 +104,12 @@ class Works extends React.Component<Props, State> {
         {renderWorkCards}
       </div>
       <MaterialAddButton handleMaterialAdd={this.handleWorkAdd} />
-      <PageNavi handleNaviBefore={this.handleNaviBefore} handleNaviNext={this.handleNaviNext} />
+      <PageNavi
+        currentPage={page}
+        listLength={lastPage}
+        handleNaviBefore={this.handleNaviBefore}
+        handleNaviNext={this.handleNaviNext}
+      />
     </div>
   }
 }

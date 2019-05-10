@@ -11,7 +11,9 @@ export interface WorkListArgs {
 const workList = (args: WorkListArgs) => {
   const url = apiUrl + '/works'
   const params = {
-    ...args,
+    params: {
+      ...args,
+    },
     headers: {
       Authorization: accessToken()
     }

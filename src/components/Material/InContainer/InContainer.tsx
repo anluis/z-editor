@@ -13,9 +13,10 @@ import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosEr
 import MaterialAddButton from '../../Little/MaterialAddButton/MaterialAddButton';
 import InContainerAdd from '../InContainerAdd/InContainerAdd';
 import materialTypeByValue from '../../../utils/helper/typeReturner/materialTypeByValue'
-import { IMAGE, VIDEO, LOTTIE, AUDIO } from '../../../constants/coms';
+import { IMAGE, VIDEO, LOTTIE } from '../../../constants/coms';
 import MaterialCancelButton from '../../Little/MaterialCancalButton/MaterialCancelButton';
 import materialDelete from '../../../apis/materials/materialDelete';
+import PageNavi from '../../Little/PageNavi/PageNavi';
 const MaterialDeleteDialog = React.lazy(() => import('../../Dialogs/DeleteDialog/MaterialDeleteDialog'))
 
 interface OwnProps {
@@ -32,6 +33,8 @@ interface OwnState {
   materialsList: Array<Material>
   toRemoveMaterial: Material | null
   deleteDialogOpen: boolean
+  perPage: number
+  totalPage: number
 }
 
 type State = OwnState
@@ -44,7 +47,9 @@ class InContainer extends React.Component<Props, State> {
       page: 1,
       materialsList: [],
       toRemoveMaterial: null,
-      deleteDialogOpen: false
+      deleteDialogOpen: false,
+      perPage: 10,
+      totalPage: 0
     }
   }
 
@@ -53,12 +58,12 @@ class InContainer extends React.Component<Props, State> {
   }
 
   fetchMaterialList = async () => {
-    const { page } = this.state
+    const { page, perPage } = this.state
     const { materialCurrentValue } = this.props
     try {
       let requestArgs: MaterialArgs = {
         page: page,
-        perPage: 10
+        perPage: perPage
       }
       const type = materialTypeByValue(materialCurrentValue)
       if (type !== null) {
@@ -66,11 +71,28 @@ class InContainer extends React.Component<Props, State> {
       }
       const listRes: any = await materials(requestArgs)
       this.setState({
-        materialsList: listRes.data.data
+        materialsList: listRes.data.data,
+        totalPage: listRes.data.last_page
       })
     } catch (err) {
       handleAxiosAsyncError(err)
     }
+  }
+
+  handleNaviBefore = () => {
+    this.setState({
+      page: this.state.page - 1
+    }, () => {
+      this.fetchMaterialList()
+    })
+  }
+
+  handleNaviNext = () => {
+    this.setState({
+      page: this.state.page + 1
+    }, () => {
+      this.fetchMaterialList()
+    })
   }
 
   handleMaterialAdd = () => {
@@ -115,7 +137,7 @@ class InContainer extends React.Component<Props, State> {
   }
 
   render() {
-    const { tabValueSecond, materialsList, toRemoveMaterial, deleteDialogOpen } = this.state
+    const { tabValueSecond, materialsList, toRemoveMaterial, deleteDialogOpen, totalPage, page } = this.state
     const { belong, materialCurrentValue } = this.props
     const renderItemByType = (item: Material, index: number) => {
       switch (item.type) {
@@ -167,6 +189,12 @@ class InContainer extends React.Component<Props, State> {
               handleMaterialChooseAndFresh={this.handleMaterialChooseAndFresh}
             />}
         </div>
+        <PageNavi
+          handleNaviBefore={this.handleNaviBefore}
+          handleNaviNext={this.handleNaviNext}
+          listLength={totalPage}
+          currentPage={page}
+        />
         <MaterialDeleteDialog
           open={deleteDialogOpen}
           confirmDeleteFunction={this.removeMaterialItem}

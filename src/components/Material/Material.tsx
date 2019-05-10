@@ -31,7 +31,7 @@ const styles = (theme: Theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   fab: {
     position: 'absolute',
@@ -69,7 +69,7 @@ class Material extends React.Component<Props> {
     const belong = pathname.includes('materials') ? 'materials' : 'dialog'
     const { classes, materialCurrentValue: value } = this.props;
     return (
-      <div className={classes.root}>
+      <div className={classes.root} style={{ overflowY: 'scroll' }}>
         <AppBar position="static" color="default">
           <Tabs
             value={value}

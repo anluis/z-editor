@@ -32,7 +32,8 @@ const styles = {
     height: 140,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18  ,
+    fontWeight: 900
   },
   desc: {
     fontSize: 14
@@ -76,7 +77,7 @@ function WorkCard(props: Props) {
       </CardContent>
       <CardActions>
         {/* edit here */}
-        <Button size="small" onClick={() => hanldeApplyWork()}>选择</Button>
+        <Button variant="contained" size="medium" color="primary" onClick={() => hanldeApplyWork()}>编辑</Button>
       </CardActions>
     </Card>
   )

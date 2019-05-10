@@ -5,8 +5,8 @@ import { Com } from '../../../types/coms';
 import styles from './RenderWork.module.css'
 import IStoreState, { Work } from '../../../types/IStoreState';
 import { connect } from 'react-redux'
-import work from '../../../apis/works/work';
 import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
+import workPreview from '../../../apis/works/workPreview';
 
 interface OwnProps extends RouteComponentProps<any> {
   work: Work
@@ -42,8 +42,7 @@ class RenderWork extends React.Component<Props, State> {
         workId: id,
         workPage: fetchPage
       }
-      let resWork: any = await work(workArgs)
-      console.dir(resWork)
+      let resWork: any = await workPreview(workArgs)
       this.setState({
         work: resWork.data
       })
@@ -77,10 +76,14 @@ class RenderWork extends React.Component<Props, State> {
     })
     // console.dir(findPageResult)
     document.title = work.settings.title
-    const renderPageIds = findPageResult ? findPageResult.order : []
-    const comsAfterFilter = coms.filter(com => renderPageIds.includes(com.id))
-    const RenderComs = comsAfterFilter.map((item: Com) => {
-      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={item.id} />
+    // const renderPageIds = findPageResult ? findPageResult.order : []
+    // const comsAfterFilter = coms.filter(com => renderPageIds.includes(com.id))
+    if (!findPageResult) {
+      return null
+    }
+    const RenderComs = coms.map((item: Com, index) => {
+      const zIndex = findPageResult.order.indexOf(item.id)
+      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={zIndex} />
     })
     return <div className={styles.workroot}>
       {RenderComs}

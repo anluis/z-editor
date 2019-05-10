@@ -58,7 +58,7 @@ class Editor extends React.Component<Props> {
 
 const mapStateToProps = (state: IStoreState) => {
   const { isAuthenticated } = state.auth
-  const { isLoading } = state.status
+  const { isLoading } = state.status.present
   return {
     isAuthenticated,
     isLoading

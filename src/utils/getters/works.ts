@@ -3,7 +3,7 @@ import { Coms, Com } from "../../types/coms";
 import { Page } from '../../types/pages'
 
 export const getComsByCurrentPageId = (state: IStoreState): Coms => {
-  const { coms } = state.work
+  const { coms } = state.work.present
   const currentPage = getCurrentPage(state)
   if (!currentPage) {
     return []
@@ -13,14 +13,14 @@ export const getComsByCurrentPageId = (state: IStoreState): Coms => {
 }
 
 export const getCurrentComById = (state: IStoreState): Com | undefined => {
-  const { currentComId } = state.status
+  const { currentComId } = state.status.present
   const Coms = getComsByCurrentPageId(state)
   return Coms.find(item => item.id === currentComId)
 }
 
 export const getCurrentPage = (state: IStoreState): Page | undefined => {
-  const { currentPageId } = state.status
-  const { pages } = state.work
+  const { currentPageId } = state.status.present
+  const { pages } = state.work.present
   const currentPage = pages.find(pageItem => pageItem.id === currentPageId)
   return currentPage
 }

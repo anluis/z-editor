@@ -38,6 +38,8 @@ interface OwnProps {
   desc: string
   work: Work
   latestWorkId: string | null
+  pastLength: number
+  futureLength: number
 }
 
 interface DispatchProps {
@@ -70,13 +72,15 @@ class TopBar extends React.Component<Props, State> {
   }
 
   undo = () => {
-    this.props.setLatestWorkId(null)
-    this.props.setBasicDialogShowStatus(true, '功能还在debug...')
+    // this.props.setLatestWorkId(null)
+    // this.props.setBasicDialogShowStatus(true, '功能还在debug...')
+    this.props.undo()
   }
 
   redo = () => {
-    this.props.setLatestWorkId(null)
-    this.props.setBasicDialogShowStatus(true, '功能还在debug...')
+    // this.props.setLatestWorkId(null)
+    // this.props.setBasicDialogShowStatus(true, '功能还在debug...')
+    this.props.redo()
   }
 
   showPublishDialog = () => {
@@ -198,7 +202,7 @@ class TopBar extends React.Component<Props, State> {
   }
 
   render() {
-    const { latestWorkId } = this.props
+    const { latestWorkId, pastLength, futureLength } = this.props
     const renderItem = (item: topBarItem, index: number) => {
       return <div key={index} className={styles.fitem} onClick={() => this.handleAddCom(item.type)}>
         {item.name}
@@ -213,8 +217,8 @@ class TopBar extends React.Component<Props, State> {
     return (
       <>
         <div className={styles.head}>
-          <Button variant="contained" color="primary" onClick={this.undo}>撤销</Button>
-          <Button variant="contained" color="primary" onClick={this.undo}>重做</Button>
+          <Button variant="contained" color="primary" onClick={this.undo} disabled={pastLength <= 0}>撤销</Button>
+          <Button variant="contained" color="primary" onClick={this.redo} disabled={futureLength <= 0}>重做</Button>
         </div>
 
         <div className={styles.functions}>
@@ -287,18 +291,22 @@ class TopBar extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { work } = state
-  const { desc, title } = state.work.settings
-  const { currentComId, currentPageId, latestWorkId } = state.status
-  const comsIds = state.work.coms.map(item => { return item.id })
+  const { present } = state.work
+  const { desc, title } = state.work.present.settings
+  const { currentComId, currentPageId, latestWorkId } = state.status.present
+  const comsIds = state.work.present.coms.map(item => { return item.id })
+  const pastLength = state.work.past.length
+  const futureLength = state.work.future.length
   return {
     currentComId,
     currentPageId,
     comsIds,
     desc,
     title,
-    work,
-    latestWorkId
+    work: present,
+    latestWorkId,
+    pastLength,
+    futureLength
   }
 }
 

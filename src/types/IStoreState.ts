@@ -16,8 +16,16 @@ interface IStoreState {
     readonly accessToken: string
     readonly isAuthenticated: boolean
   },
-  work: Work
-  status: StatusState
+  work: {
+    past: Array<Work>
+    present: Work
+    future: Array<Work>
+  }
+  status: {
+    past: Array<StatusState>
+    present: StatusState
+    future: Array<StatusState>
+  }
 }
 
 export default IStoreState

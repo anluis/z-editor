@@ -260,7 +260,7 @@ class Attribute extends React.Component<Props, State> {
 
 const mapStateToProps = (state: IStoreState) => {
   const currentCom = getCurrentComById(state)
-  const { currentPageId } = state.status
+  const { currentPageId } = state.status.present
   return {
     currentCom,
     currentPageId

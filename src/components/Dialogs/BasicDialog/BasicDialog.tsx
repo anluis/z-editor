@@ -66,7 +66,7 @@ class BasicDialog extends React.Component<Props> {
 
 
 const mapStateToProps = (state: IStoreState) => {
-  const { basicDialogShow, basicDialogMessage, latestWorkId } = state.status
+  const { basicDialogShow, basicDialogMessage, latestWorkId } = state.status.present
   return {
     basicDialogShow,
     basicDialogMessage,

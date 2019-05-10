@@ -179,7 +179,7 @@ class InContainer extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { materialCurrentValue } = state.status
+  const { materialCurrentValue } = state.status.present
   return {
     materialCurrentValue
   }

@@ -107,7 +107,7 @@ class Material extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { materialCurrentValue } = state.status
+  const { materialCurrentValue } = state.status.present
   return {
     materialCurrentValue
   }

@@ -123,6 +123,11 @@ const statusReducer = (state: State = initState, action: Action): State => {
       return {
         ...initState
       }
+    case SET_LATEST_WORK_ID:
+      return {
+        ...state,
+        latestWorkId: action.id
+      }
     default:
       return state
   }

@@ -91,7 +91,7 @@ VideoCard.propTypes = {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const comsIds = state.work.coms.map(item => { return item.id })
+  const comsIds = state.work.present.coms.map(item => { return item.id })
   return {
     comsIds
   }

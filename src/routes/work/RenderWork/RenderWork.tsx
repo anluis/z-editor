@@ -89,9 +89,9 @@ class RenderWork extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { work } = state
+  const { present } = state.work
   return {
-    work
+    work: present
   }
 }
 

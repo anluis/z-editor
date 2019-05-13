@@ -76,9 +76,7 @@ class Pages extends React.Component<Props, State> {
       ...pageCopy,
       id: newPageId,
       name: '页面 - ' + newPageId,
-      order: [],
-      settings: {}
-
+      order: []
     }
     this.props.addPage(newPage)
   }

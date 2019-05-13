@@ -7,9 +7,10 @@ export interface PageStyles {
 }
 
 export interface PageSettings {
-  wechatShareTitle?: string
-  wechatShareDescription?: string
-  wechatShareIcon?: string
+  pageTitle: string
+  wechatShareTitle: string
+  wechatShareDescription: string
+  wechatShareIcon: string
 }
 
 export interface Page {

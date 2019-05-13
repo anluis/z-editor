@@ -47,11 +47,13 @@ class PageSettingDialog extends React.Component<Props, State> {
         wechatShareTitle: '',
         wechatShareDescription: '',
         wechatShareIcon: '',
+        pageTitle: currentPage.settings.pageTitle,
         width: currentPage.styles.width,
         height: currentPage.styles.height
       }
     } else {
       this.state = {
+        pageTitle: '',
         wechatShareTitle: '',
         wechatShareDescription: '',
         wechatShareIcon: '',
@@ -67,11 +69,12 @@ class PageSettingDialog extends React.Component<Props, State> {
       return
     }
     try {
-      const { wechatShareDescription, wechatShareIcon, wechatShareTitle, width, height } = this.state
+      const { wechatShareDescription, wechatShareIcon, wechatShareTitle, pageTitle, width, height } = this.state
       const pageSettings = {
         wechatShareTitle: wechatShareTitle,
         wechatShareDescription: wechatShareDescription,
-        wechatShareIcon: wechatShareIcon
+        wechatShareIcon: wechatShareIcon,
+        pageTitle: pageTitle
       }
       const pageStyles = {
         width: width,
@@ -120,6 +123,12 @@ class PageSettingDialog extends React.Component<Props, State> {
     })
   }
 
+  handlePageTitleChange = (e: string) => {
+    this.setState({
+      pageTitle: e
+    })
+  }
+
   render() {
     const { pageSettingDialogShow } = this.props
     return (
@@ -138,6 +147,14 @@ class PageSettingDialog extends React.Component<Props, State> {
               autoFocus
               margin="dense"
               id="title"
+              label="页面标题"
+              fullWidth
+              value={this.state.pageTitle}
+              onChange={(e) => this.handlePageTitleChange(e.target.value)}
+            />
+            <TextField
+              margin="dense"
+              id="share-title"
               label="微信分享标题"
               fullWidth
               value={this.state.wechatShareTitle}
@@ -160,7 +177,6 @@ class PageSettingDialog extends React.Component<Props, State> {
               onChange={(e) => this.handleDescChange(e.target.value)}
             />
             <TextField
-              autoFocus
               margin="dense"
               id="width"
               label="页面宽度"
@@ -169,7 +185,6 @@ class PageSettingDialog extends React.Component<Props, State> {
               onChange={(e) => this.handleWidthChange(e.target.value)}
             />
             <TextField
-              autoFocus
               margin="dense"
               id="height"
               label="页面高度"

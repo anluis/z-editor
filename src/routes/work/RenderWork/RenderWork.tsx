@@ -5,7 +5,6 @@ import { Com } from '../../../types/coms';
 import styles from './RenderWork.module.css'
 import IStoreState, { Work } from '../../../types/IStoreState';
 import { connect } from 'react-redux'
-import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 import workPreview from '../../../apis/works/workPreview';
 
 interface OwnProps extends RouteComponentProps<any> {
@@ -32,7 +31,7 @@ class RenderWork extends React.Component<Props, State> {
     const { id, page } = this.props.match.params
     try {
       let fetchPage = 0
-      if (!id || id === 'test') {
+      if (!id) {
         return
       }
       if (page) {
@@ -47,39 +46,32 @@ class RenderWork extends React.Component<Props, State> {
         work: resWork.data
       })
     } catch (e) {
-      // handleAxiosAsyncError(e)
       console.warn(e.message)
     }
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params
-    if (id === 'test') {
-      return
-    }
     this.fetchWork()
   }
 
   render() {
     let { work } = this.state
-    const { page, id } = this.props.match.params
-    if (id === 'test') {
-      work = this.props.work
-    }
+    const { page } = this.props.match.params
     if (work === null) {
       return null
     }
     const { pages, coms } = work
-    // console.dir(pages)
+    console.dir(pages)
     const findPageResult = pages.find(pageItem => {
       return pageItem.id === Number(page)
     })
-    // console.dir(findPageResult)
-    document.title = work.settings.title
-    // const renderPageIds = findPageResult ? findPageResult.order : []
-    // const comsAfterFilter = coms.filter(com => renderPageIds.includes(com.id))
     if (!findPageResult) {
       return null
+    }
+    if (findPageResult.hasOwnProperty('settings')) {
+      if (findPageResult.settings.hasOwnProperty('pageTitle')) {
+        document.title = findPageResult.settings.pageTitle ? findPageResult.settings.pageTitle : '星视度'
+      }
     }
     const RenderComs = coms.map((item: Com, index) => {
       const zIndex = findPageResult.order.indexOf(item.id)

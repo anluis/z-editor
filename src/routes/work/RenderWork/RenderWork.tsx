@@ -85,7 +85,10 @@ class RenderWork extends React.Component<Props, State> {
       const zIndex = findPageResult.order.indexOf(item.id)
       return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={zIndex} />
     })
-    return <div className={styles.workroot}>
+    const bindPageStyles = {
+      minHeight: findPageResult.styles.height * (window.innerWidth / findPageResult.styles.width) + 'px'
+    }
+    return <div className={styles.workroot} style={bindPageStyles}>
       {RenderComs}
     </div>
   }

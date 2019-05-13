@@ -32,9 +32,9 @@ export const exchangeComOrder = (targetPageId: number, oldComId: number, newComI
   newComId
 })
 
-export const setPageSettings = (pageSettingArgs: PageSettings, pageId: number) => ({
+export const setPageSettings = (pageSettings: PageSettings, pageId: number) => ({
   type: types.SET_PAGE_SETTINGS,
-  pageSettingArgs,
+  pageSettings,
   pageId
 })
 

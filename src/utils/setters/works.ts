@@ -1,6 +1,6 @@
 import { State } from '../../reducers/work/pagesReducer'
 import { Com } from '../../types/coms'
-import { Page, PageSettings } from '../../types/pages'
+import { Page, PageSettings, PageStyles } from '../../types/pages'
 import { cloneDeep } from 'lodash'
 import arrayMove from 'array-move';
 
@@ -43,6 +43,16 @@ export const setPageSettingsByPageId = (state: State, pageSettings: PageSettings
   stateCopy.map(item => {
     if (item.id === pageId) {
       item.settings = pageSettings
+    }
+  })
+  return stateCopy
+}
+
+export const setPageStylesByPageId = (state: State, pageStyles: PageStyles, pageId: number) => {
+  let stateCopy = cloneDeep(state)
+  stateCopy.map(item => {
+    if (item.id === pageId) {
+      item.styles = pageStyles
     }
   })
   return stateCopy

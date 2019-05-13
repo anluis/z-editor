@@ -9,6 +9,8 @@ import TopBar from '../../../components/TopBar/TopBar';
 import { getComsByCurrentPageId } from '../../../utils/getters/works'
 import { Coms, Com } from '../../../types/coms';
 import RndComponent from '../../../components/control/RndComponent';
+// @ts-ignore
+import Rnd from 'react-rnd'
 
 interface OwnProps {
   currentPage: Page | undefined
@@ -27,9 +29,14 @@ class Editor extends React.Component<Props> {
     const { height, width } = currentPage.styles
     const designStyles: React.CSSProperties = {
       height: `${height}px`,
-      border: '1px dashed #a3afb7',
       width: `${width}px`,
+      border: '1px dashed #a3afb7',
       backgroundColor: '#eef1f6',
+      // width: '100%',
+      // height: '100%',
+      // position: 'absolute',
+      // top: '0',
+      // left: '0'
     }
     const RenderComsWithControl = currentComs.map((item) => {
       const zIndex = currentPage.order.findIndex(e => e === item.id)

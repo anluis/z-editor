@@ -1,5 +1,8 @@
 import * as types from '../constants/ActionTypes'
-import { Page, PageAction, PageSettings } from '../types/pages'
+import { Page, PageAction, PageSettings, PageStyles } from '../types/pages'
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { setLoading, setErrorMessage } from './status';
 
 export const addPage = (page: Page): PageAction => ({
   type: types.ADD_PAGE,
@@ -34,3 +37,24 @@ export const setPageSettings = (pageSettingArgs: PageSettings, pageId: number) =
   pageSettingArgs,
   pageId
 })
+
+export const setPageStyles = (pageStyles: PageStyles, pageId: number) => ({
+  type: types.SET_PAGE_STYLES,
+  pageStyles,
+  pageId
+})
+
+export const asyncSetPageSettingsAndStyles = (pageSettings: PageSettings, pageStyles: PageStyles, pageId: number): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+    try {
+      dispatch(setLoading(true))
+      dispatch(setPageSettings(pageSettings, pageId))
+      dispatch(setPageStyles(pageStyles, pageId))
+      dispatch(setLoading(false))
+    } catch (err) {
+      const { message } = err.response.data
+      dispatch(setErrorMessage(message))
+      dispatch(setLoading(false))
+    }
+  }
+}

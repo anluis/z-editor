@@ -32,6 +32,7 @@ class Editor extends React.Component<Props> {
       width: `${width}px`,
       border: '1px dashed #a3afb7',
       backgroundColor: '#eef1f6',
+      marginBottom: '30px'
       // width: '100%',
       // height: '100%',
       // position: 'absolute',

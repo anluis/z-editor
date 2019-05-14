@@ -1,7 +1,8 @@
-import { UPDATE_AUTH, DELETE_AUTH } from '../constants/ActionTypes'
+import { UPDATE_AUTH, DELETE_AUTH, SET_WECHAT_SHARE_URL } from '../constants/ActionTypes'
 export interface AuthState {
   accessToken: string
   isAuthenticated: boolean
+  wechatShareUrl: string
 }
 
 export interface UpdateAuth {
@@ -13,4 +14,9 @@ export interface DeleteAuth {
   type: typeof DELETE_AUTH
 }
 
-export type AuthAction = UpdateAuth | DeleteAuth
+export interface SetWechatShareUrl {
+  type: typeof SET_WECHAT_SHARE_URL
+  url: string
+}
+
+export type AuthAction = UpdateAuth | DeleteAuth | SetWechatShareUrl

@@ -6,9 +6,11 @@ import styles from './RenderWork.module.css'
 import IStoreState, { Work } from '../../../types/IStoreState';
 import { connect } from 'react-redux'
 import workPreview from '../../../apis/works/workPreview';
+import inWechat from '../../../utils/helper/userAgent/inWechat'
+import { $wechat } from '../../../utils/wechat/share';
 
 interface OwnProps extends RouteComponentProps<any> {
-  work: Work
+  wxUrl: string
 }
 
 type Props = OwnProps
@@ -45,6 +47,27 @@ class RenderWork extends React.Component<Props, State> {
       this.setState({
         work: resWork.data
       })
+      const findPageResult = resWork.data.pages.find((pageItem: any) => {
+        return pageItem.id === Number(page)
+      })
+      if (findPageResult && inWechat()) {
+        const { wxUrl } = this.props
+        const { wechatShareDescription, wechatShareIcon, wechatShareTitle } = findPageResult.settings
+        const wxShareInfoValue = {
+          title: wechatShareTitle,
+          desc: wechatShareDescription,
+          link: window.location.href.split("#")[0],
+          imgUrl: wechatShareIcon
+        }
+        $wechat(wxUrl)
+          .then((res: any) => {
+            res.share(wxShareInfoValue)
+          })
+          .catch(err => {
+            console.warn(err.message)
+          })
+      }
+
     } catch (e) {
       console.warn(e.message)
     }
@@ -61,7 +84,6 @@ class RenderWork extends React.Component<Props, State> {
       return null
     }
     const { pages, coms } = work
-    console.dir(pages)
     const findPageResult = pages.find(pageItem => {
       return pageItem.id === Number(page)
     })
@@ -87,9 +109,8 @@ class RenderWork extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { present } = state.work
   return {
-    work: present
+    wxUrl: state.auth.wechatShareUrl
   }
 }
 

@@ -4,17 +4,29 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import IStoreState from './types/IStoreState'
 import Routes from './routes/Routes';
 import './App.css'
+import { ThunkDispatch } from 'redux-thunk';
+import { setWxShareUrl } from './actions/auth';
 interface OwnProps extends RouteComponentProps<any> {
 
 }
+
+interface DispatchProps {
+  setWechatConfigUrl: (wxUrl: string) => void
+}
+
 
 interface StateProps {
   isAuthenticated: boolean
 }
 
-type Props = StateProps & OwnProps
+type Props = StateProps & OwnProps & DispatchProps
 
 class App extends Component<Props> {
+
+  componentDidMount() {
+    this.props.setWechatConfigUrl(location.href)
+  }
+
   render() {
     const { isAuthenticated } = this.props
     return (
@@ -29,8 +41,17 @@ const mapStateToProps = (state: IStoreState) => {
   }
 }
 
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+  return {
+    setWechatConfigUrl: (url: string) => {
+      dispatch(setWxShareUrl(url))
+    }
+  }
+}
+
 const connectedApp = connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(App)
 
 export default withRouter(connectedApp);

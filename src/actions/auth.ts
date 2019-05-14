@@ -2,7 +2,8 @@ import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { setLoading, setErrorMessage } from '../actions/status'
 import { signIn } from '../apis/authorizations'
-import { UPDATE_AUTH, DELETE_AUTH } from '../constants/ActionTypes';
+import { UPDATE_AUTH, DELETE_AUTH, SET_WECHAT_SHARE_URL } from '../constants/ActionTypes';
+import { SetWechatShareUrl } from '../types/auth';
 
 export const updateAuth = (accessToken: string) => ({
   type: UPDATE_AUTH,
@@ -12,6 +13,13 @@ export const updateAuth = (accessToken: string) => ({
 export const deleteAuth = () => ({
   type: DELETE_AUTH
 })
+
+export const setWxShareUrl = (url: string): SetWechatShareUrl => {
+  return {
+    type: SET_WECHAT_SHARE_URL,
+    url
+  }
+}
 
 export const login = (username: string, password: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {

@@ -44,9 +44,9 @@ class PageSettingDialog extends React.Component<Props, State> {
     const { currentPage } = props
     if (currentPage) {
       this.state = {
-        wechatShareTitle: '',
-        wechatShareDescription: '',
-        wechatShareIcon: '',
+        wechatShareTitle: currentPage.settings.wechatShareTitle,
+        wechatShareDescription: currentPage.settings.wechatShareDescription,
+        wechatShareIcon: currentPage.settings.wechatShareIcon,
         pageTitle: currentPage.settings.pageTitle,
         width: currentPage.styles.width,
         height: currentPage.styles.height

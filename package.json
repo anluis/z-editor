@@ -42,7 +42,8 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "redux-undo": "^1.0.0-beta9-9-7",
-    "typescript": "3.4.3"
+    "typescript": "3.4.3",
+    "weixin-js-sdk": "^1.4.0-test"
   },
   "scripts": {
     "start": "react-scripts start",

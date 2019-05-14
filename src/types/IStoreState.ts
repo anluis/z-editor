@@ -15,6 +15,7 @@ interface IStoreState {
   auth: {
     readonly accessToken: string
     readonly isAuthenticated: boolean
+    wechatShareUrl: string
   },
   work: {
     past: Array<Work>

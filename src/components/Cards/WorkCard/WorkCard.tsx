@@ -15,6 +15,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 export interface WorkCardProps extends RouteComponentProps {
   classes: any
   work: Work
+  handleChooseWork: (work: Work) => void
 }
 
 interface DispatchProps {
@@ -32,7 +33,7 @@ const styles = {
     height: 140,
   },
   title: {
-    fontSize: 18  ,
+    fontSize: 18,
     fontWeight: 900
   },
   desc: {
@@ -48,7 +49,7 @@ const bindStyles = {
 }
 
 function WorkCard(props: Props) {
-  const { classes, applyWork, work } = props
+  const { classes, applyWork, work, handleChooseWork } = props
   const { title, desc } = props.work.settings
   const { _id } = props.work
   const hanldeApplyWork = () => {
@@ -77,7 +78,22 @@ function WorkCard(props: Props) {
       </CardContent>
       <CardActions>
         {/* edit here */}
-        <Button variant="contained" size="medium" color="primary" onClick={() => hanldeApplyWork()}>编辑</Button>
+        <Button
+          variant="contained"
+          size="medium"
+          color="primary"
+          onClick={() => hanldeApplyWork()}
+        >
+          编辑
+        </Button>
+        <Button
+          variant="contained"
+          size="medium"
+          color="secondary"
+          onClick={() => handleChooseWork(work)}
+        >
+          删除
+        </Button>
       </CardActions>
     </Card>
   )

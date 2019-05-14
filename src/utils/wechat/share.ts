@@ -2,7 +2,7 @@
 import wx from 'weixin-js-sdk'
 import axios from 'axios'
 import isiOS from '../helper/device/isIos'
-import { apiUrl } from '../../constants/base'
+import { wxApiUrl as apiUrl } from '../../constants/base'
 
 const share = (shareObject: any) => {
   // utm_term 为分享统计标记

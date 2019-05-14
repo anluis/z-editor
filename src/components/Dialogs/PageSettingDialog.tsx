@@ -129,6 +129,12 @@ class PageSettingDialog extends React.Component<Props, State> {
     })
   }
 
+  handleWechatShareIconChange = (e: string) => {
+    this.setState({
+      wechatShareIcon: e
+    })
+  }
+
   render() {
     const { pageSettingDialogShow } = this.props
     return (
@@ -146,7 +152,7 @@ class PageSettingDialog extends React.Component<Props, State> {
             <TextField
               autoFocus
               margin="dense"
-              id="title"
+              id="page-title"
               label="页面标题"
               fullWidth
               value={this.state.pageTitle}
@@ -168,14 +174,7 @@ class PageSettingDialog extends React.Component<Props, State> {
               value={this.state.wechatShareDescription}
               onChange={(e) => this.handleDescChange(e.target.value)}
             />
-            <TextField
-              margin="dense"
-              id="icon"
-              label="微信分享图标"
-              fullWidth
-              value={this.state.wechatShareIcon}
-              onChange={(e) => this.handleDescChange(e.target.value)}
-            />
+
             <TextField
               margin="dense"
               id="width"
@@ -192,6 +191,15 @@ class PageSettingDialog extends React.Component<Props, State> {
               value={this.state.height}
               onChange={(e) => this.handleHeightChange(e.target.value)}
             />
+            <TextField
+              margin="dense"
+              id="icon"
+              label="微信分享图标链接"
+              fullWidth
+              value={this.state.wechatShareIcon}
+              onChange={(e) => this.handleWechatShareIconChange(e.target.value)}
+            />
+
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">

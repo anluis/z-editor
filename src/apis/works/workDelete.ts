@@ -7,9 +7,8 @@ export interface WorkDeleteArgs {
 }
 
 const workDelete = (args: WorkDeleteArgs) => {
-  const url = apiUrl + '/works'
+  const url = apiUrl + '/works/' + args._id
   const params = {
-    ...args,
     headers: {
       Authorization: accessToken()
     }

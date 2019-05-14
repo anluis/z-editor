@@ -13,6 +13,8 @@ import MaterialAddButton from '../../../components/Little/MaterialAddButton/Mate
 import { createWork } from '../../../actions/works';
 import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom'
+import workDelete from '../../../apis/works/workDelete';
+const BasicDeleteDialog = React.lazy(() => import('../../../components/Dialogs/DeleteDialog/BasicDeleteDialog'))
 
 interface OwnProps extends RouteComponentProps<any> {
 }
@@ -29,6 +31,8 @@ interface OwnState {
   perPage: number
   workList: Array<Work>
   lastPage: number
+  choosenWork: Work | undefined
+  dialogOpen: boolean
 }
 
 type State = OwnState
@@ -41,7 +45,9 @@ class Works extends React.Component<Props, State> {
       page: 1,
       perPage: 10,
       workList: [],
-      lastPage: 0
+      lastPage: 0,
+      choosenWork: undefined,
+      dialogOpen: false
     }
   }
   async componentDidMount() {
@@ -94,10 +100,50 @@ class Works extends React.Component<Props, State> {
     })
   }
 
+  handleWorkDeleteDialogShow = () => {
+    this.setState({
+      dialogOpen: true
+    })
+  }
+
+  handleWorkDeleteDialogClose = () => {
+    this.setState({
+      dialogOpen: false
+    })
+  }
+
+  handleWorkDelete = async () => {
+    try {
+      const item = this.state.choosenWork
+      if (item && item._id) {
+        await workDelete({ _id: item._id })
+        const workListFilter = this.state.workList.filter(listItem => listItem._id !== item._id)
+        this.setState({
+          workList: workListFilter
+        })
+      }
+      this.handleWorkDeleteDialogClose()
+    } catch (err) {
+      handleAxiosAsyncError(err)
+    }
+  }
+
+  handleChooseWork = (item: Work) => {
+    this.setState({
+      choosenWork: item
+    })
+    this.handleWorkDeleteDialogShow()
+  }
+
   render() {
-    const { workList, page, lastPage } = this.state
-    const renderWorkCards = workList.map((item, index) => {
-      return <WorkCard work={item} key={index} />
+    const { workList, page, lastPage, dialogOpen, choosenWork } = this.state
+    const remindWord = `确定删除${choosenWork ? choosenWork.settings.title : ''}?`
+    const renderWorkCards = workList.map((item: Work, index) => {
+      return <WorkCard
+        work={item}
+        key={index}
+        handleChooseWork={(item) => this.handleChooseWork(item)}
+      />
     })
     return <div className={styles.works}>
       <div className={styles.workflex}>
@@ -109,6 +155,12 @@ class Works extends React.Component<Props, State> {
         listLength={lastPage}
         handleNaviBefore={this.handleNaviBefore}
         handleNaviNext={this.handleNaviNext}
+      />
+      <BasicDeleteDialog
+        confirmDeleteFunction={this.handleWorkDelete}
+        closeFunction={this.handleWorkDeleteDialogClose}
+        remindWord={remindWord}
+        open={dialogOpen}
       />
     </div>
   }

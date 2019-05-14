@@ -177,8 +177,13 @@ class InContainer extends React.Component<Props, State> {
     return (
       <>
         <div className={styles.inctn}>
-          {tabValueSecond === 0 && <MaterialAddButton handleMaterialAdd={this.handleMaterialAdd} />}
-          {tabValueSecond !== 0 && <MaterialCancelButton handleMaterialChooseAndFresh={this.handleMaterialChooseAndFresh} />}
+          {
+            tabValueSecond === 0 &&
+            <MaterialAddButton handleMaterialAdd={this.handleMaterialAdd} />
+          }
+          {
+            tabValueSecond !== 0 &&
+            <MaterialCancelButton handleMaterialChooseAndFresh={this.handleMaterialChooseAndFresh} />}
           {/* step1 choose current materials */}
           {tabValueSecond === 0 &&
             renderListItems}
@@ -189,12 +194,16 @@ class InContainer extends React.Component<Props, State> {
               handleMaterialChooseAndFresh={this.handleMaterialChooseAndFresh}
             />}
         </div>
-        <PageNavi
-          handleNaviBefore={this.handleNaviBefore}
-          handleNaviNext={this.handleNaviNext}
-          listLength={totalPage}
-          currentPage={page}
-        />
+        {
+          tabValueSecond === 0 &&
+          <PageNavi
+            handleNaviBefore={this.handleNaviBefore}
+            handleNaviNext={this.handleNaviNext}
+            listLength={totalPage}
+            currentPage={page}
+          />
+        }
+
         <MaterialDeleteDialog
           open={deleteDialogOpen}
           confirmDeleteFunction={this.removeMaterialItem}

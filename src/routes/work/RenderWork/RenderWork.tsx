@@ -95,9 +95,10 @@ class RenderWork extends React.Component<Props, State> {
         document.title = findPageResult.settings.pageTitle ? findPageResult.settings.pageTitle : '星视度'
       }
     }
+    const maxZIndex = coms.length + 1
     const RenderComs = coms.map((item: Com, index) => {
       const zIndex = findPageResult.order.indexOf(item.id)
-      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={zIndex} />
+      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={zIndex} maxZindex={maxZIndex} />
     })
     const bindPageStyles = {
       minHeight: findPageResult.styles.height * (window.innerWidth / findPageResult.styles.width) + 'px'

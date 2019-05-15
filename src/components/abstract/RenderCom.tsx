@@ -11,10 +11,11 @@ interface RenderComProps {
   com: Com
   mode?: string
   zIndex: number
+  maxZindex?: number
 }
 
 const RenderCom: React.SFC<RenderComProps> = (props) => {
-  const { com, mode, zIndex } = props
+  const { com, mode, zIndex, maxZindex } = props
   switch (com.type) {
     case TEXT:
       return <Text {...com as TextCom} mode={mode} zIndex={zIndex} />
@@ -23,7 +24,7 @@ const RenderCom: React.SFC<RenderComProps> = (props) => {
     case VIDEO:
       return <Video {...com as VideoCom} mode={mode} zIndex={zIndex} />
     case PHOTO_GET:
-      return <PhotoGet {...com as PhotoGetCom} mode={mode} zIndex={zIndex} />
+      return <PhotoGet {...com as PhotoGetCom} mode={mode} zIndex={zIndex} maxZindex={maxZindex} />
     case LOTTIE:
       return <Lottie {...com as LottieCom} mode={mode} zIndex={zIndex} />
     default:

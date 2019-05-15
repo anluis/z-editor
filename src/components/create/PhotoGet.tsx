@@ -8,6 +8,7 @@ import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
 interface Props extends PhotoGetCom, RouteComponentProps {
   mode?: string
   zIndex: number
+  maxZindex?: number
 }
 
 interface OwnState {
@@ -45,17 +46,31 @@ class PhotoGet extends React.Component<Props, State> {
   }
 
   render() {
-    const { width, height, filter, zIndex, mode, x, y } = this.props
+    const { width, height, filter, zIndex, mode, x, y, maxZindex } = this.props
     const { imgUrl } = this.state
     const bindStyle: React.CSSProperties = {
       width: width + 'px',
       height: height + 'px',
-      // backgroundImage: `url("` + imgUrl + `")`,
       zIndex: zIndex,
       position: 'absolute',
       left: x + 'px',
       top: y + 'px'
     }
+
+    let bindStyleMaxExtra: React.CSSProperties = {
+      width: width + 'px',
+      height: height + 'px',
+      zIndex: zIndex,
+      position: 'absolute',
+      left: x + 'px',
+      top: y + 'px'
+    }
+
+    if (maxZindex) {
+      bindStyleMaxExtra.zIndex = maxZindex
+      bindStyleMaxExtra.opacity = 0
+    }
+
     const bindStyleNotWithImg = {
       width: width + 'px',
       height: height + 'px',
@@ -75,6 +90,10 @@ class PhotoGet extends React.Component<Props, State> {
       bindStyle.top = y * zoomByDevice() + 'px'
       bindStyle.height = height * zoomByDevice() + 'px'
       bindStyle.width = width * zoomByDevice() + 'px'
+      bindStyleMaxExtra.left = x * zoomByDevice() + 'px'
+      bindStyleMaxExtra.top = y * zoomByDevice() + 'px'
+      bindStyleMaxExtra.height = height * zoomByDevice() + 'px'
+      bindStyleMaxExtra.width = width * zoomByDevice() + 'px'
     }
     if (mode === 'editor') {
       return <div style={bindStyleNotWithImg}>
@@ -82,9 +101,16 @@ class PhotoGet extends React.Component<Props, State> {
         <div>照片比例为 {width} * {height}</div>
       </div>
     }
-    return <div style={bindStyle}>
-      {imgUrl !== null && <img src={imgUrl} style={innerImgStyle} />}
-    </div>
+    return (
+      <>
+        <div style={bindStyleMaxExtra}>
+          {imgUrl !== null && <img src={imgUrl} style={innerImgStyle} />}
+        </div>
+        <div style={bindStyle}>
+          {imgUrl !== null && <img src={imgUrl} style={innerImgStyle} />}
+        </div>
+      </>
+    )
   }
 }
 

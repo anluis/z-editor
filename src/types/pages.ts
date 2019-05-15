@@ -23,59 +23,53 @@ export interface Page {
 
 export type Pages = Array<Page>
 
-interface AddPageAction {
+export interface AddPage {
   type: typeof ADD_PAGE,
   page: Page
 }
 
-interface DeletePage {
+export interface DeletePage {
   type: typeof DELETE_PAGE
   id: number
   nextPageId: number
 }
 
-interface UpdatePage {
+export interface UpdatePage {
   type: typeof UPDATE_PAGE
   page: Page
 }
 
-interface FocusPage {
+export interface FocusPage {
   type: typeof FOCUS_PAGE
   id: number
 }
 
-interface ExchangeComOrder {
+export interface ExchangeComOrder {
   type: typeof EXCHANGE_COM_ORDER,
   targetPageId: number,
   oldComId: number,
   newComId: number
 }
 
-interface SetPageSettings {
+export interface SetPageSettings {
   type: typeof SET_PAGE_SETTINGS,
   pageSettings: PageSettings,
-  id: number
+  pageId: number
 }
 
-interface ApplyWork {
+export interface ApplyWork {
   type: typeof APPLY_WORK,
   work: Work
 }
 
-interface SetPageSettings {
-  type: typeof SET_PAGE_SETTINGS,
-  pageSettingArgs: PageSettings,
-  pageId: number
-}
-
-interface SetPageStyles {
+export interface SetPageStyles {
   type: typeof SET_PAGE_STYLES,
   pageStyles: PageStyles,
   pageId: number
 }
 
 export type PageAction =
-  AddPageAction |
+  AddPage |
   DeletePage |
   UpdatePage |
   FocusPage |

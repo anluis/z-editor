@@ -3,14 +3,14 @@ import { AnyAction } from 'redux'
 import { setLoading, setErrorMessage } from '../actions/status'
 import { signIn } from '../apis/authorizations'
 import { UPDATE_AUTH, DELETE_AUTH, SET_WECHAT_SHARE_URL } from '../constants/ActionTypes';
-import { SetWechatShareUrl } from '../types/auth';
+import { SetWechatShareUrl, UpdateAuth, DeleteAuth } from '../types/auth';
 
-export const updateAuth = (accessToken: string) => ({
+export const updateAuth = (accessToken: string): UpdateAuth => ({
   type: UPDATE_AUTH,
   accessToken
 })
 
-export const deleteAuth = () => ({
+export const deleteAuth = (): DeleteAuth => ({
   type: DELETE_AUTH
 })
 

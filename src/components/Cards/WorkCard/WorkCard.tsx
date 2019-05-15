@@ -82,7 +82,7 @@ function WorkCard(props: Props) {
           variant="contained"
           size="medium"
           color="secondary"
-          onClick={() => handleWorkChooseToDelete(work)}
+        // onClick={() => handleWorkChooseToDelete(work)}
         >
           删除
         </Button>

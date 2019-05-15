@@ -6,6 +6,7 @@ import Routes from './routes/Routes';
 import './App.css'
 import { ThunkDispatch } from 'redux-thunk';
 import { setWxShareUrl } from './actions/auth';
+
 interface OwnProps extends RouteComponentProps<any> {
 
 }

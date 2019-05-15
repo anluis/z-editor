@@ -61,11 +61,19 @@ class Login extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    document.title = 'H5 编辑器'
+    const body = document.getElementsByTagName("body")[0]
+    body.setAttribute('style', 'overflow: hidden')
     const { isAuthenticated, clearError } = this.props
     clearError()
     if (isAuthenticated) {
       this.naviToEditor()
     }
+  }
+
+  componentWillUnmount() {
+    const body = document.getElementsByTagName("body")[0]
+    body.removeAttribute('style')
   }
 
   handleChange = (name: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import workList from '../../../apis/works/workList'
 import IStoreState, { Work } from '../../../types/IStoreState';
-import { connect } from 'react-redux'
 import styles from './Works.module.css'
+import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { deleteAuth } from '../../../actions/auth';
@@ -10,11 +10,13 @@ import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosEr
 import PageNavi from '../../../components/Little/PageNavi/PageNavi'
 import WorkCard from '../../../components/Cards/WorkCard/WorkCard';
 import MaterialAddButton from '../../../components/Little/MaterialAddButton/MaterialAddButton';
-import { createWork } from '../../../actions/works';
+import { createWork, applyWork } from '../../../actions/works';
 import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom'
 import workDelete from '../../../apis/works/workDelete';
+const ApplyWorkDialog = React.lazy(() => import('../../../components/Dialogs/ConfirmDialog/ApplyWorkDialog'))
 const BasicDeleteDialog = React.lazy(() => import('../../../components/Dialogs/DeleteDialog/BasicDeleteDialog'))
+const CreateWorkDialog = React.lazy(() => import('../../../components/Dialogs/ConfirmDialog/CreateWorkDialog'))
 
 interface OwnProps extends RouteComponentProps<any> {
 }
@@ -22,6 +24,7 @@ interface OwnProps extends RouteComponentProps<any> {
 interface DispatchProps {
   deleteAuth: () => void
   createWork: () => void
+  applyWork: (work: Work) => void
 }
 
 type Props = OwnProps & DispatchProps
@@ -33,6 +36,8 @@ interface OwnState {
   lastPage: number
   choosenWork: Work | undefined
   dialogOpen: boolean
+  applyWorkDialogOpen: boolean
+  createWorkDialogOpen: boolean
 }
 
 type State = OwnState
@@ -47,7 +52,9 @@ class Works extends React.Component<Props, State> {
       workList: [],
       lastPage: 0,
       choosenWork: undefined,
-      dialogOpen: false
+      dialogOpen: false,
+      applyWorkDialogOpen: false,
+      createWorkDialogOpen: false
     }
   }
   async componentDidMount() {
@@ -94,6 +101,7 @@ class Works extends React.Component<Props, State> {
   }
 
   handleWorkAdd = () => {
+    this.handleWorkApplyDialogClose()
     this.props.createWork()
     this.props.history.push({
       pathname: '/editor'
@@ -109,6 +117,18 @@ class Works extends React.Component<Props, State> {
   handleWorkDeleteDialogClose = () => {
     this.setState({
       dialogOpen: false
+    })
+  }
+
+  hanldeWorkApplyDialogShow = () => {
+    this.setState({
+      applyWorkDialogOpen: true
+    })
+  }
+
+  handleWorkApplyDialogClose = () => {
+    this.setState({
+      applyWorkDialogOpen: false
     })
   }
 
@@ -128,40 +148,98 @@ class Works extends React.Component<Props, State> {
     }
   }
 
-  handleChooseWork = (item: Work) => {
+  handleChooseWorkToDelete = (item: Work) => {
     this.setState({
       choosenWork: item
     })
     this.handleWorkDeleteDialogShow()
   }
 
+  handleChooseWorkToApply = (item: Work) => {
+    this.setState({
+      choosenWork: item
+    })
+    this.hanldeWorkApplyDialogShow()
+  }
+
+  handleApplyWorkConfirm = () => {
+    if (this.state.choosenWork === undefined) {
+      return
+    }
+    this.props.applyWork(this.state.choosenWork)
+    this.props.history.push({
+      pathname: '/editor'
+    })
+  }
+
+  handleCreateWorkToConfirm = () => {
+    this.setState({
+      createWorkDialogOpen: true
+    })
+  }
+
+  hanldeCreateWorkDialogClose = () => {
+    this.setState({
+      createWorkDialogOpen: false
+    })
+  }
+
   render() {
-    const { workList, page, lastPage, dialogOpen, choosenWork } = this.state
+    const {
+      workList,
+      page,
+      lastPage,
+      dialogOpen,
+      choosenWork,
+      applyWorkDialogOpen,
+      createWorkDialogOpen
+    } = this.state
     const remindWord = `确定删除${choosenWork ? choosenWork.settings.title : ''}?`
+    const applyWorkRemindWord = `确定放弃现有工作区，进行编辑${choosenWork ? choosenWork.settings.title : ''}?`
     const renderWorkCards = workList.map((item: Work, index) => {
       return <WorkCard
         work={item}
         key={index}
-        handleChooseWork={(item) => this.handleChooseWork(item)}
+        handleWorkChooseToApply={(item) => this.handleChooseWorkToApply(item)}
+        handleWorkChooseToDelete={(item) => this.handleChooseWorkToDelete(item)}
       />
     })
     return <div className={styles.works}>
       <div className={styles.workflex}>
         {renderWorkCards}
       </div>
-      <MaterialAddButton handleMaterialAdd={this.handleWorkAdd} />
+      <MaterialAddButton handleMaterialAdd={this.handleCreateWorkToConfirm} />
       <PageNavi
         currentPage={page}
         listLength={lastPage}
         handleNaviBefore={this.handleNaviBefore}
         handleNaviNext={this.handleNaviNext}
       />
-      <BasicDeleteDialog
-        confirmDeleteFunction={this.handleWorkDelete}
-        closeFunction={this.handleWorkDeleteDialogClose}
-        remindWord={remindWord}
-        open={dialogOpen}
-      />
+      <React.Suspense fallback={null}>
+        <BasicDeleteDialog
+          confirmDeleteFunction={this.handleWorkDelete}
+          closeFunction={this.handleWorkDeleteDialogClose}
+          remindWord={remindWord}
+          open={dialogOpen}
+        />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
+        <ApplyWorkDialog
+          confirmFuction={this.handleApplyWorkConfirm}
+          closeFunction={this.handleWorkApplyDialogClose}
+          remindWord={applyWorkRemindWord}
+          open={applyWorkDialogOpen}
+        />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
+        <CreateWorkDialog
+          confirmFuction={this.handleWorkAdd}
+          closeFunction={this.hanldeCreateWorkDialogClose}
+          remindWord={'确定放弃现有工作区内容创建新作品吗？'}
+          open={createWorkDialogOpen}
+        />
+      </React.Suspense>
+
     </div>
   }
 }
@@ -178,6 +256,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
     },
     createWork: () => {
       dispatch(createWork())
+    },
+    applyWork: (work) => {
+      dispatch(applyWork(work))
     }
   }
 }

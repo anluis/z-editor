@@ -40,7 +40,6 @@ export const UNDO = 'UNDO'
 export const REDO = 'REDO'
 
 // status 
-export const SET_CURRENT_PAGE_ID = 'SET_CURRENT_PAGE_ID'
 export const SET_CURRENT_COM_ID = 'SET_CURRENT_COM_ID'
 export const SET_LOADING_STATUS = 'SET_LOADING_STATUS'
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE'

@@ -1,5 +1,4 @@
 import {
-  SET_CURRENT_PAGE_ID,
   SET_CURRENT_COM_ID,
   SET_LOADING_STATUS,
   SET_ERROR_MESSAGE,
@@ -9,7 +8,9 @@ import {
   SET_MATERIAL_CHOOSEN_COM,
   SET_BASIC_DIALOG_STATUS,
   SET_LATEST_WORK_ID,
-  CREATE_WORK
+  CREATE_WORK,
+  REDO,
+  UNDO
 } from '../constants/ActionTypes'
 import { Com } from './coms';
 
@@ -34,12 +35,6 @@ export interface SetLoadingStatus {
   isLoading: boolean
 }
 
-export interface SetCurrentPageId {
-  type: typeof SET_CURRENT_PAGE_ID
-  id: number,
-  nextPageId: number
-}
-
 export interface SetCurrentComId {
   type: typeof SET_CURRENT_COM_ID
   id: number
@@ -58,7 +53,7 @@ export interface SetMaterialDialogStatus {
 export interface SetPageSettingsDialogStatus {
   type: typeof SET_PAGE_SETTINGS_DIALOG_STATUS
   status: boolean,
-  choosenPageId: number
+  choosenPageId: number | null
 }
 
 export interface SetMaterialCurrentValue {
@@ -79,15 +74,22 @@ export interface SetBasicDialogStatus {
 
 export interface SetLatestWorkId {
   type: typeof SET_LATEST_WORK_ID
-  id: string
+  id: string | null
 }
 
 export interface CreateWork {
   type: typeof CREATE_WORK
 }
 
+export interface Redo {
+  type: typeof REDO
+}
+
+export interface Undo {
+  type: typeof UNDO
+}
+
 export type StatusAction =
-  SetCurrentPageId |
   SetCurrentComId |
   SetLoadingStatus |
   SetErrorMessage |
@@ -97,4 +99,6 @@ export type StatusAction =
   SetMaterialChoosenCom |
   SetBasicDialogStatus |
   SetLatestWorkId |
-  CreateWork
+  CreateWork |
+  Redo |
+  Undo

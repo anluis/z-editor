@@ -67,8 +67,8 @@ class PhotoGet extends React.Component<Props, State> {
       zIndex: zIndex
     }
     const innerImgStyle = {
-      width: width + 'px',
-      height: height + 'px'
+      width: width * zoomByDevice() + 'px',
+      height: height * zoomByDevice() + 'px'
     }
     if (mode !== 'editor') {
       bindStyle.left = x * zoomByDevice() + 'px'

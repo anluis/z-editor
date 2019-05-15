@@ -62,6 +62,22 @@ class PageSettingDialog extends React.Component<Props, State> {
       }
     }
   }
+  componentWillReceiveProps() {
+    const { currentPage } = this.props
+    console.log(currentPage)
+    if (currentPage) {
+      this.setState({
+        wechatShareTitle: currentPage.settings.wechatShareTitle,
+        wechatShareDescription: currentPage.settings.wechatShareDescription,
+        wechatShareIcon: currentPage.settings.wechatShareIcon,
+        pageTitle: currentPage.settings.pageTitle,
+        width: currentPage.styles.width,
+        height: currentPage.styles.height
+      })
+    }
+  }
+
+
 
   handleConfirm = async () => {
     const { asyncSetPageSettingsAndStyles, choosenPageId, setPageSettingsDialogStatus } = this.props

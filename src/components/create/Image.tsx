@@ -18,10 +18,12 @@ class Image extends React.Component<Props> {
       backgroundSize: 'cover',
       zIndex: zIndex,
       left: x + 'px',
-      top: y + 'px'
+      top: y + 'px',
+      overflow: 'hidden'
     }
     let bindInnerImg: React.CSSProperties = {
-      height: '100%'
+      width: '100%',
+      overflow: 'hidden'
     }
     if (mode === 'editor') {
       bindStyle.left = '0'
@@ -35,8 +37,8 @@ class Image extends React.Component<Props> {
       bindStyle.height = height * zoomByDevice() + 'px'
       bindStyle.width = width * zoomByDevice() + 'px'
       bindStyle.overflow = 'hidden'
-      delete bindInnerImg.backgroundImage
-      delete bindInnerImg.backgroundSize
+      delete bindStyle.backgroundImage
+      delete bindStyle.backgroundSize
     }
     return (
       <div style={bindStyle}>

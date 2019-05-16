@@ -2,6 +2,7 @@ import * as React from 'react'
 const lottie = require('lottie-web')
 import { LottieCom } from '../../types/coms'
 import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
+import styles from './common.module.css'
 
 interface Props extends LottieCom {
   mode?: string
@@ -48,7 +49,7 @@ class Lottie extends React.Component<Props> {
       bindStyle.height = height * zoomByDevice() + 'px'
       bindStyle.width = width * zoomByDevice() + 'px'
     }
-    return <div id={`lottie-${id}`} style={bindStyle}></div>
+    return <div id={`lottie-${id}`} className={styles.commondiv} style={bindStyle}></div>
   }
 }
 

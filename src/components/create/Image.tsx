@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ImageCom } from '../../types/coms'
 import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
+import styles from './common.module.css'
 
 interface Props extends ImageCom {
   mode?: string
@@ -41,7 +42,7 @@ class Image extends React.Component<Props> {
       delete bindStyle.backgroundSize
     }
     return (
-      <div style={bindStyle}>
+      <div style={bindStyle} className={styles.commondiv}>
         {mode !== 'editor' && <img src={imgUrl} style={bindInnerImg} />}
       </div>
     )

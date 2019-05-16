@@ -16,7 +16,8 @@ class Video extends React.Component<Props> {
       height: height + 'px',
       zIndex: zIndex,
       left: x + 'px',
-      top: y + 'px'
+      top: y + 'px',
+      userSelect: 'none'
     }
     if (mode === 'editor') {
       bindStyle.left = '0'

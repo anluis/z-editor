@@ -10,9 +10,7 @@ const UndoTypes = [
   types.FOCUS_PAGE,
   types.UPDATE_PAGE,
   types.EXCHANGE_COM_ORDER,
-  types.SET_BASIC_DIALOG_STATUS,
-  types.SET_CURRENT_COM_ID,
-  types.SET_LATEST_WORK_ID
+  types.SET_CURRENT_COM_ID
 ]
 
 export default UndoTypes

@@ -21,6 +21,6 @@ export const getCurrentComById = (state: IStoreState): Com | undefined => {
 export const getCurrentPage = (state: IStoreState): Page | undefined => {
   const { currentPageId } = state.status.present
   const { pages } = state.work.present
-  const currentPage = pages.find(pageItem => pageItem.id === currentPageId)
+  const currentPage = pages.find(pageItem => pageItem.id === currentPageId) ? pages.find(pageItem => pageItem.id === currentPageId) : pages[0]
   return currentPage
 }

@@ -66,6 +66,7 @@ class Pages extends React.Component<Props, State> {
     const pageIds = this.props.currentPages.map(item => { return item.id })
     const nextPageId = minOfArray(pageIds)
     this.props.deletePage(choosenPage.id, nextPageId)
+    this.props.focusPage(nextPageId)
   }
 
   handleAddPage = () => {

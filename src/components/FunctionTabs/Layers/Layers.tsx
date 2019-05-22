@@ -54,7 +54,10 @@ const SortableItem = SortableElement(({ item, canBeSort, handleDialogOpen }: { i
       >
         删除
       </Button>}
-      {canBeSort && <img className={styles.dragbutton} src={'https://cdn.xingstation.cn/fe/cms/img/drag.svg'} />}
+      {canBeSort
+        &&
+        <img className={styles.dragbutton} src={'https://cdn.xingstation.cn/fe/cms/img/drag.svg'} />
+      }
     </div>
   )
 })

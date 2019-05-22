@@ -23,7 +23,6 @@ class AlertDialog extends React.Component<Props> {
 
   handleConfirm = () => {
     this.props.confirmDeleteFunction()
-    console.log('confirm')
   }
 
   render() {

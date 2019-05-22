@@ -1,8 +1,7 @@
 import { Coms } from "./coms";
 import { Pages } from "./pages";
-import { StatusState } from "./status";
-import { Settings } from "./settings";
-
+import { StatusState } from "./status"
+import { Settings } from "./settings"
 
 export interface Work {
   coms: Coms

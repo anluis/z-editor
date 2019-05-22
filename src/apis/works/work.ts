@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { apiUrl } from '../../constants/base';
-import { accessToken } from '../../utils/getters/auth';
 
 interface Args {
   workId: string
@@ -10,9 +9,6 @@ interface Args {
 export const work = (args: Args) => {
   const url = apiUrl + '/works/' + args.workId
   const params = {
-    // headers: {
-    //   Authorization: accessToken()
-    // },
     params: {
       workPage: args.workPage
     }

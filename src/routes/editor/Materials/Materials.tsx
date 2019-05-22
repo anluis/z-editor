@@ -8,6 +8,4 @@ class Materials extends React.Component {
   }
 }
 
-
-
 export default Materials

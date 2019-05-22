@@ -11,7 +11,7 @@ interface Props extends LottieCom {
 
 class Lottie extends React.Component<Props> {
   initAnimation = () => {
-    const { id, assetsPath, zIndex, path } = this.props
+    const { id, assetsPath, path } = this.props
     const el = document.getElementById(`lottie-${id}`)
     if (el) {
       lottie.loadAnimation({

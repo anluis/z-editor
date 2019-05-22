@@ -4,8 +4,7 @@ import statusReducer from './status/statusReducer';
 import auth from './auth/authReducer'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
-import undoable, { groupByActionTypes, excludeAction } from 'redux-undo'
-// import UndoTypes from '../constants/UndoTypes'
+import undoable, { excludeAction } from 'redux-undo'
 import { SET_MATERIAL_DIALOG_STATUS, SET_MATERIAL_CHOOSEN_COM, FOCUS_COM } from '../constants/ActionTypes';
 
 const authPersistConfig = {

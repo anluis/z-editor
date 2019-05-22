@@ -15,7 +15,6 @@ interface DispatchProps {
   setWechatConfigUrl: (wxUrl: string) => void
 }
 
-
 interface StateProps {
   isAuthenticated: boolean
 }
@@ -55,4 +54,4 @@ const connectedApp = connect(
   mapDispatchToProps
 )(App)
 
-export default withRouter(connectedApp);
+export default withRouter(connectedApp)

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux'
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import IStoreState from './types/IStoreState'
@@ -21,7 +21,7 @@ interface StateProps {
 
 type Props = StateProps & OwnProps & DispatchProps
 
-class App extends Component<Props> {
+class App extends React.Component<Props> {
 
   componentDidMount() {
     this.props.setWechatConfigUrl(location.href)

@@ -9,6 +9,7 @@ import IStoreState from '../../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux'
 import { setBasicDialogStatus } from '../../../actions/status';
+import EditorStatusContext from '../../../routes/editor/Editor'
 
 interface OwnProps {
   basicDialogShow: boolean
@@ -66,7 +67,7 @@ class BasicDialog extends React.Component<Props> {
 
 
 const mapStateToProps = (state: IStoreState) => {
-  const { basicDialogShow, basicDialogMessage, latestWorkId } = state.status.present
+  const { basicDialogShow, basicDialogMessage, latestWorkId } = state.status
   return {
     basicDialogShow,
     basicDialogMessage,

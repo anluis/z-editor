@@ -21,11 +21,7 @@ interface IStoreState {
     present: Work
     future: Array<Work>
   }
-  status: {
-    past: Array<StatusState>
-    present: StatusState
-    future: Array<StatusState>
-  }
+  status: StatusState
 }
 
 export default IStoreState

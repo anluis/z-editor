@@ -185,11 +185,12 @@ class Layers extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { currentPageId } = state.status.present
+  const { currentPageId } = state.status
+  const bounderyId = state.work.present.pages.find(item => item.id === currentPageId)
   const currentPage = getCurrentPage(state)
   return {
     currentComs: getComsByCurrentPageId(state),
-    currentPageId,
+    currentPageId: bounderyId ? currentPageId : state.work.present.pages[0].id,
     currentPage
   }
 }

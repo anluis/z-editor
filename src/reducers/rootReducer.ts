@@ -39,6 +39,6 @@ const status = undoable(statusReducer, {
 const rootReducer = combineReducers({
   work: persistReducer(workPersistConfig, work),
   auth: persistReducer(authPersistConfig, auth),
-  status: persistReducer(statusPersistConfig, status)
+  status: persistReducer(statusPersistConfig, statusReducer),
 })
 export default rootReducer

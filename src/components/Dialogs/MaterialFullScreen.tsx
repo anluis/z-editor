@@ -97,7 +97,7 @@ class FullScreenDialog extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { materialDialogShow, materialChoosenCom, currentPageId } = state.status.present
+  const { materialDialogShow, materialChoosenCom, currentPageId } = state.status
   return {
     materialDialogShow,
     materialChoosenCom,

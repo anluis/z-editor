@@ -293,7 +293,7 @@ class TopBar extends React.Component<Props, State> {
 const mapStateToProps = (state: IStoreState) => {
   const { present } = state.work
   const { desc, title } = state.work.present.settings
-  const { currentComId, currentPageId, latestWorkId } = state.status.present
+  const { currentComId, currentPageId, latestWorkId } = state.status
   const comsIds = state.work.present.coms.map(item => { return item.id })
   const pastLength = state.work.past.length
   const futureLength = state.work.future.length

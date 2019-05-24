@@ -156,7 +156,6 @@ class Login extends React.Component<Props, State> {
           </div>}
       </>
     )
-
   }
 }
 
@@ -165,7 +164,7 @@ class Login extends React.Component<Props, State> {
 } as any
 
 const mapStateToProps = (state: IStoreState) => {
-  const { isLoading, errorMessage } = state.status.present
+  const { isLoading, errorMessage } = state.status
   const { isAuthenticated } = state.auth
   return {
     isLoading,

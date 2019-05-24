@@ -154,7 +154,7 @@ class Pages extends React.Component<Props, State> {
 
 const mapStateToProps = (state: IStoreState) => {
   const currentPages = state.work.present.pages
-  const { currentPageId } = state.status.present
+  const { currentPageId } = state.status
   return {
     currentPages,
     currentPageId

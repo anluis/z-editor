@@ -228,7 +228,7 @@ class PageSettingDialog extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { pageSettingDialogShow, choosenPageId } = state.status.present
+  const { pageSettingDialogShow, choosenPageId } = state.status
   const currentPage = getCurrentPage(state)
   return {
     pageSettingDialogShow,

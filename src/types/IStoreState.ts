@@ -1,8 +1,7 @@
 import { Coms } from "./coms";
 import { Pages } from "./pages";
-import { StatusState } from "./status";
-import { Settings } from "./settings";
-
+import { StatusState } from "./status"
+import { Settings } from "./settings"
 
 export interface Work {
   coms: Coms
@@ -22,11 +21,7 @@ interface IStoreState {
     present: Work
     future: Array<Work>
   }
-  status: {
-    past: Array<StatusState>
-    present: StatusState
-    future: Array<StatusState>
-  }
+  status: StatusState
 }
 
 export default IStoreState

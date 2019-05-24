@@ -83,7 +83,7 @@ class MenuBar extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { isLoading } = state.status.present
+  const { isLoading } = state.status
   return {
     isLoading
   }

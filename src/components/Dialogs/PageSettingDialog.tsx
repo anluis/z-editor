@@ -64,7 +64,6 @@ class PageSettingDialog extends React.Component<Props, State> {
   }
   componentWillReceiveProps() {
     const { currentPage } = this.props
-    console.log(currentPage)
     if (currentPage) {
       this.setState({
         wechatShareTitle: currentPage.settings.wechatShareTitle,
@@ -76,8 +75,6 @@ class PageSettingDialog extends React.Component<Props, State> {
       })
     }
   }
-
-
 
   handleConfirm = async () => {
     const { asyncSetPageSettingsAndStyles, choosenPageId, setPageSettingsDialogStatus } = this.props
@@ -96,7 +93,6 @@ class PageSettingDialog extends React.Component<Props, State> {
         width: width,
         height: height
       }
-      console.log(choosenPageId)
       await asyncSetPageSettingsAndStyles(pageSettings, pageStyles, choosenPageId)
       setPageSettingsDialogStatus(false, null)
     } catch (err) {
@@ -232,7 +228,7 @@ class PageSettingDialog extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { pageSettingDialogShow, choosenPageId } = state.status.present
+  const { pageSettingDialogShow, choosenPageId } = state.status
   const currentPage = getCurrentPage(state)
   return {
     pageSettingDialogShow,

@@ -9,8 +9,6 @@ import TopBar from '../../../components/TopBar/TopBar';
 import { getComsByCurrentPageId } from '../../../utils/getters/works'
 import { Coms, Com } from '../../../types/coms';
 import RndComponent from '../../../components/control/RndComponent';
-// @ts-ignore
-import Rnd from 'react-rnd'
 
 interface OwnProps {
   currentPage: Page | undefined

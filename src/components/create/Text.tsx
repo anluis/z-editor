@@ -7,6 +7,7 @@ interface Props extends TextCom {
   mode?: string
   zIndex: number
 }
+
 class Text extends React.Component<Props> {
   render() {
     const { width, height, fontSize, context, letterSpacing, color, mode, x, y, backgroundColor, zIndex } = this.props

@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import RenderCom from '../../../components/abstract/RenderCom'
+import { connect } from 'react-redux'
 import { Com } from '../../../types/coms';
+import { $wechat } from '../../../utils/wechat/share';
+import { Page } from '../../../types/pages';
+import RenderCom from '../../../components/abstract/RenderCom'
 import styles from './RenderWork.module.css'
 import IStoreState, { Work } from '../../../types/IStoreState';
-import { connect } from 'react-redux'
 import workPreview from '../../../apis/works/workPreview';
 import inWechat from '../../../utils/helper/userAgent/inWechat'
-import { $wechat } from '../../../utils/wechat/share';
 
 interface OwnProps extends RouteComponentProps<any> {
   wxUrl: string
@@ -47,7 +48,7 @@ class RenderWork extends React.Component<Props, State> {
       this.setState({
         work: resWork.data
       })
-      const findPageResult = resWork.data.pages.find((pageItem: any) => {
+      const findPageResult = resWork.data.pages.find((pageItem: Page) => {
         return pageItem.id === Number(page)
       })
       if (findPageResult && inWechat()) {
@@ -67,7 +68,6 @@ class RenderWork extends React.Component<Props, State> {
             console.warn(err.message)
           })
       }
-
     } catch (e) {
       console.warn(e.message)
     }
@@ -96,9 +96,12 @@ class RenderWork extends React.Component<Props, State> {
       }
     }
     const maxZIndex = coms.length + 1
-    const RenderComs = coms.map((item: Com, index) => {
+    const RenderComs = coms.map((item: Com) => {
       const zIndex = findPageResult.order.indexOf(item.id)
-      return <RenderCom com={item} key={`${item.type}-${item.id}`} zIndex={zIndex} maxZindex={maxZIndex} />
+      return (<RenderCom com={item}
+        key={`${item.type}-${item.id}`}
+        zIndex={zIndex}
+        maxZindex={maxZIndex} />)
     })
     const bindPageStyles = {
       minHeight: findPageResult.styles.height * (window.innerWidth / findPageResult.styles.width) + 'px'

@@ -91,7 +91,11 @@ class Pages extends React.Component<Props, State> {
   }
 
   renderPageItem = (item: Page, index: number) => {
-    return <div className={item.id === this.props.currentPageId ? styles.pageItemf : styles.pageItem} key={index} onClick={() => this.handlePageItemFocus(item.id)}>
+    return <div
+      className={item.id === this.props.currentPageId ? styles.pageItemf : styles.pageItem}
+      key={index}
+      onClick={() => this.handlePageItemFocus(item.id)}
+    >
       {item.name}
       <Button
         variant="outlined"
@@ -150,7 +154,7 @@ class Pages extends React.Component<Props, State> {
 
 const mapStateToProps = (state: IStoreState) => {
   const currentPages = state.work.present.pages
-  const { currentPageId } = state.status.present
+  const { currentPageId } = state.status
   return {
     currentPages,
     currentPageId

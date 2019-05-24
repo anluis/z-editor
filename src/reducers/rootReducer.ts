@@ -4,8 +4,7 @@ import statusReducer from './status/statusReducer';
 import auth from './auth/authReducer'
 import storage from 'redux-persist/lib/storage'
 import { persistReducer } from 'redux-persist'
-import undoable, { excludeAction } from 'redux-undo'
-import { SET_MATERIAL_DIALOG_STATUS, SET_MATERIAL_CHOOSEN_COM, FOCUS_COM } from '../constants/ActionTypes';
+import undoable from 'redux-undo'
 
 const authPersistConfig = {
   key: 'auth',
@@ -26,14 +25,6 @@ const work = undoable(workReducer, {
   undoType: 'UNDO',
   redoType: 'REDO',
   limit: 10
-  // filter: excludeAction([SET_MATERIAL_DIALOG_STATUS, SET_MATERIAL_CHOOSEN_COM])
-})
-
-const status = undoable(statusReducer, {
-  undoType: 'UNDO',
-  redoType: 'REDO',
-  limit: 10,
-  filter: excludeAction([SET_MATERIAL_DIALOG_STATUS, SET_MATERIAL_CHOOSEN_COM, FOCUS_COM])
 })
 
 const rootReducer = combineReducers({

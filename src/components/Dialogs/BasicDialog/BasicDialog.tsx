@@ -9,7 +9,6 @@ import IStoreState from '../../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux'
 import { setBasicDialogStatus } from '../../../actions/status';
-import EditorStatusContext from '../../../routes/editor/Editor'
 
 interface OwnProps {
   basicDialogShow: boolean

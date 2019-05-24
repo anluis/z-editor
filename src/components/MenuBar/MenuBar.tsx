@@ -36,7 +36,7 @@ class MenuBar extends React.Component<Props> {
   }
 
   navigateToSaaS = () => {
-    window.location.href = 'http://h5.xingstation.com/m/y6541h00/6d7143ab847f2d24c131'
+    window.location.href = 'http://saas.xingstation.com/y6541h00/6d7143ab847f2d24c131'
   }
 
   render() {

@@ -12,7 +12,7 @@ const Materials = React.lazy(() => import('./Materials/Materials'))
 const Works = React.lazy(() => import('./Works/Works'))
 const Templates = React.lazy(() => import('./Templates/Templates'))
 const FullScreenMaterialDialog = React.lazy(() => import('../../components/Dialogs/MaterialFullScreen'))
-const PageSettingDialog = React.lazy(() => import('../../components/Dialogs/PageSettingDialog'))
+const PageSettingDialog = React.lazy(() => import('../../components/Dialogs/PageSettingDialog/PageSettingDialog'))
 
 interface OwnProps extends RouteComponentProps {
   isLoading: boolean

@@ -346,6 +346,16 @@ class InContainerAdd extends React.Component<Props, State> {
       handleAxiosAsyncError(err)
     }
   }
+
+  handleMultiLottieMaterialsUpload = async (e: any) => {
+    for (const item of e.target.files) {
+      await this.hanldeSingleLottieMaterialUpload(item)
+    }
+  }
+
+  hanldeSingleLottieMaterialUpload = async (e: any) => {
+
+  }
   // handleLottieImgsUpload = async (e: any) => {
 
   // }
@@ -363,6 +373,7 @@ class InContainerAdd extends React.Component<Props, State> {
       lottieNameError,
       lottiePathError,
       lottieJsonUrl,
+      lottieCoverUrl,
       lottieJsonError
     } = this.state
     return <div className={styles.containeradd}>
@@ -385,7 +396,11 @@ class InContainerAdd extends React.Component<Props, State> {
             id="img-upload"
             type="file"
           />
-          {imgPreviewUrl !== '' && <img src={imgPreviewUrl} />}
+          {
+            imgPreviewUrl !== ''
+            &&
+            <img src={imgPreviewUrl} className={styles.previewimg} />
+          }
           <label htmlFor="img-upload">
             <Button variant="contained" component="span">上传</Button>
           </label>
@@ -423,7 +438,11 @@ class InContainerAdd extends React.Component<Props, State> {
             id="img-upload"
             type="file"
           />
-          {imgPreviewUrl !== '' && <img src={imgPreviewUrl} />}
+          {
+            imgPreviewUrl !== ''
+            &&
+            <img src={imgPreviewUrl} className={styles.previewimg} />
+          }
           <label htmlFor="img-upload">
             <Button variant="contained" component="span">点击上传视频封面</Button>
           </label>
@@ -480,6 +499,7 @@ class InContainerAdd extends React.Component<Props, State> {
             id="lottie-cover-upload"
             type="file"
           />
+
           <label htmlFor="lottie-cover-upload">
             <Button variant="contained" component="span">点击上传Lottie动画封面</Button>
           </label>
@@ -494,6 +514,12 @@ class InContainerAdd extends React.Component<Props, State> {
           <label htmlFor="lottie-json">
             <Button variant="contained" component="span">点击上传Lottie动画Json</Button>
           </label>
+
+          {
+            lottieCoverUrl !== ''
+            &&
+            <img src={lottieCoverUrl} className={styles.previewimg} />
+          }
           <Button variant="contained" component="span" onClick={this.handleSubmitLottie}>提交</Button>
 
           {/* <input

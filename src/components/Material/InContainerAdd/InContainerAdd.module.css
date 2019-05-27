@@ -9,3 +9,7 @@
 .imginput {
   display: none;
 }
+
+.previewimg {
+  width: 300px;
+}

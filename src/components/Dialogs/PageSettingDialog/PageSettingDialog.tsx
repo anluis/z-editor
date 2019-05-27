@@ -268,7 +268,7 @@ class PageSettingDialog extends React.Component<Props, State> {
               className={styles.imginput}
               onChange={e => this.handleIconUpload(e)}
               accept="image/*"
-              id="img-upload"
+              id="icon-upload"
               type="file"
             />
 

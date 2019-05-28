@@ -10,7 +10,10 @@ interface Props extends TextCom {
 
 class Text extends React.Component<Props> {
   handleClickAction = () => {
-    const { href } = this.props
+    const { href, mode } = this.props
+    if (mode === 'editor') {
+      return
+    }
     if (href === '') {
       return
     } else {

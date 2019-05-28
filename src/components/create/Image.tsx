@@ -11,7 +11,10 @@ interface Props extends ImageCom {
 class Image extends React.Component<Props> {
 
   handleClickAction = () => {
-    const { href } = this.props
+    const { href, mode } = this.props
+    if (mode === 'editor') {
+      return
+    }
     if (href === '') {
       return
     } else {

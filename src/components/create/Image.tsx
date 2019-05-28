@@ -9,6 +9,16 @@ interface Props extends ImageCom {
 }
 
 class Image extends React.Component<Props> {
+
+  handleClickAction = () => {
+    const { href } = this.props
+    if (href === '') {
+      return
+    } else {
+      window.location.href = href
+    }
+  }
+
   render() {
     const { width, height, imgUrl, zIndex, x, y, mode } = this.props
     let bindStyle: React.CSSProperties = {
@@ -42,7 +52,7 @@ class Image extends React.Component<Props> {
       delete bindStyle.backgroundSize
     }
     return (
-      <div style={bindStyle} className={styles.commondiv}>
+      <div style={bindStyle} className={styles.commondiv} onClick={() => this.handleClickAction}>
         {mode !== 'editor' && <img src={imgUrl} style={bindInnerImg} />}
       </div>
     )

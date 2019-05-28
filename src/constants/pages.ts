@@ -9,7 +9,7 @@ export const initPage: Page = {
     height: 667
   },
   settings: {
-    pageTitle: '星视度',
+    pageTitle: '',
     wechatShareDescription: '',
     wechatShareIcon: '',
     wechatShareTitle: ''

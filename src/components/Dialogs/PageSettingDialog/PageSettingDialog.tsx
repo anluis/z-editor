@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import * as qiniu from 'qiniu-js'
-import { setPageSettingsDialogStatus } from '../../../actions/status';
+import { setPageSettingsDialogStatus, setLoading } from '../../../actions/status';
 import { setPageSettings, setPageStyles, asyncSetPageSettingsAndStyles } from '../../../actions/pages';
 import { getCurrentPage } from '../../../utils/getters/works';
 import styles from './PageSettingDialog.module.css'
@@ -31,6 +31,7 @@ interface DispatchProps {
   setPageSettings: (pageSettingArgs: PageSettings, pageId: number) => void
   setPageStyles: (pageStyleArgs: PageStyles, pageId: number) => void
   asyncSetPageSettingsAndStyles: (pageSettings: PageSettings, pageStyles: PageStyles, pageId: number) => Promise<void>
+  setLoading: (status: boolean) => void
 }
 
 interface OwnState extends PageSettings {
@@ -158,6 +159,7 @@ class PageSettingDialog extends React.Component<Props, State> {
       if (!file) {
         return
       }
+      this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
       const suffix = `${time}-${name}`
@@ -177,6 +179,7 @@ class PageSettingDialog extends React.Component<Props, State> {
         next(res: any) {
         },
         error(err: any) {
+          that.props.setLoading(false)
         },
         complete(res: any) {
           const uploadArgs = {
@@ -188,14 +191,19 @@ class PageSettingDialog extends React.Component<Props, State> {
             that.setState({
               wechatShareIcon: r.data.url
             })
+            that.props.setLoading(false)
+
           }).catch(e => {
             handleAxiosAsyncError(e)
+            that.props.setLoading(false)
+
           })
         }
       }
       const subscription = observable.subscribe(observer)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
@@ -314,6 +322,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
     },
     asyncSetPageSettingsAndStyles: async (pageSettings: PageSettings, pageStyles: PageStyles, pageId: number) => {
       dispatch(asyncSetPageSettingsAndStyles(pageSettings, pageStyles, pageId))
+    },
+    setLoading: (status: boolean) => {
+      dispatch(setLoading(status))
     }
   }
 }

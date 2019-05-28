@@ -8,6 +8,9 @@ import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosEr
 import * as qiniu from 'qiniu-js'
 import { materialsPost } from '../../../apis/materials/materials';
 import materialTypeByValue from '../../../utils/helper/typeReturner/materialTypeByValue';
+import { ThunkDispatch } from 'redux-thunk';
+import { setLoading } from '../../../actions/status';
+import { connect } from 'react-redux';
 const moment = require('moment')
 
 const mStyles = (theme: Theme) =>
@@ -19,11 +22,17 @@ const mStyles = (theme: Theme) =>
     }
   })
 
-interface Props {
+interface OwnProps {
   classes: any
   materialCurrentValue: number
   handleMaterialChooseAndFresh: () => void
 }
+
+interface DispatchProps {
+  setLoading: (status: boolean) => void
+}
+
+type Props = OwnProps & DispatchProps
 
 interface State {
   imgName: string
@@ -85,10 +94,13 @@ class InContainerAdd extends React.Component<Props, State> {
       imgUrl: imgPreviewUrl
     }
     try {
+      this.props.setLoading(true)
       await materialsPost(materialArgs)
       handleMaterialChooseAndFresh()
+      this.props.setLoading(false)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
@@ -118,11 +130,11 @@ class InContainerAdd extends React.Component<Props, State> {
 
   handleImageInputUpLoad = async (e: any) => {
     try {
-      // console.log(e.target.files[0])
       const file = e.target.files[0]
       if (!file) {
         return
       }
+      this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
       const suffix = `${time}-${name}`
@@ -142,6 +154,7 @@ class InContainerAdd extends React.Component<Props, State> {
         next(res: any) {
         },
         error(err: any) {
+          that.props.setLoading(false)
         },
         complete(res: any) {
           const uploadArgs = {
@@ -153,14 +166,19 @@ class InContainerAdd extends React.Component<Props, State> {
             that.setState({
               imgPreviewUrl: r.data.url
             })
+            that.props.setLoading(false)
+
           }).catch(e => {
             handleAxiosAsyncError(e)
+            that.props.setLoading(false)
+
           })
         }
       }
       const subscription = observable.subscribe(observer)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
@@ -171,6 +189,7 @@ class InContainerAdd extends React.Component<Props, State> {
       if (!file) {
         return
       }
+      this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
       const suffix = `${time}-${name}`
@@ -190,6 +209,7 @@ class InContainerAdd extends React.Component<Props, State> {
         next(res: any) {
         },
         error(err: any) {
+          that.props.setLoading(false)
         },
         complete(res: any) {
           const uploadArgs = {
@@ -201,24 +221,29 @@ class InContainerAdd extends React.Component<Props, State> {
             that.setState({
               lottieCoverUrl: r.data.url
             })
+            that.props.setLoading(false)
+
           }).catch(e => {
             handleAxiosAsyncError(e)
+            that.props.setLoading(false)
+
           })
         }
       }
       const subscription = observable.subscribe(observer)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
   handleVideoInputUpload = async (e: any) => {
     try {
-      // console.log(e.target.files[0])
       const file = e.target.files[0]
       if (!file) {
         return
       }
+      this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
       const suffix = `${time}-${name}`
@@ -238,6 +263,7 @@ class InContainerAdd extends React.Component<Props, State> {
         next(res: any) {
         },
         error(err: any) {
+          that.props.setLoading(false)
         },
         complete(res: any) {
           const uploadArgs = {
@@ -249,6 +275,7 @@ class InContainerAdd extends React.Component<Props, State> {
             that.setState({
               videoPreviewUrl: r.data.url
             })
+            that.props.setLoading(false)
           }).catch(e => {
             handleAxiosAsyncError(e)
           })
@@ -257,16 +284,17 @@ class InContainerAdd extends React.Component<Props, State> {
       const subscription = observable.subscribe(observer)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
   handleLottieJsonUpload = async (e: any) => {
     try {
-      // console.log(e.target.files[0])
       const file = e.target.files[0]
       if (!file) {
         return
       }
+      this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
       const suffix = `${time}-${name}`
@@ -286,6 +314,7 @@ class InContainerAdd extends React.Component<Props, State> {
         next(res: any) {
         },
         error(err: any) {
+          that.props.setLoading(false)
         },
         complete(res: any) {
           const uploadArgs = {
@@ -297,14 +326,17 @@ class InContainerAdd extends React.Component<Props, State> {
             that.setState({
               lottieJsonUrl: r.data.url
             })
+            that.props.setLoading(false)
           }).catch(e => {
             handleAxiosAsyncError(e)
+            that.props.setLoading(false)
           })
         }
       }
       const subscription = observable.subscribe(observer)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
@@ -539,4 +571,12 @@ class InContainerAdd extends React.Component<Props, State> {
   }
 }
 
-export default withStyles(mStyles)(InContainerAdd)
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+  return {
+    setLoading: (status: boolean) => {
+      dispatch(setLoading(status))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(withStyles(mStyles)(InContainerAdd))

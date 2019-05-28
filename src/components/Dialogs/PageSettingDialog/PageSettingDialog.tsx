@@ -226,6 +226,7 @@ class PageSettingDialog extends React.Component<Props, State> {
               margin="dense"
               id="page-title"
               label="页面标题"
+              placeholder="请输入页面标题(网页标题)"
               fullWidth
               value={this.state.pageTitle}
               onChange={(e) => this.handlePageTitleChange(e.target.value)}
@@ -234,6 +235,7 @@ class PageSettingDialog extends React.Component<Props, State> {
               margin="dense"
               id="share-title"
               label="微信分享标题"
+              placeholder="请输入微信分享时候的标题"
               fullWidth
               value={this.state.wechatShareTitle}
               onChange={(e) => this.handleTitleChange(e.target.value)}
@@ -242,6 +244,7 @@ class PageSettingDialog extends React.Component<Props, State> {
               margin="dense"
               id="desc"
               label="微信分享描述"
+              placeholder="请输入微信分享时候的描述"
               fullWidth
               value={this.state.wechatShareDescription}
               onChange={(e) => this.handleDescChange(e.target.value)}
@@ -252,25 +255,27 @@ class PageSettingDialog extends React.Component<Props, State> {
               id="width"
               label="页面宽度"
               fullWidth
+              disabled
               value={this.state.width}
               onChange={(e) => this.handleWidthChange(e.target.value)}
             />
             <TextField
               margin="dense"
               id="height"
-              label="页面高度"
+              label="页面高度(逻辑像素,即一倍图)"
               fullWidth
               value={this.state.height}
               onChange={(e) => this.handleHeightChange(e.target.value)}
             />
-            <TextField
+            {/* <TextField
               margin="dense"
               id="icon"
-              label="微信分享图标链接"
+              label="微信分享图标链接,请点击上传"
+              disabled
               fullWidth
               value={this.state.wechatShareIcon}
               onChange={(e) => this.handleWechatShareIconChange(e.target.value)}
-            />
+            /> */}
 
             <input
               className={styles.imginput}
@@ -280,9 +285,17 @@ class PageSettingDialog extends React.Component<Props, State> {
               type="file"
             />
 
+
+
             <label htmlFor="icon-upload">
-              <Button variant="contained" component="span">上传</Button>
+              <Button variant="contained" component="span">分享Icon上传</Button>
             </label>
+
+            <div>
+              {this.state.wechatShareIcon !== '' &&
+                <img src={this.state.wechatShareIcon} className={styles.shareicon} />
+              }
+            </div>
 
           </DialogContent>
           <DialogActions>

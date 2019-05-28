@@ -13,6 +13,7 @@ export interface BaseCom {
 export interface ImageCom extends BaseCom {
   imgUrl: string
   type: 'IMAGE'
+  href: string
 }
 
 export interface TextCom extends BaseCom {
@@ -23,6 +24,7 @@ export interface TextCom extends BaseCom {
   type: 'TEXT'
   backgroundColor: string
   opacity: number
+  href: string
 }
 
 export interface VideoCom extends BaseCom {

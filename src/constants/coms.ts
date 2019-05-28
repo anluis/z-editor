@@ -19,7 +19,8 @@ export const initText: TextCom = {
   id: 0,
   context: '',
   backgroundColor: 'rgba(0,0,0,0)',
-  opacity: 0
+  opacity: 0,
+  href: ''
 }
 
 export const initImage: ImageCom = {
@@ -30,7 +31,8 @@ export const initImage: ImageCom = {
   y: 0,
   width: 100,
   height: 100,
-  imgUrl: ''
+  imgUrl: '',
+  href: ''
 }
 
 export const initVideo: VideoCom = {

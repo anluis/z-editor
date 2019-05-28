@@ -16,6 +16,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { TextField } from '@material-ui/core';
 
 interface DispatchProps {
   updateCom: (id: number, com: Com) => void
@@ -76,6 +77,18 @@ class Attribute extends React.Component<Props, State> {
     if ('context' in currentCom) {
       let comCopy = { ...currentCom }
       comCopy.context = e
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateComName = (e: string) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('name' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.name = e
       updateCom(currentCom.id, comCopy)
     }
   }
@@ -142,10 +155,22 @@ class Attribute extends React.Component<Props, State> {
     }
   }
 
+  updateHref = (href: string) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('href' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.href = href
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
   render() {
     const { currentCom } = this.props
     if (!currentCom) {
-      return <div> 你竟然没有选中任何一个组件 </div>
+      return <div className={styles.nocurrentcom}> 你没有选中组件,点击组件查看修改属性 </div>
     }
     return (
       <div className={styles.attributes}>
@@ -153,44 +178,72 @@ class Attribute extends React.Component<Props, State> {
           <Button variant="outlined" color="secondary" onClick={this.handleDialogOpen}>
             删除
           </Button>
-          <div className={styles.attrId}>
-            <InputLabel>组件编号:  </InputLabel>
-            <Input
+          {/* <div className={styles.attrId}>
+            <TextField
+              label="组件编号"
+              id="com-id"
+              fullWidth
               value={currentCom.id}
-              disabled>
-            </Input>
-          </div>
+              disabled
+              margin="dense"
+            />
+          </div> */}
           <div className={styles.attr}>
-            <InputLabel>组件名称:  </InputLabel>
-            <Input
+            <TextField
+              label="组件名称"
+              id="com-name"
+              fullWidth
+              onChange={e => this.updateComName(e.target.value)}
               value={currentCom.name}
-              disabled>
-            </Input>
+              margin="dense"
+            />
           </div>
           {('context' in currentCom) &&
             <div className={styles.attr}>
-              <InputLabel>文本内容:  </InputLabel>
-              <Input
-                inputProps={{ maxLength: 12 }}
+              <TextField
+                label="文本内容"
+                id="com-context"
+                fullWidth
                 onChange={e => this.updateTextContext(e.target.value)}
                 value={currentCom.context}
+                margin="dense"
               />
             </div>}
+          {
+            ('href' in currentCom) &&
+            <div className={styles.attr}>
+              <TextField
+                label="跳转链接(Url)"
+                id="com-href"
+                fullWidth
+                onChange={e => this.updateHref(e.target.value)}
+                value={currentCom.href}
+                margin="dense"
+              />
+            </div>
+          }
+
           {('imgUrl' in currentCom) &&
             <div className={styles.attr}>
-              <InputLabel>图片链接:  </InputLabel>
-              <Input
+              <TextField
+                label="图片链接"
+                id="com-img-url"
+                fullWidth
                 onChange={e => this.updateImgUrl(e.target.value)}
                 value={currentCom.imgUrl}
+                margin="dense"
               />
             </div>
           }
           {('videoUrl' in currentCom) &&
             <div className={styles.attr}>
-              <InputLabel>视频链接:  </InputLabel>
-              <Input
+              <TextField
+                label="视频链接"
+                id="com-video-url"
+                fullWidth
                 onChange={e => this.updateVideoUrl(e.target.value)}
                 value={currentCom.videoUrl}
+                margin="dense"
               />
             </div>
           }
@@ -206,16 +259,21 @@ class Attribute extends React.Component<Props, State> {
             </div>}
           {('path' in currentCom) &&
             <div className={styles.attr}>
-              <InputLabel>Json路径:  </InputLabel>
-              <Input
+              <TextField
+                label="Json路径"
+                id="com-json-path"
+                fullWidth
                 value={currentCom.path}
-                disabled>
-              </Input>
+                margin="dense"
+                disabled
+              />
             </div>}
           {('fontSize' in currentCom &&
             <div className={styles.attr}>
-              <InputLabel>字体大小:  </InputLabel>
-              <Input
+              <TextField
+                label="字体大小(Px)"
+                id="com-font-size"
+                fullWidth
                 inputProps={{ maxLength: 12 }}
                 onChange={e => this.updateFontSize(Number(e.target.value))}
                 value={currentCom.fontSize}
@@ -223,11 +281,14 @@ class Attribute extends React.Component<Props, State> {
             </div>)}
           {('letterSpacing' in currentCom &&
             <div className={styles.attr}>
-              <InputLabel>字体间距:  </InputLabel>
-              <Input
+              <TextField
+                label="字体间距(Px)"
+                id="com-letter-spacing"
+                fullWidth
                 inputProps={{ maxLength: 12 }}
                 onChange={e => this.updateLetterSpacing(e.target.value)}
                 value={currentCom.letterSpacing}
+                margin="dense"
               />
             </div>)
           }
@@ -238,10 +299,10 @@ class Attribute extends React.Component<Props, State> {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">前方高能预警！</DialogTitle>
+          <DialogTitle id="alert-dialog-title">请确认</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              你确实要删除组件{currentCom.name}吗？
+              你确实要删除组件 -{currentCom.name}- 吗？
             </DialogContentText>
           </DialogContent>
           <DialogActions>

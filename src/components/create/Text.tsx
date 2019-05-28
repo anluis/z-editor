@@ -9,6 +9,17 @@ interface Props extends TextCom {
 }
 
 class Text extends React.Component<Props> {
+  handleClickAction = () => {
+    const { href, mode } = this.props
+    if (mode === 'editor') {
+      return
+    }
+    if (href === '') {
+      return
+    } else {
+      window.location.href = href
+    }
+  }
   render() {
     const { width, height, fontSize, context, letterSpacing, color, mode, x, y, backgroundColor, zIndex } = this.props
     let bindStyle: React.CSSProperties = {
@@ -36,7 +47,10 @@ class Text extends React.Component<Props> {
       bindStyle.height = height * zoomByDevice() + 'px'
       bindStyle.width = width * zoomByDevice() + 'px'
     }
-    return <div style={bindStyle} className={styles.commondiv}>
+    return <div
+      style={bindStyle}
+      className={styles.commondiv}
+      onClick={() => this.handleClickAction()}>
       {context}
     </div>
   }

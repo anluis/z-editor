@@ -1,5 +1,5 @@
 import * as React from 'react'
-import IStoreState from '../../types/IStoreState';
+import IStoreState from '../../../types/IStoreState';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,13 +7,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { PageSettings, Page, PageStyles } from '../../types/pages';
+import { PageSettings, Page, PageStyles } from '../../../types/pages';
 import { connect } from 'react-redux'
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { setPageSettingsDialogStatus } from '../../actions/status';
-import { setPageSettings, setPageStyles, asyncSetPageSettingsAndStyles } from '../../actions/pages';
-import { getCurrentPage } from '../../utils/getters/works';
+import * as qiniu from 'qiniu-js'
+import { setPageSettingsDialogStatus, setLoading } from '../../../actions/status';
+import { setPageSettings, setPageStyles, asyncSetPageSettingsAndStyles } from '../../../actions/pages';
+import { getCurrentPage } from '../../../utils/getters/works';
+import styles from './PageSettingDialog.module.css'
+import { getQiniuToken, saveUploadResult } from '../../../apis/upload/qiniu'
+import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
+const moment = require('moment')
 
 interface OwnProps {
   pageSettingDialogShow: boolean
@@ -26,6 +31,7 @@ interface DispatchProps {
   setPageSettings: (pageSettingArgs: PageSettings, pageId: number) => void
   setPageStyles: (pageStyleArgs: PageStyles, pageId: number) => void
   asyncSetPageSettingsAndStyles: (pageSettings: PageSettings, pageStyles: PageStyles, pageId: number) => Promise<void>
+  setLoading: (status: boolean) => void
 }
 
 interface OwnState extends PageSettings {
@@ -147,6 +153,60 @@ class PageSettingDialog extends React.Component<Props, State> {
     })
   }
 
+  handleIconUpload = async (e: any) => {
+    try {
+      const file = e.target.files[0]
+      if (!file) {
+        return
+      }
+      this.props.setLoading(true)
+      const { name } = file
+      const time = moment().unix()
+      const suffix = `${time}-${name}`
+      const key = encodeURI(`${suffix}`)
+      const qiniuToken: any = await getQiniuToken()
+      const putExtra = {
+        fname: file.name,
+        params: {},
+        mimeType: ["image/png", "image/jpeg", "image/jpg"]
+      }
+      const config = {
+        useCdnDomain: true
+      }
+      const observable = qiniu.upload(file, key, qiniuToken.data, putExtra, config)
+      const that = this
+      const observer = {
+        next(res: any) {
+        },
+        error(err: any) {
+          that.props.setLoading(false)
+        },
+        complete(res: any) {
+          const uploadArgs = {
+            size: file.size,
+            name: res.hash,
+            key: res.key
+          }
+          saveUploadResult(uploadArgs).then((r: any) => {
+            that.setState({
+              wechatShareIcon: r.data.url
+            })
+            that.props.setLoading(false)
+
+          }).catch(e => {
+            handleAxiosAsyncError(e)
+            that.props.setLoading(false)
+
+          })
+        }
+      }
+      const subscription = observable.subscribe(observer)
+    } catch (err) {
+      handleAxiosAsyncError(err)
+      this.props.setLoading(false)
+    }
+  }
+
   render() {
     const { pageSettingDialogShow } = this.props
     return (
@@ -212,6 +272,18 @@ class PageSettingDialog extends React.Component<Props, State> {
               onChange={(e) => this.handleWechatShareIconChange(e.target.value)}
             />
 
+            <input
+              className={styles.imginput}
+              onChange={e => this.handleIconUpload(e)}
+              accept="image/*"
+              id="icon-upload"
+              type="file"
+            />
+
+            <label htmlFor="icon-upload">
+              <Button variant="contained" component="span">上传</Button>
+            </label>
+
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -250,6 +322,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
     },
     asyncSetPageSettingsAndStyles: async (pageSettings: PageSettings, pageStyles: PageStyles, pageId: number) => {
       dispatch(asyncSetPageSettingsAndStyles(pageSettings, pageStyles, pageId))
+    },
+    setLoading: (status: boolean) => {
+      dispatch(setLoading(status))
     }
   }
 }

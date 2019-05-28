@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
-import IStoreState from '../../types/IStoreState';
+import IStoreState from '../../../types/IStoreState';
 import { connect } from 'react-redux'
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { ThunkDispatch } from 'redux-thunk';
-import { setMaterialDialogStatus, setMaterialChoosenCom } from '../../actions/status'
+import { setMaterialDialogStatus, setMaterialChoosenCom } from '../../../actions/status'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import { Button } from '@material-ui/core'
-import Material from '../Material/Material'
-import { Com } from '../../types/coms';
-import { addCom } from '../../actions/coms';
+import Material from '../../Material/Material'
+import { Com } from '../../../types/coms';
+import { addCom } from '../../../actions/coms';
 
 const styles: any = {
   appBar: {

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 import IStoreState from './types/IStoreState'
 import Routes from './routes/Routes';
 import './App.css'
+import { connect } from 'react-redux'
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
 import { setWxShareUrl } from './actions/auth';
 

@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router-dom'
 import { connect } from 'react-redux'
 import IStoreState from '../../types/IStoreState';
+import GlobalLoading from '../../components/Little/GlobalLoading/GlobalLoading'
 
 const MenuBar = React.lazy(() => import('../../components/MenuBar/MenuBar'))
 const BasicDialog = React.lazy(() => import('../../components/Dialogs/BasicDialog/BasicDialog'))
@@ -11,8 +12,8 @@ const PlayGround = React.lazy(() => import('./Playground/Playground'))
 const Materials = React.lazy(() => import('./Materials/Materials'))
 const Works = React.lazy(() => import('./Works/Works'))
 const Templates = React.lazy(() => import('./Templates/Templates'))
-const FullScreenMaterialDialog = React.lazy(() => import('../../components/Dialogs/MaterialFullScreen'))
-const PageSettingDialog = React.lazy(() => import('../../components/Dialogs/PageSettingDialog'))
+const FullScreenMaterialDialog = React.lazy(() => import('../../components/Dialogs/MaterialFullScreenDialog/MaterialFullScreen'))
+const PageSettingDialog = React.lazy(() => import('../../components/Dialogs/PageSettingDialog/PageSettingDialog'))
 
 interface OwnProps extends RouteComponentProps {
   isLoading: boolean
@@ -38,6 +39,7 @@ class Editor extends React.Component<Props> {
         <FullScreenMaterialDialog />
         <PageSettingDialog />
         <BasicDialog />
+        <GlobalLoading />
       </React.Suspense>
     </div>
   }

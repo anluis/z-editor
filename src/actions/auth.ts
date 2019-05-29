@@ -1,7 +1,7 @@
 import { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { setLoading, setErrorMessage } from '../actions/status'
-import { signIn } from '../apis/authorizations'
+import { signIn, signOut } from '../apis/authorizations'
 import { UPDATE_AUTH, DELETE_AUTH, SET_WECHAT_SHARE_URL } from '../constants/ActionTypes';
 import { SetWechatShareUrl, UpdateAuth, DeleteAuth } from '../types/auth';
 
@@ -43,7 +43,10 @@ export const logout = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     try {
       dispatch(setLoading(true))
-      dispatch(deleteAuth())
+      const deleteAuthResult = await signOut()
+      if (deleteAuthResult) {
+        dispatch(deleteAuth())
+      }
       dispatch(setLoading(false))
     } catch (err) {
       dispatch(setLoading(false))

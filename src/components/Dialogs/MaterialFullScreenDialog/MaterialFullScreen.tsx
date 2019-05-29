@@ -46,23 +46,24 @@ function Transition(props: any) {
 
 class FullScreenDialog extends React.Component<Props> {
 
-  // handleClickOpen = () => {
-  //   // this.setState({ open: true });
-  // };
-
   handleClose = () => {
     this.props.setMaterialChoosenCom(null)
     this.props.setMaterialDialogStatus(false)
   }
 
   handleAddCom = () => {
-    const { currentPageId, materialChoosenCom, setMaterialChoosenCom, addCom, setMaterialDialogStatus } = this.props
-    console.log(currentPageId)
-    console.log(materialChoosenCom)
+    const { 
+      currentPageId, 
+      materialChoosenCom, 
+      setMaterialChoosenCom, 
+      addCom,
+      setMaterialDialogStatus 
+    } = this.props
 
     if (currentPageId !== null && materialChoosenCom !== null) {
       addCom(currentPageId, materialChoosenCom)
     }
+    
     setMaterialChoosenCom(null)
     setMaterialDialogStatus(false)
   }

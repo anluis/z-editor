@@ -15,7 +15,7 @@ class Image extends React.Component<Props> {
     if (mode === 'editor') {
       return
     }
-    if (href === '') {
+    if (!href || href === '') {
       return
     } else {
       window.location.href = href
@@ -23,7 +23,15 @@ class Image extends React.Component<Props> {
   }
 
   render() {
-    const { width, height, imgUrl, zIndex, x, y, mode } = this.props
+    const {
+      width,
+      height,
+      imgUrl,
+      zIndex,
+      x,
+      y,
+      mode
+    } = this.props
     let bindStyle: React.CSSProperties = {
       position: 'absolute',
       width: width + 'px',
@@ -55,8 +63,16 @@ class Image extends React.Component<Props> {
       delete bindStyle.backgroundSize
     }
     return (
-      <div style={bindStyle} className={styles.commondiv} onClick={() => this.handleClickAction}>
-        {mode !== 'editor' && <img src={imgUrl} style={bindInnerImg} />}
+      <div
+        style={bindStyle}
+        className={styles.commondiv}
+        onClick={() => this.handleClickAction()}
+      >
+        {
+          mode !== 'editor'
+          &&
+          <img src={imgUrl} style={bindInnerImg} />
+        }
       </div>
     )
   }

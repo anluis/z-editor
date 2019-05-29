@@ -108,7 +108,12 @@ class InContainerAdd extends React.Component<Props, State> {
     const { videoName, videoPreviewUrl, imgPreviewUrl } = this.state
     const { materialCurrentValue, handleMaterialChooseAndFresh } = this.props
     const type = materialTypeByValue(materialCurrentValue)
-    if (videoName === '' || type === null || imgPreviewUrl === '' || videoPreviewUrl === '') {
+    if (
+      videoName === '' ||
+      type === null ||
+      imgPreviewUrl === '' ||
+      videoPreviewUrl === ''
+    ) {
       this.setState({
         imgNameError: 'error'
       })
@@ -184,7 +189,6 @@ class InContainerAdd extends React.Component<Props, State> {
 
   handleLottieCoverUpload = async (e: any) => {
     try {
-      // console.log(e.target.files[0])
       const file = e.target.files[0]
       if (!file) {
         return
@@ -372,10 +376,13 @@ class InContainerAdd extends React.Component<Props, State> {
       assetsPath: lottiePath
     }
     try {
+      this.props.setLoading(true)
       await materialsPost(materialArgs)
       handleMaterialChooseAndFresh()
+      this.props.setLoading(false)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
@@ -388,9 +395,6 @@ class InContainerAdd extends React.Component<Props, State> {
   hanldeSingleLottieMaterialUpload = async (e: any) => {
 
   }
-  // handleLottieImgsUpload = async (e: any) => {
-
-  // }
 
   render() {
     const {
@@ -433,10 +437,14 @@ class InContainerAdd extends React.Component<Props, State> {
             &&
             <img src={imgPreviewUrl} className={styles.previewimg} />
           }
-          <label htmlFor="img-upload">
-            <Button variant="contained" component="span">上传</Button>
-          </label>
-          <Button variant="contained" color="primary" onClick={this.handleSubmitImage}>提交</Button>
+
+          <div >
+            <label htmlFor="img-upload">
+              <Button variant="contained" component="span" className={styles.uploadbuttons}>点击上传图片</Button>
+            </label>
+            <Button variant="contained" color="primary" onClick={this.handleSubmitImage} className={styles.uploadbuttons}>提交</Button>
+          </div>
+
         </>}
 
       {materialCurrentValue === 1 &&

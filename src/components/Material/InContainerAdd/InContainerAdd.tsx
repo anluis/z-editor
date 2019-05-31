@@ -388,6 +388,9 @@ class InContainerAdd extends React.Component<Props, State> {
   }
 
   handleMultiLottieMaterialsUpload = async (e: any) => {
+    if (this.state.lottiePath === '') {
+      return
+    }
     this.props.setLoading(true)
     for (const item of e.target.files) {
       await this.hanldeSingleLottieMaterialUpload(item)
@@ -408,7 +411,7 @@ class InContainerAdd extends React.Component<Props, State> {
       const putExtra = {
         fname: file.name,
         params: {},
-        mimeType: ["image/png", "image/jpeg", "image/jpg", "image/svg"]
+        mimeType: ["image/png", "image/jpeg", "image/jpg", "image/svg+xml"]
       }
       const config = {
         useCdnDomain: true
@@ -424,10 +427,10 @@ class InContainerAdd extends React.Component<Props, State> {
           const uploadArgs = {
             size: file.size,
             name: res.hash,
-            key: res.key
+            key: res.key,
+            folder: that.state.lottiePath
           }
           saveUploadResult(uploadArgs).then((r: any) => {
-            console.dir(r)
             that.setState({
               lottieUrls: [...that.state.lottieUrls, r.data.url]
             })
@@ -460,7 +463,8 @@ class InContainerAdd extends React.Component<Props, State> {
       lottieJsonUrl,
       lottieCoverUrl,
       lottieJsonError,
-      lottieUrls
+      lottieUrls,
+      lottiePath
     } = this.state
     return <div className={styles.containeradd}>
       {materialCurrentValue === 0 &&
@@ -545,16 +549,8 @@ class InContainerAdd extends React.Component<Props, State> {
         <>
           <TextField
             id="lottie-name"
-            label="Lottie动画素材"
-            className={classes.textField}
-            disabled
-            value={'动画素材请从七牛上传到一个文件目录，然后填写文件目录到下方'}
-            margin="normal"
-            autoFocus
-          />
-          <TextField
-            id="lottie-name"
             label="Lottie动画名称"
+            placeholder="请填写动画名称"
             className={classes.textField}
             value={this.state.lottieName}
             onChange={this.handleChange('lottieName')}
@@ -565,7 +561,8 @@ class InContainerAdd extends React.Component<Props, State> {
 
           <TextField
             id="lottie-path-name"
-            label="Lottie动画文件目录"
+            label="Lottie动画素材存放目录"
+            placeholder="请尽量以动画名英文+日期格式填入以免冲突"
             className={classes.textField}
             value={this.state.lottiePath}
             onChange={this.handleChange('lottiePath')}
@@ -576,8 +573,9 @@ class InContainerAdd extends React.Component<Props, State> {
           <TextField
             id="lottie-json-url"
             label="Lottie动画Json链接"
+            placeholder="请填写动画Json的链接,或者点击下方按钮上传"
             className={classes.textField}
-            value={this.state.lottieJsonUrl}
+            value={lottieJsonUrl}
             onChange={this.handleChange('lottieJsonUrl')}
             margin="normal"
             error={lottieJsonError === 'error'}
@@ -602,8 +600,14 @@ class InContainerAdd extends React.Component<Props, State> {
             id="lottie-json"
             type="file"
           />
+
           <label htmlFor="lottie-json">
-            <Button variant="contained" component="span">点击上传Lottie动画Json</Button>
+            <Button
+              variant="contained"
+              component="span"
+            >
+              点击上传Lottie动画Json
+            </Button>
           </label>
 
           {
@@ -623,10 +627,19 @@ class InContainerAdd extends React.Component<Props, State> {
             type="file"
             multiple
           />
-          <label htmlFor="lottie-imgs-upload">
-            <Button variant="contained" component="span">点击上传Lottie动画图片素材</Button>
-          </label>
-          {lottieUrls.length > 0 && <span>已上传 {lottieUrls.length}</span>}
+          {
+            lottiePath !== '' &&
+            <label htmlFor="lottie-imgs-upload">
+              <Button
+                variant="contained"
+                component="span"
+                disabled={lottiePath === ''}
+              >
+                点击上传Lottie动画图片素材
+            </Button>
+            </label>
+          }
+          {lottieUrls.length > 0 && <span>已上传 {lottieUrls.length} 个素材</span>}
           {lottieUrls.map((item, index) => {
             return <div key={index}>{item}</div>
           })}

@@ -4,6 +4,7 @@ import { setLoading, setErrorMessage } from '../actions/status'
 import { signIn, signOut } from '../apis/authorizations'
 import { UPDATE_AUTH, DELETE_AUTH, SET_WECHAT_SHARE_URL } from '../constants/ActionTypes';
 import { SetWechatShareUrl, UpdateAuth, DeleteAuth } from '../types/auth';
+import { handleAxiosAsyncError } from '../utils/helper/errorHandle/axiosError';
 
 export const updateAuth = (accessToken: string): UpdateAuth => ({
   type: UPDATE_AUTH,
@@ -49,6 +50,7 @@ export const logout = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
       }
       dispatch(setLoading(false))
     } catch (err) {
+      handleAxiosAsyncError(err)
       dispatch(setLoading(false))
     }
   }

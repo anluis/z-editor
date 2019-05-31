@@ -167,6 +167,30 @@ class Attribute extends React.Component<Props, State> {
     }
   }
 
+  updateComX = (x: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('x' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.x = x
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateComY = (y: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('y' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.y = y
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
   render() {
     const { currentCom } = this.props
     if (!currentCom) {
@@ -198,7 +222,34 @@ class Attribute extends React.Component<Props, State> {
               margin="dense"
             />
           </div>
-          {('context' in currentCom) &&
+          {
+            ('x' in currentCom) &&
+            <div className={styles.attr}>
+              <TextField
+                label="X轴距离(单位:逻辑像素)"
+                id="com-x"
+                fullWidth
+                value={currentCom.x}
+                margin="dense"
+                onChange={e => this.updateComX(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('y' in currentCom) &&
+            <div className={styles.attr}>
+              <TextField
+                label="Y轴距离(单位:逻辑像素)"
+                id="com-y"
+                fullWidth
+                value={currentCom.y}
+                margin="dense"
+                onChange={e => this.updateComY(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('context' in currentCom) &&
             <div className={styles.attr}>
               <TextField
                 label="文本内容"
@@ -208,7 +259,8 @@ class Attribute extends React.Component<Props, State> {
                 value={currentCom.context}
                 margin="dense"
               />
-            </div>}
+            </div>
+          }
           {
             ('href' in currentCom) &&
             <div className={styles.attr}>

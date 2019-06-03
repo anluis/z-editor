@@ -46,6 +46,7 @@ interface State {
   lottieNameError: string
   lottieUrls: Array<string>
   lottieCoverUrl: string
+  lottieCoverError: string
   lottiePath: string
   lottiePathError: string
   lottieJsonUrl: string
@@ -65,6 +66,7 @@ class InContainerAdd extends React.Component<Props, State> {
       videoPreviewUrl: '',
       lottieName: '',
       lottieCoverUrl: '',
+      lottieCoverError: '',
       lottieUrls: [],
       lottieNameError: '',
       lottiePath: '',
@@ -347,7 +349,9 @@ class InContainerAdd extends React.Component<Props, State> {
 
   handleSubmitLottie = async () => {
     const { lottieName, lottiePath, lottieJsonUrl, lottieCoverUrl } = this.state
-    if (lottieName === '') {
+    if (
+      lottieName === ''
+    ) {
       this.setState({
         lottieNameError: 'error'
       })
@@ -364,6 +368,13 @@ class InContainerAdd extends React.Component<Props, State> {
     if (lottieJsonUrl === '') {
       this.setState({
         lottieJsonError: 'error'
+      })
+      return
+    }
+
+    if (lottieCoverUrl === '') {
+      this.setState({
+        lottieCoverError: 'error'
       })
       return
     }
@@ -462,6 +473,7 @@ class InContainerAdd extends React.Component<Props, State> {
       lottiePathError,
       lottieJsonUrl,
       lottieCoverUrl,
+      lottieCoverError,
       lottieJsonError,
       lottieUrls,
       lottiePath
@@ -547,6 +559,9 @@ class InContainerAdd extends React.Component<Props, State> {
       {
         materialCurrentValue === 2 &&
         <>
+          <div className={styles.lottieremind}>
+            注意:输入素材存放路径之后才会显示上传素材按钮，上传过素材之后请不要修改存放路径
+          </div>
           <TextField
             id="lottie-name"
             label="Lottie动画名称"
@@ -590,7 +605,11 @@ class InContainerAdd extends React.Component<Props, State> {
           />
 
           <label htmlFor="lottie-cover-upload">
-            <Button variant="contained" component="span">点击上传Lottie动画封面</Button>
+            <Button
+              variant="contained"
+              component="span"
+              color={lottieCoverError === 'error' ? 'secondary' : 'primary'}
+            >点击上传Lottie动画封面</Button>
           </label>
 
           <input

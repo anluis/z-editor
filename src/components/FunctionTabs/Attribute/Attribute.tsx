@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styles from './Attribute.module.css'
-import Input from '@material-ui/core/Input';
 import { SketchPicker, RGBColor } from 'react-color'
 import IStoreState from '../../../types/IStoreState'
 import { connect } from 'react-redux'

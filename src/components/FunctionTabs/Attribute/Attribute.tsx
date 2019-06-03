@@ -190,6 +190,31 @@ class Attribute extends React.Component<Props, State> {
     }
   }
 
+  updateComWidth = (width: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('width' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.width = width
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateComHeight = (height: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('height' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.height = height
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+
   render() {
     const { currentCom } = this.props
     if (!currentCom) {
@@ -201,16 +226,6 @@ class Attribute extends React.Component<Props, State> {
           <Button variant="outlined" color="secondary" onClick={this.handleDialogOpen}>
             删除
           </Button>
-          {/* <div className={styles.attrId}>
-            <TextField
-              label="组件编号"
-              id="com-id"
-              fullWidth
-              value={currentCom.id}
-              disabled
-              margin="dense"
-            />
-          </div> */}
           <div className={styles.attr}>
             <TextField
               label="组件名称"
@@ -244,6 +259,32 @@ class Attribute extends React.Component<Props, State> {
                 value={currentCom.y}
                 margin="dense"
                 onChange={e => this.updateComY(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('width' in currentCom) &&
+            <div className={styles.width}>
+              <TextField
+                label="组件宽度(单位:逻辑像素)"
+                id="com-width"
+                fullWidth
+                value={currentCom.width}
+                margin="dense"
+                onChange={e => this.updateComWidth(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('height' in currentCom) &&
+            <div className={styles.width}>
+              <TextField
+                label="组件高度(单位:逻辑像素)"
+                id="com-height"
+                fullWidth
+                value={currentCom.height}
+                margin="dense"
+                onChange={e => this.updateComHeight(Number(e.target.value))}
               />
             </div>
           }

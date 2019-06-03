@@ -14,6 +14,7 @@ import { createWork, applyWork } from '../../../actions/works';
 import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom'
 import workDelete from '../../../apis/works/workDelete';
+import { setLoading } from '../../../actions/status';
 const ApplyWorkDialog = React.lazy(() => import('../../../components/Dialogs/ConfirmDialog/ApplyWorkDialog'))
 const BasicDeleteDialog = React.lazy(() => import('../../../components/Dialogs/DeleteDialog/BasicDeleteDialog'))
 const CreateWorkDialog = React.lazy(() => import('../../../components/Dialogs/ConfirmDialog/CreateWorkDialog'))
@@ -25,6 +26,7 @@ interface DispatchProps {
   deleteAuth: () => void
   createWork: () => void
   applyWork: (work: Work) => void
+  setLoading: (status: boolean) => void
 }
 
 type Props = OwnProps & DispatchProps
@@ -67,14 +69,17 @@ class Works extends React.Component<Props, State> {
       page: page,
       perPage: perPage
     }
+    this.props.setLoading(true)
     try {
       const resWorks: any = await workList(args)
       this.setState({
         workList: resWorks.data.data,
         lastPage: resWorks.data.last_page
       })
+      this.props.setLoading(false)
     } catch (e) {
       handleAxiosAsyncError(e)
+      this.props.setLoading(false)
     }
   }
 
@@ -259,6 +264,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
     },
     applyWork: (work) => {
       dispatch(applyWork(work))
+    },
+    setLoading: (status: boolean) => {
+      dispatch(setLoading(status))
     }
   }
 }

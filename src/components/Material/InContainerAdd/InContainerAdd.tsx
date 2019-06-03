@@ -1,16 +1,17 @@
 import * as React from 'react'
 import styles from './InContainerAdd.module.css'
-import TextField from '@material-ui/core/TextField';
-import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField'
+import * as qiniu from 'qiniu-js'
+import { withStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core';
 import { getQiniuToken, saveUploadResult } from '../../../apis/upload/qiniu'
 import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
-import * as qiniu from 'qiniu-js'
 import { materialsPost } from '../../../apis/materials/materials';
 import materialTypeByValue from '../../../utils/helper/typeReturner/materialTypeByValue';
 import { ThunkDispatch } from 'redux-thunk';
 import { setLoading } from '../../../actions/status';
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
+
 const moment = require('moment')
 
 const mStyles = (theme: Theme) =>
@@ -45,6 +46,7 @@ interface State {
   lottieNameError: string
   lottieUrls: Array<string>
   lottieCoverUrl: string
+  lottieCoverError: string
   lottiePath: string
   lottiePathError: string
   lottieJsonUrl: string
@@ -64,6 +66,7 @@ class InContainerAdd extends React.Component<Props, State> {
       videoPreviewUrl: '',
       lottieName: '',
       lottieCoverUrl: '',
+      lottieCoverError: '',
       lottieUrls: [],
       lottieNameError: '',
       lottiePath: '',
@@ -108,7 +111,12 @@ class InContainerAdd extends React.Component<Props, State> {
     const { videoName, videoPreviewUrl, imgPreviewUrl } = this.state
     const { materialCurrentValue, handleMaterialChooseAndFresh } = this.props
     const type = materialTypeByValue(materialCurrentValue)
-    if (videoName === '' || type === null || imgPreviewUrl === '' || videoPreviewUrl === '') {
+    if (
+      videoName === '' ||
+      type === null ||
+      imgPreviewUrl === '' ||
+      videoPreviewUrl === ''
+    ) {
       this.setState({
         imgNameError: 'error'
       })
@@ -184,7 +192,6 @@ class InContainerAdd extends React.Component<Props, State> {
 
   handleLottieCoverUpload = async (e: any) => {
     try {
-      // console.log(e.target.files[0])
       const file = e.target.files[0]
       if (!file) {
         return
@@ -342,7 +349,9 @@ class InContainerAdd extends React.Component<Props, State> {
 
   handleSubmitLottie = async () => {
     const { lottieName, lottiePath, lottieJsonUrl, lottieCoverUrl } = this.state
-    if (lottieName === '') {
+    if (
+      lottieName === ''
+    ) {
       this.setState({
         lottieNameError: 'error'
       })
@@ -362,6 +371,13 @@ class InContainerAdd extends React.Component<Props, State> {
       })
       return
     }
+
+    if (lottieCoverUrl === '') {
+      this.setState({
+        lottieCoverError: 'error'
+      })
+      return
+    }
     const { materialCurrentValue, handleMaterialChooseAndFresh } = this.props
     const type = materialTypeByValue(materialCurrentValue)
     const materialArgs = {
@@ -372,25 +388,76 @@ class InContainerAdd extends React.Component<Props, State> {
       assetsPath: lottiePath
     }
     try {
+      this.props.setLoading(true)
       await materialsPost(materialArgs)
       handleMaterialChooseAndFresh()
+      this.props.setLoading(false)
     } catch (err) {
       handleAxiosAsyncError(err)
+      this.props.setLoading(false)
     }
   }
 
   handleMultiLottieMaterialsUpload = async (e: any) => {
+    if (this.state.lottiePath === '') {
+      return
+    }
+    this.props.setLoading(true)
     for (const item of e.target.files) {
       await this.hanldeSingleLottieMaterialUpload(item)
     }
   }
 
-  hanldeSingleLottieMaterialUpload = async (e: any) => {
-
+  hanldeSingleLottieMaterialUpload = async (file: any) => {
+    try {
+      this.props.setLoading(true)
+      if (!file) {
+        return
+      }
+      const { name } = file
+      const time = moment().unix()
+      const suffix = `${time}-${name}`
+      const key = encodeURI(`${suffix}`)
+      const qiniuToken: any = await getQiniuToken()
+      const putExtra = {
+        fname: file.name,
+        params: {},
+        mimeType: ["image/png", "image/jpeg", "image/jpg", "image/svg+xml"]
+      }
+      const config = {
+        useCdnDomain: true
+      }
+      const observable = qiniu.upload(file, key, qiniuToken.data, putExtra, config)
+      const that = this
+      const observer = {
+        next(res: any) {
+        },
+        error(err: any) {
+        },
+        complete(res: any) {
+          const uploadArgs = {
+            size: file.size,
+            name: res.hash,
+            key: res.key,
+            folder: that.state.lottiePath
+          }
+          saveUploadResult(uploadArgs).then((r: any) => {
+            that.setState({
+              lottieUrls: [...that.state.lottieUrls, r.data.url]
+            })
+            that.props.setLoading(false)
+          }).catch(e => {
+            that.props.setLoading(false)
+            handleAxiosAsyncError(e)
+          })
+        }
+      }
+      const subscription = observable.subscribe(observer)
+    } catch (err) {
+      this.props.setLoading(false)
+      handleAxiosAsyncError(err)
+    }
   }
-  // handleLottieImgsUpload = async (e: any) => {
-
-  // }
 
   render() {
     const {
@@ -406,7 +473,10 @@ class InContainerAdd extends React.Component<Props, State> {
       lottiePathError,
       lottieJsonUrl,
       lottieCoverUrl,
-      lottieJsonError
+      lottieCoverError,
+      lottieJsonError,
+      lottieUrls,
+      lottiePath
     } = this.state
     return <div className={styles.containeradd}>
       {materialCurrentValue === 0 &&
@@ -433,10 +503,14 @@ class InContainerAdd extends React.Component<Props, State> {
             &&
             <img src={imgPreviewUrl} className={styles.previewimg} />
           }
-          <label htmlFor="img-upload">
-            <Button variant="contained" component="span">上传</Button>
-          </label>
-          <Button variant="contained" color="primary" onClick={this.handleSubmitImage}>提交</Button>
+
+          <div >
+            <label htmlFor="img-upload">
+              <Button variant="contained" component="span" className={styles.uploadbuttons}>点击上传图片</Button>
+            </label>
+            <Button variant="contained" color="primary" onClick={this.handleSubmitImage} className={styles.uploadbuttons}>提交</Button>
+          </div>
+
         </>}
 
       {materialCurrentValue === 1 &&
@@ -485,18 +559,13 @@ class InContainerAdd extends React.Component<Props, State> {
       {
         materialCurrentValue === 2 &&
         <>
-          <TextField
-            id="lottie-name"
-            label="Lottie动画素材"
-            className={classes.textField}
-            disabled
-            value={'动画素材请从七牛上传到一个文件目录，然后填写文件目录到下方'}
-            margin="normal"
-            autoFocus
-          />
+          <div className={styles.lottieremind}>
+            注意:输入素材存放路径之后才会显示上传素材按钮，上传过素材之后请不要修改存放路径
+          </div>
           <TextField
             id="lottie-name"
             label="Lottie动画名称"
+            placeholder="请填写动画名称"
             className={classes.textField}
             value={this.state.lottieName}
             onChange={this.handleChange('lottieName')}
@@ -504,9 +573,11 @@ class InContainerAdd extends React.Component<Props, State> {
             autoFocus
             error={lottieNameError === 'error'}
           />
+
           <TextField
             id="lottie-path-name"
-            label="Lottie动画文件目录"
+            label="Lottie动画素材存放目录"
+            placeholder="请尽量以动画名英文+日期格式填入以免冲突"
             className={classes.textField}
             value={this.state.lottiePath}
             onChange={this.handleChange('lottiePath')}
@@ -517,8 +588,9 @@ class InContainerAdd extends React.Component<Props, State> {
           <TextField
             id="lottie-json-url"
             label="Lottie动画Json链接"
+            placeholder="请填写动画Json的链接,或者点击下方按钮上传"
             className={classes.textField}
-            value={this.state.lottieJsonUrl}
+            value={lottieJsonUrl}
             onChange={this.handleChange('lottieJsonUrl')}
             margin="normal"
             error={lottieJsonError === 'error'}
@@ -533,7 +605,11 @@ class InContainerAdd extends React.Component<Props, State> {
           />
 
           <label htmlFor="lottie-cover-upload">
-            <Button variant="contained" component="span">点击上传Lottie动画封面</Button>
+            <Button
+              variant="contained"
+              component="span"
+              color={lottieCoverError === 'error' ? 'secondary' : 'primary'}
+            >点击上传Lottie动画封面</Button>
           </label>
 
           <input
@@ -543,28 +619,56 @@ class InContainerAdd extends React.Component<Props, State> {
             id="lottie-json"
             type="file"
           />
+
           <label htmlFor="lottie-json">
-            <Button variant="contained" component="span">点击上传Lottie动画Json</Button>
+            <Button
+              variant="contained"
+              component="span"
+            >
+              点击上传Lottie动画Json
+            </Button>
           </label>
 
           {
             lottieCoverUrl !== ''
             &&
-            <img src={lottieCoverUrl} className={styles.previewimg} />
+            <img
+              src={lottieCoverUrl}
+              className={styles.previewimg} />
           }
-          <Button variant="contained" component="span" onClick={this.handleSubmitLottie}>提交</Button>
 
-          {/* <input
+
+          <input
             className={styles.imginput}
-            onChange={e => this.handleLottieImgsUpload(e)}
+            onChange={e => this.handleMultiLottieMaterialsUpload(e)}
             accept="image/*"
             id="lottie-imgs-upload"
             type="file"
             multiple
           />
-          <label htmlFor="lottie-imgs-upload">
-            <Button variant="contained" component="span">点击上传Lottie动画图片素材</Button>
-          </label> */}
+          {
+            lottiePath !== '' &&
+            <label htmlFor="lottie-imgs-upload">
+              <Button
+                variant="contained"
+                component="span"
+                disabled={lottiePath === ''}
+              >
+                点击上传Lottie动画图片素材
+            </Button>
+            </label>
+          }
+          {lottieUrls.length > 0 && <span>已上传 {lottieUrls.length} 个素材</span>}
+          {lottieUrls.map((item, index) => {
+            return <div key={index}>{item}</div>
+          })}
+          <Button
+            variant="contained"
+            component="span"
+            onClick={this.handleSubmitLottie}
+          >
+            提交
+          </Button>
         </>
       }
     </div>

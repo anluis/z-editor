@@ -14,7 +14,7 @@ class Text extends React.Component<Props> {
     if (mode === 'editor') {
       return
     }
-    if (href === '') {
+    if (!href || href === '') {
       return
     } else {
       window.location.href = href

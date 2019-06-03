@@ -3,9 +3,7 @@ export interface baseMaterial {
   type: string
   name: string
   desc: string
-  _id?: string
-  created_at?: string
-  updated_at?: string
+  _id: string
 }
 
 export interface ImgMaterial extends baseMaterial {

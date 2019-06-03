@@ -6,6 +6,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { Work } from '../../../types/IStoreState';
+// @ts-ignore
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export interface WorkCardProps {
   classes: any
@@ -63,11 +65,6 @@ function WorkCard(props: Props) {
           {desc}
         </Typography>
       </CardContent>
-      <CardContent>
-        <Typography className={classes.desc} color="textSecondary" gutterBottom>
-          作品链接: <a href={workUrl} target="_blank">{workUrl}</a>
-        </Typography>
-      </CardContent>
       <CardActions>
         {/* edit here */}
         <Button
@@ -78,6 +75,15 @@ function WorkCard(props: Props) {
         >
           编辑
         </Button>
+        <CopyToClipboard text={workUrl}>
+          <Button
+            variant="contained"
+            size="medium"
+            color="primary"
+          >
+            拷贝链接
+          </Button>
+        </CopyToClipboard>
         <Button
           variant="contained"
           size="medium"

@@ -1,22 +1,23 @@
 import * as React from 'react'
 import styles from './InContainer.module.css'
 import IStoreState from '../../../types/IStoreState';
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-import { connect } from 'react-redux';
-import materials, { MaterialArgs } from '../../../apis/materials/materials';
-import { Material, ImgMaterial, LottieMaterial, VideoMaterial } from '../../../types/materials'
 import ImageCard from '../../Cards/ImageCard/ImageCard';
 import VideoCard from '../../Cards/VideoCard/VideoCard';
 import LottieCard from '../../Cards/LottieCard/LottieCard';
-import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
 import MaterialAddButton from '../../Little/MaterialAddButton/MaterialAddButton';
 import InContainerAdd from '../InContainerAdd/InContainerAdd';
 import materialTypeByValue from '../../../utils/helper/typeReturner/materialTypeByValue'
-import { IMAGE, VIDEO, LOTTIE } from '../../../constants/coms';
 import MaterialCancelButton from '../../Little/MaterialCancalButton/MaterialCancelButton';
 import materialDelete from '../../../apis/materials/materialDelete';
 import PageNavi from '../../Little/PageNavi/PageNavi';
+import { connect } from 'react-redux';
+import materials, { MaterialArgs } from '../../../apis/materials/materials';
+import { Material, ImgMaterial, LottieMaterial, VideoMaterial } from '../../../types/materials'
+import { handleAxiosAsyncError } from '../../../utils/helper/errorHandle/axiosError';
+import { IMAGE, VIDEO, LOTTIE } from '../../../constants/coms';
+import { ThunkDispatch } from 'redux-thunk';
+import { setLoading } from '../../../actions/status';
+
 const MaterialDeleteDialog = React.lazy(() => import('../../Dialogs/DeleteDialog/MaterialDeleteDialog'))
 
 interface OwnProps {
@@ -24,17 +25,22 @@ interface OwnProps {
   belong: string
 }
 
-type Props = OwnProps
+interface DispatchProps {
+  setLoading: (status: boolean) => void
+}
+
+type Props = OwnProps & DispatchProps
 
 interface OwnState {
   // when need to do upload action, value change
   tabValueSecond: number
   page: number
   materialsList: Array<Material>
-  toRemoveMaterial: Material | null
+  toRemoveMaterial: Material | undefined
   deleteDialogOpen: boolean
   perPage: number
   totalPage: number
+  choosenMaterial: Material | undefined
 }
 
 type State = OwnState
@@ -46,7 +52,8 @@ class InContainer extends React.Component<Props, State> {
       tabValueSecond: 0,
       page: 1,
       materialsList: [],
-      toRemoveMaterial: null,
+      toRemoveMaterial: undefined,
+      choosenMaterial: undefined,
       deleteDialogOpen: false,
       perPage: 10,
       totalPage: 0
@@ -61,6 +68,7 @@ class InContainer extends React.Component<Props, State> {
     const { page, perPage } = this.state
     const { materialCurrentValue } = this.props
     try {
+      this.props.setLoading(true)
       let requestArgs: MaterialArgs = {
         page: page,
         perPage: perPage
@@ -74,7 +82,9 @@ class InContainer extends React.Component<Props, State> {
         materialsList: listRes.data.data,
         totalPage: listRes.data.last_page
       })
+      this.props.setLoading(false)
     } catch (err) {
+      this.props.setLoading(false)
       handleAxiosAsyncError(err)
     }
   }
@@ -110,14 +120,20 @@ class InContainer extends React.Component<Props, State> {
 
   removeMaterialItem = async () => {
     const { toRemoveMaterial } = this.state
-    if (toRemoveMaterial !== null && toRemoveMaterial._id) {
+    if (!toRemoveMaterial) {
+      return
+    }
+    if (toRemoveMaterial._id) {
       try {
+        this.props.setLoading(true)
         await materialDelete({ _id: toRemoveMaterial._id })
         this.setState({
           deleteDialogOpen: false,
           materialsList: this.state.materialsList.filter(item => item._id !== toRemoveMaterial._id)
         })
+        this.props.setLoading(false)
       } catch (err) {
+        this.props.setLoading(false)
         handleAxiosAsyncError(err)
       }
     }
@@ -136,9 +152,25 @@ class InContainer extends React.Component<Props, State> {
     })
   }
 
+  handleChoosen = (item: Material) => {
+    this.setState({
+      choosenMaterial: item
+    })
+  }
+
   render() {
-    const { tabValueSecond, materialsList, toRemoveMaterial, deleteDialogOpen, totalPage, page } = this.state
-    const { belong, materialCurrentValue } = this.props
+    const {
+      tabValueSecond,
+      materialsList,
+      toRemoveMaterial,
+      deleteDialogOpen,
+      totalPage,
+      page
+    } = this.state
+    const {
+      belong,
+      materialCurrentValue
+    } = this.props
     const renderItemByType = (item: Material, index: number) => {
       switch (item.type) {
         case IMAGE:
@@ -173,7 +205,7 @@ class InContainer extends React.Component<Props, State> {
     const renderListItems = materialsList.map((item, index) => {
       return renderListItem(item, index)
     })
-    const remindWord = toRemoveMaterial !== null ? `确定删除${toRemoveMaterial.name}吗？` : '确定删除吗？'
+    const remindWord = toRemoveMaterial ? `确定删除${toRemoveMaterial.name}吗？` : '确定删除吗？'
     return (
       <>
         <div className={styles.inctn}>
@@ -194,6 +226,7 @@ class InContainer extends React.Component<Props, State> {
               handleMaterialChooseAndFresh={this.handleMaterialChooseAndFresh}
             />}
         </div>
+        {/* Navi Component */}
         {
           tabValueSecond === 0 &&
           <PageNavi
@@ -222,12 +255,11 @@ const mapStateToProps = (state: IStoreState) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-  return {
-    ss: () => {
-      return {
 
-      }
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+  return {
+    setLoading: (status: boolean) => {
+      dispatch(setLoading(status))
     }
   }
 }

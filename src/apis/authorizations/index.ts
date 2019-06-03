@@ -1,5 +1,7 @@
 import { apiUrl } from '../../constants/base'
 import axios from 'axios'
+import { accessToken } from '../../utils/getters/auth';
+
 
 interface SignInArgs {
   username: string
@@ -20,4 +22,19 @@ const signIn = (payload: SignInArgs) => {
   })
 }
 
-export { signIn }
+const signOut = () => {
+  const requestUrl = `${apiUrl}/authorizations/current`
+  const params = {
+    headers: {
+      Authorization: accessToken()
+    }
+  }
+  return new Promise<any>((resolve, reject) => {
+    axios
+      .delete(requestUrl, params)
+      .then(r => resolve(r))
+      .catch(e => reject(e))
+  })
+}
+
+export { signIn, signOut }

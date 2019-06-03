@@ -8,7 +8,6 @@ import { logout } from '../../actions/auth'
 import { Button } from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work';
 import NoteIcon from '@material-ui/icons/Note';
-import FilterIcon from '@material-ui/icons/Filter';
 import MaterialIcon from '@material-ui/icons/Palette'
 import SubscribeIcon from '@material-ui/icons/PlaylistAdd'
 

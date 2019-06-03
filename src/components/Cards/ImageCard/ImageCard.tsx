@@ -15,8 +15,8 @@ import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux'
 import { initImage } from '../../../constants/coms';
 import { cloneDeep } from 'lodash'
-import maxOfArray from '../../../utils/helper/maxOfArray'
 import { Material, ImgMaterial } from '../../../types/materials';
+import maxOfArray from '../../../utils/helper/maxOfArray'
 
 const styles = {
   card: {
@@ -48,7 +48,6 @@ interface DispatchProps {
 
 type Props = OwnProps & DispatchProps
 
-
 function ImageCard(props: Props) {
   const generateComAndSetInStore = () => {
     const newId = maxOfArray(props.comsIds) + 1
@@ -60,14 +59,15 @@ function ImageCard(props: Props) {
   }
 
   const bindStyles = {
-    margin: '20px'
+    margin: '20px',
+    cursor: 'pointer'
   }
   const { classes, belong, handleDeleteDialog, material } = props
   const { name, imgUrl } = props.material
 
   return (
     <>
-      <Card className={classes.card} style={bindStyles}>
+      <Card className={classes.card} style={bindStyles} onClick={generateComAndSetInStore}>
         <CardMedia
           className={classes.media}
           image={imgUrl}
@@ -79,8 +79,24 @@ function ImageCard(props: Props) {
           </Typography>
         </CardContent>
         <CardActions>
-          {belong === 'dialog' && <Button size="small" onClick={generateComAndSetInStore}>选择</Button>}
-          {belong !== 'dialog' && <Button size="small" color="secondary" onClick={() => handleDeleteDialog(material)}>删除</Button>}
+          {belong === 'dialog'
+            &&
+            <Button
+              size="small"
+            >
+              预览
+            </Button>
+          }
+          {belong !== 'dialog'
+            &&
+            <Button
+              size="small"
+              color="secondary"
+              onClick={() => handleDeleteDialog(material)}
+            >
+              删除
+            </Button>
+          }
         </CardActions>
       </Card>
     </>

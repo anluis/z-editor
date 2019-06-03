@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styles from './Attribute.module.css'
-import Input from '@material-ui/core/Input';
 import { SketchPicker, RGBColor } from 'react-color'
 import IStoreState from '../../../types/IStoreState'
 import { connect } from 'react-redux'
@@ -167,6 +166,55 @@ class Attribute extends React.Component<Props, State> {
     }
   }
 
+  updateComX = (x: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('x' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.x = x
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateComY = (y: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('y' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.y = y
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateComWidth = (width: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('width' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.width = width
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+  updateComHeight = (height: number) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('height' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.height = height
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
+
   render() {
     const { currentCom } = this.props
     if (!currentCom) {
@@ -178,16 +226,6 @@ class Attribute extends React.Component<Props, State> {
           <Button variant="outlined" color="secondary" onClick={this.handleDialogOpen}>
             删除
           </Button>
-          {/* <div className={styles.attrId}>
-            <TextField
-              label="组件编号"
-              id="com-id"
-              fullWidth
-              value={currentCom.id}
-              disabled
-              margin="dense"
-            />
-          </div> */}
           <div className={styles.attr}>
             <TextField
               label="组件名称"
@@ -198,7 +236,60 @@ class Attribute extends React.Component<Props, State> {
               margin="dense"
             />
           </div>
-          {('context' in currentCom) &&
+          {
+            ('x' in currentCom) &&
+            <div className={styles.attr}>
+              <TextField
+                label="X轴距离(单位:逻辑像素)"
+                id="com-x"
+                fullWidth
+                value={currentCom.x}
+                margin="dense"
+                onChange={e => this.updateComX(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('y' in currentCom) &&
+            <div className={styles.attr}>
+              <TextField
+                label="Y轴距离(单位:逻辑像素)"
+                id="com-y"
+                fullWidth
+                value={currentCom.y}
+                margin="dense"
+                onChange={e => this.updateComY(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('width' in currentCom) &&
+            <div className={styles.width}>
+              <TextField
+                label="组件宽度(单位:逻辑像素)"
+                id="com-width"
+                fullWidth
+                value={currentCom.width}
+                margin="dense"
+                onChange={e => this.updateComWidth(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('height' in currentCom) &&
+            <div className={styles.width}>
+              <TextField
+                label="组件高度(单位:逻辑像素)"
+                id="com-height"
+                fullWidth
+                value={currentCom.height}
+                margin="dense"
+                onChange={e => this.updateComHeight(Number(e.target.value))}
+              />
+            </div>
+          }
+          {
+            ('context' in currentCom) &&
             <div className={styles.attr}>
               <TextField
                 label="文本内容"
@@ -208,7 +299,8 @@ class Attribute extends React.Component<Props, State> {
                 value={currentCom.context}
                 margin="dense"
               />
-            </div>}
+            </div>
+          }
           {
             ('href' in currentCom) &&
             <div className={styles.attr}>

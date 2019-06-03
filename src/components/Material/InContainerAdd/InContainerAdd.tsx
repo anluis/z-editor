@@ -416,7 +416,7 @@ class InContainerAdd extends React.Component<Props, State> {
       }
       const { name } = file
       const time = moment().unix()
-      const suffix = `${time}-${name}`
+      const suffix = `${name}`
       const key = encodeURI(`${suffix}`)
       const qiniuToken: any = await getQiniuToken()
       const putExtra = {

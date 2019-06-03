@@ -3,7 +3,7 @@ const lottie = require('lottie-web')
 import { LottieCom } from '../../types/coms'
 import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
 import styles from './common.module.css'
-
+import { qiniuUrl } from '../../constants/base'
 interface Props extends LottieCom {
   mode?: string
   zIndex: number
@@ -19,7 +19,7 @@ class Lottie extends React.Component<Props> {
         renderer: 'svg',
         loop: true,
         autoplay: true,
-        assetsPath: assetsPath,
+        assetsPath: qiniuUrl + '/cms/' + assetsPath + '/',
         path: path // the path to the animation json
       })
     }

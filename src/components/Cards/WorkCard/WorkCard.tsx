@@ -65,11 +65,6 @@ function WorkCard(props: Props) {
           {desc}
         </Typography>
       </CardContent>
-      <CardContent>
-        <Typography className={classes.desc} color="textSecondary" gutterBottom>
-          作品链接: <a href={workUrl} target="_blank">{workUrl}</a>
-        </Typography>
-      </CardContent>
       <CardActions>
         {/* edit here */}
         <Button

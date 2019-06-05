@@ -14,6 +14,7 @@ const Works = React.lazy(() => import('./Works/Works'))
 const Templates = React.lazy(() => import('./Templates/Templates'))
 const FullScreenMaterialDialog = React.lazy(() => import('../../components/Dialogs/MaterialFullScreenDialog/MaterialFullScreen'))
 const PageSettingDialog = React.lazy(() => import('../../components/Dialogs/PageSettingDialog/PageSettingDialog'))
+const Myaccount = React.lazy(() => import('./Myaccount/Myaccount'))
 
 interface OwnProps extends RouteComponentProps {
   isLoading: boolean
@@ -30,12 +31,13 @@ class Editor extends React.Component<Props> {
       return <Redirect to='/login' />
     }
     return <div className={styles.main}>
+      <MenuBar />
       <React.Suspense fallback={null}>
-        <MenuBar />
         <Route path="/editor" exact component={PlayGround} />
         <Route path="/editor/materials" component={Materials} />
         <Route path="/editor/works" component={Works} />
         <Route path="/editor/templates" component={Templates} />
+        <Route path="/editor/myaccount" component={Myaccount} />
         <FullScreenMaterialDialog />
         <PageSettingDialog />
         <BasicDialog />

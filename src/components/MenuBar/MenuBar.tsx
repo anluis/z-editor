@@ -10,7 +10,8 @@ import WorkIcon from '@material-ui/icons/Work';
 import NoteIcon from '@material-ui/icons/Note';
 import MaterialIcon from '@material-ui/icons/Palette'
 import SubscribeIcon from '@material-ui/icons/PlaylistAdd'
-
+import { user } from '../../apis/user/userGet'
+import Profile from './Profile/Profile'
 
 interface DispatchProps {
   logout: () => Promise<void>
@@ -23,6 +24,18 @@ interface OwnProps extends RouteComponentProps {
 type Props = DispatchProps & OwnProps
 
 class MenuBar extends React.Component<Props> {
+
+  componentDidMount() {
+    this.fetchUser()
+  }
+
+  fetchUser = async () => {
+    try {
+      const userInfo = await user()
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
   handleLogOut = () => {
     this.props.logout()
@@ -75,7 +88,7 @@ class MenuBar extends React.Component<Props> {
         </Button>
       </div>
       <div className={`${styles.pane} ${styles.logout}`} >
-        <Button size="medium" color="inherit" onClick={this.handleLogOut}>登出</Button>
+        <Profile />
       </div>
     </div>
   }

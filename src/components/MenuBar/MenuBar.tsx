@@ -88,7 +88,6 @@ class MenuBar extends React.Component<Props> {
         </Button>
       </div>
       <div className={`${styles.pane} ${styles.logout}`} >
-        {/* <Button size="medium" color="inherit" onClick={this.handleLogOut}>登出</Button> */}
         <Profile />
       </div>
     </div>

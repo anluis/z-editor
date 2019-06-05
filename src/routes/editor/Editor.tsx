@@ -31,8 +31,8 @@ class Editor extends React.Component<Props> {
       return <Redirect to='/login' />
     }
     return <div className={styles.main}>
+      <MenuBar />
       <React.Suspense fallback={null}>
-        <MenuBar />
         <Route path="/editor" exact component={PlayGround} />
         <Route path="/editor/materials" component={Materials} />
         <Route path="/editor/works" component={Works} />

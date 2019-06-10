@@ -49,7 +49,12 @@ class Lottie extends React.Component<Props> {
       bindStyle.height = height * zoomByDevice() + 'px'
       bindStyle.width = width * zoomByDevice() + 'px'
     }
-    return <div id={`lottie-${id}`} className={styles.commondiv} style={bindStyle}></div>
+    return <div
+      id={`lottie-${id}`}
+      className={styles.commondiv}
+      style={bindStyle}>
+
+    </div>
   }
 }
 

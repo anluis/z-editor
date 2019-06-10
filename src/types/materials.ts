@@ -1,4 +1,10 @@
-import { IMAGE, LOTTIE, VIDEO, AUDIO } from '../constants/coms'
+import {
+  IMAGE,
+  LOTTIE,
+  VIDEO,
+  AUDIO
+} from '../constants/coms'
+
 export interface baseMaterial {
   type: string
   name: string

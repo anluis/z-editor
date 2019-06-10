@@ -307,6 +307,7 @@ class Attribute extends React.Component<Props, State> {
               <TextField
                 label="跳转链接(Url)"
                 id="com-href"
+                placeholder="请输入带http/https的链接"
                 fullWidth
                 onChange={e => this.updateHref(e.target.value)}
                 value={currentCom.href}

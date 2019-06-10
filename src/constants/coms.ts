@@ -55,7 +55,8 @@ export const initLottie: LottieCom = {
   y: 0,
   name: '',
   path: '',
-  assetsPath: ''
+  assetsPath: '',
+  href: ''
 }
 
 export const initPhotoGet: PhotoGetCom = {

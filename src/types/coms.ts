@@ -40,7 +40,8 @@ export interface PhotoGetCom extends BaseCom {
 export interface LottieCom extends BaseCom {
   path: string
   assetsPath: string
-  type: 'LOTTIE'
+  type: 'LOTTIE',
+  href: string
 }
 
 export type Com = ImageCom | TextCom | VideoCom | PhotoGetCom | LottieCom

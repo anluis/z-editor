@@ -24,11 +24,34 @@ class Lottie extends React.Component<Props> {
       })
     }
   }
+
+  handleClickAction = () => {
+    const { href, mode } = this.props
+    if (mode === 'editor') {
+      return
+    }
+    if (!href || href === '') {
+      return
+    } else {
+      window.location.href = href
+    }
+  }
+  
   componentDidMount() {
     this.initAnimation()
   }
   render() {
-    const { id, width, height, zIndex, x, y, mode } = this.props
+    const {
+      id,
+      width,
+      height,
+      zIndex,
+      x,
+      y,
+      mode,
+      href
+    } = this.props
+
     let bindStyle: React.CSSProperties = {
       position: 'absolute',
       width: width + 'px',
@@ -49,9 +72,12 @@ class Lottie extends React.Component<Props> {
       bindStyle.height = height * zoomByDevice() + 'px'
       bindStyle.width = width * zoomByDevice() + 'px'
     }
+
+    const bindClass = href === '' ? styles.cannotclick : styles.canclick
     return <div
       id={`lottie-${id}`}
-      className={styles.commondiv}
+      className={bindClass}
+      onClick={() => this.handleClickAction()}
       style={bindStyle}>
 
     </div>

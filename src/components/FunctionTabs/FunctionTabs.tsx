@@ -40,28 +40,24 @@ function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="属性" />
-          <Tab label="图层" />
-          <Tab label="页面" />
-        </Tabs>
-      </AppBar>
-      {value === 0 && <TabContainer>
-        <React.Suspense fallback={null}>
+      <React.Suspense fallback={null}>
+        <AppBar position="static">
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="属性" />
+            <Tab label="图层" />
+            <Tab label="页面" />
+          </Tabs>
+        </AppBar>
+        {value === 0 && <TabContainer>
           <Attribute />
-        </React.Suspense>
-      </TabContainer>}
-      {value === 1 && <TabContainer>
-        <React.Suspense fallback={null}>
+        </TabContainer>}
+        {value === 1 && <TabContainer>
           <Layers />
-        </React.Suspense>
-      </TabContainer>}
-      {value === 2 && <TabContainer>
-        <React.Suspense fallback={null}>
+        </TabContainer>}
+        {value === 2 && <TabContainer>
           <Pages />
-        </React.Suspense>
-      </TabContainer>}
+        </TabContainer>}
+      </React.Suspense>
     </div>
   );
 }

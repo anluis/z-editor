@@ -10,6 +10,8 @@ interface Props extends ImageCom {
 
 class Image extends React.Component<Props> {
 
+  private Timer: any
+
   handleClickAction = () => {
     const { href, mode } = this.props
     if (mode === 'editor') {
@@ -30,8 +32,10 @@ class Image extends React.Component<Props> {
       zIndex,
       x,
       y,
-      mode
+      mode,
+      href
     } = this.props
+
     let bindStyle: React.CSSProperties = {
       position: 'absolute',
       width: width + 'px',
@@ -43,10 +47,12 @@ class Image extends React.Component<Props> {
       top: y + 'px',
       overflow: 'hidden'
     }
+
     let bindInnerImg: React.CSSProperties = {
       width: '100%',
       overflow: 'hidden'
     }
+
     if (mode === 'editor') {
       bindStyle.left = '0'
       bindStyle.top = '0'
@@ -62,10 +68,13 @@ class Image extends React.Component<Props> {
       delete bindStyle.backgroundImage
       delete bindStyle.backgroundSize
     }
+
+    const bindClass = href === '' ? styles.canclick : styles.cannotclick
+
     return (
       <div
         style={bindStyle}
-        className={styles.commondiv}
+        className={bindClass}
         onClick={() => this.handleClickAction()}
       >
         {

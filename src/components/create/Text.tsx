@@ -49,7 +49,7 @@ class Text extends React.Component<Props> {
     }
     return <div
       style={bindStyle}
-      className={styles.commondiv}
+      className={styles.canclick}
       onClick={() => this.handleClickAction()}>
       {context}
     </div>

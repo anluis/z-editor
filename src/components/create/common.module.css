@@ -1,4 +1,13 @@
 .commondiv {
   user-select: none;
-  /* pointer-events: none; */
+  pointer-events: none;
+}
+
+.canclick {
+  user-select: none;
+}
+
+.cannotclick {
+  user-select: none;
+  pointer-events: none;
 }

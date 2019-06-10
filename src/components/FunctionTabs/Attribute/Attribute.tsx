@@ -104,6 +104,18 @@ class Attribute extends React.Component<Props, State> {
     }
   }
 
+  updateColor = (e: RGBColor) => {
+    const { currentCom, updateCom } = this.props
+    if (!currentCom) {
+      return
+    }
+    if ('color' in currentCom) {
+      let comCopy = { ...currentCom }
+      comCopy.color = `rgba(${e.r}, ${e.g}, ${e.b}, ${e.a})`
+      updateCom(currentCom.id, comCopy)
+    }
+  }
+
   updateFontSize = (fontSize: number) => {
     if (typeof fontSize !== 'number') {
       return
@@ -340,6 +352,18 @@ class Attribute extends React.Component<Props, State> {
               />
             </div>
           }
+
+          {('color' in currentCom) &&
+            <div className={styles.attr}>
+              <InputLabel>颜色:  </InputLabel>
+              <SketchPicker
+                color={currentCom.color}
+                onChangeComplete={e => {
+                  this.updateColor(e.rgb)
+                }}
+              />
+            </div>}
+
           {('backgroundColor' in currentCom) &&
             <div className={styles.attr}>
               <InputLabel>背景颜色:  </InputLabel>
@@ -350,6 +374,7 @@ class Attribute extends React.Component<Props, State> {
                 }}
               />
             </div>}
+
           {('path' in currentCom) &&
             <div className={styles.attr}>
               <TextField

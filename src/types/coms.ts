@@ -17,11 +17,11 @@ export interface ImageCom extends BaseCom {
 }
 
 export interface TextCom extends BaseCom {
+  type: 'TEXT'
   fontSize: number
   color: string
   letterSpacing: string
   context: string
-  type: 'TEXT'
   backgroundColor: string
   opacity: number
   href: string

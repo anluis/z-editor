@@ -84,7 +84,7 @@ function ImageCard(props: Props) {
             <Button
               size="small"
             >
-              预览
+              选择
             </Button>
           }
           {belong !== 'dialog'

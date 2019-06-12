@@ -15,10 +15,8 @@ export const userPatch = (payload: userPatchArgs) => {
     }
   }
   const params = {
-    params: {
-      name: payload.name,
-      password: payload.password
-    }
+    name: payload.name,
+    password: payload.password
   }
   return new Promise((resolve, reject) => {
     axios.patch(url, params, config).then(r => resolve(r)).catch(e => reject(e))

@@ -50,7 +50,8 @@ class Image extends React.Component<Props> {
 
     let bindInnerImg: React.CSSProperties = {
       width: '100%',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      height: '100%'
     }
 
     if (mode === 'editor') {

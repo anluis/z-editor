@@ -8,13 +8,15 @@ import { AnyAction } from 'redux';
 import { setLoading } from '../../../actions/status';
 import { connect } from 'react-redux';
 import { userPatch } from '../../../apis/user/userPatch';
+import { logout } from '../../../actions/auth';
 
 interface OwnProps {
 
 }
 
 interface DispatchProps {
-
+  signOut: () => void
+  setLoading: (status: boolean) => void
 }
 
 type Props = OwnProps & DispatchProps
@@ -79,6 +81,7 @@ class Myaccount extends React.Component<Props, State> {
       const changeResult: any = await userPatch(userInfoPayload)
       if (changeResult.status === 200) {
         alert('修改成功！')
+        this.props.signOut()
       }
     } catch (err) {
       console.warn(err.message)
@@ -140,6 +143,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): Dispatc
   return {
     setLoading: (status: boolean) => {
       dispatch(setLoading(status))
+    },
+    signOut: () => {
+      dispatch(logout())
     }
   }
 }

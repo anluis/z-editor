@@ -18,7 +18,7 @@ export const initText: TextCom = {
   type: TEXT,
   id: 0,
   context: '',
-  backgroundColor: 'rgba(0,0,0,0)',
+  backgroundColor: 'white',
   opacity: 0,
   href: ''
 }

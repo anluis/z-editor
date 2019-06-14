@@ -131,8 +131,9 @@ class Login extends React.Component<Props, State> {
                 this.handleKeyPress(ev.key)
               }}>
                 <TextField
-                  type="username"
+                  type="text"
                   error={isError}
+                  autoComplete="true"
                   id="outlined-name"
                   label="用户名"
                   className={classes.textField}

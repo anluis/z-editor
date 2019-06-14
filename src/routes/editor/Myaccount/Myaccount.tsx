@@ -45,11 +45,11 @@ class Myaccount extends React.Component<Props, State> {
   fetchUserData = async () => {
     try {
       const userData: any = await user()
-      console.dir(userData)
       this.setState({
         name: userData.data.name
       })
     } catch (err) {
+      console.warn(err.message)
       handleAxiosAsyncError(err)
     }
   }
@@ -90,7 +90,7 @@ class Myaccount extends React.Component<Props, State> {
   }
 
   render() {
-    return <div className={styles.myaccount}>
+    return <form className={styles.myaccount}>
 
       <TextField
         autoFocus
@@ -108,6 +108,7 @@ class Myaccount extends React.Component<Props, State> {
         margin="dense"
         id="account-password"
         label="密码"
+        autoComplete="false"
         placeholder="请输入新密码"
         fullWidth
         type="password"
@@ -118,9 +119,10 @@ class Myaccount extends React.Component<Props, State> {
       <TextField
         autoFocus
         margin="dense"
-        id="account-password"
+        id="account-confirm"
         label="确认密码"
         placeholder="请输入确认密码"
+        autoComplete="false"
         fullWidth
         type="password"
         value={this.state.confirmpassword}
@@ -135,7 +137,7 @@ class Myaccount extends React.Component<Props, State> {
         确定
       </Button>
 
-    </div>
+    </form >
   }
 }
 

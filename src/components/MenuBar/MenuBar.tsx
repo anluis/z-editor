@@ -12,6 +12,7 @@ import MaterialIcon from '@material-ui/icons/Palette'
 import SubscribeIcon from '@material-ui/icons/PlaylistAdd'
 import { user } from '../../apis/user/userGet'
 import Profile from './Profile/Profile'
+import { handleAxiosAsyncError } from '../../utils/helper/errorHandle/axiosError';
 
 interface DispatchProps {
   logout: () => Promise<void>
@@ -33,6 +34,7 @@ class MenuBar extends React.Component<Props> {
     try {
       const userInfo = await user()
     } catch (err) {
+      handleAxiosAsyncError(err)
       console.log(err.message)
     }
   }

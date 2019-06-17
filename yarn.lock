@@ -2973,6 +2973,13 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
+crypto-random-string@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-3.0.0.tgz#b173d4228bf42a6cd38447129f579133438c50d4"
+  integrity sha512-HJJQbkbJmYRCBDhgmEoU9Z0tseO2Xlbyg3bV56wShnCWnhnoAyhF2qwy1SBlhOcILkZeEUNzrrAcQQKK/JGFkw==
+  dependencies:
+    type-fest "^0.4.1"
+
 css-blank-pseudo@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/css-blank-pseudo/-/css-blank-pseudo-0.1.4.tgz#dfdefd3254bf8a82027993674ccf35483bfcb3c5"
@@ -10435,6 +10442,11 @@ type-check@~0.3.2:
   integrity sha1-WITKtRLPHTVeP7eE8wgEsrUg23I=
   dependencies:
     prelude-ls "~1.1.2"
+
+type-fest@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.4.1.tgz#8bdf77743385d8a4f13ba95f610f5ccd68c728f8"
+  integrity sha512-IwzA/LSfD2vC1/YDYMv/zHP4rDF1usCwllsDpbolT3D4fUepIO7f9K70jjmUewU/LmGUKJcwcVtDCpnKk4BPMw==
 
 type-is@~1.6.16:
   version "1.6.16"

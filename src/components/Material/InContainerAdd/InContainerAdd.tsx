@@ -11,6 +11,8 @@ import materialTypeByValue from '../../../utils/helper/typeReturner/materialType
 import { ThunkDispatch } from 'redux-thunk';
 import { setLoading } from '../../../actions/status';
 import { connect } from 'react-redux'
+import { getFileExtension } from '../../../utils/helper/stringHandler/getFileExtension'
+const cryptoRandomString = require('crypto-random-string')
 
 const moment = require('moment')
 
@@ -145,11 +147,13 @@ class InContainerAdd extends React.Component<Props, State> {
       this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
-      const suffix = `${time}-${name}`
+      const randomstr = cryptoRandomString({ length: 10 })
+      const fileExtension = getFileExtension(name)
+      const suffix = `${time}-${randomstr}.${fileExtension}`
       const key = encodeURI(`${suffix}`)
       const qiniuToken: any = await getQiniuToken()
       const putExtra = {
-        fname: file.name,
+        fname: name,
         params: {},
         mimeType: ["image/png", "image/jpeg", "image/jpg"]
       }
@@ -199,7 +203,9 @@ class InContainerAdd extends React.Component<Props, State> {
       this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
-      const suffix = `${time}-${name}`
+      const randomstr = cryptoRandomString({ length: 10 })
+      const fileExtension = getFileExtension(name)
+      const suffix = `${time}-${randomstr}.${fileExtension}`
       const key = encodeURI(`${suffix}`)
       const qiniuToken: any = await getQiniuToken()
       const putExtra = {
@@ -253,7 +259,9 @@ class InContainerAdd extends React.Component<Props, State> {
       this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
-      const suffix = `${time}-${name}`
+      const randomstr = cryptoRandomString({ length: 10 })
+      const fileExtension = getFileExtension(name)
+      const suffix = `${time}-${randomstr}.${fileExtension}`
       const key = encodeURI(`${suffix}`)
       const qiniuToken: any = await getQiniuToken()
       const putExtra = {
@@ -304,7 +312,9 @@ class InContainerAdd extends React.Component<Props, State> {
       this.props.setLoading(true)
       const { name } = file
       const time = moment().unix()
-      const suffix = `${time}-${name}`
+      const randomstr = cryptoRandomString({ length: 10 })
+      const fileExtension = getFileExtension(name)
+      const suffix = `${time}-${randomstr}.${fileExtension}`
       const key = encodeURI(`${suffix}`)
       const qiniuToken: any = await getQiniuToken()
       const putExtra = {

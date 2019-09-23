@@ -65,7 +65,6 @@ class Login extends React.Component<Props, State> {
       userName: '',
       passWord: ''
     })
-    document.title = 'H5 编辑器'
     const body = document.getElementsByTagName("body")[0]
     body.setAttribute('style', 'overflow: hidden')
     const { isAuthenticated, clearError } = this.props
@@ -123,7 +122,6 @@ class Login extends React.Component<Props, State> {
           <Redirect to="/editor" />
           :
           <div className={outstyles.login}>
-            <img className={outstyles.logo} src="https://cdn.xingstation.cn/fe/actiview/img/actiview-logo.png" />
             {animateSpan}
             <Paper>
               <div className={outstyles.welcome}>欢迎登陆</div>

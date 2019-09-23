@@ -25,7 +25,6 @@ type Props = OwnProps
 
 class Editor extends React.Component<Props> {
   render() {
-    document.title = 'H5 编辑器'
     const { isAuthenticated } = this.props
     if (!isAuthenticated) {
       return <Redirect to='/login' />

@@ -1,7 +1,8 @@
 {
-  "name": "cms-web",
+  "name": "z-editor",
+  "description": "An editor to make mobile pages.",
+  "license": "MIT",
   "version": "0.1.2",
-  "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",

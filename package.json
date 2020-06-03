@@ -8,17 +8,6 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "@material-ui/styles": "^3.0.0-alpha.10",
-    "@types/classnames": "^2.2.7",
-    "@types/jest": "24.0.11",
-    "@types/lodash": "^4.14.123",
-    "@types/node": "11.13.4",
-    "@types/qiniu-js": "^2.5.0",
-    "@types/react": "16.8.13",
-    "@types/react-color": "^3.0.0",
-    "@types/react-dom": "16.8.4",
-    "@types/react-redux": "^7.0.6",
-    "@types/react-router-dom": "^4.3.2",
-    "@types/redux-logger": "^3.0.7",
     "array-move": "^2.1.0",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
@@ -44,7 +33,6 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "redux-undo": "^1.0.0-beta9-9-7",
-    "typescript": "3.4.3",
     "weixin-js-sdk": "^1.4.0-test"
   },
   "scripts": {
@@ -64,6 +52,17 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.8"
+    "@types/classnames": "^2.2.10",
+    "@types/jest": "^25.2.3",
+    "@types/lodash": "^4.14.154",
+    "@types/node": "^14.0.9",
+    "@types/qiniu-js": "^2.5.1",
+    "@types/react": "^16.9.35",
+    "@types/react-color": "^3.0.2",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "redux-devtools-extension": "^2.13.8",
+    "typescript": "^3.9.3"
   }
 }

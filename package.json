@@ -12,7 +12,7 @@
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "crypto-random-string": "^3.0.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "lottie-web": "^5.5.2",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",

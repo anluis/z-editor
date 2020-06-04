@@ -27,7 +27,7 @@ type Props = DispatchProps & OwnProps
 class MenuBar extends React.Component<Props> {
 
   componentDidMount() {
-    this.fetchUser()
+    // this.fetchUser()
   }
 
   fetchUser = async () => {
@@ -49,14 +49,9 @@ class MenuBar extends React.Component<Props> {
     })
   }
 
-  navigateToSaaS = () => {
-    window.location.href = 'http://saas.xingstation.com/y6541h00/6d7143ab847f2d24c131'
-  }
-
   render() {
     return <div className={styles.menubar}>
       <div className={styles.pane}>
-        <img className={styles.logo} src={'https://cdn.xingstation.cn/fe/actiview/img/actiview-logo.png'} />
       </div>
       <div className={styles.pane} onClick={() => this.navigate('editor')}>
         <Button size="medium" color="inherit">
@@ -81,12 +76,6 @@ class MenuBar extends React.Component<Props> {
         <Button size="medium" color="inherit">
           <MaterialIcon fontSize={'small'} />
           素材库
-        </Button>
-      </div>
-      <div className={styles.pane} onClick={this.navigateToSaaS}>
-        <Button size="medium" color="inherit">
-          <SubscribeIcon fontSize={'small'} />
-          订阅服务
         </Button>
       </div>
       <div className={`${styles.pane} ${styles.logout}`} >

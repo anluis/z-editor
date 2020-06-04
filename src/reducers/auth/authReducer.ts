@@ -7,7 +7,7 @@ type State = AuthState
 
 const initState: AuthState = {
   accessToken: '',
-  isAuthenticated: false,
+  isAuthenticated: process.env.NODE_ENV === 'development' ? true : false,
   wechatShareUrl: ''
 }
 

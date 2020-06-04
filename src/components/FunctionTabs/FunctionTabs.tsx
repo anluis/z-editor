@@ -1,6 +1,5 @@
 import * as React from 'react'
 // import styles from './FunctionTabs.module.css'
-import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -17,10 +16,6 @@ function TabContainer(props: any) {
     </Typography>
   );
 }
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
 
 const useStyles = makeStyles(theme => ({
   root: {

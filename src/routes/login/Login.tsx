@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux'
@@ -20,8 +19,8 @@ const styles = (theme: Theme) =>
       flexWrap: 'wrap',
     },
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
+      marginLeft: theme.spacing(),
+      marginRight: theme.spacing(),
     },
     dense: {
       marginTop: 16,
@@ -162,9 +161,6 @@ class Login extends React.Component<Props, State> {
   }
 }
 
-(Login as React.ComponentClass<Props>).propTypes = {
-  classes: PropTypes.object.isRequired,
-} as any
 
 const mapStateToProps = (state: IStoreState) => {
   const { isLoading, errorMessage } = state.status

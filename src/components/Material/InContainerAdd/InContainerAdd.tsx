@@ -19,8 +19,6 @@ const moment = require('moment')
 const mStyles = (theme: Theme) =>
   createStyles({
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
       width: 500
     }
   })

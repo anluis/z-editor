@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -84,10 +83,6 @@ function VideoCard(props: Props) {
       </CardActions>
     </Card>
   );
-}
-
-VideoCard.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state: IStoreState) => {

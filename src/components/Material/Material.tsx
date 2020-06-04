@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IStoreState from '../../types/IStoreState';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { withStyles, Theme } from '@material-ui/core/styles';
+import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { AnyAction } from 'redux';
 import { setMaterialCurrentValue } from '../../actions/status';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -23,11 +23,7 @@ function TabContainer(props: any) {
   );
 }
 
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-const styles = (theme: Theme) => ({
+const styles = (theme: Theme) => createStyles({
   root: {
     flexGrow: 1,
     width: '100%',
@@ -35,8 +31,8 @@ const styles = (theme: Theme) => ({
   },
   fab: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
+    bottom: theme.spacing() * 2,
+    right: theme.spacing() * 2,
   } as any,
   fabGreen: {
     color: theme.palette.common.white,

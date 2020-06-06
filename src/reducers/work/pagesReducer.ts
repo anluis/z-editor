@@ -1,4 +1,4 @@
-import { PageAction, Pages } from '../../types/pages'
+import { PageAction, Pages } from '../../types/pages';
 import {
   ADD_COM,
   ADD_PAGE,
@@ -8,49 +8,50 @@ import {
   SET_PAGE_SETTINGS,
   APPLY_WORK,
   CREATE_WORK,
-  SET_PAGE_STYLES
+  SET_PAGE_STYLES,
 } from '../../constants/ActionTypes';
 import { ComAction } from '../../types/coms';
-export type State = Pages
-export type Action = PageAction | ComAction
+export type State = Pages;
+export type Action = PageAction | ComAction;
 import {
   addComOrderInCurrentPage,
   removeComOrderInCurrentPage,
   exchangeOrderInPage,
   setPageSettingsByPageId,
-  setPageStylesByPageId
-} from '../../utils/setters/works'
-import { initPage } from '../../constants/pages'
+  setPageStylesByPageId,
+} from '../../utils/setters/works';
+import { initPage } from '../../constants/pages';
 
-const initState = [
-  initPage
-]
+const initState = [initPage];
 
 const pagesReducers = (state: State = initState, action: Action): State => {
   switch (action.type) {
     case APPLY_WORK:
-      return action.work.pages
+      return action.work.pages;
     case ADD_COM:
-      return addComOrderInCurrentPage(state, action.targetPageId, action.com)
+      return addComOrderInCurrentPage(state, action.targetPageId, action.com);
     case DELETE_COM:
-      return removeComOrderInCurrentPage(state, action.targetPageId, action.id)
+      return removeComOrderInCurrentPage(state, action.targetPageId, action.id);
     case ADD_PAGE:
-      return state.concat([action.page])
+      return state.concat([action.page]);
     case DELETE_PAGE:
-      return state.filter(item => item.id !== action.id)
+      return state.filter((item) => item.id !== action.id);
     case EXCHANGE_COM_ORDER:
-      return exchangeOrderInPage(state, action.targetPageId, action.oldComId, action.newComId)
+      return exchangeOrderInPage(
+        state,
+        action.targetPageId,
+        action.oldComId,
+        action.newComId
+      );
     case SET_PAGE_SETTINGS:
-      return setPageSettingsByPageId(state, action.pageSettings, action.pageId)
+      return setPageSettingsByPageId(state, action.pageSettings, action.pageId);
     case SET_PAGE_STYLES:
-      return setPageStylesByPageId(state, action.pageStyles, action.pageId)
+      return setPageStylesByPageId(state, action.pageStyles, action.pageId);
     case CREATE_WORK:
-      return [
-        initPage
-      ]
+      return [initPage];
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default pagesReducers
+export default pagesReducers;

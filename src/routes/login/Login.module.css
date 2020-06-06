@@ -26,12 +26,12 @@
   text-align: center;
   color: rgb(32, 33, 36);
   direction: ltr;
-  font-family: roboto, "Noto Sans Myanmar UI", arial, sans-serif;
+  font-family: roboto, 'Noto Sans Myanmar UI', arial, sans-serif;
 }
 
 .logo {
   width: 120px;
   position: absolute;
   top: 3%;
-  left: 3%
+  left: 3%;
 }

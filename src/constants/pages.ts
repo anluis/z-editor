@@ -1,4 +1,4 @@
-import { Page } from "../types/pages";
+import { Page } from '../types/pages';
 
 export const initPage: Page = {
   id: 0,
@@ -6,12 +6,12 @@ export const initPage: Page = {
   name: '新页面',
   styles: {
     width: 375,
-    height: 667
+    height: 667,
   },
   settings: {
     pageTitle: '',
     wechatShareDescription: '',
     wechatShareIcon: '',
-    wechatShareTitle: ''
-  }
-}
+    wechatShareTitle: '',
+  },
+};

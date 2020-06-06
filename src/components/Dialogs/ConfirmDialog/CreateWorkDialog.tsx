@@ -7,26 +7,25 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 export interface CreateWorkDialogProps {
-  open: boolean
-  confirmFuction: () => void
-  closeFunction: () => void
-  remindWord: string
+  open: boolean;
+  confirmFuction: () => void;
+  closeFunction: () => void;
+  remindWord: string;
 }
 
-type Props = CreateWorkDialogProps
+type Props = CreateWorkDialogProps;
 
 class CreateWorkDialog extends React.Component<Props> {
-
   handleClose = () => {
-    this.props.closeFunction()
-  }
+    this.props.closeFunction();
+  };
 
   handleConfirm = () => {
-    this.props.confirmFuction()
-  }
+    this.props.confirmFuction();
+  };
 
   render() {
-    const { open, remindWord } = this.props
+    const { open, remindWord } = this.props;
     return (
       <Dialog
         open={open}
@@ -43,15 +42,14 @@ class CreateWorkDialog extends React.Component<Props> {
         <DialogActions>
           <Button onClick={this.handleClose} color="primary">
             取消
-            </Button>
+          </Button>
           <Button onClick={this.handleConfirm} color="secondary" autoFocus>
             确定
-            </Button>
+          </Button>
         </DialogActions>
       </Dialog>
     );
   }
 }
 
-
-export default CreateWorkDialog
+export default CreateWorkDialog;

@@ -1,30 +1,28 @@
-import axios from 'axios'
+import axios from 'axios';
 import { apiUrl } from '../../constants/base';
 
 interface Args {
-  workId: string
-  workPage: number
+  workId: string;
+  workPage: number;
 }
 
 export const work = (args: Args) => {
-  const url = apiUrl + '/works/' + args.workId
+  const url = apiUrl + '/works/' + args.workId;
   const params = {
     params: {
-      workPage: args.workPage
-    }
-  }
+      workPage: args.workPage,
+    },
+  };
   return new Promise((resolve, reject) => {
     axios
       .get(url, params)
-      .then(
-        r => {
-          resolve(r)
-        }
-      )
-      .catch(e => {
-        reject(e)
+      .then((r) => {
+        resolve(r);
       })
-  })
-}
+      .catch((e) => {
+        reject(e);
+      });
+  });
+};
 
-export default work
+export default work;

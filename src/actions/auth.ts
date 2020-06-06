@@ -1,57 +1,64 @@
-import { ThunkAction, ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
-import { setLoading, setErrorMessage } from '../actions/status'
-import { signIn, signOut } from '../apis/authorizations'
-import { UPDATE_AUTH, DELETE_AUTH, SET_WECHAT_SHARE_URL } from '../constants/ActionTypes';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { setLoading, setErrorMessage } from '../actions/status';
+import { signIn, signOut } from '../apis/authorizations';
+import {
+  UPDATE_AUTH,
+  DELETE_AUTH,
+  SET_WECHAT_SHARE_URL,
+} from '../constants/ActionTypes';
 import { SetWechatShareUrl, UpdateAuth, DeleteAuth } from '../types/auth';
 import { handleAxiosAsyncError } from '../utils/helper/errorHandle/axiosError';
 
 export const updateAuth = (accessToken: string): UpdateAuth => ({
   type: UPDATE_AUTH,
-  accessToken
-})
+  accessToken,
+});
 
 export const deleteAuth = (): DeleteAuth => ({
-  type: DELETE_AUTH
-})
+  type: DELETE_AUTH,
+});
 
 export const setWxShareUrl = (url: string): SetWechatShareUrl => {
   return {
     type: SET_WECHAT_SHARE_URL,
-    url
-  }
-}
+    url,
+  };
+};
 
-export const login = (username: string, password: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+export const login = (
+  username: string,
+  password: string
+): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     try {
-      dispatch(setLoading(true))
-      const signInResult = await signIn({ username, password })
+      dispatch(setLoading(true));
+      const signInResult = await signIn({ username, password });
       if (signInResult.data.access_token) {
-        dispatch(updateAuth(signInResult.data.access_token))
+        dispatch(updateAuth(signInResult.data.access_token));
       }
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
     } catch (err) {
-      const { message } = err.response.data
-      alert(message)
-      dispatch(setErrorMessage(message))
-      dispatch(setLoading(false))
+      const { message } = err.response.data;
+      alert(message);
+      dispatch(setErrorMessage(message));
+      dispatch(setLoading(false));
     }
-  }
-}
+  };
+};
 
 export const logout = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     try {
-      dispatch(setLoading(true))
-      const deleteAuthResult = await signOut()
+      dispatch(setLoading(true));
+      const deleteAuthResult = await signOut();
       if (deleteAuthResult) {
-        dispatch(deleteAuth())
+        dispatch(deleteAuth());
       }
-      dispatch(setLoading(false))
+      dispatch(setLoading(false));
     } catch (err) {
-      handleAxiosAsyncError(err)
-      dispatch(setLoading(false))
+      handleAxiosAsyncError(err);
+      dispatch(setLoading(false));
     }
-  }
-}
+  };
+};

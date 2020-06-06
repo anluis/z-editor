@@ -1,149 +1,191 @@
-import * as React from 'react'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
-import { getComsByCurrentPageId } from '../../../utils/getters/works'
+import * as React from 'react';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { getComsByCurrentPageId } from '../../../utils/getters/works';
 import { Coms, Com } from '../../../types/coms';
 import { Button } from '@material-ui/core';
-import { connect } from 'react-redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { deleteCom, updateCom } from '../../../actions/coms'
+import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { deleteCom, updateCom } from '../../../actions/coms';
 import IStoreState from '../../../types/IStoreState';
-import styles from './Layers.module.css'
+import styles from './Layers.module.css';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { exchangeComOrder } from '../../../actions/pages'
-import listItemSortByOrder from '../../../utils/getters/coms'
-import { getCurrentPage } from '../../../utils/getters/works'
+import { exchangeComOrder } from '../../../actions/pages';
+import listItemSortByOrder from '../../../utils/getters/coms';
+import { getCurrentPage } from '../../../utils/getters/works';
 import { Page } from '../../../types/pages';
 
 interface StateProps {
-  currentComs: Coms
-  currentPageId: number | null
-  currentPage: Page | undefined
+  currentComs: Coms;
+  currentPageId: number | null;
+  currentPage: Page | undefined;
 }
 
 interface DispatchProps {
-  deleteCom: (id: number, targetPageId: number) => void
-  updateCom: (id: number, com: Com) => void
-  exchangeComOrder: (targetPageId: number, oldComId: number, newComId: number) => void
+  deleteCom: (id: number, targetPageId: number) => void;
+  updateCom: (id: number, com: Com) => void;
+  exchangeComOrder: (
+    targetPageId: number,
+    oldComId: number,
+    newComId: number
+  ) => void;
 }
 
 interface State {
-  deleteDialogOpen: boolean
-  choosenCom: Com | null
-  topRemindText: string
-  canBeSort: boolean
+  deleteDialogOpen: boolean;
+  choosenCom: Com | null;
+  topRemindText: string;
+  canBeSort: boolean;
 }
 
-type Props = StateProps & DispatchProps
+type Props = StateProps & DispatchProps;
 
-const SortableItem = SortableElement(({ item, canBeSort, handleDialogOpen }: { item: Com, canBeSort: boolean, handleDialogOpen: (com: Com) => void }) => {
-  return (
-    <div className={styles.layerItem}>
-      {item.name}
-      {/* <Button variant="outlined">设置</Button> */}
-      {!canBeSort && <Button
-        variant="outlined"
-        color="secondary"
-        onClick={(e) => {
-          e.preventDefault()
-          handleDialogOpen(item)
-        }}
-      >
-        删除
-      </Button>}
-      {canBeSort
-        &&
-        <img className={styles.dragbutton} src={'https://cdn.xingstation.cn/fe/cms/img/drag.svg'} />
-      }
-    </div>
-  )
-})
-
-const SortableList = SortableContainer(({ items, handleDialogOpen, canBeSort }: { items: Coms, handleDialogOpen: (com: Com) => void, canBeSort: boolean }) => {
-  return (
-    <div className={styles.layers}>
-      {items.map((item, index) => {
-        return (
-          <SortableItem
-            disabled={!canBeSort}
-            canBeSort={canBeSort}
-            item={item}
-            key={`sortableItem-${index}`}
-            index={index}
-            handleDialogOpen={handleDialogOpen}
+const SortableItem = SortableElement(
+  ({
+    item,
+    canBeSort,
+    handleDialogOpen,
+  }: {
+    item: Com;
+    canBeSort: boolean;
+    handleDialogOpen: (com: Com) => void;
+  }) => {
+    return (
+      <div className={styles.layerItem}>
+        {item.name}
+        {/* <Button variant="outlined">设置</Button> */}
+        {!canBeSort && (
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={(e) => {
+              e.preventDefault();
+              handleDialogOpen(item);
+            }}
+          >
+            删除
+          </Button>
+        )}
+        {canBeSort && (
+          <img
+            className={styles.dragbutton}
+            src={'https://cdn.xingstation.cn/fe/cms/img/drag.svg'}
           />
-        )
-      })}
-    </div>
-  )
-})
+        )}
+      </div>
+    );
+  }
+);
+
+const SortableList = SortableContainer(
+  ({
+    items,
+    handleDialogOpen,
+    canBeSort,
+  }: {
+    items: Coms;
+    handleDialogOpen: (com: Com) => void;
+    canBeSort: boolean;
+  }) => {
+    return (
+      <div className={styles.layers}>
+        {items.map((item, index) => {
+          return (
+            <SortableItem
+              disabled={!canBeSort}
+              canBeSort={canBeSort}
+              item={item}
+              key={`sortableItem-${index}`}
+              index={index}
+              handleDialogOpen={handleDialogOpen}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+);
 
 class Layers extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props)
+    super(props);
     this.state = {
       deleteDialogOpen: false,
       choosenCom: null,
       topRemindText: '点击进入排序',
-      canBeSort: false
-    }
+      canBeSort: false,
+    };
   }
 
   handleDialogOpen = (item: Com) => {
-    this.setState({ deleteDialogOpen: true, choosenCom: item })
-  }
+    this.setState({ deleteDialogOpen: true, choosenCom: item });
+  };
 
   hanldeDialogClose = () => {
-    this.setState({ deleteDialogOpen: false })
-  }
+    this.setState({ deleteDialogOpen: false });
+  };
 
   hanldeDialogCloseAndDeleteCom = () => {
-    this.setState({ deleteDialogOpen: false })
-    const { currentPageId } = this.props
-    const { choosenCom } = this.state
+    this.setState({ deleteDialogOpen: false });
+    const { currentPageId } = this.props;
+    const { choosenCom } = this.state;
     if (!choosenCom) {
-      return
+      return;
     }
     if (currentPageId === null) {
-      return
+      return;
     }
-    this.props.deleteCom(choosenCom.id, currentPageId)
-  }
+    this.props.deleteCom(choosenCom.id, currentPageId);
+  };
 
-  onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number, newIndex: number }) => {
-    const { currentComs, exchangeComOrder, currentPageId, currentPage } = this.props
+  onSortEnd = ({
+    oldIndex,
+    newIndex,
+  }: {
+    oldIndex: number;
+    newIndex: number;
+  }) => {
+    const {
+      currentComs,
+      exchangeComOrder,
+      currentPageId,
+      currentPage,
+    } = this.props;
     if (currentPageId === null || !currentPage) {
-      return
+      return;
     }
-    const listSorted = listItemSortByOrder(currentComs, currentPage.order)
-    exchangeComOrder(currentPageId, listSorted[oldIndex].id, listSorted[newIndex].id)
-  }
+    const listSorted = listItemSortByOrder(currentComs, currentPage.order);
+    exchangeComOrder(
+      currentPageId,
+      listSorted[oldIndex].id,
+      listSorted[newIndex].id
+    );
+  };
 
   deleteCom = (id: number, currentPageId: number) => {
     if (currentPageId === null) {
-      return
+      return;
     }
-    this.props.deleteCom(id, currentPageId)
-  }
+    this.props.deleteCom(id, currentPageId);
+  };
 
   sortModeChange = () => {
     this.setState({
       topRemindText: this.state.canBeSort ? '点击进入排序' : '关闭排序模式',
-      canBeSort: !this.state.canBeSort
-    })
-  }
-
+      canBeSort: !this.state.canBeSort,
+    });
+  };
 
   render() {
-    const { currentComs, currentPage } = this.props
-    const { topRemindText, canBeSort } = this.state
+    const { currentComs, currentPage } = this.props;
+    const { topRemindText, canBeSort } = this.state;
     if (!currentPage) {
-      return
+      return;
     }
-    const listSorted = listItemSortByOrder(currentComs, currentPage.order)
+    const listSorted = listItemSortByOrder(currentComs, currentPage.order);
     return (
       <>
         <div className={styles.inaddmode}>
@@ -167,49 +209,62 @@ class Layers extends React.Component<Props, State> {
           <DialogTitle id="alert-dialog-title">前方高能预警！</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              你确实要删除组件{this.state.choosenCom ? this.state.choosenCom.name : ''}吗？
+              你确实要删除组件
+              {this.state.choosenCom ? this.state.choosenCom.name : ''}吗？
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.hanldeDialogClose} color="primary">
               取消
             </Button>
-            <Button onClick={this.hanldeDialogCloseAndDeleteCom} color="primary" autoFocus>
+            <Button
+              onClick={this.hanldeDialogCloseAndDeleteCom}
+              color="primary"
+              autoFocus
+            >
               确定
             </Button>
           </DialogActions>
         </Dialog>
       </>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { currentPageId } = state.status
-  const bounderyId = state.work.present.pages.find(item => item.id === currentPageId)
-  const currentPage = getCurrentPage(state)
+  const { currentPageId } = state.status;
+  const bounderyId = state.work.present.pages.find(
+    (item) => item.id === currentPageId
+  );
+  const currentPage = getCurrentPage(state);
   return {
     currentComs: getComsByCurrentPageId(state),
     currentPageId: bounderyId ? currentPageId : state.work.present.pages[0].id,
-    currentPage
-  }
-}
+    currentPage,
+  };
+};
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => {
   return {
     deleteCom: (id: number, currentPageId: number | null) => {
       if (currentPageId === null) {
-        return
+        return;
       }
-      dispatch(deleteCom(id, currentPageId))
+      dispatch(deleteCom(id, currentPageId));
     },
     updateCom: (id: number, com: Com) => {
-      dispatch(updateCom(id, com))
+      dispatch(updateCom(id, com));
     },
-    exchangeComOrder: (tagetPageId: number, oldComId: number, newComId: number) => {
-      dispatch(exchangeComOrder(tagetPageId, oldComId, newComId))
-    }
-  }
-}
+    exchangeComOrder: (
+      tagetPageId: number,
+      oldComId: number,
+      newComId: number
+    ) => {
+      dispatch(exchangeComOrder(tagetPageId, oldComId, newComId));
+    },
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layers)
+export default connect(mapStateToProps, mapDispatchToProps)(Layers);

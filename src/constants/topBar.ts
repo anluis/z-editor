@@ -1,39 +1,38 @@
-import { videoIcon, getIcon, lottieIcon, imgIcon, textIcon } from "./imgs";
-import { TEXT, IMAGE, VIDEO, PHOTO_GET, LOTTIE } from "./coms";
+import { videoIcon, getIcon, lottieIcon, imgIcon, textIcon } from './imgs';
+import { TEXT, IMAGE, VIDEO, PHOTO_GET, LOTTIE } from './coms';
 
 export interface topBarItem {
-  name: string
-  type: string
-  imgUrl: string
+  name: string;
+  type: string;
+  imgUrl: string;
 }
 
 const topBarSettings: Array<topBarItem> = [
   {
     name: 'Text',
     type: TEXT,
-    imgUrl: textIcon
+    imgUrl: textIcon,
   },
   {
     name: 'Image',
     type: IMAGE,
-    imgUrl: imgIcon
+    imgUrl: imgIcon,
   },
   {
     name: 'Video',
     type: VIDEO,
-    imgUrl: videoIcon
+    imgUrl: videoIcon,
   },
   {
     name: 'PhotoGet',
     type: PHOTO_GET,
-    imgUrl: getIcon
+    imgUrl: getIcon,
   },
   {
     name: 'Lottie',
     type: LOTTIE,
-    imgUrl: lottieIcon
-  }
+    imgUrl: lottieIcon,
+  },
+];
 
-]
-
-export { topBarSettings }
+export { topBarSettings };

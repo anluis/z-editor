@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import AddIcon from '@material-ui/icons/Add'
-import Fab from '@material-ui/core/Fab'
+import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = (theme: any) => ({
@@ -25,7 +25,11 @@ function SimpleTooltips(props: any) {
         </Fab>
       </Tooltip> */}
       <Tooltip title="新增" aria-label="Add">
-        <Fab color="primary" className={classes.absolute} onClick={handleMaterialAdd}>
+        <Fab
+          color="primary"
+          className={classes.absolute}
+          onClick={handleMaterialAdd}
+        >
           <AddIcon />
         </Fab>
       </Tooltip>
@@ -34,4 +38,4 @@ function SimpleTooltips(props: any) {
 }
 
 // @ts-ignore
-export default withStyles(styles)(SimpleTooltips)
+export default withStyles(styles)(SimpleTooltips);

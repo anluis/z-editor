@@ -28,53 +28,53 @@
 /* Custom Code Here */
 
 .animatespan {
-	background: #fff;
-	position: absolute;
-	transform: translateY(100vh);
-	border-radius: 50%;
-	
-	&:before {
-		content: '';
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		opacity: 0.5;
-		background: #fff;
-		border-radius: 50%;
-		transform: translate(-50%, -50%) scale(1);
-	}
-		
-	@for $i from 0 through 400 {
-		$size: random(7) + px;
-		&:nth-child(#{$i}) {
-			width: $size;
-			height: $size;
-			top: random(100) + vh;
-			left: random(100) + vw;
-			animation: stars (random(20) * 0.1) + 5 + s random(5) + s infinite;
-		}
-	}	
+  background: #fff;
+  position: absolute;
+  transform: translateY(100vh);
+  border-radius: 50%;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.5;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  @for $i from 0 through 400 {
+    $size: random(7) + px;
+    &:nth-child(#{$i}) {
+      width: $size;
+      height: $size;
+      top: random(100) + vh;
+      left: random(100) + vw;
+      animation: stars (random(20) * 0.1) + 5 + s random(5) + s infinite;
+    }
+  }
 }
 
 @keyframes stars {
-	20% {
-		opacity: 0.5
-	}
-	40% {
-		opacity: 1;
-	}
-	50% {
-		opacity: 0.2;
-	}
-	60% {
-		opacity: 1;
-	}
-	80% {
-		opacity: 0.1;
-	}
-	100% {
-		opacity: 1;
-		transform: translateY(-100vh);
-	}
+  20% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  60% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-100vh);
+  }
 }
 /* end of custom code */

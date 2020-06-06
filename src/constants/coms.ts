@@ -1,10 +1,16 @@
-import { TextCom, ImageCom, VideoCom, LottieCom, PhotoGetCom } from "../types/coms";
-export const TEXT = 'TEXT'
-export const IMAGE = 'IMAGE'
-export const VIDEO = 'VIDEO'
-export const PHOTO_GET = 'PHOTO_GET'
-export const LOTTIE = 'LOTTIE'
-export const AUDIO = 'AUDIO'
+import {
+  TextCom,
+  ImageCom,
+  VideoCom,
+  LottieCom,
+  PhotoGetCom,
+} from '../types/coms';
+export const TEXT = 'TEXT';
+export const IMAGE = 'IMAGE';
+export const VIDEO = 'VIDEO';
+export const PHOTO_GET = 'PHOTO_GET';
+export const LOTTIE = 'LOTTIE';
+export const AUDIO = 'AUDIO';
 
 export const initText: TextCom = {
   x: 0,
@@ -20,8 +26,8 @@ export const initText: TextCom = {
   context: '',
   backgroundColor: 'white',
   opacity: 0,
-  href: ''
-}
+  href: '',
+};
 
 export const initImage: ImageCom = {
   name: '',
@@ -32,8 +38,8 @@ export const initImage: ImageCom = {
   width: 100,
   height: 100,
   imgUrl: '',
-  href: ''
-}
+  href: '',
+};
 
 export const initVideo: VideoCom = {
   name: '',
@@ -43,8 +49,8 @@ export const initVideo: VideoCom = {
   y: 0,
   width: 100,
   height: 100,
-  videoUrl: ''
-}
+  videoUrl: '',
+};
 
 export const initLottie: LottieCom = {
   type: LOTTIE,
@@ -56,8 +62,8 @@ export const initLottie: LottieCom = {
   name: '',
   path: '',
   assetsPath: '',
-  href: ''
-}
+  href: '',
+};
 
 export const initPhotoGet: PhotoGetCom = {
   type: PHOTO_GET,
@@ -67,5 +73,5 @@ export const initPhotoGet: PhotoGetCom = {
   x: 0,
   y: 0,
   name: '',
-  filter: `opacity(0.7)`
-}
+  filter: `opacity(0.7)`,
+};

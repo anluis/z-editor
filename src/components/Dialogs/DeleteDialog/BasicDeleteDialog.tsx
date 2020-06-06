@@ -7,26 +7,25 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 export interface MaterialDeleteDialogProps {
-  open: boolean
-  confirmDeleteFunction: () => void
-  closeFunction: () => void
-  remindWord: string
+  open: boolean;
+  confirmDeleteFunction: () => void;
+  closeFunction: () => void;
+  remindWord: string;
 }
 
-type Props = MaterialDeleteDialogProps
+type Props = MaterialDeleteDialogProps;
 
 class BasicDeleteDialog extends React.Component<Props> {
-
   handleClose = () => {
-    this.props.closeFunction()
-  }
+    this.props.closeFunction();
+  };
 
   handleConfirm = () => {
-    this.props.confirmDeleteFunction()
-  }
+    this.props.confirmDeleteFunction();
+  };
 
   render() {
-    const { open, remindWord } = this.props
+    const { open, remindWord } = this.props;
     return (
       <Dialog
         open={open}
@@ -43,15 +42,14 @@ class BasicDeleteDialog extends React.Component<Props> {
         <DialogActions>
           <Button onClick={this.handleClose} color="primary">
             取消
-            </Button>
+          </Button>
           <Button onClick={this.handleConfirm} color="secondary" autoFocus>
             确定
-            </Button>
+          </Button>
         </DialogActions>
       </Dialog>
     );
   }
 }
 
-
-export default BasicDeleteDialog
+export default BasicDeleteDialog;

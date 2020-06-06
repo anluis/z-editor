@@ -8,55 +8,53 @@ import { logout } from '../../../actions/auth';
 import { ThunkDispatch } from 'redux-thunk';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-interface OwnProps extends RouteComponentProps<any> {
-
-}
+interface OwnProps extends RouteComponentProps<any> {}
 
 interface DispatchProps {
-  logout: () => Promise<void>
+  logout: () => Promise<void>;
 }
 
-type Props = OwnProps & DispatchProps
+type Props = OwnProps & DispatchProps;
 
 interface State {
-  open: boolean
-  anchorEl: any
+  open: boolean;
+  anchorEl: any;
 }
 
 class MenuAppBar extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props)
+    super(props);
     this.state = {
       open: false,
-      anchorEl: null
-    }
+      anchorEl: null,
+    };
   }
 
   naviToMyAccount = () => {
     this.props.history.push({
-      pathname: '/editor/myaccount/'
-    })
-  }
+      pathname: '/editor/myaccount/',
+    });
+  };
 
   logOut = () => {
-    this.props.logout()
-  }
+    this.props.logout();
+  };
 
   handleMenu = (event: any) => {
     this.setState({
-      anchorEl: event.currentTarget
-    })
-  }
+      anchorEl: event.currentTarget,
+    });
+  };
 
   handleClose = () => {
     this.setState({
-      anchorEl: null
-    })
-  }
+      anchorEl: null,
+    });
+  };
 
   render() {
-    const open = Boolean(this.state.anchorEl)
-    const { anchorEl } = this.state
+    const open = Boolean(this.state.anchorEl);
+    const { anchorEl } = this.state;
     return (
       <div>
         <IconButton
@@ -87,17 +85,18 @@ class MenuAppBar extends React.Component<Props, State> {
           <MenuItem onClick={() => this.logOut()}>注销</MenuItem>
         </Menu>
       </div>
-    )
+    );
   }
-
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => {
   return {
     logout: async () => {
-      dispatch(logout())
-    }
-  }
-}
+      dispatch(logout());
+    },
+  };
+};
 
-export default withRouter(connect(null, mapDispatchToProps)(MenuAppBar))
+export default withRouter(connect(null, mapDispatchToProps)(MenuAppBar));

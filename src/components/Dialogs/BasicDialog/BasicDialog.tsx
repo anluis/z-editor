@@ -7,35 +7,37 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IStoreState from '../../../types/IStoreState';
 import { ThunkDispatch } from 'redux-thunk';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { setBasicDialogStatus } from '../../../actions/status';
 
 interface OwnProps {
-  basicDialogShow: boolean
-  basicDialogMessage: string
-  latestWorkId: string | null
+  basicDialogShow: boolean;
+  basicDialogMessage: string;
+  latestWorkId: string | null;
 }
 
 interface DispatchProps {
-  setBasicDialogShowStatus: (status: boolean, msg: string) => void
+  setBasicDialogShowStatus: (status: boolean, msg: string) => void;
 }
 
-type Props = OwnProps & DispatchProps
+type Props = OwnProps & DispatchProps;
 
 class BasicDialog extends React.Component<Props> {
-
   handleClose = () => {
-    this.props.setBasicDialogShowStatus(false, '')
+    this.props.setBasicDialogShowStatus(false, '');
   };
 
   render() {
-    const { latestWorkId, basicDialogMessage } = this.props
-    const workUrl = window.location.origin + '/work/' + latestWorkId + '/0'
-    const renderUrl =
+    const { latestWorkId, basicDialogMessage } = this.props;
+    const workUrl = window.location.origin + '/work/' + latestWorkId + '/0';
+    const renderUrl = (
       <>
         <span>链接为: </span>
-        <a href={workUrl} target="_blank">{workUrl}</a>
+        <a href={workUrl} target="_blank">
+          {workUrl}
+        </a>
       </>
+    );
     return (
       <Dialog
         open={this.props.basicDialogShow}
@@ -43,9 +45,7 @@ class BasicDialog extends React.Component<Props> {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          提示
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">提示</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {basicDialogMessage}
@@ -64,21 +64,22 @@ class BasicDialog extends React.Component<Props> {
   }
 }
 
-
 const mapStateToProps = (state: IStoreState) => {
-  const { basicDialogShow, basicDialogMessage, latestWorkId } = state.status
+  const { basicDialogShow, basicDialogMessage, latestWorkId } = state.status;
   return {
     basicDialogShow,
     basicDialogMessage,
-    latestWorkId
-  }
-}
+    latestWorkId,
+  };
+};
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => {
   return {
     setBasicDialogShowStatus: (status: boolean, msg: string) => {
-      dispatch(setBasicDialogStatus(status, msg))
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(BasicDialog)
+      dispatch(setBasicDialogStatus(status, msg));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BasicDialog);

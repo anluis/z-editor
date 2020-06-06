@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import CloseIcon from '@material-ui/icons/Close'
-import Fab from '@material-ui/core/Fab'
+import * as React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
+import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = (theme: any) => ({
@@ -20,7 +20,11 @@ function SimpleTooltips(props: any) {
   return (
     <>
       <Tooltip title="取消" aria-label="Add">
-        <Fab color="primary" className={classes.absolute} onClick={handleMaterialChooseAndFresh}>
+        <Fab
+          color="primary"
+          className={classes.absolute}
+          onClick={handleMaterialChooseAndFresh}
+        >
           <CloseIcon />
         </Fab>
       </Tooltip>
@@ -29,4 +33,4 @@ function SimpleTooltips(props: any) {
 }
 
 // @ts-ignore
-export default withStyles(styles)(SimpleTooltips)
+export default withStyles(styles)(SimpleTooltips);

@@ -1,14 +1,17 @@
+import {
+  UPDATE_SETTINGS,
+  APPLY_WORK,
+  CREATE_WORK,
+} from '../../constants/ActionTypes';
+import { Settings, SettingsAction } from '../../types/settings';
 
-import { UPDATE_SETTINGS, APPLY_WORK, CREATE_WORK } from '../../constants/ActionTypes'
-import { Settings, SettingsAction } from '../../types/settings'
-
-type State = Settings
-type Action = SettingsAction
+type State = Settings;
+type Action = SettingsAction;
 
 const initState = {
   title: '',
-  desc: ''
-}
+  desc: '',
+};
 
 const settingsReducer = (state: State = initState, action: Action): State => {
   switch (action.type) {
@@ -16,21 +19,21 @@ const settingsReducer = (state: State = initState, action: Action): State => {
       return {
         ...state,
         desc: action.desc,
-        title: action.title
-      }
+        title: action.title,
+      };
     case APPLY_WORK:
       return {
         ...state,
         desc: action.work.settings.desc,
-        title: action.work.settings.title
-      }
+        title: action.work.settings.title,
+      };
     case CREATE_WORK:
       return {
-        ...initState
-      }
+        ...initState,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default settingsReducer
+export default settingsReducer;

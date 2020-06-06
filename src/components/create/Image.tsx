@@ -1,40 +1,30 @@
-import * as React from 'react'
-import { ImageCom } from '../../types/coms'
+import * as React from 'react';
+import { ImageCom } from '../../types/coms';
 import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
-import styles from './common.module.css'
+import styles from './common.module.css';
 
 interface Props extends ImageCom {
-  mode?: string
-  zIndex: number
+  mode?: string;
+  zIndex: number;
 }
 
 class Image extends React.Component<Props> {
-
-  private Timer: any
+  private Timer: any;
 
   handleClickAction = () => {
-    const { href, mode } = this.props
+    const { href, mode } = this.props;
     if (mode === 'editor') {
-      return
+      return;
     }
     if (!href || href === '') {
-      return
+      return;
     } else {
-      window.location.href = href
+      window.location.href = href;
     }
-  }
+  };
 
   render() {
-    const {
-      width,
-      height,
-      imgUrl,
-      zIndex,
-      x,
-      y,
-      mode,
-      href
-    } = this.props
+    const { width, height, imgUrl, zIndex, x, y, mode, href } = this.props;
 
     let bindStyle: React.CSSProperties = {
       position: 'absolute',
@@ -45,32 +35,32 @@ class Image extends React.Component<Props> {
       zIndex: zIndex,
       left: x + 'px',
       top: y + 'px',
-      overflow: 'hidden'
-    }
+      overflow: 'hidden',
+    };
 
     let bindInnerImg: React.CSSProperties = {
       width: '100%',
       overflow: 'hidden',
-      height: '100%'
-    }
+      height: '100%',
+    };
 
     if (mode === 'editor') {
-      bindStyle.left = '0'
-      bindStyle.top = '0'
-      bindStyle.height = '100%'
-      bindStyle.width = '100%'
+      bindStyle.left = '0';
+      bindStyle.top = '0';
+      bindStyle.height = '100%';
+      bindStyle.width = '100%';
     }
     if (mode !== 'editor') {
-      bindStyle.left = x * zoomByDevice() + 'px'
-      bindStyle.top = y * zoomByDevice() + 'px'
-      bindStyle.height = height * zoomByDevice() + 'px'
-      bindStyle.width = width * zoomByDevice() + 'px'
-      bindStyle.overflow = 'hidden'
-      delete bindStyle.backgroundImage
-      delete bindStyle.backgroundSize
+      bindStyle.left = x * zoomByDevice() + 'px';
+      bindStyle.top = y * zoomByDevice() + 'px';
+      bindStyle.height = height * zoomByDevice() + 'px';
+      bindStyle.width = width * zoomByDevice() + 'px';
+      bindStyle.overflow = 'hidden';
+      delete bindStyle.backgroundImage;
+      delete bindStyle.backgroundSize;
     }
 
-    const bindClass = href === '' ? styles.canclick : styles.cannotclick
+    const bindClass = href === '' ? styles.canclick : styles.cannotclick;
 
     return (
       <div
@@ -78,14 +68,10 @@ class Image extends React.Component<Props> {
         className={bindClass}
         onClick={() => this.handleClickAction()}
       >
-        {
-          mode !== 'editor'
-          &&
-          <img src={imgUrl} style={bindInnerImg} />
-        }
+        {mode !== 'editor' && <img src={imgUrl} style={bindInnerImg} />}
       </div>
-    )
+    );
   }
 }
 
-export default Image
+export default Image;

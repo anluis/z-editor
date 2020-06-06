@@ -1,38 +1,37 @@
-import {
-  IMAGE,
-  LOTTIE,
-  VIDEO,
-  AUDIO
-} from '../constants/coms'
+import { IMAGE, LOTTIE, VIDEO, AUDIO } from '../constants/coms';
 
 export interface baseMaterial {
-  type: string
-  name: string
-  desc: string
-  _id: string
+  type: string;
+  name: string;
+  desc: string;
+  _id: string;
 }
 
 export interface ImgMaterial extends baseMaterial {
-  type: typeof IMAGE
-  imgUrl: string
+  type: typeof IMAGE;
+  imgUrl: string;
 }
 
 export interface LottieMaterial extends baseMaterial {
-  type: typeof LOTTIE
-  imgUrl: string
-  path: string
-  assetsPath: string
+  type: typeof LOTTIE;
+  imgUrl: string;
+  path: string;
+  assetsPath: string;
 }
 
 export interface VideoMaterial extends baseMaterial {
-  type: typeof VIDEO
-  videoUrl: string
-  imgUrl: string
+  type: typeof VIDEO;
+  videoUrl: string;
+  imgUrl: string;
 }
 
 export interface AudioMaterial extends baseMaterial {
-  type: typeof AUDIO
-  audioUrl: string
+  type: typeof AUDIO;
+  audioUrl: string;
 }
 
-export type Material = ImgMaterial | LottieMaterial | VideoMaterial | AudioMaterial
+export type Material =
+  | ImgMaterial
+  | LottieMaterial
+  | VideoMaterial
+  | AudioMaterial;

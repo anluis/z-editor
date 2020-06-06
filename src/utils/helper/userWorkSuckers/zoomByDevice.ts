@@ -1,5 +1,5 @@
 const zoomByDevice = () => {
-  return window.innerWidth / 375
-}
+  return window.innerWidth / 375;
+};
 
-export default zoomByDevice
+export default zoomByDevice;

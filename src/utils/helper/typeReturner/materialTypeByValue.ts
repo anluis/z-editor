@@ -2,16 +2,16 @@ import { IMAGE, VIDEO, LOTTIE, AUDIO } from '../../../constants/coms';
 const materialTypeByValue = (value: number) => {
   switch (value) {
     case 0:
-      return IMAGE
+      return IMAGE;
     case 1:
-      return VIDEO
+      return VIDEO;
     case 2:
-      return LOTTIE
+      return LOTTIE;
     case 3:
-      return AUDIO
+      return AUDIO;
     default:
-      return null
+      return null;
   }
-}
+};
 
-export default materialTypeByValue
+export default materialTypeByValue;

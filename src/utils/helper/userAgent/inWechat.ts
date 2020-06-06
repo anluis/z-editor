@@ -1,5 +1,5 @@
 const isInWechat = (): boolean => {
-  return /micromessenger/i.test(navigator.userAgent)
-}
+  return /micromessenger/i.test(navigator.userAgent);
+};
 
-export default isInWechat
+export default isInWechat;

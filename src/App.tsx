@@ -1,57 +1,51 @@
 import * as React from 'react';
-import IStoreState from './types/IStoreState'
+import IStoreState from './types/IStoreState';
 import Routes from './routes/Routes';
-import './App.css'
-import { connect } from 'react-redux'
+import './App.css';
+import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ThunkDispatch } from 'redux-thunk';
 import { setWxShareUrl } from './actions/auth';
 
-interface OwnProps extends RouteComponentProps<any> {
-
-}
+interface OwnProps extends RouteComponentProps<any> {}
 
 interface DispatchProps {
-  setWechatConfigUrl: (wxUrl: string) => void
+  setWechatConfigUrl: (wxUrl: string) => void;
 }
 
 interface StateProps {
-  isAuthenticated: boolean
+  isAuthenticated: boolean;
 }
 
-type Props = StateProps & OwnProps & DispatchProps
+type Props = StateProps & OwnProps & DispatchProps;
 
 class App extends React.Component<Props> {
-
   componentDidMount() {
-    this.props.setWechatConfigUrl(location.href)
+    this.props.setWechatConfigUrl(location.href);
   }
 
   render() {
-    const { isAuthenticated } = this.props
-    return (
-      <Routes isAuthenticated={isAuthenticated} />
-    );
+    const { isAuthenticated } = this.props;
+    return <Routes isAuthenticated={isAuthenticated} />;
   }
 }
 const mapStateToProps = (state: IStoreState) => {
-  const { isAuthenticated } = state.auth
+  const { isAuthenticated } = state.auth;
   return {
-    isAuthenticated
-  }
-}
+    isAuthenticated,
+  };
+};
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, any>
+): DispatchProps => {
   return {
     setWechatConfigUrl: (url: string) => {
-      dispatch(setWxShareUrl(url))
-    }
-  }
-}
+      dispatch(setWxShareUrl(url));
+    },
+  };
+};
 
-const connectedApp = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+const connectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 
-export default withRouter(connectedApp)
+export default withRouter(connectedApp);

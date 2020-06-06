@@ -1,18 +1,18 @@
-import * as React from 'react'
-const lottie = require('lottie-web')
-import { LottieCom } from '../../types/coms'
+import * as React from 'react';
+const lottie = require('lottie-web');
+import { LottieCom } from '../../types/coms';
 import zoomByDevice from '../../utils/helper/userWorkSuckers/zoomByDevice';
-import styles from './common.module.css'
-import { qiniuUrl } from '../../constants/base'
+import styles from './common.module.css';
+import { qiniuUrl } from '../../constants/base';
 interface Props extends LottieCom {
-  mode?: string
-  zIndex: number
+  mode?: string;
+  zIndex: number;
 }
 
 class Lottie extends React.Component<Props> {
   initAnimation = () => {
-    const { id, assetsPath, path } = this.props
-    const el = document.getElementById(`lottie-${id}`)
+    const { id, assetsPath, path } = this.props;
+    const el = document.getElementById(`lottie-${id}`);
     if (el) {
       lottie.loadAnimation({
         container: el, // the dom element that will contain the animation
@@ -20,37 +20,28 @@ class Lottie extends React.Component<Props> {
         loop: true,
         autoplay: true,
         assetsPath: qiniuUrl + '/cms/' + assetsPath + '/',
-        path: path // the path to the animation json
-      })
+        path: path, // the path to the animation json
+      });
     }
-  }
+  };
 
   handleClickAction = () => {
-    const { href, mode } = this.props
+    const { href, mode } = this.props;
     if (mode === 'editor') {
-      return
+      return;
     }
     if (!href || href === '') {
-      return
+      return;
     } else {
-      window.location.href = href
+      window.location.href = href;
     }
-  }
-  
+  };
+
   componentDidMount() {
-    this.initAnimation()
+    this.initAnimation();
   }
   render() {
-    const {
-      id,
-      width,
-      height,
-      zIndex,
-      x,
-      y,
-      mode,
-      href
-    } = this.props
+    const { id, width, height, zIndex, x, y, mode, href } = this.props;
 
     let bindStyle: React.CSSProperties = {
       position: 'absolute',
@@ -58,30 +49,31 @@ class Lottie extends React.Component<Props> {
       height: height + 'px',
       zIndex: zIndex,
       left: x + 'px',
-      top: y + 'px'
-    }
+      top: y + 'px',
+    };
     if (mode === 'editor') {
-      bindStyle.left = '0'
-      bindStyle.top = '0'
-      bindStyle.width = '100%'
-      bindStyle.height = '100%'
+      bindStyle.left = '0';
+      bindStyle.top = '0';
+      bindStyle.width = '100%';
+      bindStyle.height = '100%';
     }
     if (mode !== 'editor') {
-      bindStyle.left = x * zoomByDevice() + 'px'
-      bindStyle.top = y * zoomByDevice() + 'px'
-      bindStyle.height = height * zoomByDevice() + 'px'
-      bindStyle.width = width * zoomByDevice() + 'px'
+      bindStyle.left = x * zoomByDevice() + 'px';
+      bindStyle.top = y * zoomByDevice() + 'px';
+      bindStyle.height = height * zoomByDevice() + 'px';
+      bindStyle.width = width * zoomByDevice() + 'px';
     }
 
-    const bindClass = href === '' ? styles.cannotclick : styles.canclick
-    return <div
-      id={`lottie-${id}`}
-      className={bindClass}
-      onClick={() => this.handleClickAction()}
-      style={bindStyle}>
-
-    </div>
+    const bindClass = href === '' ? styles.cannotclick : styles.canclick;
+    return (
+      <div
+        id={`lottie-${id}`}
+        className={bindClass}
+        onClick={() => this.handleClickAction()}
+        style={bindStyle}
+      ></div>
+    );
   }
 }
 
-export default Lottie
+export default Lottie;

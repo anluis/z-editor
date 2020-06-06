@@ -23,7 +23,7 @@
 .itemDetail {
   background: #f9f9f9;
   overflow-y: scroll;
-  height: calc(100% - 40px)
+  height: calc(100% - 40px);
 }
 .functiontabs {
   min-width: 350px;

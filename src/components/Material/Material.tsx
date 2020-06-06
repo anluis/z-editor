@@ -11,58 +11,62 @@ import { withStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { AnyAction } from 'redux';
 import { setMaterialCurrentValue } from '../../actions/status';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import moduleStyles from './Material.module.css'
+import moduleStyles from './Material.module.css';
 import green from '@material-ui/core/colors/green';
-const InContainer = React.lazy(() => import('./InContainer/InContainer'))
+const InContainer = React.lazy(() => import('./InContainer/InContainer'));
 
 function TabContainer(props: any) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3, }} className={moduleStyles.ctn}>
+    <Typography
+      component="div"
+      style={{ padding: 8 * 3 }}
+      className={moduleStyles.ctn}
+    >
       {props.children}
     </Typography>
   );
 }
 
-const styles = (theme: Theme) => createStyles({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper
-  },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing() * 2,
-    right: theme.spacing() * 2,
-  } as any,
-  fabGreen: {
-    color: theme.palette.common.white,
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[600],
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+      width: '100%',
+      backgroundColor: theme.palette.background.paper,
     },
-  },
-});
+    fab: {
+      position: 'absolute',
+      bottom: theme.spacing() * 2,
+      right: theme.spacing() * 2,
+    } as any,
+    fabGreen: {
+      color: theme.palette.common.white,
+      backgroundColor: green[500],
+      '&:hover': {
+        backgroundColor: green[600],
+      },
+    },
+  });
 
 interface OwnProps extends RouteComponentProps {
-  classes: any
-  materialCurrentValue: number
+  classes: any;
+  materialCurrentValue: number;
 }
 
 interface DispatchProps {
-  setMaterialCurrentValue: (value: number) => void
+  setMaterialCurrentValue: (value: number) => void;
 }
 
-type Props = OwnProps & DispatchProps
+type Props = OwnProps & DispatchProps;
 
 class Material extends React.Component<Props> {
-
   handleChange = (event: any, value: any) => {
-    this.props.setMaterialCurrentValue(value)
+    this.props.setMaterialCurrentValue(value);
   };
 
   render() {
-    const { pathname } = this.props.location
-    const belong = pathname.includes('materials') ? 'materials' : 'dialog'
+    const { pathname } = this.props.location;
+    const belong = pathname.includes('materials') ? 'materials' : 'dialog';
     const { classes, materialCurrentValue: value } = this.props;
     return (
       <div className={classes.root} style={{ overflowY: 'scroll' }}>
@@ -81,21 +85,27 @@ class Material extends React.Component<Props> {
             <Tab label="音乐" />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer>
-          <React.Suspense fallback={null}>
-            <InContainer belong={belong} />
-          </React.Suspense>
-        </TabContainer>}
-        {value === 1 && <TabContainer>
-          <React.Suspense fallback={null}>
-            <InContainer belong={belong} />
-          </React.Suspense>
-        </TabContainer>}
-        {value === 2 && <TabContainer>
-          <React.Suspense fallback={null}>
-            <InContainer belong={belong} />
-          </React.Suspense>
-        </TabContainer>}
+        {value === 0 && (
+          <TabContainer>
+            <React.Suspense fallback={null}>
+              <InContainer belong={belong} />
+            </React.Suspense>
+          </TabContainer>
+        )}
+        {value === 1 && (
+          <TabContainer>
+            <React.Suspense fallback={null}>
+              <InContainer belong={belong} />
+            </React.Suspense>
+          </TabContainer>
+        )}
+        {value === 2 && (
+          <TabContainer>
+            <React.Suspense fallback={null}>
+              <InContainer belong={belong} />
+            </React.Suspense>
+          </TabContainer>
+        )}
         {value === 3 && <TabContainer>暂无音乐</TabContainer>}
       </div>
     );
@@ -103,18 +113,22 @@ class Material extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: IStoreState) => {
-  const { materialCurrentValue } = state.status
+  const { materialCurrentValue } = state.status;
   return {
-    materialCurrentValue
-  }
-}
+    materialCurrentValue,
+  };
+};
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, AnyAction>): DispatchProps => {
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+): DispatchProps => {
   return {
     setMaterialCurrentValue: (value: number) => {
-      dispatch(setMaterialCurrentValue(value))
-    }
-  }
-}
+      dispatch(setMaterialCurrentValue(value));
+    },
+  };
+};
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Material)))
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Material))
+);

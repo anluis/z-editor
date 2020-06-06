@@ -1,11 +1,10 @@
-import * as React from 'react'
-import Material from '../../../components/Material/Material'
+import * as React from 'react';
+import Material from '../../../components/Material/Material';
 
 class Materials extends React.Component {
-
   render() {
-    return <Material />
+    return <Material />;
   }
 }
 
-export default Materials
+export default Materials;
